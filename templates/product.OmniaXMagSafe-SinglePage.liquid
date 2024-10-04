@@ -1,0 +1,34 @@
+<main class="overflow-x-hidden">
+  {% section 'OmniaXMagSafe-SinglePage-1' %}
+  {% section 'OmniaXMagSafe-SinglePage-2' %}
+  {% section 'OmniaXMagSafe-SinglePage-3' %}
+  <section class="!relative">
+    <div class="!fixed !right-1 top-28  md:!bottom-4 md:!top-auto  md:!right-10 md:!bottom-10 text-center flex justify-end p-2 z-[20] cursor-pointer">
+      <div
+        id="rax-play-button3"
+        class="hover:scale-105"
+      >
+        <image src="{{ 'floatIcon.png'|file_url }}" class="md:w-[100px] md:h-[100px] h-[50px] w-[50px]"></image>
+      </div>
+    </div>
+    {% section 'OmniaXMagSafe-SinglePage-4' %}
+    {% section 'OmniaXMagSafe-SinglePage-5' %}
+    {% section 'OmniaXMagSafe-SinglePage-6' %}
+    {% section 'OmniaXMagSafe-SinglePage-7' %}
+    {% section 'OmniaXMagSafe-SinglePage-8' %}
+    {% section 'OmniaXMagSafe-SinglePage-9' %}
+    {% section 'OmniaXMagSafe-SinglePage-10' %}
+    {% section 'OmniaXMagSafe-SinglePage-11' %}
+    {% section 'OmniaXMagSafe-SinglePage-12' %}
+    {% section 'OmniaXMagSafe-SinglePage-13' %}
+    {% section 'OmniaXMagSafe-SinglePage-14' %}
+    {% section 'OmniaXMagSafe-SinglePage-15' %}
+  </section>
+</main>
+<script>
+  const playButton3 = document.getElementById('rax-play-button3');
+  // Add an event listener to the button
+  playButton3.addEventListener('click', () => {
+          document.getElementById('OmniaXMagSafe-SinglePage-3').scrollIntoView();
+  });
+</script>

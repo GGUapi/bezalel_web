@@ -1,0 +1,139 @@
+<div class="collection-list grid-uniform  small-gutter ">
+  
+    {% for product in collections.futura-bundle-offers.products %}
+
+    <div class="product grid__item one-third medium--one-half small--one-whole {% if product.options.size == 1 %}no-variant{% endif %}" itemscope itemtype="http://schema.org/Product">
+
+        {% assign current_variant = product.selected_or_first_available_variant %}
+        {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+		
+      	<div class="collection-item-wrap item-with-variants clearfix">
+          
+            <h3 class="product-name" itemprop="name">
+                <a href="{{ product.url }}">{{ product.title }}</a>
+            </h3> 
+
+            <h3 class="price">
+                {{ current_variant.price | money }}
+              	{% unless current_variant.compare_at_price == current_variant.price %}
+              	<span>{{ current_variant.compare_at_price | money }}</span>
+				{% endunless %}
+            </h3>
+
+            <div class="product-image">
+
+               {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+                <a href="{{ product.url }}">
+                    <img id="productPhotoImg-{{ product.id }}" src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}">
+                </a>
+            </div>
+
+            <div class="product-content">           
+
+                <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm-{{ product.id }}">
+                <div class="select-quantity-wrap">
+                    <div class="select clearfix"{% if hide_default_title %} style="display: none"{% endif %}>
+
+                        <select name="id" id="product-select2-{{ product.id }}" class="product-single__variants">
+                        {% for variant in product.variants %}
+                            {% if variant.available %}
+                                <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+                            {% else %}                        
+                                <option disabled="disabled">
+                                {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                                </option>                        
+                            {% endif %}
+                        {% endfor %}
+                        </select>
+
+                        {% if product.available and product.variants.size > 1 %}
+                            {% for option in product.options %}
+                                {% include 'swatch' with option %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="buy-row quantity-row">
+                      <label for="Quantity" class="quantity-selector">{{ 'products.product.quantity' | t }}</label>
+                      <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector">
+                    </div>
+
+                </div>
+
+                <button type="submit" name="add" id="AddToCart" class="btn">
+                    <span id="AddToCartText">Add to Bag</span>
+                </button>
+
+            </form>
+
+            </div>
+        </div>
+  	</div>
+
+    <script>
+        var selectCallback2 = function(variant, selector) {
+
+          if (variant) {
+            var form = jQuery('#' + selector.domIdPrefix).closest('form');
+            for (var i=0,length=variant.options.length; i<length; i++) {
+              var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+              if (radioButton.size()) {
+                radioButton.get(0).checked = true;
+              }
+            }
+          }
+        };
+
+        jQuery(function($) {
+            new Shopify.OptionSelectors('product-select2-{{ product.id }}', {
+            product: bold_product_json[{{ product.id }}],
+            onVariantSelected: selectCallback2,
+            enableHistoryState: true
+          });
+
+          {% if product.options.size == 1 %}
+            {% if product.options.first != "Title" %}
+              $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">{{ product.options.first | escape }}</label>');
+            {% else %}
+              $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">&nbsp;</label>');
+            {% endif %}
+          {% endif %}
+
+          {% if bold_variants_size == 1 and product.variants.first.title contains 'Default' %}
+            $('.selector-wrapper').hide();
+          {% endif %}
+
+        });
+    </script>
+
+    {% endfor %}
+</div>
+
+<script>
+    jQuery(document).ready(function() {
+      
+        $( ".iphone-6-6s label" ).text( "6" );              
+        $( ".iphone-6-plus-6s-plus label" ).text( "6 +" );
+        $( ".iphone-7 label" ).text( "7" );
+        $( ".iphone-7-plus label" ).text( "7 +" );
+        $( ".iphone-8 label" ).text( "8" );
+        $( ".iphone-8-plus label" ).text( "8 +" );
+        $( ".iphone-x label" ).text( "X" );
+      
+        $(".swatch-element input:radio").on('click', function(){
+            if ($(this).attr('checked', 'checked')){
+               $(this).parents(".swatch-element").addClass('active-swatch');
+                $(this).parents(".swatch-element").siblings().removeClass('active-swatch');
+                $(this).parents(".swatch").addClass('active-variant');
+                $(this).parents(".swatch").siblings().removeClass('active-variant');
+                $(this).parents(".product").addClass().addClass('active-product');
+                $(this).parents(".product").siblings().removeClass('active-product');
+                $(this).parents(".product").siblings('.product').children('.swatch').removeClass('active-variant');
+                $(this).parents(".product").siblings('.product').children('.swatch-element').removeClass('checked');
+            } else {
+               $(this).parents(".swatch-element").removeClass('checked');
+               $(this).parents(".swatch").removeClass('active-variant');
+           }
+        });
+	});
+</script>

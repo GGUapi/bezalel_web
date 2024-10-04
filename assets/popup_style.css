@@ -1,0 +1,130 @@
+/* 彈跳式視窗外部樣式 */
+.new_model {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border:none;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  /* 彈跳式視窗內容樣式 */
+  .new_model-content {
+    position: relative;
+    margin: 10% auto;
+    z-index: 1000;
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 5px;
+    background-color:transparent;
+  }
+  
+  /* 關閉按鈕樣式 */
+  .close {
+    position: absolute;
+    top: 5%;
+    right: 7%;
+    font-size: 40px;
+    font-weight: bolder;
+    color: white;
+    cursor: pointer;
+    opacity:1;
+  }
+
+  .close2 {
+    position: absolute;
+    top: 8%;
+    right: 11%;
+    font-size: 40px;
+    font-weight: bolder;
+    color: white;
+    cursor: pointer;
+    opacity:0;
+  }
+  
+  /* 關閉按鈕懸停樣式 */
+  .close:hover {
+    opacity:0.5;
+  }
+
+  .close2:hover {
+    opacity:0;
+  }
+
+/*RWD調整*/
+@media (max-width: 835px) {
+  .new_model {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border:none;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+    .new_model-content {
+        position: relative;
+        margin: 43% auto 9% auto;
+        padding: 20px;
+        width: 100%;
+        max-width: 500px;
+        border-radius: 5px;
+        top:50%
+        left:50%
+      }
+
+} 
+
+@media (max-width: 535px) {
+  .new_model {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border:none;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+    .new_model-content {
+        position: relative;
+        margin: 50% auto 0% auto;
+        padding: 20px;
+        width: 100%;
+        max-width: 350px;
+        border-radius: 5px;
+        top:50%
+        left:50%
+      }
+
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 7%;
+    font-size: 40px;
+    font-weight: bolder;
+    color: white;
+    cursor: pointer;
+  }
+
+  .close2 {
+    position: absolute;
+    top: 8%;
+    right: 11%;
+    font-size: 40px;
+    font-weight: bolder;
+    color: white;
+    cursor: pointer;
+    opacity:0;
+  }
+
+}  

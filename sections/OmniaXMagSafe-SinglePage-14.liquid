@@ -1,0 +1,252 @@
+<section class="relative pb-16 overflow-hidden">
+  <div class="mt-8 container mx-auto px-4 ">
+    <div class="relative">
+      <div class="max-w-4xl mx-auto mb-8 text-center">
+        <h2 class="font-heading text-lg xs:text-xl sm:text-2xl md:text-4xl font-medium text-black tracking-tight mb-2">
+          用戶真實體驗分享
+        </h2>
+        <p class="font-heading text-base xs:text-md sm:text-xl md:text-2xl font-medium text-black tracking-tight mb-2">
+          個人資料隱蔽處理，心得內容絕對真實
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="mt-4 lg:mt-16 md:max-w-2xl mx-auto px-4">
+    <div class="collapse collapse-plus bg-white rounded-t-md border-solid border-b-2 border-gray-200/50">
+      <input type="radio" name="my-accordion-3" checked="checked">
+      <div class="collapse-title text-xl font-medium">
+        <div class="flex items-center gap-2 py-2">
+          <image src="{{ 'customer1.png'|file_url }}" />
+          <div class="flex-grow">
+            <p class="font-bold">楊先生</p>
+            <p>終於找到有質感的磁吸車用充電器，賞心悅目又實用！</p>
+          </div>
+        </div>
+      </div>
+      <div class="collapse-content">
+        <image src="{{ 'share1.png'|file_url }}" class="w-full"></image>
+      </div>
+    </div>
+    <div class="collapse collapse-plus bg-white border-solid border-b-2 border-gray-200/50">
+      <input type="radio" name="my-accordion-3">
+      <div class="collapse-title text-xl font-medium">
+        <div class="flex items-center gap-2 py-2">
+          <image src="{{ 'customer2.png'|file_url }}" />
+          <div class="flex-grow">
+            <p class="font-bold">Cheng</p>
+            <p>終於收到實品，嗯～安裝簡易，加分！質感也很好，手機手錶都能充電真的很方便呢</p>
+          </div>
+        </div>
+      </div>
+      <div class="collapse-content">
+        <image src="{{ 'share2.png'|file_url }}" class="w-full"></image>
+      </div>
+    </div>
+    <div class="collapse collapse-plus bg-white border-solid border-b-2 border-gray-200/50">
+      <input type="radio" name="my-accordion-3">
+      <div class="collapse-title text-xl font-medium">
+        <div class="flex items-center gap-2 py-2">
+          <image src="{{ 'customer3.png'|file_url }}" />
+          <div class="flex-grow">
+            <p class="font-bold">張先生</p>
+            <p>還有什麼比BEZALEL，充手機WATCH、耳機來的好用！</p>
+          </div>
+        </div>
+      </div>
+      <div class="collapse-content">
+        <image src="{{ 'share3.png'|file_url }}" class="w-full"></image>
+      </div>
+    </div>
+    <div class="collapse collapse-plus bg-white border-solid border-b-2 border-gray-200/50">
+      <input type="radio" name="my-accordion-3">
+      <div class="collapse-title text-xl font-medium">
+        <div class="flex items-center gap-2 py-2">
+          <image src="{{ 'customer4.png'|file_url }}" />
+          <div class="flex-grow">
+            <p class="font-bold">沈小姐</p>
+            <p>
+              原本的無線車充一直有過熱跟電量充了等於沒充的困擾，但倍加能這款磁吸車用快充真心方便，手機充電沒有過熱問題！!
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="collapse-content">
+        <image src="{{ 'share4.png'|file_url }}" class="w-full"></image>
+      </div>
+    </div>
+    <div class="collapse collapse-plus bg-white border-solid border-b-2 border-gray-200/50">
+      <input type="radio" name="my-accordion-3">
+      <div class="collapse-title text-xl font-medium">
+        <div class="flex items-center gap-2 py-2">
+          <image src="{{ 'customer5.png'|file_url }}" />
+          <div class="flex-grow">
+            <p class="font-bold">Wange</p>
+            <p>支架穩固很特別，可以調整！磁吸強力，拿取方便，一機兩用，精緻時尚！</p>
+          </div>
+        </div>
+      </div>
+      <div class="collapse-content">
+        <image src="{{ 'share5.png'|file_url }}" class="w-full"></image>
+      </div>
+    </div>
+    <div class="collapse collapse-plus bg-white rounded-b-md">
+      <input type="radio" name="my-accordion-3">
+      <div class="collapse-title text-xl font-medium">
+        <div class="flex items-center gap-2 py-2">
+          <image src="{{ 'customer6.png'|file_url }}" />
+          <div class="flex-grow">
+            <p class="font-bold">Miaow</p>
+            <p>充電過程中從9v自動觸發到12v充電,使用規格書9v外再上一級充電有點意外</p>
+          </div>
+        </div>
+      </div>
+      <div class="collapse-content">
+        <image src="{{ 'share6.png'|file_url }}" class="w-full"></image>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+      .collapse:not(td):not(tr):not(colgroup) {
+      visibility: visible
+  }
+
+  .collapse {
+      position: relative !important;
+      display: grid !important;
+      overflow: hidden !important;
+      grid-template-rows: auto 0fr !important;
+      transition: grid-template-rows .2s !important;
+      width: 100% !important;
+  }
+
+  .collapse-title,.collapse>input[type=checkbox],.collapse>input[type=radio],.collapse-content {
+      grid-column-start: 1 !important;
+      grid-row-start: 1 !important
+  }
+
+  .collapse>input[type=checkbox],.collapse>input[type=radio] {
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
+      opacity: 0 !important
+  }
+
+  .collapse-content {
+      visibility: hidden !important;
+      grid-column-start: 1 !important;
+      grid-row-start: 2 !important;
+      min-height: 0 !important;
+      transition: visibility .2s !important;
+      transition: padding .2s ease-out,background-color .2s ease-out !important;
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+      cursor: unset !important
+  }
+
+  .collapse[open],.collapse-open,.collapse:focus:not(.collapse-close) {
+      grid-template-rows: auto 1fr !important
+  }
+
+  .collapse:not(.collapse-close):has(>input[type=checkbox]:checked),.collapse:not(.collapse-close):has(>input[type=radio]:checked) {
+      grid-template-rows: auto 1fr !important
+  }
+
+  .collapse[open]>.collapse-content,.collapse-open>.collapse-content,.collapse:focus:not(.collapse-close)>.collapse-content,.collapse:not(.collapse-close)>input[type=checkbox]:checked~.collapse-content,.collapse:not(.collapse-close)>input[type=radio]:checked~.collapse-content {
+      visibility: visible !important;
+      min-height: fit-content !important
+  }
+  .collapse:focus-visible {
+      outline-style: solid !important;
+      outline-width: 2px !important;
+      outline-offset: 2px !important;
+      outline-color: var(--fallback-bc,oklch(var(--bc)/1)) !important
+  }
+
+  .collapse:has(.collapse-title:focus-visible),.collapse:has(>input[type=checkbox]:focus-visible),.collapse:has(>input[type=radio]:focus-visible) {
+      outline-style: solid !important;
+      outline-width: 2px !important;
+      outline-offset: 2px !important;
+      outline-color: var(--fallback-bc,oklch(var(--bc)/1)) !important
+  }
+
+  .collapse-arrow>.collapse-title:after {
+      position: absolute !important;
+      display: block !important;
+      height: .5rem !important;
+      width: .5rem !important;
+      --tw-translate-y: -100% !important;
+      --tw-rotate: 45deg !important;
+      transform: translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
+      transition-property: all !important;
+      transition-timing-function: cubic-bezier(.4,0,.2,1) !important;
+      transition-timing-function: cubic-bezier(0,0,.2,1) !important;
+      transition-duration: .15s !important;
+      transition-duration: .2s !important;
+      top: 1.9rem !important;
+      inset-inline-end: 1.4rem !important;
+      content: "" !important;
+      transform-origin: 75% 75% !important;
+      box-shadow: 2px 2px !important;
+      pointer-events: none !important
+  }
+
+  .collapse-plus>.collapse-title:after {
+      position: absolute !important;
+      display: block !important;
+      height: .5rem !important;
+      width: .5rem !important;
+      transition-property: all;
+      transition-timing-function: cubic-bezier(.4,0,.2,1)!important;
+      transition-timing-function: cubic-bezier(0,0,.2,1) !important;
+      transition-duration: .3s !important;
+      top: .9rem !important;
+      inset-inline-end: 1.4rem !important;
+      content: "+" !important;
+      pointer-events: none !important
+  }
+
+  .collapse:not(.collapse-open):not(.collapse-close)>input[type=checkbox],.collapse:not(.collapse-open):not(.collapse-close)>input[type=radio]:not(:checked),.collapse:not(.collapse-open):not(.collapse-close)>.collapse-title {
+      cursor: pointer !important
+  }
+
+  .collapse:focus:not(.collapse-open):not(.collapse-close):not(.collapse[open])>.collapse-title {
+      cursor: unset !important
+  }
+
+  .collapse-title {
+      position: relative !important
+  }
+
+  :where(.collapse>input[type=checkbox]),:where(.collapse>input[type=radio]) {
+      z-index: 1 !important
+  }
+
+  .collapse-title,:where(.collapse>input[type=checkbox]),:where(.collapse>input[type=radio]) {
+      width: 100% !important;
+      padding: 1rem !important;
+      padding-inline-end:3rem;min-height: 3.75rem !important;
+      transition: background-color .2s ease-out !important
+  }
+
+  .collapse[open]>:where(.collapse-content),.collapse-open>:where(.collapse-content),.collapse:focus:not(.collapse-close)>:where(.collapse-content),.collapse:not(.collapse-close)>:where(input[type=checkbox]:checked~.collapse-content),.collapse:not(.collapse-close)>:where(input[type=radio]:checked~.collapse-content) {
+      padding-bottom: 1rem !important;
+      transition: padding .2s ease-out,background-color .2s ease-out !important
+  }
+
+  .collapse[open].collapse-arrow>.collapse-title:after,.collapse-open.collapse-arrow>.collapse-title:after,.collapse-arrow:focus:not(.collapse-close)>.collapse-title:after,.collapse-arrow:not(.collapse-close)>input[type=checkbox]:checked~.collapse-title:after,.collapse-arrow:not(.collapse-close)>input[type=radio]:checked~.collapse-title:after {
+      --tw-translate-y: -50% !important;
+      --tw-rotate: 225deg !important;
+      transform: translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important
+  }
+
+  .collapse[open].collapse-plus>.collapse-title:after,.collapse-open.collapse-plus>.collapse-title:after,.collapse-plus:focus:not(.collapse-close)>.collapse-title:after,.collapse-plus:not(.collapse-close)>input[type=checkbox]:checked~.collapse-title:after,.collapse-plus:not(.collapse-close)>input[type=radio]:checked~.collapse-title:after {
+      content: "−" !important
+  }
+</style>
+{% schema %}
+{
+  "name": "Section name",
+  "settings": []
+}
+{% endschema %}

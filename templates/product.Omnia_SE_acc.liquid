@@ -1,0 +1,410 @@
+{% include 'bold-product' with product, hide_action: 'break', output: 'none' %}
+
+<div class="prelude-buy no-top-menu-buy no-swatches buy-page">
+  
+    <section class="full-width product-wrap">
+
+        <div class="container container-padding">
+
+          	<div class="product">
+
+            {% assign current_variant = bold_selected_or_first_available_variant %}
+            {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+
+            <div class="product-image">
+              
+               <div class="product-above-image-content-mobile">
+                  
+              		<div class="product-title">{{ product.title }}</div>
+                    <h4>{{ product.description }}</h4>
+                  	<h5></h5>
+
+                    <div class="prices-wrap">
+                        {% if current_variant.price < current_variant.compare_at_price %}<span class="ComparePrice">{{ current_variant.compare_at_price | money }}</span>&nbsp;&nbsp;{% endif %}
+                        <h3 class="price ProductPrice">
+                            {{ current_variant.price | money }} 
+                        </h3>
+                    </div>
+              	
+                 	<div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}'>{{ product.metafields.judgeme.badge }}</div>				
+
+              	</div>
+              
+              	<div id="slider" class="regular-slider flexslider">
+                	<ul class="slides">
+                  		{% if product.images.size > 0 %}
+                            <li class="slide featured" data-index="0" data-variant-img="{{ featured_image.id }}" data-thumb="{{ featured_image | img_url: 'small' }}">
+                                <img src="{{ featured_image | img_url: 'grande' }}" width="440" height="440" alt="{{ featured_image.alt | escape }}">
+                              	
+                            </li>
+                    	{% if product.images.size > 1 %}
+                      	{% assign index = 0 %}
+                      		{% for image in product.images %}
+                        		{% unless image contains featured_image %}
+                          		{% assign index = index | plus: 1 %}
+                      				{% if image.alt contains 'youtube' %}
+                          			<li class="slide{% if image.alt contains 'youtube' %} video{% endif %}" data-index="{{ index }}" data-variant-img="{{ image.id }}" data-thumb="{{ image | img_url: 'small' }}">
+                                        <iframe src="{{ image.alt }}" frameborder="0" allowfullscreen></iframe>
+                                    </li>
+                      				{% else %}
+                          			<li class="slide" data-index="{{ index }}" data-variant-img="{{ image.id }}" data-thumb="{{ image | img_url: 'small' }}">
+                              			<img src="{{ image | img_url: 'grande' }}" width="440" height="440" alt="{{ image.alt | escape }}">
+                          			</li>
+                      				{% endif %}
+                        		{% endunless %}
+                      		{% endfor %}
+                    	{% endif %}
+                  		{% else %}
+                    	<li class="slide">
+                      		<img src="{{ 'no-image.svg' | asset_url }}" alt="*">
+                    	</li>
+                  		{% endif %}
+
+                	</ul>
+              	</div>
+            </div>
+              
+            <div class="product-content">
+              
+				<div class="product-above-image-content-desktop">
+
+                    <div class="product-title">{{ product.title }}</div>
+                    <h4>{{ product.description }}</h4>
+                    <h5></h5>
+                    {% if current_variant.price < current_variant.compare_at_price %}<span class="ComparePrice">{{ current_variant.compare_at_price | money }}</span>&nbsp;&nbsp;{% endif %}
+
+                    <h3 class="price ProductPrice">
+                        {{ current_variant.price | money }}              
+                    </h3>
+              	</div>
+                                          
+              	<div class='jdgm-widget jdgm-preview-badge desktop' data-id='{{ product.id }}'>{{ product.metafields.judgeme.badge }}</div>				
+                      
+				{% assign preorder = false %}
+				{% if product.available %}
+              		{% for tag in product.tags %}
+              			{% if tag == 'preorder' %}
+              				{% assign preorder = true %}
+              			{% endif %}
+              		{% endfor %}
+              	{% endif %}
+
+                <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+
+                  <div class="buy-row swatches">
+
+                      <select name="id" id="productSelect" class="product-single__variants">
+                        
+                        {% for variant in product.variants %}
+						
+                        {% include 'bold-hidden-variants' with variant, bold_loop: 'loop' %}
+
+                        {% if variant.available %}
+
+                            <option {% if variant == current_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+
+                          {% else %}
+                            <option disabled="disabled">
+                              {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                            </option>
+                          {% endif %}
+                        {% endfor %}                   
+                        
+                      </select>
+
+                   	</div>
+                                
+                  	<div class="buy-row quantity-row">
+                        <div class="form__column quantity-selector">
+                            <label for="Quantity" class="quantity-selector">{{ 'products.product.quantity' | t }}</label>
+                            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="qty-remove-defaults quantity-selector">
+                        </div>   
+                        <button type="submit" name="add" id="AddToCart" class="btn">
+                            <span id="AddToCartText">添加到購物車</span>
+                        </button>
+                  	</div>
+          	</form>
+
+            </div>
+              
+          	<div class="product-detail-anchor-nav">
+                <ul>
+                    <li><a href="#section1" data-analytics-title="特色">特色</a></li>
+                    <li><a href="#section2" data-analytics-title="規格">規格</a></li>
+                    <li><a href="#section3" data-analytics-title="內容物">內容物</a></li>
+                    <li><a href="#section4" data-analytics-title="評論">評論</a></li>
+                    <li><a href="/pages/service" target="_blank" data-analytics-title="FAQ">FAQ</a></li>
+                </ul>
+            </div>
+			</div>
+		</div>      
+    </section>
+
+    <span class="anchor" id="section1"></span>
+
+    <div id="features-section">
+        
+        <section class="full-width white-bg">
+            <div class="container container-padding clearfix feature-left-image">
+                <table>
+                    <tr>
+                        <td class="middle sixty">
+                            <source type="image/webp" srcset="{{ 'Pro_Omnia_SE_acc_c01.webp' | asset_url }}" />
+                            <img src="{{ 'Pro_Omnia_SE_acc_c01.jpg' | asset_url }}" width="600" height="600" alt="三合一組合">
+                        </td>
+                        <td class="black-txt middle">	
+                            <h2>三合一組合</h2>
+                            <p class="last">可安裝於冷氣通風孔、儀表板或擋風玻璃。</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+ 
+        <section class="full-width white-bg">                             	
+            <div class="container container-bottom-padding clearfix feature-right-image">
+                <source type="image/webp" srcset="{{ 'Pro_Omnia_SE_acc_c02.webp' | asset_url }}" class="features-mobile" />
+                <img src="{{ 'Pro_Omnia_SE_acc_c02.jpg' | asset_url }}" alt="可調整視角" class="features-mobile">
+                <table>
+                    <tr>
+                        <td class="middle black-txt left-text">
+                            <h2>可調整視角</h2>
+                            <p class="last">伸縮臂可伸長約15公分，並以225°弧度旋轉，調整成最適合您的觀看角度。</p>
+                      	</td>
+                        <td class="middle sixty-five" id="qi-certified">	
+                            <source type="image/webp" srcset="{{ 'Pro_Omnia_SE_acc_c02.webp' | asset_url }}" class="features-desktop" />
+                            <img src="{{ 'Pro_Omnia_SE_acc_c02.jpg' | asset_url }}" width="600" height="600" alt="可調整視角" class="features-desktop">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        
+	</div>
+
+	<section class="full-width OmniaSMagSafe-banner hero">
+	</section>
+
+    <span class="anchor" id="section2"></span>
+
+    <section class="full-width white-bg" id="specs-section">
+      	<div class="container max-width-1100 container-bottom-padding clearfix">
+            <h3 class="display-title">規格</h3>
+			<div class="grid">
+                <div class="grid__item one-third medium--one-third small--one-half">
+                    <span class="module-icon weight"></span>
+                    <h3>66</h3>
+                  	<p>重量(g)</p>                
+              	</div>
+                <div class="grid__item one-third medium--one-third small--one-half">
+                    <span class="module-icon dimensions"></span>
+                    <h3>110 x 55 x 66</h3>
+                  	<p>尺寸（公釐，未展開尺寸）</p>               
+              	</div>
+          </div>
+      </div>
+  	</section>
+  
+    <section class="full-width">
+        <div class="container">
+            <hr class="full-width-rule">
+        </div>
+    </section>
+
+    <span class="anchor" id="section3"></span>
+
+    <section class="full-width white-bg" id="box-section">
+      	<div class="container clearfix max-width-1100">
+            <h3 class="display-title">內容物</h3>
+      	</div>
+  	</section>
+
+    <section class="full-width offwhite-bg" id="box-section-content">
+      	<div class="container max-width-1100 clearfix">
+			<div class="grid">
+                <div class="grid__item one-third medium--one-half small--one-half">
+                    <div class="M_pro_contentbox">
+                      	<source type="image/webp" srcset="{{ 'Pro_Omnia_SE_acc_box.webp' | asset_url }}" class="box-item" />
+                        <img src="{{ 'Pro_Omnia_SE_acc_box.png' | asset_url }}" width="285" height="285" alt="車用充電器吸盤支架(單售支架)" class="box-item">
+                  		<p>車用充電器吸盤支架(單售支架)</p>
+                  	</div>
+                </div>  
+          	</div>
+      	</div>
+  	</section>
+
+    <span class="anchor" id="section4"></span>
+  
+    <section class="full-width">
+        <div class="container">
+            <hr class="full-width-rule">
+        </div>
+    </section>
+
+	<section class="full-width judgeme-review space-p-b-100" id="reviews-section">
+      	<div class="container max-width-1100">
+          	<h3 class="display-title space-p-t-20">顧客評論</h3>
+          	<div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title }}' data-id='{{ product.id }}'>{{ product.metafields.judgeme.widget }}</div>
+      	</div>
+  	</section> 
+</div>
+
+{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+{{ 'flexslider.js' | asset_url | script_tag }}
+
+<script>
+  
+  	var selectCallback = function(variant, selector) {
+
+  	var $addToCart = $('#AddToCart'),
+      	$productPrice = $('.ProductPrice'),
+      	$comparePrice = $('.ComparePrice'),
+      	$quantityElements = $('.quantity-selector'),
+      	$addToCartText = $('#AddToCartText'),
+      	moneyFormat = "{{ shop.money_format }}";
+
+    	if (variant && variant.available == true) {
+            $addToCart.removeClass('btn--disabled').prop('disabled', false);
+            $quantityElements.removeClass('hidden');
+            //$addToCartText.text('加入購物車');
+
+      	if (variant.featured_image) {
+        	var newImg = $('#slider').find('.slide[data-variant-img="' + variant.featured_image.id + '"]');
+        	if (newImg.length > 0) {
+          		if ($('#slider').hasClass('loaded')) {
+            		$('#slider').flexslider(newImg.data('index'));
+          		} else {
+            		$('#slider').data('loaded-index', newImg.data('index'));
+          		}
+        	}
+      	}
+
+        if ( variant.compare_at_price > variant.price ) {
+            $comparePrice.html(Shopify.formatMoney(variant.compare_at_price, moneyFormat)).show();
+            $productPrice.html(Shopify.formatMoney(variant.price,  moneyFormat)) + Shopify.formatMoney(variant.compare_at_price, moneyFormat);
+        } else {
+            $comparePrice.hide();
+            $productPrice.html(Shopify.formatMoney(variant.price, moneyFormat));
+        }
+        var form = jQuery('#' + selector.domIdPrefix).closest('form');
+      	for (var i=0,length=variant.options.length; i<length; i++) {
+        	var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+        	if (radioButton.size()) {
+          	radioButton.get(0).checked = true;
+        	}
+      	}
+
+    } else {
+		$addToCart.addClass('btn--disabled').prop('disabled', true);
+      	$addToCartText.text("Pre-Order");
+        $quantityElements.addClass('hidden');
+    }    
+
+    $(".swatch-element input:radio").on('click', function(){
+        if ($(this).attr('checked', 'checked')){
+           	$(this).parent().addClass('active-swatch-single-variant');
+          	$(this).parent().siblings().removeClass('active-swatch-single-variant');
+        } else {
+           $(this).parent().removeClass('active-swatch-single-variant');
+       }
+    });      
+  };
+
+  	jQuery(function($) {
+        new Shopify.OptionSelectors('productSelect', {
+          product: bold_product_json[{{ product.id }}],
+          onVariantSelected: selectCallback,
+          enableHistoryState: false
+        });
+
+        {% if product.options.size == 1 %}
+          {% if product.options.first != "Title" %}
+            $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">{{ product.options.first | escape }}</label>');
+          {% else %}
+            $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">&nbsp;</label>');
+          {% endif %}
+        {% endif %}
+
+        {% if bold_variants_size == 1 and product.variants.first.title contains 'Default' %}
+          $('.selector-wrapper').hide();
+        {% endif %}
+  	});
+	jQuery(document).ready(function() {
+  
+        if ($('.regular-slider').length > 0) {
+
+          $('.regular-slider.flexslider').imagesLoaded(function() {
+            var sliderArgs = {
+                animation: 'slide',
+                animationSpeed: 300,    
+                slideshow: false,
+                slideshowSpeed: 5000,
+                directionNav: true,
+                keyboard: true,
+                prevText: '',
+                nextText: '',
+                smoothHeight: true,
+                video: true,
+                controlNav: 'thumbnails',
+                controlsContainer: $('.custom-controls-container'),
+                customDirectionNav: $('.custom-navigation a'),
+                start: function(slider) {
+                    if ($(slider).find('.slide').not('.clone').length === 1) {
+                      $(slider).find('.flex-direction-nav').remove();
+                    }
+                    $(window).trigger('resize');
+                    slider.addClass('loaded');
+                    if ($('#slider').data('loaded-index') != undefined) {
+                      $('#slider').flexslider($('#slider').data('loaded-index'));
+                    }
+
+                    $('.flex-control-thumbs').addClass('show');
+                }
+            };
+
+            if ($('.regular-slider.flexslider').find('li').length === 1) {
+              sliderArgs.touch = false;
+            }
+
+            $('.regular-slider.flexslider').flexslider(sliderArgs);
+          });
+        }
+ 	});
+  
+    jQuery(function(){$(document).on("click",".faq-item .faq-question",function(){$(this).parent().find(".content").is(":visible")||($(".faq-item .content").slideUp(),$(".faq-item .faq-question").removeClass("active")),$(this).toggleClass("active").parent().find(".content").slideToggle()})});
+
+  	var tag = document.createElement('script');
+
+  	tag.src = "https://www.youtube.com/iframe_api";
+  	var firstScriptTag = document.getElementsByTagName('script')[0];
+  	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	var player;
+  	function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        playerVars: {
+              color: 'white',
+              playlist: VideoIdArr
+          },
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      });
+  	}
+
+  	function onPlayerReady(event) {
+    	event.target.playVideo();
+  	}
+
+  	var done = false;
+  	function onPlayerStateChange(event) {
+    	if (event.data == YT.PlayerState.PLAYING && !done) {
+      	setTimeout(stopVideo, 6000);
+      	done = true;
+    	}
+  	}
+  	function stopVideo() {
+    	player.stopVideo();
+  	}
+
+</script>

@@ -1,0 +1,41 @@
+<section class="full-width page-header">
+  	<div class="container container-padding">
+  		<h2 class="display-title">{{ 'customer.activate_account.title' | t }}</h2>
+  	</div>
+</section>
+
+<div class="full-width info-page accounts">
+  
+  	<div class="container container-bottom-padding">
+      
+  		<div class="account-wrap">
+
+    	{% form 'activate_customer_password' %}
+
+            {% if form.errors %}
+            <div class="errorForm feedback">
+                <p>
+                    {% for field in form.errors %}
+                          <span class="alert label">The {{ field | capitalize | replace: 'Body', 'Message' }} field {{ form.errors.messages[field] }}</span><br />
+                    {% endfor %}
+                </p>
+            </div>
+            {% endif %}
+    
+            <p>{{ 'customer.activate_account.subtext' | t: email: email }}</p>
+
+            <input type="password" placeholder="Password" value="" name="customer[password]" id="CustomerPassword" class="input-full">
+
+            <input type="password" placeholder="Confirm Password"value="" name="customer[password_confirmation]" id="CustomerPasswordConfirmation" class="input-full">
+
+            <div class="activate-account-buttons">
+                <input type="submit" class="btn" value="Activate Account" />
+                <p>or</p>
+                <input id="decline-invite" type="submit" name="decline" value="Decline Invitation" />
+            </div>
+
+            {% endform %}
+
+  		</div>
+	</div>
+</div>

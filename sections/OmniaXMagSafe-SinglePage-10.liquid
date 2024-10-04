@@ -1,0 +1,164 @@
+<section class="">
+  <div class="mx-auto md:w-[70%] w-full relative hidden md:block">
+    <div class="rax-carousel rounded-md mx-auto">
+      <div id="rax-item1" class="rax-carousel-item w-full">
+        <img
+          src="{{ 'caroselreplace1.gif'|file_url }}"
+          class="w-full"
+          width=""
+          height=""
+        >
+      </div>
+      <div id="rax-item2" class="rax-carousel-item w-full">
+        <img
+          src="{{ 'carosol2.png'|file_url }}"
+          class="w-full"
+          width=""
+          height=""
+        >
+      </div>
+      <div id="rax-item3" class="rax-carousel-item w-full">
+        <img
+          src="{{ 'carosol3.png'|file_url }}"
+          class="w-full"
+          width=""
+          height=""
+        >
+      </div>
+    </div>
+    <div class="absolute z-10 bottom-5 flex w-full justify-center py-2 items-center gap-8">
+      <a
+        onclick="
+          let buttons = document.querySelectorAll('.carosol_btn');
+          let button=this;
+          buttons.forEach(btn => {btn.classList.remove('bg-black/80'); btn.classList.remove('text-white');btn.classList.remove('bg-white/80'); btn.classList.remove('text-black');btn.classList.add('bg-white/80'); btn.classList.add('text-black')});
+          button.classList.remove('bg-white/80');
+          button.classList.remove('text-black');
+          button.classList.add('bg-black/80');
+          button.classList.add('text-white');
+          window.location.href = '#rax-item1';
+        "
+        class="cursor-pointer bg-black/80 text-white carosol_btn carosol_btn3 font-bold  md:!py-2 md:!px-8 md:text-[15px] rounded-full text-[12px] p-1"
+        >1.2KG 磁吸力</a
+      >
+      <a
+        onclick="
+          let buttons = document.querySelectorAll('.carosol_btn');
+          let button=this;
+          buttons.forEach(btn => {btn.classList.remove('bg-black/80'); btn.classList.remove('text-white');btn.classList.remove('bg-white/80'); btn.classList.remove('text-black');btn.classList.add('bg-white/80'); btn.classList.add('text-black')});
+          button.classList.remove('bg-white/80');
+          button.classList.remove('text-black');
+          button.classList.add('bg-black/80');
+          button.classList.add('text-white');
+
+              window.location.href = '#rax-item2';
+        "
+        class="cursor-pointer bg-white/80 text-black carosol_btn carosol_btn3 font-bold  md:!py-2 md:!px-8 md:text-[15px] rounded-full text-[12px] p-1"
+        >科技感外型</a
+      >
+      <a
+        onclick="
+          let buttons = document.querySelectorAll('.carosol_btn');
+          let button=this;
+          buttons.forEach(btn => {btn.classList.remove('bg-black/80'); btn.classList.remove('text-white');btn.classList.remove('bg-white/80'); btn.classList.remove('text-black');btn.classList.add('bg-white/80'); btn.classList.add('text-black')});
+          button.classList.remove('bg-white/80');
+          button.classList.remove('text-black');
+          button.classList.add('bg-black/80');
+          button.classList.add('text-white');
+          window.location.href = '#rax-item3';
+        "
+        class="cursor-pointer bg-white/80 text-black carosol_btn carosol_btn3 font-bold  md:!py-2 md:!px-8 md:text-[15px] rounded-full text-[12px] p-1"
+        >透明黑化面蓋</a
+      >
+    </div>
+  </div>
+
+  <div class="mx-auto md:w-[80%] w-full relative md:hidden">
+    <div class="rax-carousel-vertical rounded-md mx-auto">
+      <div id="rax-item1" class="rax-carousel-item w-full relative">
+        <img
+          src="{{ 'caroselreplace1.gif'|file_url }}"
+          class="w-full"
+          width=""
+          height=""
+        >
+        <div class="absolute z-10 bottom-0 right-0 flex w-full justify-end py-2  pr-2 items-center gap-8">
+          <div class="cursor-pointer bg-white/80 text-black  carosol_btn carosol_btn3 font-bold  md:!py-2 md:!px-8 md:text-[15px] rounded-full text-[12px] p-1 text-center min-w-[80px]">
+            1.2KG 磁吸力
+          </div>
+        </div>
+      </div>
+      <div id="rax-item2" class="rax-carousel-item w-full relative">
+        <img
+          src="{{ 'carosol2.png'|file_url }}"
+          class="w-full"
+          width=""
+          height=""
+        >
+        <div class="absolute z-10 bottom-0 right-0 flex w-full justify-end py-2   pr-2 items-center gap-8">
+          <div class="cursor-pointer bg-white/80 text-black carosol_btn carosol_btn3 font-bold  md:!py-2 md:!px-8 md:text-[15px] rounded-full text-[12px] p-1 text-center min-w-[80px]">
+            科技感外型
+          </div>
+        </div>
+      </div>
+      <div id="rax-item3" class="rax-carousel-item w-full relative">
+        <img
+          src="{{ 'carosol3.png'|file_url }}"
+          class="w-full"
+          width=""
+          height=""
+        >
+        <div class="absolute z-10 bottom-0 right-0 flex w-full justify-end py-2 pr-2 items-center gap-8">
+          <div class="cursor-pointer bg-white/80 text-black carosol_btn carosol_btn3 font-bold  md:!py-2 md:!px-8 md:text-[15px] rounded-full text-[12px] p-1 text-center min-w-[80px]">
+            透明黑化面蓋
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script></script>
+<style>
+        html{
+  scroll-behavior: smooth;
+  }
+        .rax-carousel {
+          display: inline-flex !important;
+          overflow-x: scroll !important;
+          scroll-snap-type: x mandatory !important;
+          scroll-behavior: smooth !important;
+          -ms-overflow-style: none !important;
+          scrollbar-width: none !important;
+        }
+
+        .rax-carousel-vertical {
+            flex-direction: column !important;
+            overflow-y: scroll !important;
+            scroll-snap-type: y mandatory !important;
+        }
+
+        .rax-carousel-item {
+            box-sizing: content-box !important;
+            display: flex !important;
+            flex: none !important;
+            scroll-snap-align: start !important;
+        }
+
+        .carousel-start .carousel-item {
+            scroll-snap-align: start
+        }
+
+        .carousel-center .carousel-item {
+            scroll-snap-align: center
+        }
+
+        .carousel-end .carousel-item {
+            scroll-snap-align: end
+        }
+</style>
+{% schema %}
+{
+  "name": "Section name",
+  "settings": []
+}
+{% endschema %}

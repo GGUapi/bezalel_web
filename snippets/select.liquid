@@ -1,0 +1,28 @@
+{% include 'bold-product' with product, hide_action: 'break' %}{% if bold_hidden_product %}{% break %}{%endif %}
+
+
+
+
+
+
+<div class="swatch clearfix" data-option-index="{{ option_index }}">
+  <div class="header">{{ swatch }}</div>
+  {% assign values = '' %}
+  <select>
+  {% for variant in product.variants %}
+    {% assign value = variant.options[option_index] %}
+   <select>
+    
+
+    
+     <option value="{{ value | escape }}">{{ variant }}</option>
+    
+   
+
+
+  {% endfor %}
+       </select>
+</div>
+
+
+

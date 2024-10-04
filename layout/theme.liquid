@@ -1,0 +1,2897 @@
+<!doctype html>
+<html lang="zh-hant" class="no-js" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-NH88RJZ5');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-327291478"></script>
+    <script defer src="https://cdn.tailwindcss.com"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-327291478');
+    </script>
+
+    {% include 'canonicals_app' %}
+
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {% render 'pagefly-head' %}
+
+    <meta name="facebook-domain-verification" content="2d11rezvu3qwduo219q9fod0259efm">
+
+    <meta name="google-site-verification" content="vW61TnWw65eY1zw3Xkl8sGAIfHrQAKlHOAFMaXQKq2A">
+    <meta name="google-site-verification" content="f0tnuRC-aPfIZPfInzGbzllse-ZRCujia-mFbG-dzeY">
+    <meta name="google-site-verification" content="8Z-6_gv911CAXIXkdL-WJmLpVeHE1zfJB4k8wNpeeAI">
+    <script>
+      (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <title>
+      {% if template == 'password' -%}
+        {{- shop.name -}}
+      {%- else -%}
+        {{- page_title -}}
+        {%- if current_tags -%}
+          {%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+        {%- endif -%}
+        {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+        {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- endif %}
+    </title>
+    {% if template contains 'index' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,MagSafe手機保護殼,MagSafe行動電源,MagSafe車用充電器"
+      >
+    {% elsif template contains 'page.about' %}
+      <meta name="keywords" content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,關於倍加能,倍加能品牌故事">
+    {% elsif template contains 'page.careers' %}
+      <meta name="keywords" content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,倍加能人才招募,加入倍加能">
+    {% elsif template contains 'page.return' %}
+      <meta name="keywords" content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,倍加能退換貨Q&A">
+    {% elsif template contains 'page.warranty' %}
+      <meta name="keywords" content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,倍加能產品保固指南">
+    {% elsif template contains 'page.delivery' %}
+      <meta name="keywords" content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,倍加能運送資訊">
+    {% elsif template contains 'page.privacy' %}
+      <meta name="keywords" content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,倍加能隱私權政策">
+    {% elsif template contains 'page.service' %}
+      <meta name="keywords" content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,倍加能客戶服務">
+    {% elsif template contains 'customers' %}
+      <meta name="keywords" content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,倍加能會員專區">
+    {% elsif collection.handle == 'all' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,MagSafe手機保護殼,MagSafe行動電源,MagSafe車用充電器"
+      >
+    {% elsif collection.handle == 'set' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,Omnia S MagSafe磁吸無線車用充電器,Omnia S MagSafe Qi無線車充"
+      >
+    {% elsif collection.handle == 'case' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,MagSafe手機保護殼,MagSafe磁吸手機保護殼"
+      >
+    {% elsif collection.handle == 'wireless-charger' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,Prelude SE MagSafe行動電源,Futura X 無線充電板,Altair 無線充電座,Prelude Android 智慧無線充電行動電源"
+      >
+    {% elsif collection.handle == 'wireless-charging-tray' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,Futura X 無線充電板,Futura S MagSafe 磁吸無線快充充電盤"
+      >
+    {% elsif collection.handle == 'accessories' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,MagSafe手機保護殼,18W USB 壁式充電器,USB-C to USB-C 充電線,USB-C to Lightning 充電線"
+      >
+    {% elsif collection.handle == 'for-iphone' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,MagSafe手機保護殼,MagSafe行動電源,MagSafe車用充電器,iPhone"
+      >
+    {% elsif collection.handle == 'for-android' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,MagSafe手機保護殼,MagSafe行動電源,MagSafe車用充電器,Android"
+      >
+    {% elsif collection.handle == 'events-2205' or collection.handle == 'combi' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,MagSafe手機保護殼,MagSafe磁吸行動電源,無線充電超值組合產品"
+      >
+    {% elsif template == 'product.Prelude_SE' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,行動電源,Prelude SE MagSafe 立架式磁吸無線充電行動電源"
+      >
+    {% elsif template == 'product.magsafeiphone13case' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,MagSafe手機保護殼,MagSafe磁吸手機保護殼,iPhone13系列 MagSafe 抗菌透明保護殼"
+      >
+    {% elsif template == 'product.magsafeiphone14case' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,MagSafe手機保護殼,MagSafe磁吸手機保護殼,iPhone14系列 MagSafe 抗菌透明保護殼"
+      >
+    {% elsif template == 'product.Omnia_S_MagSafe' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,車用充電器,Omnia S1 MagSafe 磁吸無線車用充電器"
+      >
+    {% elsif template == 'product.Omnia_S_MagSafe_2' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,車用充電器,Omnia S MagSafe 磁吸無線車用充電器"
+      >
+    {% elsif template == 'product.Omnia_SE' %}
+      <meta name="keywords" content="倍加能,BEZALEL,無線充電,無線車用充電器,車用充電器,Omnia SE 無線車用充電器">
+    {% elsif template == 'product.Omnia_S_MagSafe_acc' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,支架,車用充電器,Omnia S MagSafe 磁吸無線車用充電器"
+      >
+    {% elsif template == 'product.Omnia_SE_acc' %}
+      <meta name="keywords" content="倍加能,BEZALEL,無線充電,支架,吸盤支架,車用充電器吸盤支架,Omnia SE 無線車用充電器">
+    {% elsif template == 'product.prelude android' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,行動電源,Prelude Android 智慧無線充電行動電源"
+      >
+    {% elsif template == 'product.futura-x' %}
+      <meta name="keywords" content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,無線充電板,Futura X 無線充電板">
+    {% elsif template == 'product.futura-s' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,無線充電盤,Futura S MagSafe 磁吸無線快充充電盤"
+      >
+    {% elsif template == 'product.altair' %}
+      <meta name="keywords" content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,無線充電座,Altair 無線充電座">
+    {% elsif template == 'product.wall-charger' %}
+      <meta name="keywords" content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,壁式充電器,18W USB 壁式充電器">
+    {% elsif template == 'product.glossy' %}
+      <meta name="keywords" content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,MagSafe手機保護殼,BEZALEL 鏡面手機殼">
+    {% elsif template == 'product.cables' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,USB-C to USB-C 充電線,USB-C to Lightning 充電線"
+      >
+    {% elsif template == 'product.events-220501_PreludeSEMagSafe' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,行動電源,Prelude SE MagSafe 立架式磁吸無線充電行動電源"
+      >
+    {% elsif template == 'product.events-220502_FuturaX' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,行動電源,Prelude SE MagSafe 立架式磁吸無線充電行動電源,Futura X 無線充電板"
+      >
+    {% elsif template == 'product.events-220503_OmniaSMagSafe' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,行動電源,車用充電器,Prelude SE MagSafe 立架式磁吸無線充電行動電源,Omnia S MagSafe 磁吸無線車用充電器"
+      >
+    {% elsif template == 'product.combi_FuturaS' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,無線充電盤,Futura S MagSafe 磁吸無線快充充電盤"
+      >
+    {% elsif template == 'product.combi_FuturaS_OmniaS' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,行動電源,車用充電器,Futura S MagSafe 磁吸無線快充充電盤,Omnia S MagSafe 磁吸無線車用充電器"
+      >
+    {% elsif template == 'product.combi_FuturaS_PreludeSE' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,行動電源,Futura S MagSafe 磁吸無線快充充電盤,Prelude SE MagSafe 立架式磁吸無線充電行動電源"
+      >
+    {% elsif template == 'product.combi_FuturaS_i14case' %}
+      <meta
+        name="keywords"
+        content="倍加能,BEZALEL,無線充電,MagSafe,磁吸無線充電,MagSafe手機保護殼,Futura S MagSafe 磁吸無線快充充電盤,iPhone14系列 MagSafe 抗菌透明保護殼"
+      >
+    {% endif %}
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+    <meta name="copyright" content="BEZALEL 倍加能股份有限公司">
+    <meta name="company" content="BEZALEL 倍加能股份有限公司">
+    <meta name="rating" content="general">
+    <meta name="revisit-after" content="2 Days">
+    <meta name="robots" content="index,follow">
+    <meta name="robots" content="all">
+    <meta name="googlebot" content="all">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ 'apple-icon-57x57.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ 'apple-icon-60x60.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ 'apple-icon-72x72.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ 'apple-icon-75x75.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ 'apple-icon-114x114.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ 'apple-icon-120x120.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ 'apple-icon-144x144.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ 'apple-icon-152x152.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ 'apple-icon-180x180.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="144x144" href="{{ 'android-icon-144x144.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ 'android-icon-192x192.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon-32x32.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ 'favicon-96x96.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ 'favicon-16x16.png' | asset_url }}">
+
+    {% if template contains 'index' %}
+      <link rel="canonical" href="https://tw.bezalel.co/">
+    {% elsif template == 'page.about' %}
+      <link rel="canonical" href="https://tw.bezalel.co/pages/about">
+    {% elsif template == 'page.careers' %}
+      <link rel="canonical" href="https://tw.bezalel.co/pages/careers">
+    {% elsif template == 'page.return' %}
+      <link rel="canonical" href="https://tw.bezalel.co/pages/return">
+    {% elsif template == 'page.warranty' %}
+      <link rel="canonical" href="https://tw.bezalel.co/pages/warranty">
+    {% elsif template == 'page.delivery' %}
+      <link rel="canonical" href="https://tw.bezalel.co/pages/delivery">
+    {% elsif template == 'page.privacy' %}
+      <link rel="canonical" href="https://tw.bezalel.co/pages/privacy">
+    {% elsif template == 'page.service' %}
+      <link rel="canonical" href="https://tw.bezalel.co/pages/service">
+    {% elsif collection.handle == 'all' %}
+      <link rel="canonical" href="https://tw.bezalel.co/collections/all">
+    {% elsif collection.handle == 'set' %}
+      <link rel="canonical" href="https://tw.bezalel.co/collections/set">
+    {% elsif collection.handle == 'case' %}
+      <link rel="canonical" href="https://tw.bezalel.co/collections/case">
+    {% elsif collection.handle == 'wireless-charger' %}
+      <link rel="canonical" href="https://tw.bezalel.co/collections/wireless-charger">
+    {% elsif collection.handle == 'wireless-charging-tray' %}
+      <link rel="canonical" href="https://tw.bezalel.co/collections/wireless-charging-tray">
+    {% elsif collection.handle == 'accessories' %}
+      <link rel="canonical" href="https://tw.bezalel.co/collections/accessories">
+    {% elsif collection.handle == 'for-iphone' %}
+      <link rel="canonical" href="https://tw.bezalel.co/collections/for-iphone">
+    {% elsif collection.handle == 'for-android' %}
+      <link rel="canonical" href="https://tw.bezalel.co/collections/for-android">
+    {% elsif collection.handle == 'events-2205' %}
+      <link rel="canonical" href="https://tw.bezalel.co/collections/events-2205">
+    {% elsif collection.handle == 'fiona' %}
+      <link rel="canonical" href="https://tw.bezalel.co/collections/fiona">
+    {% elsif template == 'product.Prelude_SE' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/wireless-charger-prelude-se-magsafe">
+    {% elsif template == 'product.magsafeiphone13case' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/case-iphone13-magsafecase">
+    {% elsif template == 'product.magsafeiphone14case' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/case-iphone14-magsafecase">
+    {% elsif template == 'product.Omnia_S_MagSafe' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/car-charger-omnia-s1-magsafe">
+    {% elsif template == 'product.Omnia_S_MagSafe_2' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/car-charger-omnia-s-magsafe">
+    {% elsif template == 'product.Omnia_SE' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/car-charger-omnia-se">
+    {% elsif template == 'product.Omnia_S_MagSafe_acc' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/car-charger-omnia-s-magsafe-acc">
+    {% elsif template == 'product.Omnia_S_MagSafe_acc' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/car-charger-omnia-se-acc">
+    {% elsif template == 'product.prelude android' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/charger-prelude-android">
+    {% elsif template == 'product.futura-x' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/wireless-charger-futura-x">
+    {% elsif template == 'product.futura-s' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/wireless-charger-futura-s-magsafe">
+    {% elsif template == 'product.altair' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/wireless-charger-altair-stand">
+    {% elsif template == 'product.wall-charger' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/wall-charger-18w-usb">
+    {% elsif template == 'product.glossy' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/case-glossycase">
+    {% elsif template == 'product.cables' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/cable-usbc-to-usbc">
+    {% elsif template == 'product.events-220501_PreludeSEMagSafe' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/events-220501-preludesemagsafe">
+    {% elsif template == 'product.events-220502_FuturaX' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/events-220502-futurax">
+    {% elsif template == 'product.events-220503_OmniaSMagSafe' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/events-220503-omniasmagsafe">
+    {% elsif template == 'product.combi_FuturaS' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/combi_FuturaS">
+    {% elsif template == 'product.combi_FuturaS_OmniaS' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/combi_FuturaS_OmniaS">
+    {% elsif template == 'product.combi_FuturaS_PreludeSE' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/combi_FuturaS_PreludeSE">
+    {% elsif template == 'product.combi_FuturaS_i14case' %}
+      <link rel="canonical" href="https://tw.bezalel.co/products/combi_futuras_i14case">
+    {% endif %}
+
+    <link rel="alternate" hreflang="zh-hant" href="https://tw.bezalel.co/">
+    <link rel="manifest" href="{{ 'manifest.json' | asset_url }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ 'ms-icon-144x144.png' | asset_url }}">
+    <meta name="theme-color" content="#ffffff">
+    {{ content_for_header }}
+    {% render 'globo.alsobought.script' %}
+    {% include 'social-meta-tags' %}
+    <link rel="stylesheet" href="{{ 'animate.css' | asset_url }}">
+    <link rel="stylesheet preload" as="style" type="text/css" href="{{ 'styles.scss.css' | asset_url }}">
+    <link
+      rel="stylesheet preload"
+      as="style"
+      type="text/css"
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"
+    >
+    <script src="https://kit.fontawesome.com/facd60f989.js" crossorigin="anonymous"></script>
+
+    {% include 'bold-common' %}
+
+    {{ '//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js' | script_tag }}
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script> -->
+    <!-- 2023_03_18 _add fix -->
+    {{ 'https://accessories.w3apps.co/js/accessories.js' | script_tag }}
+    <script type="text/javascript">
+      accessoriesJS($);
+    </script>
+    <!-- 2023_03_18 _add fix end -->
+    {% unless template contains 'cart' %}
+    {% endunless %}
+
+    {% if template contains 'product' %}
+      <script>
+        jQuery(document).ready(function() {
+            $(".product-content").delay(1000).fadeIn(2000);
+        });
+      </script>
+    {% endif %}
+
+    {% include 'ninjacoderz_sitemap_noindex' %}
+
+    {% if template contains 'customers' %}
+      {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {% endif %}
+
+    {% if template == 'page.contact' %}
+      {{ '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js' | script_tag }}
+      <script>
+        jQuery(document).ready(function() {
+          $("#datepicker").datepicker({
+            orientation: "bottom"
+          });
+        });
+      </script>
+    {% endif %}
+
+    {% if template contains 'overview'
+      or template contains 'video'
+      or template contains 'index'
+      or collection.handle == 'all'
+    %}
+      {{ 'jquery.magnific-popup.min.js' | asset_url | script_tag }}
+      {{ 'magnific-popup.css' | asset_url | stylesheet_tag }}
+      <script>
+        jQuery(document).ready(function(){
+            $('.video-popup').magnificPopup({type:'iframe'});
+        });
+      </script>
+    {% endif %}
+
+    {% if collection.handle == 'all' or template contains 'index' %}
+      {{ 'popup_style.css' | asset_url | stylesheet_tag }}
+      <div id="myModal" class="new_model">
+        <div class="new_model-content">
+          <span class="close">&times;</span>
+          <a> <img src="{{'popup_bts.jpg'|asset_url}}"> </a>
+        </div>
+      </div>
+      {{ 'popup_auto.js' | asset_url | script_tag }}
+      <script>
+        jQuery(document).ready(function(){
+            $('.video-popup').magnificPopup({type:'iframe'});
+        });
+      </script>
+    {% endif %}
+
+    {% if template == 'cart' %}
+      {{ 'popup_style.css' | asset_url | stylesheet_tag }}
+      <div id="myModal2" class="new_model">
+        <div class="new_model-content">
+          <span class="close2">&times;</span>
+          <a> <img src="{{'cart0830.png'|asset_url}}"> </a>
+        </div>
+      </div>
+      {{ 'popup_auto.js' | asset_url | script_tag }}
+      <script>
+        jQuery(document).ready(function(){
+            $('.video-popup').magnificPopup({type:'iframe'});
+        });
+      </script>
+    {% endif %}
+
+    {% if template contains 'index' %}
+      <!-- MailerLite Universal -->
+      <script>
+        (function(m,a,i,l,e,r){ m['MailerLiteObject']=e;function f(){
+        var c={ a:arguments,q:[]};var r=this.push(c);return "number"!=typeof r?r:f.bind(c.q);}
+        f.q=f.q||[];m[e]=m[e]||f.bind(f.q);m[e].q=m[e].q||f.q;r=a.createElement(i);
+        var _=a.getElementsByTagName(i)[0];r.async=1;r.src=l+'?v'+(~~(new Date().getTime()/1000000));
+        _.parentNode.insertBefore(r,_);})(window, document, 'script', 'https://static.mailerlite.com/js/universal.js', 'ml');
+
+        var ml_account = ml('accounts', '3675212', 's6m5c2c7p7', 'load');
+      </script>
+      <!-- End MailerLite Universal -->
+    {% endif %}
+
+    {% if template contains 'index' %}
+      {{ 'jquery.cycle2.min.js' | asset_url | script_tag }}
+      {{ 'jquery.cycle2.carousel.min.js' | asset_url | script_tag }}
+    {% endif %}
+
+    {% if product.metafields.inventory.ShappifyHidden == 'true' %} <meta name="robots" content="noindex"> {% endif %}
+
+    <!-- Hotjar Tracking Code for http://bezalel.co -->
+    <script>
+      (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:995042,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+
+    <!-- Start Visual Website Optimizer Asynchronous Code -->
+    <script type="text/javascript">
+      var _vwo_code=(function(){
+      var account_id=272745,
+      settings_tolerance=2000,
+      library_tolerance=2500,
+      use_existing_jquery=false,
+      /* DO NOT EDIT BELOW THIS LINE */
+      f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+    </script>
+    <!-- End Visual Website Optimizer Asynchronous Code -->
+    {% include 'judgeme_core' %}
+
+    <!-- Chatra {literal} -->
+    <!--
+      <script>
+          (function(d, w, c) {
+              w.ChatraID = 'Kj7DBxqt4mGxmghc3';
+              var s = d.createElement('script');
+              w[c] = w[c] || function() {
+                  (w[c].q = w[c].q || []).push(arguments);
+              };
+              s.async = true;
+              s.src = 'https://call.chatra.io/chatra.js';
+              if (d.head) d.head.appendChild(s);
+          })(document, window, 'Chatra');
+      </script>
+    -->
+    <!-- /Chatra {/literal} -->
+    {% include 'sca.freegifts' %}
+    <!-- {% render 'omg-facebook-chat' %} -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    >
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <meta name="facebook-domain-verification" content="x0yooaosra8i1uf8p3bmsxa4stnpsy">
+  </head>
+
+  <body
+    id="{{ page_title | handle }}"
+    class="{% if template contains 'wall-charger' or template contains 'altair' or template contains 'kit' or template contains 'glossy' or template contains 'prelude' or template contains 'futura' %}no-top-links {% endif %}{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}"
+    itemscope
+    itemtype="http://schema.org/WebPage"
+  >
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-NH88RJZ5"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    {% unless template == 'cart' %}
+      <!--
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="close-icon" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></div>
+              <div class="modal-body">
+                  <a href="/collections/all"><img src="{{ "PrimeSale.jpg" | asset_url }}" /></a>
+                </div>
+              </div>
+            </div>
+        </div>
+      -->
+    {% endunless %}
+
+    <div id="PageContainer">
+      <header class="site-header" role="banner">
+        <article id="eventwrap">
+          <p class="evenP txt_g2">開學季全館 85 折，結帳輸入 BTS85</p>
+          <!--
+            <p class="evenP txt_g2" style = "color:#4b9be1;font-weight:600;"> 85折 </p>
+            <p class="evenP txt_g2">活動!</p>
+          -->
+          <p class="evenP2 txt_g2">開學季全館 85 折，結帳輸入 BTS85</p>
+          <!--
+            <p class="evenP2 txt_g2" style = "color:#4b9be1 !important;font-weight:600;"> 85折 </p>
+            <p class="evenP2 txt_g2"> 優惠 </p>
+          -->
+          <img id="changeButton" src="{{'cross.png'|asset_url}}" alt="關閉">
+        </article>
+        <!-- 手機版submenu items -->
+        <div
+          id="m-menu-statu"
+          class="sub-menu-mobile animate"
+          itemscope
+          itemtype="http://schema.org/SiteNavigationElement"
+        >
+          <ul>
+            <li>
+              <div id="search-button-mobile1">
+                <a href="https://bezalel.tw/">
+                  <p class="home-icon"><span class="sub-search-menu-txt2 txt_g2">回首頁</span></p>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div id="search-button-mobile">
+                <p class="search-icon"><span class="sub-search-menu-txt txt_g2">商品搜尋</span></p>
+              </div>
+            </li>
+            <li>
+              <div id="search-button-mobile2">
+                <a href="https://bezalel.tw/pages/%E5%AF%A6%E9%AB%94%E6%93%9A%E9%BB%9E">
+                  <p class="store-icon"><span class="sub-search-menu-txt1 txt_g2">實體據點</span></p>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div id="sub-menu-NewMemberIcon">
+                {% if customer %}
+                  <div>
+                    <a class="sub-menu-link" href="/account" alt="Hi, {{ customer.first_name }}"
+                      ><img
+                        class="newMemberIcon"
+                        src="https://cdn.shopify.com/s/files/1/1403/9023/files/30e9e48cd5800f86614a66ac4cc86194.png?v=1689130992"
+
+                      ><span class="sub-menu-member-txt txt_g2">Hi, {{ customer.first_name }}</span></a
+                    >
+                  </div>
+                {% else %}
+                  <div>
+                    <a class="sub-menu-link" href="/account/login" data-analytics-title="會員註冊/登入"
+                      ><img
+                        class="newMemberIcon"
+                        src="https://cdn.shopify.com/s/files/1/1403/9023/files/30e9e48cd5800f86614a66ac4cc86194.png?v=1689130992"
+                        alt="登入"
+
+                      ><span class="sub-menu-member-txt txt_g2">會員登入</span></a
+                    >
+                  </div>
+                {% endif %}
+              </div>
+            </li>
+
+            <li>
+              <h4 class="m-car-fix">
+                <a href="/cart" class="cart-nav cart-nav-mobile" data-analytics-title="購物車" title="購物車">
+                  <span class="cart-icon"><div class="sub-menu-car-txt txt_g2">購物車</div></span>
+                  <span class="cart-count">
+                    {%- unless cart.item_count > 99 or cart.item_count == 0 %}{{ cart.item_count }}{% endunless -%}
+                  </span>
+                </a>
+              </h4>
+            </li>
+            <!--
+              <li>
+                   <h4>
+                       <a itemprop="url" href="/pages/about" data-analytics-title="關於BEZALEL倍加能" title="關於BEZALEL倍加能">
+                           <span itemprop="name">關於</span>
+                           <meta itemprop="description" content="來自美國洛杉磯的無線充電品牌，致力於打造最高品質的無線充電生態系統，透過領先業界的創新技術應用與極簡設計美學，BEZALEL 倍加能的無線充電器產品讓你不受拘束，體驗自由與便利的無線快充新生活。"/>
+                       </a>
+                   </h4>
+               </li>
+              <li>
+                  {% if shop.customer_accounts_enabled %}
+                     {% if customer  %}
+                     <h4><a href="/account" data-analytics-title="會員專區" title="會員專區"><span>hi, {{ customer.first_name }}</span></a></h4>
+                     {% else %}
+                     <h4>
+                           <a itemprop="url" href="/account/login" data-analytics-title="會員註冊" title="會員註冊">
+                               <span itemprop="name">註冊</span>
+                               <meta itemprop="description" content="BEZALEL倍加能會員註冊"/>
+                           </a>
+                     </h4>
+                     {% endif %}
+                 {% endif %}
+              </li>
+            -->
+          </ul>
+        </div>
+        <!-- 手機上方menu -->
+        <nav class="mobile-nav" role="navigation">
+          <!--
+            <div class="logo-mobile">
+                <a href="/" data-analytics-title="BEZALEL 倍加能" title="BEZALEL 倍加能"><span class="sr-only">BEZALEL 倍加能 | MagSafe 手機保護殼 | 無線充電 | 倍加能 MagSafe | BEZALEL MagSafe | MagSafe 磁吸手機保護殼 | 磁吸無線充電</span></a>
+            </div>
+          -->
+          <!-- add 2023/7/13 手機版產品menu -->
+          <div class="m-nav-top txt_g2">
+            <!-- 2023/7/28 修改規格 產品下拉選單變更 -->
+            <div class="dropdown">
+              <span class="txt_g3">產品</span>
+              <div class="dropdown-content">
+                <!--
+                  <h4 id="sub-product-top-item"><a class="txt_g2" href="/collections/fatherday">父親節限定組合</a></h4>
+                -->
+                <h4><a class="txt_g2" href="/collections/new-product">最新產品</a></h4>
+                <h4><a class="txt_g2" href="/collections/set">熱銷組合</a></h4>
+                <h4><a class="txt_g2" href="/collections/in-the-door">戶外用品</a></h4>
+                <h4><a class="txt_g2" href="/collections/in-door">室內充電</a></h4>
+                <h4><a class="txt_g2" href="/collections/vechcle">車用充電</a></h4>
+                <h4><a class="txt_g2" href="/collections/accessoires">周邊配件</a></h4>
+              </div>
+            </div>
+            <h4>
+              <a
+                class="m-menu-fix-point"
+                itemprop="url"
+                href="https://bezalel.tw/blogs/newblog"
+                data-analytics-title="部落格"
+                title="部落格"
+              >
+                <span class="txt_g3" itemprop="name">部落格</span>
+                <meta
+                  itemprop="description"
+                  content="BEZALEL 倍加能產品：Prelude SE MagSafe立架式磁吸無線充電行動電源、MagSafe抗菌透明保護殼、Omnia S MagSafe磁吸無線車用充電器"
+                >
+              </a>
+            </h4>
+            <h4>
+              <a itemprop="url" href="https://bezalel.tw/pages/abouttest" data-analytics-title="關於" title="關於">
+                <span class="txt_g3" itemprop="name">關於</span>
+                <meta
+                  itemprop="description"
+                  content="BEZALEL 倍加能產品：Prelude SE MagSafe立架式磁吸無線充電行動電源、MagSafe抗菌透明保護殼、Omnia S MagSafe磁吸無線車用充電器"
+                >
+              </a>
+            </h4>
+            <!-- m test -->
+
+            {% if shop.customer_accounts_enabled %}
+              {% if customer %}
+                <h4>
+                  <a href="/account" data-analytics-title="會員專區" title="會員專區"
+                    ><span>hi, {{ customer.first_name }}</span></a
+                  >
+                </h4>
+              {% else %}
+                <h4>
+                  <a itemprop="url" href="/account/login" data-analytics-title="會員註冊" title="會員註冊">
+                    <span itemprop="name">註冊</span>
+                    <meta itemprop="description" content="BEZALEL倍加能會員註冊">
+                  </a>
+                </h4>
+              {% endif %}
+            {% endif %}
+          </div>
+
+          <!-- add 2023/7/13 -->
+          <!-- 2023/7/13 手機版把搜尋跟購物車移到submenu -->
+          <!--
+            <div id="search-button-mobile">
+              <p class="search-icon"><span class="sr-only">商品搜尋</span></p>
+            </div>
+          -->
+          <div id="search-mobile">
+            <form action="/search" method="get" id="search-bar-mobile" role="search">
+              <input type="hidden" name="type" value="product">
+              <input
+                type="search"
+                name="q"
+                onfocus="this.value=''"
+                value="{{ search.terms | escape }}"
+                class="search-input"
+                placeholder="Search"
+              >
+              <input type="submit" class="search-submit" value="&#xf054;">
+            </form>
+          </div>
+          <!--
+            <a href="/cart" class="cart-nav cart-nav-mobile" data-analytics-title="購物車" title="購物車">
+              <p class="cart-icon"><span class="sr-only">購物車</span></p>
+                <span class="cart-count">{% unless cart.item_count > 99 or cart.item_count == 0 %}{{ cart.item_count }}{% endunless %}</span>
+            </a>
+          -->
+
+          <button id="mobile-toggle">
+            <p><span class="sr-only">開啟主選單</span></p>
+          </button>
+        </nav>
+        <!-- 2023/7/13 手機版把搜尋跟購物車移到submenu -->
+        <!-- 上方menu -->
+        <nav class="desktop-nav" role="navigation">
+          <div class="logo-desktop">
+            <a href="/" data-analytics-title="BEZALEL 倍加能"
+              ><span class="sr-only"
+                >BEZALEL 倍加能 | MagSafe 手機保護殼 | 無線充電 | 倍加能 MagSafe | BEZALEL MagSafe | MagSafe
+                磁吸手機保護殼 | 磁吸無線充電</span
+              ></a
+            >
+          </div>
+          <div id="desktop-toggle" style="display:block !important;">
+            <a class="txt_g2" data-analytics-title="產品" href="/collections/all">產品</a>
+            <div class="sub-menu-desktop animate">
+              <div class="grid--full">
+                <div class="grid__item one-fifth medium--one-third small--one-whole">
+                  <ul>
+                    <!--
+                      <li><h5><a class="txt_g2" href="/collections/fatherday" data-analytics-title="父親節限定組合">父親節限定組合</a></h5></li>
+                    -->
+                    <li>
+                      <h5>
+                        <a class="txt_g2" href="/collections/new-product" data-analytics-title="最新產品">最新產品</a>
+                      </h5>
+                    </li>
+                    <li>
+                      <h5><a class="txt_g2" href="/collections/set" data-analytics-title="套組">熱銷組合</a></h5>
+                    </li>
+                    <li>
+                      <h5>
+                        <a class="txt_g2" href="/collections/in-the-door" data-analytics-title="戶外用品">戶外用品</a>
+                      </h5>
+                    </li>
+                    <li>
+                      <h5>
+                        <a class="txt_g2" href="/collections/in-door" data-analytics-title="室內充電">室內充電</a>
+                      </h5>
+                    </li>
+                    <li>
+                      <h5>
+                        <a class="txt_g2" href="/collections/vechcle" data-analytics-title="車用充電">車用充電</a>
+                      </h5>
+                    </li>
+                    <li>
+                      <h5>
+                        <a class="txt_g2" href="/collections/accessoires" data-analytics-title="周邊配件">周邊配件</a>
+                      </h5>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="takeplace-item">
+            <a
+              class="txt_g2"
+              href="https://bezalel.tw/pages/%E5%AF%A6%E9%AB%94%E6%93%9A%E9%BB%9E"
+              data-analytics-title="實體據點"
+              >實體據點</a
+            >
+          </div>
+          <div class="support-menu-item">
+            <a class="txt_g2" href="https://bezalel.tw/blogs/newblog" data-analytics-title="部落格">部落格</a>
+          </div>
+          <div class="about-menu-item">
+            <a class="txt_g2" href="https://bezalel.tw/pages/abouttest" data-analytics-title="關於">關於</a>
+          </div>
+
+          <!--
+            logo
+            <div class="logo-desktop">
+                <a href="/" data-analytics-title="BEZALEL 倍加能"><span class="sr-only">BEZALEL 倍加能 | MagSafe 手機保護殼 | 無線充電 | 倍加能 MagSafe | BEZALEL MagSafe | MagSafe 磁吸手機保護殼 | 磁吸無線充電</span></a>
+            </div>
+          -->
+          <!-- 最右邊的menu -->
+          <div class="nav-items">
+            <div class="nav-item" id="search">
+              <form action="/search" method="get" id="search-bar" role="search">
+                <input type="hidden" name="type" value="product">
+                <input
+                  type="search"
+                  name="q"
+                  onfocus="this.value=''"
+                  value="{{ search.terms | escape }}"
+                  class="search-input"
+                  placeholder="Search"
+                >
+                <input type="submit" class="search-submit" value="&#xf054;">
+              </form>
+            </div>
+            <div class="nav-item" id="search-button">
+              <p class="search-icon"><span class="sr-only">商品搜尋</span></p>
+            </div>
+            <!--
+              <div class="nav-item">
+                  <h4><a href="/pages/about" data-analytics-title="關於BEZALEL倍加能">關於</a></h4>
+              </div>
+            -->
+
+            <!-- 2023/7/13 移到中間 -->
+
+            <div class="nav-item" id="sign-in">
+              {% if customer %}
+                <h4>
+                  <a href="/account" alt="Hi, {{ customer.first_name }}"
+                    ><img
+                      class="newMemberIcon"
+                      src="https://cdn.shopify.com/s/files/1/1403/9023/files/30e9e48cd5800f86614a66ac4cc86194.png?v=1689130992"
+                  ></a>
+                </h4>
+              {% else %}
+                <h4>
+                  <a href="/account/login" data-analytics-title="會員註冊/登入"
+                    ><img class="newMemberIcon" src="{{ 'login0522.png' | asset_url }}" alt="登入"
+                  ></a>
+                </h4>
+              {% endif %}
+            </div>
+
+            <div class="nav-item" id="cart">
+              <h4>
+                <a href="/cart" class="cart-nav cart-nav-desktop" data-analytics-title="購物車">
+                  <p class="cart-icon"><span class="sr-only">購物車</span></p>
+                  <span class="cart-count" aria-hidden="true">
+                    {%- unless cart.item_count > 99 or cart.item_count == 0 %}{{ cart.item_count }}{% endunless -%}
+                  </span>
+                </a>
+              </h4>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <main class="main-content {% if template == 'index' %}home{% endif %}" role="main">
+        <div class="globoRecommendationsTop"></div>
+        {{ content_for_layout }}
+        {%- render 'globo.alsobought.action' %}
+      </main>
+
+      {% include 'footer-signup' %}
+
+      <footer class="site-footer clearfix" role="contentinfo">
+        <!--
+          <div class="grid--full">
+                <p class="bezalel-mark">
+                    <span class="sr-only">BEZALEL 倍加能 | MagSafe 手機保護殼 | 無線充電 | 倍加能 MagSafe | BEZALEL MagSafe | MagSafe 磁吸手機保護殼 | 磁吸無線充電</span>
+                </p>
+          </div>
+        -->
+
+        <aside class="footer-section">
+          <p class="footer-title">產品</p>
+          <ul>
+            <li>
+              <a href="/collections/new-product" data-analytics-title="最新產品">最新產品</a>
+            </li>
+            <li>
+              <a href="/collections/in-the-door" data-analytics-title="戶外用品">戶外用品</a>
+            </li>
+            <li>
+              <a href="/collections/in-door" data-analytics-title="室內充電">室內充電</a>
+            </li>
+            <li>
+              <a href="/collections/vechcle" data-analytics-title="車用充電">車用充電</a>
+            </li>
+            <li>
+              <a href="/collections/accessoires" data-analytics-title="周邊配件">周邊配件</a>
+            </li>
+            <li>
+              <a href="/collections/set" data-analytics-title="套組">熱銷組合</a>
+            </li>
+            <li>
+              <a href="https://shop.bezalel.tw" data-analytics-title="車內充電">車內充電</a>
+            </li>
+          </ul>
+        </aside>
+
+        <aside class="footer-section">
+          <p class="footer-title">關於</p>
+          <ul>
+            <!--
+              <li>
+                <a href="/pages/about" data-analytics-title="品牌故事">品牌故事</a>
+              </li>
+            -->
+            <li>
+              <a href="https://bezalel.tw/blogs/newblog" data-analytics-title="Blog">Blog</a>
+            </li>
+            <!--
+              <li>
+                <a href="/blogs/press" data-analytics-title="媒體報導">媒體報導</a>
+              </li>
+              <li>
+                <a href="/pages/careers" data-analytics-title="人才招募">人才招募</a>
+              </li>
+            -->
+          </ul>
+        </aside>
+
+        <aside class="footer-section">
+          <p class="footer-title">服務</p>
+          <ul>
+            <li>
+              <a
+                href="https://bezalel.tw/pages/%E6%96%B0%E7%89%88-%E9%80%80%E6%8F%9B%E8%B2%A8q-a"
+                data-analytics-title="退換貨Q&A"
+                >退換貨Q&A</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://bezalel.tw/pages/%E6%96%B0%E7%89%88-%E5%95%86%E5%93%81%E4%BF%9D%E5%9B%BA%E6%8C%87%E5%8D%97"
+                data-analytics-title="商品保固指南"
+                >商品保固指南</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://bezalel.tw/pages/%E6%96%B0%E7%89%88-%E9%81%8B%E9%80%81%E8%B3%87%E8%A8%8A"
+                data-analytics-title="運送資訊"
+                >運送資訊</a
+              >
+            </li>
+            <li>
+              <a href="https://bezalel.tw/pages/privacy" data-analytics-title="隱私權政策">隱私權政策</a>
+            </li>
+          </ul>
+        </aside>
+
+        <aside class="footer-section social-footer">
+          <p class="footer-title">客服</p>
+          <ul class="no-mobile-stack">
+            <li>
+              <a class="inf">我們的電話與線上客服開放時間為週一至週五的上午9:00到下午5:00</a>
+            </li>
+            <li>
+              <p></p>
+            </li>
+
+            <li>
+              <a class="inf">倍加能股份有限公司</a>
+            </li>
+            <li>
+              <a class="inf">統編 : 82862693</a>
+            </li>
+            <li>
+              <a href="mailto:info.tw@bezalel.co" data-analytics-title="客服信箱" rel="noreferrer noopener" class="inf"
+                >信箱 : info.tw@bezalel.co</a
+              >
+            </li>
+            <li>
+              <a href="tel:(05)-2242828" data-analytics-title="客服專線" class="inf">電話 : (05)-2242828</a>
+              <address>600嘉義市西區</address>
+            </li>
+          </ul>
+        </aside>
+
+        <section class="full-width copyright clearfix">
+          <!--
+            2023/8/15 移除小icon
+            <ul class="inline-list social-icons">
+                {% include 'footer_social-icons' %}
+            </ul>
+          -->
+
+          <div class="copy">
+            <p class="text txt_g4">&copy; 2023&nbsp;BEZALEL</p>
+          </div>
+        </section>
+      </footer>
+    </div>
+
+    <script type="text/javascript">
+      if ( window.devicePixelRatio > 1 ) {
+        var retinaImages = document.getElementsByClassName('retina-img');
+        for (var i = 0; i <= retinaImages.length; i++ ) {
+          if ( retinaImages[i] != undefined ) {
+            retinaImages[i].setAttribute('src', retinaImages[i].getAttribute('data-retina-src'));
+          }
+        }
+      }
+    </script>
+
+    <script type="text/javascript">
+      {% capture jQuery_plus_icon %} {% include "asset_svg" with "plus" %} {% endcapture %}
+      {% capture jQuery_minus_icon %} {% include "asset_svg" with "minus" %} {% endcapture %}
+      {% capture jQuery_close_icon %} {% include "asset_svg" with "close" %} {% endcapture %}
+      {% capture jQuery_arrow_down_icon %} {% include "asset_svg" with "arrow_down" %} {% endcapture %}
+      {% capture jQuery_arrow_left_icon %} {% include "asset_svg" with "arrow_left" %} {% endcapture %}
+      {% capture jQuery_arrow_right_icon %} {% include "asset_svg" with "arrow_right" %} {% endcapture %}
+
+      jQuery.themeAssets = {
+        plus: '{{ jQuery_plus_icon | lstrip | rstrip }}',
+        minus: '{{ jQuery_minus_icon | lstrip | rstrip }}',
+        close: '{{ jQuery_close_icon | lstrip | rstrip }}',
+        arrow_down: '{{ jQuery_arrow_down_icon | lstrip | rstrip }}',
+        arrow_left: '{{ jQuery_arrow_left_icon | lstrip | rstrip }}',
+        arrow_right: '{{ jQuery_arrow_right_icon | lstrip | rstrip }}'
+      }
+    </script>
+
+    {{ 'theme.js' | asset_url | script_tag }}
+
+    {% if template contains 'product'
+      or template contains 'prelude-overview'
+      or template contains 'futura-overview'
+      or template contains 'latitude-overview'
+      or template contains 'collection'
+    %}
+      <script>
+        jQuery(function() {
+          jQuery('.swatch :radio').change(function() {
+            var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
+            var optionValue = jQuery(this).val();
+            jQuery(this)
+              .closest('form')
+              .find('.single-option-selector')
+              .eq(optionIndex)
+              .val(optionValue)
+              .trigger('change');
+          });
+        });
+      </script>
+    {% endif %}
+
+    {% unless template == 'cart' %}
+      <!--
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+                if ($.cookie('prime') == null) {
+                    $('#myModal').modal('show');
+                    $.cookie('prime', '7');
+                }
+            });
+        </script>
+      -->
+    {% endunless %}
+
+    {% include 'social-login' %}
+
+    <!-- google dynamic remarketing tag for theme.liquid -->
+
+    {% if template contains 'product' %}
+      <script type="text/javascript">
+        var json_product = {{ product | json }};
+      </script>
+      <script>
+        var ecomm_prodid=[];
+        for(var i=0;i<json_product.variants.length;i++)
+            ecomm_prodid.push(json_product.variants[i].sku);
+      </script>
+      <script type="text/javascript">
+        var google_tag_params = {
+            ecomm_prodid: ecomm_prodid,
+            ecomm_pagetype: 'product',
+            ecomm_totalvalue: parseFloat('{{ product.price | money_without_currency | remove: ","}}')
+        };
+      </script>
+    {% elsif template contains 'collection' %}
+      <script type="text/javascript">
+        var google_tag_params = {
+            ecomm_prodid: '',
+            ecomm_pagetype: 'category',
+            ecomm_totalvalue: 0
+        };
+      </script>
+    {% elsif template contains 'cart' %}
+      <script type="text/javascript">
+        var id = new Array();
+        {% for item in cart.items %}
+        id.push('{{item.variant.sku}}');
+        {% endfor %}
+
+            var google_tag_params = {
+                ecomm_prodid: id,
+                ecomm_pagetype: 'cart',
+                ecomm_totalvalue: parseFloat('{{ cart.total_price | money_without_currency | remove: ","}}')
+            };
+      </script>
+    {% elsif template contains 'search' %}
+      <script type="text/javascript">
+            var google_tag_params = {
+                ecomm_prodid: '',
+                ecomm_pagetype: 'searchresults',
+                ecomm_totalvalue: 0
+        };
+      </script>
+    {% elsif template contains 'index' %}
+      <script type="text/javascript">
+        var google_tag_params = {
+            ecomm_prodid: '',
+            ecomm_pagetype: 'home',
+            ecomm_totalvalue: 0
+        };
+      </script>
+    {% else %}
+      <script type="text/javascript">
+        var google_tag_params = {
+            ecomm_prodid: '',
+            ecomm_pagetype: 'other',
+            ecomm_totalvalue: 0
+        };
+      </script>
+    {% endif %}
+
+    <!-- Google Code for Remarketing Tag -->
+    <script type="text/javascript">
+      /* <![CDATA[ */
+      var google_conversion_id = 969349839;
+      var google_custom_params = window.google_tag_params;
+      var google_remarketing_only = true;
+      /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    <noscript>
+      <div style="display:inline;">
+        <img
+          height="1"
+          width="1"
+          style="border-style:none;"
+          alt=""
+          src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/969349839/?value=0&amp;guid=ON&amp;script=0"
+        >
+      </div>
+    </noscript>
+
+    {% if template contains 'blog' %}
+      <script>
+        jQuery(document).ready(function() {
+          $(function() {
+              $('.grid').each(function() {
+                  $(this).children('.blog-article').matchHeight();
+              });
+          });
+        });
+      </script>
+    {% endif %}
+
+    {% if template contains 'product' %}
+      {% unless template contains 'kit'
+        or template contains 'wall-charger'
+        or template contains 'omnia'
+        or template contains 'X'
+        or template contains '6'
+        or template contains 'samsung'
+        or template contains 'glossy'
+      %}
+        <script>
+          jQuery(document).ready(function() {
+
+                var addon = $(".add-ons");
+                var appLoaded = document.getElementById('w3-product-accessories');
+                var observer = new MutationObserver(function(mutations){
+                    mutations.forEach(function(mutation){
+                        console.log(mutation);
+                         $(".accessories-item").each(function(index) {
+                          var self = $(this),
+                            fullhandle = self.find(".accessories-title").attr("href"),
+                            fullhandleminus = fullhandle.slice(0, -2);
+                          if (!self.hasClass("accessoriesdone")) {
+                              self.find(".accessory-price").wrapAll('<div class="accessory-price-wrap"></div>');
+                              self.find("select").wrap('<div class="accessory-select-wrap"></div>');
+                              self.find(".accessories-title-wrap, .accessory-select-wrap, .accessory-price-wrap").wrapAll('<table class="accessory-right-table"></table>');
+                              if (fullhandle.indexOf("cable") === -1) {
+                                  self.find(".accessories-title").prop("href", fullhandleminus);
+                                self.find(".accessories-img-wrapper img").wrap('<a href="' + fullhandleminus + '"></a>');
+                              }
+                              else {
+                                  self.find(".accessories-title").prop("href", fullhandle);
+                                self.find(".accessories-img-wrapper img").wrap('<a href="' + fullhandle + '"></a>');
+
+                              }
+                              self.addClass("accessoriesdone");
+                              console.log(fullhandleminus);
+                          }
+                        });
+                    });
+
+                });
+                observer.observe(appLoaded, {attributes: true, attributeFilter: ['style'] });
+
+              $(function() {
+                  $('#specs-section .grid').each(function() {
+                      $(this).children('.grid__item').matchHeight();
+                  });
+                  $('#compatibility-section .grid').each(function() {
+                      $(this).children('.grid__item').matchHeight();
+                  });
+              });
+          });
+        </script>
+      {% endunless %}
+    {% endif %}
+
+    {% if template contains 'overview' %}
+      <script>
+        jQuery(document).ready(function() {
+            $(function() {
+                $('.variant').each(function() {
+                    $(this).children('.product').matchHeight();
+                    $(this).find('.product-header').matchHeight();
+                });
+            });
+        });
+      </script>
+    {% endif %}
+
+    {% include 'sumo' %}
+
+    {% include 'jsonld-for-seo' %}
+
+    <!-- Start Bing UET tag trackign code -->
+    <script>
+      (function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"15002790"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");
+    </script>
+    <script>
+      function GetRevenueValue()
+        {
+           return 6;
+         }
+    </script>
+    <script>
+      window.uetq = window.uetq || [];
+      window.uetq.push({ 'gv': GetRevenueValue(), 'gc': 'USD'});
+    </script>
+
+    {% include 'smile-initializer' %}
+
+    <!-- This line added automatically by JSON-LD for SEO. -->
+    <!-- {% include 'jsonld-for-seo' %} -->
+
+    {% include 'special-offers' %}
+    <!-- <script async src="https://raw.githubusercontent.com/aFarkas/lazysizes/gh-pages/lazysizes.min.js"></script> -->
+  </body>
+
+  <!-- Load Facebook SDK for JavaScript -->
+  <div id="fb-root"></div>
+  <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v7.0'
+        });
+      };
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+  <!-- Your Chat Plugin code -->
+  <div
+    class="fb-customerchat"
+    attribution="setup_tool"
+    page_id="2018272751588678"
+    logged_in_greeting=""
+    logged_out_greeting=""
+  ></div>
+</html>
+
+<script>
+  $(function () {
+    var epaper_hash = window.location.hash;
+    if ($("#popup-epaper").length) {
+      $.magnificPopup.open(
+        {
+          items: { src: "#popup-epaper", type: "inline" },
+          mainClass: "mfp-zoom mfp-epaper",
+          removalDelay: 300
+        },
+        0
+      );
+    }
+    if (epaper_hash == "#popup-epaper") {
+      if ($("#popup-epaper").length) {
+        $.magnificPopup.open(
+          {
+            items: { src: "#popup-epaper", type: "inline" },
+            mainClass: "mfp-zoom mfp-epaper",
+            removalDelay: 300
+          },
+          0
+        );
+      }
+    }
+  });
+</script>
+
+{% include 'fa_translate_core' %}
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-204371506-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-204371506-1');
+</script>
+
+<!-- Facebook Pixel Code -->
+<!--
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+   fbq('init', '345194227199449');
+  fbq('track', 'PageView');
+  </script>
+  <noscript>
+  <img height="1" width="1"
+  src="https://www.facebook.com/tr?id=345194227199449&ev=PageView
+  &noscript=1"/>
+  </noscript>
+-->
+<!-- End Facebook Pixel Code -->
+<!-- Facebook Pixel Code -->
+<!--
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '316960610206552');
+  fbq('track', 'PageView');
+  </script>
+  <noscript>
+  <img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=316960610206552&ev=PageView&noscript=1"
+  />
+  </noscript>
+-->
+<style>
+      @media only screen and (max-width: 768px){
+        #transcyBtnSwitcher {
+              background-color: black !important;
+        }
+      }
+      /*除理受scss影響到的參數,完整覆蓋*/
+      .row {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 0;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: calc(var(--bs-gutter-y) * -1);
+        margin-right: unset;
+        margin-left: calc(var(--bs-gutter-x) * -.5);
+    }
+
+      /*超連結去除所有底線*/
+      a{text-decoration:none;}
+
+       /*menu-logo*/
+        .logo-desktop {
+          top: 2px;
+          left: 6.5%;
+          margin-left: -75px;
+      }
+
+       .mce_inline_error{
+         color:#FFF;
+       }
+
+
+      /* 公告*/
+  #eventwrap {
+
+      align-content: center;
+      justify-content: center;
+      align-items: flex-start;
+  }
+  #changeButton {
+      margin-right: 15px;
+      height: 16px;
+      /* width: 26px; */
+      transform: translate(775px,8px);
+  }
+
+  .evenP2{
+    display:none;
+  }
+
+  p.evenP {
+    font-size:16px !important;
+  }
+
+      /*menu-產品 改在styles.scss*/
+      /*menu-部落格(客服改)*/
+      .desktop-nav{
+        height: 40px;
+        top:40px;
+      }
+
+      .desktop-nav #desktop-toggle{
+        height: 58px;
+        font-size:18px;
+        left:33%;
+      }
+
+
+      .takeplace-item{
+            position: absolute;
+            top: 1px;
+            left: 63%;
+            height: 80px;
+            color: #929292;
+            font-size: 18px;
+            line-height: 40px;
+      }
+
+      .desktop-nav .support-menu-item {
+            position: absolute;
+            top: 1px;
+            left: 43%;
+            height: 80px;
+            color: #929292;
+            font-size: 18px;
+            line-height: 40px;
+    }
+      /*member icon 控制*/
+      .newMemberIcon{
+        height: 27px;
+        transform: translate(11px, 5px);
+        margin-left:9px;
+      }
+
+      /*menu-關於(2023/7/12新增)*/
+      .desktop-nav .about-menu-item {
+          position: absolute;
+          /* top: 50px; */
+          top: 1px;
+          /* left: 120px; */
+          left: 53%;
+          /* height: 70px; */
+          height: 80px;
+          color: #929292;
+          font-size: 18px;
+          /* line-height: 70px; */
+          line-height: 40px;
+      }
+    /*menu-註冊(2023/7/12新增)*/
+    .desktop-nav .sign-menu-item {
+      position: absolute;
+      /* top: 50px; */
+      top: 0;
+      /* left: 120px; */
+      left: 575px;
+      /* height: 70px; */
+      height: 80px;
+      color: #929292;
+      font-size: 14px;
+      /* line-height: 70px; */
+      line-height: 80px;
+    }
+    .nav-items .nav-item {
+      margin-right: 22px;
+
+  }
+    /*menu */
+    .m-nav-top {
+      width: 85%;
+      position: absolute;
+      display: flex;
+      flex-wrap: nowrap;
+      align-content: center;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: row;
+      top: 41%;
+  }
+  /*sub-menu-desk 覆蓋樣式*/
+
+  .sub-menu-desktop{
+    width: auto;
+    position: relative;
+    top: -20px;
+    left: -75px;
+    background-color: #fff;
+    padding:0;
+  }
+
+  .one-fifth{
+    width: auto;
+  }
+
+  .grid__item.one-fifth.medium--one-third.small--one-whole * {
+     color: #929292;
+  }
+
+  .sub-menu-desktop ul{
+   padding:0 0 0 0;
+  }
+
+  .sub-menu-desktop ul li h5 {
+      border-bottom-style: double;
+      border-bottom-width: 1px;
+      border-bottom-color: #CDCCCC;
+      padding: 7px 20px;
+      text-align: center;
+      line-height: 32px;
+      height: 40px;
+  }
+
+  .sub-menu-desktop .sub-menu-desktop-heading{
+    font-size: 18px!important;
+  }
+
+      .sub-menu-desktop ul li h5 a {
+      font-size: 18px;
+      line-height: 0px;
+  }
+
+
+  /*調整最後一個桌面版desk product menu不加底線*/
+    #desk_product_submun_fix{
+      border-bottom-style: double;
+      border-bottom-width: 0px;
+    }
+
+
+  /*sub-menu-desk 覆蓋樣式 end*/
+
+  .m-nav-top * {
+    color: #929292;
+  }
+
+  .cart-nav-mobile {
+      position: unset;
+      top: unset;
+      right: unset;
+      width: 30px;
+  }
+
+  .sub-menu-mobile{
+        text-align: center;
+        background: #FFF;
+
+  }
+
+
+
+  .sub-menu-mobile ul li {
+    width: 100%;
+    height: 50px;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #666;
+    line-height: 48px;
+    text-align: center;
+    font-size: 35px;
+  }
+
+
+
+
+
+  .cart-nav.cart-nav-mobile .cart-icon {
+      width: 43px;
+      height: 40px;
+      background-size: 35px auto;
+      position: absolute;
+      transform: translate(-98px, 3px);
+  }
+
+  h4.m-car-fix {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      align-items: center;
+  }
+  #search.focused #search-bar {
+    background: #fff;
+  }
+
+  .desktop-nav #search #search-bar .search-input{
+    color: #0b0b0b;
+    padding: 11px 0 6px 8px;
+  }
+
+  #search-button-mobile {
+      position: unset;
+      top: unset;
+      right: unset;
+  }
+
+  #search-button-mobile1 {
+      position: unset;
+      top: unset;
+      right: unset;
+  }
+
+  #search-button-mobile2 {
+      position: unset;
+      top: unset;
+      right: unset;
+  }
+
+  .cart-nav-mobile .cart-count {
+    position: absolute;
+    top: unset;
+    left: unset;
+  }
+
+  .cart-nav-desktop .cart-count {
+    position: absolute;
+    top: 2px;
+    left: 27px;
+  }
+
+
+    /*輪播區域更改*/
+    .quotes-content {
+      padding-top: 40px;
+      /*background-image: url('https://cdn.shopify.com/s/files/1/1403/9023/files/25b2ad919af8dfb29ed15d710c700901_a0683fea-6f04-4f58-bce7-7cb50a387049.jpg?v=1691027778');*/
+      background-color:#FFF;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+  /*圖片廣告輪播區域圖片高度不夠時調整*/
+  .quotes-content .container .cycle-slideshow {
+    height: 115px;
+  }
+
+  /*mail 區域*/
+      .newlittleIcon{
+      position: relative;
+      top: 22px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+
+  }
+
+  .newlittleIcon img {
+      height: 50px!important;
+      width: auto!important;
+      margin-left: 15px;
+      margin-right: 15px;
+  }
+
+  section.full-width.dark-bg.clearfix.email-signup-home.newMailSe {
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+  }
+
+  .mailchimp-wrap {
+      margin-top: 31px;
+      display: inline-block;
+      position: relative;
+      width: 90%;
+      max-width: 850px;
+      width: 670px;
+      margin-top: 30px;
+      border: 0px solid #929292;
+      height: 62.2px;
+  }
+
+  .mailchimp-wrap #mce-EMAIL {
+    float: left;
+    width: 85%;
+    height: 50px;
+    height: 40px;
+    padding: 0px 10px;
+    border: none;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    color: #000;
+    font-size: 18px !important;
+    line-height: 50px;
+    border-style: solid;
+    border-radius: 5px 0px 0px 5px !important;
+    margin-inline:0px;
+  }
+
+    .mailchimp p {
+      margin-bottom: 0;
+      color: #fff;
+  }
+
+  .mailchimp-wrap #mc-embedded-subscribeP{
+      width: 150px;
+      /* height: auto; */
+      height: 100px;
+      padding: 0;
+      border: none;
+      line-height: 50px;
+      z-index: 999;
+
+
+  }
+
+  .main-content{
+    padding-top:0px;
+  }
+
+  .mailchimp-wrap #mc-embedded-subscribe-wrap {
+    display: block;
+    float: right;
+    height: 40px;
+    width: 70px;
+    padding: 0;
+    background-size: cover;
+    line-height: 50px;
+    border-radius: 0px 5px 5px 0px !important;
+    margin-right:20px;
+  }
+
+  .container.clearfix.mailLeft {
+      padding:50px 30px 30px;
+      width: auto;
+
+  }
+
+  .container.clearfix.mailRight {
+      width: auto;
+      transform: translateY(-52px);
+
+  }
+
+  .site-footer .footer-section {
+      float: left;
+      width: 46% !important;
+      height: 250px;
+      margin-inline: 2%;
+      margin-bottom: 2em;
+  }
+
+  .dark-bg {
+      background: #454549;
+  }
+
+  .mailchimp p {
+
+  }
+
+  #mc_embed_signup input.mce_inline_error{
+    border-color: #4093cb;
+  }
+
+  /*footer變更*/
+      .bezalel-mark {
+      display: block;
+      float: left;
+      width: 53px;
+      height: 64px;
+      margin-bottom: 30px;
+      background-size: 53px auto;
+  }
+
+
+  /*footer 調文字格式去txt group 區域調，方便統一規格(在最底下)*/
+  .footer-section p.footer-title {
+      padding-bottom: 0.5em;
+      margin-bottom: 0.5em;
+      border-bottom: 1px solid #676767;
+      color: #929292;
+      font-family: "Mark", Arial, sans-serif !important;
+      letter-spacing: .025em;
+      text-align: center !important;
+      font-size:22px;
+  }
+
+  .site-footer .footer-section ul li a {
+      color: #929292;
+      /* margin: 10px; */
+    text-decoration: none;
+    text-align:center;
+    font-size:16px;
+  }
+
+  .footer-section ul li a {
+      display: inline-block;
+      width: 100%;
+      line-height: 33px;
+  }
+
+  .logo-desktop a{
+      margin-left:-23%;
+  }
+
+  .sub-menu-mobile.opened{
+    top:77px;
+  }
+
+  @media screen and (max-width:1600px) {
+  .logo-desktop a{
+      margin-left:-18%;
+  }
+
+  #changeButton{
+    transform: translate(615px, 8px);
+  }
+  }
+
+
+
+  @media screen and (max-width:1500px) {
+    .logo-desktop a{
+
+    }
+
+
+  .mailchimp-wrap {
+      display: inline-block;
+      position: relative;
+      max-width: 735px;
+      margin-top: 30px;
+      border: 0;
+      height: 59px;
+  }
+
+    .mailchimp-wrap #mc-embedded-subscribe-wrap{
+      height: 40px;
+      width: 70px;
+    }
+
+    .newlittleIcon img {
+      height: 50px!important;
+      margin-left: 10px;
+      margin-right: 10px;
+  }
+    /* < 1500px*/
+  }
+
+  @media screen and (max-width:1440px){
+    .desktop-nav #desktop-toggle{
+      left:27%;
+    }
+
+    .desktop-nav .support-menu-item{
+      left:40%;
+    }
+
+    .takeplace-item{
+      left:66%;
+    }
+
+    #changeButton{
+      transform: translate(535px, 8px);
+    }
+
+
+  }
+
+  @media screen and (max-width:1360px) {
+    .logo-desktop a{
+      margin-left:-6%;
+    }
+  }
+
+    @media screen and (max-width:1024px) {
+
+      .container-bottom-padding{
+        padding:0 30px 140px;
+      }
+      #eventwrap{
+        font-size: 16px;
+      }
+        p.evenP {
+            line-height: 0px;
+        }
+
+        #changeButton {
+          margin-right: 22px;
+          height: 14px;
+          width: auto;
+          transform: translate(350px,0px);
+        }
+
+    /*硬改submenu icon並調整規格*/
+
+  /*mobile menu 樣式變更*/
+      .mobile-nav{
+        height: 50px;
+        top:30px;
+      }
+
+      .m-nav-top{
+            top: 30%;
+      }
+
+      #mobile-toggle{
+        top: 19px;
+
+      }
+
+      .main-content {
+      padding-top: 30px;
+  }
+
+  /*強制變更初始化*/
+  .sub-menu-mobile{
+    top:-60px;
+  }
+
+  .sub-menu-mobile ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+
+  .sub-menu-mobile ul li h4 a {
+      display: unset!important;
+      height: 48px!important;
+      padding: 0!important;
+      line-height: 0!important;
+  }
+
+  .m-menu-fix-point {
+    position: relative;
+    top: 0px;
+  }
+
+  #search-button-mobile .search-icon {
+      width: 90px;
+      height: 55px;
+      background-size: 30px auto;
+      left: 10px;
+      position: relative;
+  }
+
+  #search-button-mobile1 {
+      width: 90px;
+      height: 55px;
+      background-size: 30px auto;
+      left: 0px;
+      position: relative;
+  }
+
+  #search-button-mobile2 {
+      width: 90px;
+      height: 55px;
+      background-size: 30px auto;
+      left: 0px;
+      position: relative;
+  }
+
+
+  #search-button, #search-button-mobile {
+    display: inline-block;
+    width: 202px;
+    height: auto;
+  }
+
+  #search-button-mobile1 {
+    display: inline-block;
+    width: 202px;
+    height: auto;
+  }
+
+  #search-button-mobile2 {
+    display: inline-block;
+    width: 202px;
+    height: auto;
+  }
+
+
+  span.sub-search-menu-txt {
+    position: relative;
+    left: 61px;
+    top: 13px;
+    color: grey;
+  }
+
+  span.sub-search-menu-txt1 {
+    position: relative;
+    left: 61px;
+    top: 10px;
+    color: grey;
+  }
+
+  span.sub-search-menu-txt2{
+    position: relative;
+    left: 52px;
+    top: 10px;
+    color: grey;
+  }
+
+  .desktop-nav #search #search-bar .search-input {
+      float: left;
+      width: 85%;
+      height: auto;
+      padding: 6px 0 6px 8px;
+      margin: 0;
+      border: none;
+      color: #000;
+      font-size: 14px;
+      text-align: left;
+  }
+
+  .sub-menu-mobile ul li h4 a {
+      color: #929292;
+      font-family: "Mark",Arial,sans-serif !important;
+      transform: translateX(26px);
+  }
+
+
+
+  .sub-menu-link span {
+    margin-left: 9px;
+    color: #6c757d;
+    position: relative;
+    top: 0px;
+  }
+
+  .sub-menu-link {
+
+    position: relative;
+    left: -7px;
+    top: -2px;
+  }
+
+  .sub-menu-car-txt {
+      position: absolute;
+      top: 23px;
+      left: 33px;
+      width: 90px;
+  }
+
+  .cart-nav-mobile .cart-count {
+    top: 9px;
+    left: -61px;
+  }
+
+      .newMemberIcon{
+
+        transform: unset;
+      }
+
+  #sub-menu-NewMemberIcon {
+
+  }
+
+
+  span.sub-menu-member-txt {
+
+  }
+
+      /*2023 7 28 手機版menu下拉選單變更 */
+        .dropdown {
+          position: relative;
+          display: inline-block;
+          top:-6.5px;
+        }
+
+        .dropdown-content {
+          display: none;
+          position: fixed;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          padding: 0 16px;
+          z-index: 1;
+          width: 100%;
+          left:0;
+        }
+
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+
+        .dropdown-content h4 {
+            border-top-width: 2px;
+            border-top-style: groove;
+            margin-bottom: 0 !important;
+            font-size: 14px !important;
+            line-height: 48px !important;
+            height: 50px;
+      }
+
+      /*最上方menu 線修掉*/
+      #sub-product-top-item{
+          border-top-width: 0px;
+          border-top-style: none;
+      }
+
+      .m-nav-top * {
+
+  }
+      section.full-width.dark-bg.clearfix.email-signup-home {
+      display: block;
+      min-height:250px;
+  }
+
+
+
+  .email-signup-home .container {
+      padding: 30px 5px 47px!important;
+  }
+
+      .mailchimp-wrap {
+      width: 80%;
+      max-width: 760px;
+      margin-top: 30px;
+      height: 46px;
+  }
+
+      .mailchimp-wrap #mce-EMAIL {
+      float: left;
+      width: 87%;
+      /* height: 50px; */
+      height: 44px;
+      padding: 0 20px;
+      border: 1px;
+      color: #fff!important;
+      font-size: 18px!important;
+      line-height: 50px;
+        border-style: solid;
+      margin-inline:-5px;
+  }
+
+      .mailchimp-wrap #mc-embedded-subscribe-wrap {
+        height: 44px;
+        width: 70px;
+        padding: 0;
+        background-size: cover;
+        line-height: 50px;
+        border-radius: 0px 5px 5px 0px !important;
+      /* border-style: dashed; */
+  }
+
+      .mailchimp-wrap #mc-embedded-subscribe{
+        height:42px;
+      }
+
+      .container.clearfix.mailRight {
+          width: auto;
+          transform: translateY(-32px);
+        }
+
+
+      .newlittleIcon img {
+      height: 39px!important;
+      margin-left: 14px;
+      margin-right: 18px;
+  }
+
+      /* 750   < 1023  */
+    }
+
+    @media screen and (max-width:820px){
+      .mailchimp-wrap #mc-embedded-subscribe-wrap {
+        height: 44px;
+        width: 70px;
+        padding: 0;
+        background-size: cover;
+        line-height: 50px;
+        margin-right:0px;
+      /* border-style: dashed; */
+      }
+
+      .mailchimp-wrap #mc-embedded-subscribe{
+        height:42px;
+      }
+
+      #changeButton{
+        transform: translate(250px, 0px);
+      }
+    }
+
+
+    @media screen and (max-width:768px) {
+      .sub-menu-car-txt {
+        position: absolute;
+        top: 23px;
+        left: 27px;
+        width: 90px;
+      }
+
+      .cart-nav.cart-nav-mobile .cart-icon {
+        width: 35px;
+        height: 40px;
+        background-size: 35px auto;
+        position: absolute;
+        transform: translate(220px, 0px);
+      }
+
+  .evenP {
+      line-height: 1;
+  }
+
+  #changeButton {
+      margin-right: 15px;
+      height: 11px;
+      /* width: 26px; */
+      transform: translate(220px, 0px);
+  }
+
+  .sub-menu-mobile{
+   top:-60px;
+  }
+      .sub-menu-mobile ul {
+      padding-left: 0;
+  }
+
+  #search-button, #search-button-mobile {
+      /* position: absolute; */
+
+  }
+
+  #sub-menu-NewMemberIcon {
+
+  }
+
+  .cart-nav.cart-nav-mobile .cart-icon {
+      transform: translate(-93px, 2px);
+  }
+
+   .cart-nav-mobile .cart-count {
+      top: 10px;
+      left: -59px;
+  }
+
+
+  .mailchimp p {
+
+  }
+  .mailchimp-wrap {
+      width: 75%;
+      max-width: 550px;
+      margin-top: 13px;
+      height: 27px;
+  }
+
+      .mailchimp-wrap #mce-EMAIL {
+          float: left;
+          width: 88%;
+          height: 50px;
+          height: 35px;
+          padding: 0 20px;
+          color: #fff;
+          font-size: 18px !important;
+          line-height: 30px;
+          border-radius: 5px 0px 0px 5px !important;
+          margin-inline:-15px;
+  }
+
+      .mailchimp-wrap #mc-embedded-subscribe{
+        height:35px;
+      }
+
+      .s2-img3{
+        height:85px !important;
+      }
+
+      .mailchimp-wrap #mc-embedded-subscribe-wrap {
+        height: 35px;
+        width: 70px;
+        padding: 0;
+        background-size: cover;
+        line-height: 28px;
+        border-style: dashed;
+        margin-right:0px;
+  }
+      #mce-responses {
+      padding: 0;
+  }
+
+      .email-signup-home .container {
+      padding: 30px 5px 60px !important;
+  }
+
+
+      .mailchimp {
+      float: left;
+      width: 100%;
+      height: 20px;
+      text-align: center;
+  }
+
+      .mailchimp {
+      float: left;
+      width: 100%;
+      height: 20px;
+      text-align: center;
+  }
+
+      .newlittleIcon img {
+      height: 30px!important;
+      margin-left: 7px;
+      margin-right: 7px;
+      /* display: flex; */
+  }
+
+      .newlittleIcon {
+      position: relative;
+      top: 7px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+  }
+      #mc_embed_signup div.mce_inline_error {
+      margin: 0 0 1em 0;
+      padding: 21px 10px;
+      background-color: #6B0505;
+      font-weight: bold;
+      z-index: -1;
+      color: #fff;
+  }
+      .container.clearfix.mailRight {
+      width: auto;
+       transform: translateY(15px);
+  }
+
+      .bezalel-mark {
+      display: block;
+      float: left;
+      width: 26px;
+      height: 27px;
+      margin-bottom: 27px;
+      background-size: 27px auto;
+  }
+
+  .site-footer {
+    padding: 21px 25px 0 25px;
+  }
+
+  .site-footer .footer-section{
+        margin-bottom: 0;
+  }
+
+  .footer-section ul li a {
+      display: inline-block;
+      width: 100%;
+      line-height: 24px;
+  }
+
+  .site-footer .footer-section ul {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-content: flex-end;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+      width: 170px;
+
+  }
+      /* 410   < 750  */
+    }
+
+        @media screen and (max-width:450px) {
+
+          .site-footer{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:20px;
+          }
+
+          .footer-section ul li a{
+            width:150%;
+          }
+
+          .sub-menu-car-txt{
+            color:#6c757d !important;
+          }
+
+              .container.clearfix.mailRight{
+                padding: 0px 5px 87px !important;
+              }
+
+          span.sub-search-menu-txt2{
+            left:50%;
+          }
+
+            .main-content {
+                padding-top: 50px;
+            }
+          p.evenP {
+            line-height: 0.25;
+            width: 88%;
+            display:none;
+            }
+
+          .evenP2{
+            display:flex;
+            color:white !important;
+            margin-top:-5px;
+          }
+
+          .m-nav-top{
+            top:24%;
+          }
+
+          .sub-menu-car-txt{
+            left:33px;
+          }
+
+          #mobile-toggle{
+            top:15px;
+          }
+
+          .s2-img3{
+            height:70px !important;
+          }
+
+          #changeButton {
+              height: 12px;
+              /* width: 26px; */
+            transform: translate(70px, 0px);
+          }
+      .newMemberIcon{
+        height: 27px;
+        transform: translate(158px, 10px);
+        margin-left:4px;
+      }
+
+      .inf{
+        margin-left:0px !important;
+      }
+
+
+          .mailchimp-wrap #mc-embedded-subscribe-wrap {
+              height: 24px;
+              width: 46px;
+              border-radius: 0px 5px 5px 0px !important;
+            }
+              .mailchimp-wrap #mce-EMAIL {
+              height: 24px;
+              width: 83%;
+              padding: 0 10px;
+              font-size: 16px!important;
+              line-height: 0px;
+              background-color:#FFF;
+              margin-inline:0px;
+          }
+
+
+          .mailchimp-wrap #mc-embedded-subscribe{
+            background-size:22px;
+            height:25px;
+          }
+
+          /*以下手機板額外定義*/
+            .cart-nav.cart-nav-mobile .cart-icon {
+                width: 40px;
+                height: 40px;
+                background-size: 33px auto;
+                position: absolute;
+                transform: translate(-96px, 3px);
+            }
+
+            .site-footer .footer-section {
+                float: left;
+                width: 46% !important;
+                height: 100%;
+                margin-inline: 2%;
+                margin-bottom: 0px;
+            }
+
+
+          .site-footer .copyright{
+
+            margin-top: 70px;
+          }
+
+          /* < 410*/
+
+          .txt_g2{
+            font-size:16px !important;
+          }
+
+          .s5-1-txt h1{
+            font-size:20px;
+          }
+
+          .sub-menu-link span {
+            margin-left: 45px;
+            color: #6c757d;
+            position: relative;
+            top: -30px;
+          }
+
+        }
+
+    @media screen and (max-width:414px){
+      .newMemberIcon{
+        height: 27px;
+        transform: translate(158px, 10px);
+        margin-left:-3px;
+      }
+    }
+
+    @media screen and (max-width:390px){
+      .mailchimp-wrap #mce-EMAIL{
+        margin-inline:-4px;
+      }
+
+          #changeButton {
+              height: 12px;
+              /* width: 26px; */
+            transform: translate(50px, 0px);
+          }
+
+      .newMemberIcon{
+        height: 27px;
+        transform: translate(158px, 10px);
+        margin-left:-16px;
+      }
+    }
+
+
+
+
+  /* 2023/8/2 文字規格統一參數，參考用，有必要的話再帶入 */
+  .txt_g1{
+      font-size: 40px;
+      font-weight:400;
+      font-family: Microsoft JhengHei;
+  }
+
+  .txt_g2{
+      font-size: 18px;
+      font-weight: 300;
+      font-family: Microsoft JhengHei;
+  }
+
+  .txt_g3{
+      font-size: 14px;
+      font-weight: 300;
+      font-family: Microsoft JhengHei;
+  }
+
+  .txt_g4{
+      font-size: 12px;
+      font-weight: 300;
+      font-family: Microsoft JhengHei;
+  }
+
+  .footer-section p.footer-title {
+    font-size: 22px;
+  }
+
+  .site-footer .footer-section ul li a {
+    font-size: 16px;
+  }
+
+  .m-nav-top * {
+      font-size: 22px;
+      font-weight: 300;
+      font-family: Microsoft JhengHei;
+  }
+
+   @media screen and (max-width:1024px) {
+
+          .txt_g1{
+          font-size: 40px;
+          font-weight: 400;
+          font-family: Microsoft JhengHei;
+      }
+
+      .txt_g2{
+          font-size: 16px;
+          font-weight: 300;
+          font-family: Microsoft JhengHei;
+      }
+
+      .txt_g3{
+          font-size: 22px;
+          font-weight: 300;
+          font-family: Microsoft JhengHei;
+      }
+
+      .txt_g4{
+          font-size: 12px;
+          font-weight: 300;
+          font-family: Microsoft JhengHei;
+      }
+      .footer-section p.footer-title {
+        font-size: 22px;
+      }
+
+      .site-footer .footer-section ul li a {
+        font-size: 16px;
+      }
+   }
+   @media screen and (max-width:750px) {
+      .txt_g1{
+          font-size: 21px;
+          font-weight: 400;
+          font-family: Microsoft JhengHei;
+      }
+
+      .txt_g2{
+          font-size: 16px;
+          font-weight: 300;
+          font-family: Microsoft JhengHei;
+          color:black;
+      }
+
+      .txt_g3{
+          font-size: 18px;
+          font-weight: 300;
+          font-family: Microsoft JhengHei;
+      }
+
+      .txt_g4{
+          font-size: 12px;
+          font-weight: 300;
+          font-family: Microsoft JhengHei;
+      }
+
+
+      .footer-section p.footer-title {
+        font-size: 16px;
+      }
+
+      .site-footer .footer-section ul li a {
+        font-size: 16px;
+      }
+
+   }
+   @media screen and (max-width:450px) {
+
+      .s1-logo{
+        top:48%;
+      }
+
+     p.evenP{
+        color:white;
+     }
+
+      .txt_g1{
+          font-size: 40px !important;
+          font-weight: 400;
+          font-family: Microsoft JhengHei;
+      }
+
+      .txt_g2{
+          font-size: 16px;
+          font-weight: 300;
+          font-family: Microsoft JhengHei;
+
+      }
+
+      .txt_g3{
+          font-size: 22px;
+          font-weight: 300;
+          font-family: Microsoft JhengHei;
+      }
+
+      .txt_g4{
+          font-size: 12px;
+          font-weight: 300;
+          font-family: Microsoft JhengHei;
+      }
+      .footer-section p.footer-title {
+        font-size: 22px;
+      }
+
+      .site-footer .footer-section ul li a {
+        font-size: 16px;
+        margin-left:25px;
+      }
+
+          .inf {
+              margin-left: -35px !important;
+          }
+
+
+   }
+
+    @media screen and (max-width:414px) {
+      .site-footer .footer-section ul li a {
+        font-size: 16px;
+        margin-left:20px;
+      }
+
+          .inf {
+              margin-left: -45px !important;
+          }
+
+
+    }
+
+    @media screen and (max-width:390px) {
+      .site-footer .footer-section ul li a {
+        font-size: 16px;
+        margin-left:14px;
+      }
+
+          .inf {
+              margin-left: -45px !important;
+          }
+
+
+    }
+
+    @media screen and (max-width:375px) {
+      .site-footer .footer-section ul li a{
+        margin-left:12px;
+      }
+
+      .inf{
+        margin-left: -45px !important;
+      }
+
+      .evenP2{
+        text-align:left;
+        margin-left:0px;
+      }
+
+      #changeButton{
+        transform: translate(50px, 0px);
+      }
+    }
+
+    @media screen and (max-width:360px) {
+
+      .site-footer .footer-section ul li a{
+        margin-left:7px;
+      }
+
+      .inf{
+        margin-left: -50px !important;
+      }
+      .s1-logo{
+        top:38%;
+      }
+    }
+</style>
+<!-- End Facebook Pixel Code -->
+
+<script>
+  var changeButton = document.getElementById('changeButton');
+  var eventwrap = document.getElementById('eventwrap');
+  var evenDeskNav = document.getElementsByClassName('desktop-nav');
+  var evenMobNav = document.getElementsByClassName('mobile-nav');
+  var evenBody = document.getElementsByClassName('main-content');
+  var evenMoBody = document.getElementsByClassName('main-content home');
+  var evensubmenu = document.getElementsByClassName('sub-menu-mobile');
+
+  changeButton.addEventListener('click', function() {
+    eventwrap.style.display = 'none';
+
+    for (var i = 0; i < evenDeskNav.length; i++) {
+      evenDeskNav[i].style.top = '0';
+    }
+
+    for (var i = 0; i < evenBody.length; i++) {
+      evenBody[i].style.paddingTop = '40px!important';
+    }
+
+    for (var i = 0; i < evenMobNav.length; i++) {
+      evenMobNav[i].style.top = '0';
+    }
+
+     for (var i = 0; i < evenMoBody.length; i++) {
+      evenMoBody[i].style.paddingTop = '40px';
+    }
+    for (var i = 0; i < evenMoBody.length; i++) {
+      evensubmenu[i].style.top = '47px';
+    }
+
+  });
+
+
+
+      // 獲取元素
+  let element1 = document.getElementById('m-menu-statu');
+  let element2 = document.getElementById('mobile-toggle');
+
+  // 創建一個觀察元素屬性變化的觀察器
+  let observer = new MutationObserver(function(mutations) {
+      console.log("MutationObserver console!!!!");
+      mutations.forEach(function(mutation) {
+          if (mutation.attributeName === "class") {
+              let classList = mutation.target.classList;
+              if (classList.contains('opened')) {
+                console.log("MutationObserver open");
+                  // 如果'opened' class存在，就改變element2的背景顏色
+                  element2.style.backgroundImage = 'url("https://cdn.shopify.com/s/files/1/1403/9023/files/new_xX.png?v=1690879553")';  // B
+              } else {
+                  // 如果'open' class不存在，就恢復element2的背景顏色
+                  console.log("MutationObserver colse");
+                  element2.style.backgroundImage = 'url("https://cdn.shopify.com/s/files/1/1403/9023/files/4781852_burger_line_list_menu_nav_icon_0fec47ff-3ca1-47df-aac6-683b30df8c93.png?v=1691308437")';  // A
+              }
+          }
+      });
+  });
+
+  // 配置觀察器：只觀察'element1'的class變化
+  let config = { attributes: true, attributeFilter: ['class'] };
+
+  // 開始觀察'element1'
+  observer.observe(element1, config);
+
+
+
+    function checkEventDisplay() {
+        const eventWrap = document.getElementById('eventwrap');
+        const currentDate = new Date();
+        const startDate = new Date('2024-09-09T00:00:00');
+        const endDate = new Date('2024-09-23T23:59:59');
+
+        if (currentDate >= startDate && currentDate <= endDate) {
+            eventWrap.style.display = 'flex';
+        } else {
+    eventwrap.style.display = 'none';
+
+    for (var i = 0; i < evenDeskNav.length; i++) {
+      evenDeskNav[i].style.top = '0';
+    }
+
+    for (var i = 0; i < evenBody.length; i++) {
+      evenBody[i].style.paddingTop = '40px!important';
+    }
+
+    for (var i = 0; i < evenMobNav.length; i++) {
+      evenMobNav[i].style.top = '0';
+    }
+
+     for (var i = 0; i < evenMoBody.length; i++) {
+      evenMoBody[i].style.paddingTop = '40px';
+    }
+    for (var i = 0; i < evenMoBody.length; i++) {
+      evensubmenu[i].style.top = '37px';
+    }
+        }
+    }
+
+    //檢查一次是否應該顯示 eventwrap
+    checkEventDisplay();
+
+    //每分鐘檢查一次
+    setInterval(checkEventDisplay, 60000);
+</script>

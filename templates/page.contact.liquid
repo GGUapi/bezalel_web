@@ -1,0 +1,54 @@
+<section class="full-width white-bg support-intro">  
+	<div class="container container-top-padding clearfix max-width-600">      
+      	<h1 class="display-title">Support</h1>
+      	<p>BEZALEL is committed to providing exceptional customer service and quality products. If you have any questions or concerns about a product, your order, or life in general, get in touch. Our support hours are 10am – 6pm PT, weekends and holidays excluded.</p>
+  	</div>  
+</section>
+
+<section class="full-width white-bg support-contact">
+	<div class="container container-padding clearfix">
+		<div class="max-width-900">
+            <div class="grid">
+                <div class="grid__item one-third medium--one-whole small--one-whole">
+                    <a style="text-decoration:underline;" href="mailto:info.tw@bezalel.co"><img class="module-icon" src="{{ 'envelope.png' | asset_url }}" /></a>
+                    <h3>Email</h3>
+                    <p><a style="text-decoration:underline;" href="mailto:info.tw@bezalel.co">info.tw@bezalel.co</a></p>
+                </div>
+                <div class="grid__item one-third medium--one-whole small--one-whole">
+                    <a href="tel:05-2242828"><img class="module-icon" src="{{ 'call.png' | asset_url }}" /></a>
+                    <h3>Call</h3>
+                    <p><a href="tel:05-2242828">(424) 625-4011</a></p>
+                </div>
+                <div class="grid__item one-third medium--one-whole small--one-whole">
+                    <img class="module-icon" src="{{ 'chat.png' | asset_url }}" />
+                    <h3>Live Chat</h3>
+                    <p>Mon–Fri, 10am-6pm PT</p>
+                </div>
+            </div>
+      </div>
+  	</div>
+</section>
+
+<section class="full-width white-bg">
+	<div class="container container-bottom-padding clearfix">
+    	<div class="max-width-900 faqs">
+			{{ page.content }}
+        </div>
+  	</div>
+</section>
+
+	
+<script>
+  jQuery(function(){
+
+      $(document).on('click', '.item .dropdown-item', function(){
+        if(!$(this).parent().find('.content').is(':visible')) {
+          $('.item .content').slideUp();
+          $('.item .dropdown-item').removeClass('active');
+        }
+        $(this).toggleClass('active').parent().find('.content').slideToggle();
+      });     
+
+  });      	
+
+</script>

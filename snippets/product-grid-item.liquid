@@ -1,0 +1,117 @@
+{% assign on_sale = false %}
+{% if bold_compare_at_price > bold_price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+  {% assign sold_out = false %}
+{% endif %}
+
+<div class="product grid__item one-third medium--one-half small--one-whole">
+	
+  	<div class="collection-item-wrap clearfix">
+        <a href="{% if product.tags contains 'coming-soon' %}javascript:void(0);{% else %}{{ product.url }}{% endif %}" data-analytics-title="{{ product.title }}">
+            <div class="collection-title-wrap">      	
+              <h3 class="product-name">{{ product.title }}</h3>
+              {% if product.tags contains 'pro-desc_Prelude_SE' %}
+              <p class="product-description">支援 iPhone 12 mini、 iPhone 12、 iPhone 12 Pro、 iPhone 12 Pro Max、 iPhone 13 mini、 iPhone 13、 iPhone 13 Pro、 iPhone 13 Pro Max、 iPhone 14、iPhone 14 Plus、iPhone 14 Pro Max MagSafe 系列手機及其他支援 Qi 充電標準的裝置，同時享有立架式及多種充電模式。</p>
+                
+              {% elsif product.tags contains 'pro-desc_magsafeiphone13case'%}
+              <p class="product-description">專為 iPhone 13、 iPhone 13 Pro、iPhone 13 Pro Max MagSafe 系列手機專屬打造 MagSafe 手機殼。</p>
+
+              {% elsif product.tags contains 'pro-desc_magsafeiphone14case'%}
+              <p class="product-description">專為 iPhone 14、 iPhone 14 Pro、iPhone 14 Plus、iPhone 14 Pro Max MagSafe 系列手機專屬打造 MagSafe 手機殼。</p>
+                
+              {% elsif product.tags contains 'pro-desc_Omnia_S_MagSafe'%}
+              <p class="product-description">支援 iPhone 12、 iPhone 12 Pro、 iPhone 12 Pro Max、 iPhone 12 mini、 iPhone 13、 iPhone 13 mini、 iPhone 14、 iPhone 14 Plus、iPhone 14 Pro Max MagSafe系列手機。</p>
+                
+              {% elsif product.tags contains 'pro-desc_Omnia_S2_MagSafe'%}
+              <p class="product-description">支援 iPhone 12 mini、iPhone 12、 iPhone 12 Pro、 iPhone 12 Pro Max、 iPhone 13 mini、iPhone 13、 iPhone 13 Pro、 iPhone 13 Pro Max、iPhone 14、 iPhone 14 Plus、iPhone 14 Pro Max MagSafe 系列手機。</p>
+
+              {% elsif product.tags contains 'pro-desc_Omnia_SE'%}
+              <p class="product-description">支援 iPhone 8、iPhone 8 Plus、iPhone XS、iPhone XS Max、iPhone XR、iPhone 11、iPhone 11 Pro、iPhone 11 Pro Max 和 iPhone SE、Samsung、LG、Sony、Google 等有 Qi 充電標準的智慧行動裝置。<br>(**iPhone MagSafe系列不適用本款產品，敬請期待MagSafe新品上市)</p>
+
+              {% elsif product.tags contains 'pro-desc_Omnia_S2_MagSafe_acc'%}
+              <p class="product-description">單售支架</p>
+                
+              {% elsif product.tags contains 'pro-desc_prelude android'%}
+              <p class="product-description">專為 iPhone SE、 iPhone 8、X、XS、XS Max、XR、iPhone 11、Android 與其他支援 Qi 充電標準裝置而設計。</p>
+                
+              {% elsif product.tags contains 'pro-desc_futura-x'%}
+              <p class="productT">無線充電板</p>
+              <p class="product-description">專為 iPhone SE、 iPhone 8、X、XS、XS Max、XR、11、12、13、Android 與其他支援 Qi 充電標準裝置而設計。</p>
+                
+              {% elsif product.tags contains 'pro-desc_futura-s'%}
+              <p class="product-description">支援 iPhone 12 mini、iPhone 12、 iPhone 12 Pro、 iPhone 12 Pro Max、 iPhone 13 mini、iPhone 13、 iPhone 13 Pro、 iPhone 13 Pro Max、iPhone 14、 iPhone 14 Pro、iPhone 14 Plus、iPhone 14 Pro Max MagSafe 系列手機及其他支援 Qi 充電標準的裝置。</p>
+                
+              {% elsif product.tags contains 'pro-desc_altair'%}
+              <p class="product-description">專為專為 iPhone SE、iPhone 8、X、XS、XS Max、XR、iPhone 11 、Android 與其他支援 Qi 充電標準裝置而設計。</p>
+                
+              {% elsif product.tags contains 'pro-desc_wall-charger'%}
+              <p class="product-description">具備快速充電能力，獨家設計以最有效率地為您的智慧裝置充電。</p>
+                
+              {% elsif product.tags contains 'pro-desc_glossy'%}
+              <p class="product-description">磁吸手機殼，支援 iPhone 8、 iPhone 8 Plus、 iPhone X、 iPhone XR、 iPhone XS、 iPhone XS MAX 系列手機。</p>
+                
+              {% elsif product.tags contains 'pro-desc_cables'%}
+              <p class="product-description">優質 Dura-Braid 充電線並支援PD快充。</p>
+
+              {% elsif product.tags contains 'omniax' %}
+              <p class="productT">車用磁吸無線充電器系列</p>
+              {% elsif product.tags contains 'pro-desc_Prelude_X' %}
+              <p class="productT">磁吸無線充電器</p>
+              {% elsif product.tags contains 'preludexs' %}
+              <p class="productT">磁吸無線充電器</p>                
+
+
+              {% endif %}  
+              
+                <h3 class="price">
+                    {{ bold_price | money }} 
+                    {% if on_sale %}
+                        <span>{{ bold_compare_at_price | money }} </span>
+                    {% endif %}    
+                </h3>
+                <div class='jdgm-widget jdgm-preview-badge jdgm-badge-collection' data-id='{{ product.id }}'>{{ product.metafields.judgeme.badge }}</div>	                           
+            </div>
+
+            <div class="product-image">
+                {% unless product.tags contains 'omnia-custom-image' %}
+                    {% if product.featured_image %}
+                      <img class="retina-img" src="{{ product.featured_image.src | img_url: 'large' }}" data-retina-src="{{ product.featured_image.src | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" width="205" height="205" >
+                    {% else %}
+                      <img src="{{ 'no-image.svg' | asset_url }}" alt="*" />
+                    {% endif %}
+              	{% endunless %}
+              
+              	{% if product.tags contains 'omnia-custom-image' %}
+              		<img class="retina-img" src="{{ product.images[2] | img_url: 'large' }}" data-retina-src="{{  product.images[2] | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}">
+              	{% endif %}
+              
+                {% if product.tags contains 'onsale' %}
+              		<span class="badge badge--on-sale">限定組合價</span>
+              	{% endif %}
+
+            </div>
+          
+            {% if product.tags contains 'coming-soon' %}
+                <div class="btn buy-now coming-soon-btn">即將推出</div>
+            {% elsif product.tags contains 'pro-desc_Omnia_S2_MagSafe' %}
+                <!--div class="btn buy-now coming-soon-btn">最後現貨搶購中</div-->
+                <div class="btn buy-now">最後現貨搶購中</div>
+            {% else %}
+                <div class="btn buy-now">立即購買</div>
+            {% endif %}
+          
+        </a>
+  </div>
+</div>
+
+<style>
+  .productT{
+    font-size:22px;
+    color:black;
+    text-align:left;
+  }
+</style>

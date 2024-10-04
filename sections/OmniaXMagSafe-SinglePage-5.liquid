@@ -1,0 +1,76 @@
+<section class="relative pb-8  overflow-hidden">
+  <video id="rax-video" class="md:max-w-[70%] mx-auto rounded-xl" autoplay controls>
+    <source
+      src="{{ '換裝置示意.mp4'|file_url }}"
+      over
+      type="video/mp4"
+    >
+  </video>
+  <div class="pt-8 md:max-w-[70%] mx-auto px-4 ">
+    <div class="relative">
+      <div class="max-w-xl mx-auto mb-16 text-center">
+        <h2 class="font-heading text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-extrabold text-black tracking-tight mb-6">
+          獨家高效率充電法
+        </h2>
+        <p class="font-heading text-lg xs:text-xl sm:text-2xl md:text-3xl  text-black tracking-tight mb-6">
+          Qi2 無線充電技術，真 15W 無線充電
+        </p>
+      </div>
+      <div class="flex !gap-2 md:!gap-4 xl:container  mx-auto xl:!gap-8 -mx-4">
+        <div class="w-1/5">
+          <div class="max-w-md mx-auto h-full md:rounded-3xl rounded-xl shadow-box-violet overflow-hidden bg-white">
+            <div class="flex items-center justify-center">
+              <div>
+                <image src="{{ 'feature1.png'|file_url }}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-1/5">
+          <div class="max-w-md mx-auto h-full md:rounded-3xl rounded-xl shadow-box-violet overflow-hidden bg-white">
+            <div class="flex items-center justify-center">
+              <div>
+                <image src="{{ 'feature2.png'|file_url }}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-1/5">
+          <div class="max-w-md mx-auto h-full md:rounded-3xl rounded-xl shadow-box-violet overflow-hidden bg-white">
+            <div class="flex  items-center justify-center">
+              <div>
+                <image src="{{ 'feature3.png'|file_url }}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-1/5">
+          <div class="max-w-md mx-auto h-full md:rounded-3xl rounded-xl shadow-box-violet overflow-hidden bg-white">
+            <div class="flex items-center justify-center">
+              <div>
+                <image src="{{ 'feature4.png'|file_url }}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-1/5">
+          <div class="max-w-md mx-auto h-full md:rounded-3xl rounded-xl shadow-box-violet overflow-hidden bg-white">
+            <div class="flex items-center justify-center">
+              <div>
+                <image src="{{ 'feature5.png'|file_url }}" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <image class="lg:p-12 mx-auto mt-4 hidden md:block" src="{{ 'banner3.png'|file_url }}"></image>
+    <image class="mx-auto mt-4 md:hidden object-contain mx-auto " src="{{ 'banner3_mobile.png'|file_url }}"></image>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Section name",
+  "settings": []
+}
+{% endschema %}

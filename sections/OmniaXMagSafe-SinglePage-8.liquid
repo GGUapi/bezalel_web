@@ -1,0 +1,287 @@
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<section class="relative pb-16  overflow-x-hidden">
+  <div class="mt-8 md:max-w-[70%] mx-auto px-4 ">
+    <div class="relative">
+      <div class="max-w-2xl mx-auto mb-8 text-center">
+        <h2 class="font-heading text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-extrabold text-black tracking-tight mb-6 ">
+          不限車款、不限車齡
+        </h2>
+        <p class="font-heading text-lg xs:text-xl sm:text-2xl md:text-3xl  text-black tracking-tight mb-6">
+          「全方位」充電解決方案
+        </p>
+      </div>
+    </div>
+  </div>
+  <image
+    class="md:max-w-[70%] mx-auto w-full rounded-xl"
+    src="{{ 'f59f14676510c73e62c9d82ef25205e9.gif' | file_url }}"
+  ></image>
+  <div class="max-w-2xl mx-auto my-8 text-center">
+    <p class="font-heading text-lg xs:text-xl sm:text-2xl md:text-3xl  text-black tracking-tight">
+      所有車款皆適用，每台車都是萬能行動充電站
+    </p>
+  </div>
+  <div class="mx-auto md:w-[30%] w-full relative">
+    <div class="rax-carousel rounded-md mx-auto">
+      <div id="rax-car-item1" class="rax-carousel-item w-full relative scroll-mt-[100px] ">
+        <img
+          src="{{ 'Tesla.png'|file_url }}"
+          class="w-full"
+          width=""
+          height=""
+        >
+        <div class="absolute flex items-center w-full h-full top-0 flex justify-between">
+          <a
+            class="btn-circle flex items-center h-full  bg-white/30 px-4 py-1 cursor-pointer"
+            onClick="window.location.href = '#rax-car-item5';"
+            >❮</a
+          >
+          <a
+            class="btn-circle flex items-center h-full  bg-white/30 px-4 py-1 cursor-pointer"
+            onClick="window.location.href = '#rax-car-item2';"
+            >❯</a
+          >
+        </div>
+      </div>
+      <div id="rax-car-item2" class="rax-carousel-item w-full relative scroll-mt-[100px]">
+        <img
+          src="{{ 'SUV.png'|file_url }}"
+          class="w-full"
+          width=""
+          height=""
+        >
+        <div class="absolute flex items-center w-full h-full top-0 flex justify-between">
+          <a
+            class="btn-circle flex items-center h-full  bg-white/30 px-4 py-1 cursor-pointer"
+            onClick="window.location.href = '#rax-car-item1';"
+            >❮</a
+          >
+          <a
+            class="btn-circle flex items-center h-full  bg-white/30 px-4 py-1 cursor-pointer"
+            onClick="window.location.href = '#rax-car-item3';"
+            >❯</a
+          >
+        </div>
+      </div>
+      <div id="rax-car-item3" class="rax-carousel-item w-full relative scroll-mt-[100px]">
+        <img
+          src="{{ 'Sport_Car.png'|file_url }}"
+          class="w-full"
+          width=""
+          height=""
+        >
+        <div class="absolute flex items-center w-full h-full top-0 flex justify-between">
+          <a
+            class="btn-circle flex items-center h-full  bg-white/30 px-4 py-1 cursor-pointer"
+            onClick="window.location.href = '#rax-car-item2';"
+            >❮</a
+          >
+          <a
+            class="btn-circle flex items-center h-full  bg-white/30 px-4 py-1 cursor-pointer"
+            onClick="window.location.href = '#rax-car-item4';"
+            >❯</a
+          >
+        </div>
+      </div>
+      <div id="rax-car-item4" class="rax-carousel-item w-full relative scroll-mt-[100px]">
+        <img
+          src="{{ 'Sedan.png'|file_url }}"
+          class="w-full"
+          width=""
+          height=""
+        >
+        <div class="absolute flex items-center w-full h-full top-0 flex justify-between">
+          <a
+            class="btn-circle flex items-center h-full  bg-white/30 px-4 py-1 cursor-pointer"
+            onClick="window.location.href = '#rax-car-item3';"
+            >❮</a
+          >
+          <a
+            class="btn-circle flex items-center h-full  bg-white/30 px-4 py-1 cursor-pointer"
+            onClick="window.location.href = '#rax-car-item5';"
+            >❯</a
+          >
+        </div>
+      </div>
+      <div id="rax-car-item5" class="rax-carousel-item w-full relative scroll-mt-[100px]">
+        <img
+          src="{{ 'RV.png'|file_url }}"
+          class="w-full object-contain"
+          width=""
+          height=""
+        >
+        <div class="absolute flex items-center w-full h-full top-0 flex justify-between">
+          <a
+            class="btn-circle flex items-center h-full  bg-white/30 px-4 py-1 cursor-pointer"
+            onClick="window.location.href = '#rax-car-item4';"
+            >❮</a
+          >
+          <a
+            class="btn-circle flex items-center h-full  bg-white/30 px-4 py-1 cursor-pointer"
+            onClick="window.location.href = '#rax-car-item1';"
+            >❯</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rax-carousel rax-carousel-center rounded-box md:gap-2 gap-1 w-full flex justify-center mx-auto">
+    <div class="rax-carousel-item flex flex-col items-center w-1/5 md:w-auto">
+      <image src="{{ 'Tesla.png'|file_url }}" alt="Pizza" />
+      <p>電動車</p>
+    </div>
+    <div class="rax-carousel-item flex flex-col items-center w-1/5 md:w-auto">
+      <image
+        src="{{ 'SUV.png'|file_url }}"
+        alt="Pizza"
+      />
+      <p>休旅車</p>
+    </div>
+    <div class="rax-carousel-item flex flex-col items-center w-1/5 md:w-auto">
+      <image
+        src="{{ "Sport_Car.png"|file_url }}"
+        alt="Pizza"
+      />
+      <p>跑車</p>
+    </div>
+    <div class="rax-carousel-item flex flex-col items-center w-1/5 md:w-auto">
+      <image
+        src="{{ "Sedan.png"|file_url }}"
+        alt="Pizza"
+      />
+      <p>一般轎車</p>
+    </div>
+    <div class="rax-carousel-item flex flex-col items-center w-1/5 md:w-auto">
+      <image
+        src="{{ "RV.png"|file_url }}"
+        alt="Pizza"
+      />
+      <p>露營車</p>
+    </div>
+  </div>
+  <div class="mt-16 md:max-w-[70%] mx-auto px-4">
+    <div class="relative">
+      <div class="!grid !grid-cols-1 !gap-4 lg:!grid-cols-2 lg:!gap-8">
+        <div class="rounded-lg col-start-1">
+          <image class="rounded-lg" src="{{ 'e5aefe7c19af9074f3570adbe424fde3.gif'|file_url }}"></image>
+        </div>
+        <div class="rounded-lg  flex flex-col justify-center items-center">
+          <p class="font-heading text-xl xs:text-2xl sm:text-3xl md:text-4xl  text-black tracking-tight font-bold">
+            打破車用充電器框架
+          </p>
+          <p class="font-heading text-lg xs:text-xl sm:text-2xl md:text-3xl  text-black tracking-tight ">
+            一次充飽多個裝置
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--
+    <div class="rax-carousel w-full">
+      <div id="slide1" class="rax-carousel-item relative w-full">
+        <image
+          src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
+          class="w-full"
+        />
+        <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+          <a href="#slide4" class="btn btn-circle">❮</a>
+          <a href="#slide2" class="btn btn-circle">❯</a>
+        </div>
+      </div>
+      <div id="slide2" class="rax-carousel-item relative w-full">
+        <image
+          src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
+          class="w-full"
+        />
+        <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+          <a href="#slide1" class="btn btn-circle">❮</a>
+          <a href="#slide3" class="btn btn-circle">❯</a>
+        </div>
+      </div>
+      <div id="slide3" class="rax-carousel-item relative w-full">
+        <image
+          src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
+          class="w-full"
+        />
+        <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+          <a href="#slide2" class="btn btn-circle">❮</a>
+          <a href="#slide4" class="btn btn-circle">❯</a>
+        </div>
+      </div>
+      <div id="slide4" class="rax-carousel-item relative w-full">
+        <image
+          src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
+          class="w-full"
+        />
+        <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+          <a href="#slide3" class="btn btn-circle">❮</a>
+          <a href="#slide1" class="btn btn-circle">❯</a>
+        </div>
+      </div>
+    </div>
+  -->
+</section>
+<script>
+  const galleryWidth = document.querySelector('.rax-gallery').scrollWidth;
+  const scrollLength = 1564 - window.innerWidth;
+  gsap.to('.rax-gallery',{
+    x: -scrollLength,
+    ease:'none',
+    scrollTrigger:{
+      trigger:'.rax-galleryWrapper',
+      start:'center center',
+      end:scrollLength,
+      pin:true,
+      scrub:1,
+    }
+  })
+</script>
+<style>
+    .rax-carousel {
+      display: inline-flex !important;
+      overflow-x: scroll !important;
+      scroll-snap-type: x mandatory !important;
+      scroll-behavior: smooth !important;
+      -ms-overflow-style: none !important;
+      scrollbar-width: none !important;
+    }
+
+    .rax-carousel-vertical {
+        flex-direction: column !important;
+        overflow-y: scroll !important;
+        scroll-snap-type: y mandatory !important;
+    }
+
+    .rax-carousel-item {
+        box-sizing: content-box !important;
+        display: flex !important;
+        flex: none !important;
+        scroll-snap-align: start !important;
+    }
+
+    .carousel-start .rax-carousel-item {
+        scroll-snap-align: start
+    }
+
+    .rax-carousel-center .rax-carousel-item {
+        scroll-snap-align: center
+    }
+
+    .carousel-end .rax-carousel-item {
+        scroll-snap-align: end
+    }
+    .rax-anchor {
+      display: block;
+      height: 92px;
+      margin-top: -92px;
+      visibility: hidden;
+  }
+</style>
+{% schema %}
+{
+  "name": "Section name",
+  "settings": []
+}
+{% endschema %}

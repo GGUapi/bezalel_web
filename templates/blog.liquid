@@ -1,0 +1,105 @@
+{% paginate blog.articles by 12 %}
+  
+  	<section class="full-width blog-hero bezalel-blog">
+      	<div class="container container-padding text-center">
+          	<h1 class="display-title">Blog</h2>
+          
+            <form id="blog-search-form" method="get" action="/search" class="text-center">
+              	<input class="searchBox field" onfocus="this.value=''" value="{{ search.terms | escape }}" type="text" name="q" placeholder="Search" /> 
+              	<input type="hidden" name="type" value="article" />
+                <input type="submit" class="search-submit" value="&#xf054;">
+            </form>
+
+          
+            <ul>
+                <li>
+                    <a class="blog-social-icon" href="{{ settings.social_twitter }}" target="_blank">                      	
+                       <img src="{{ 'blog-twitter-logo.png' | asset_url }}" />
+                    </a>
+                </li>
+                <li>
+                    <a class="blog-social-icon" href="{{ settings.social_facebook }}" target="_blank">
+                       <img src="{{ 'blog-facebook-logo.png' | asset_url }}" />
+                    </a>
+                </li>
+                <li>
+                    <a class="blog-social-icon" href="{{ settings.social_youtube }}" target="_blank">
+                       <img src="{{ 'blog-youtube.png' | asset_url }}" />
+                    </a>
+                </li>
+                <li>
+                    <a class="blog-social-icon" href="{{ settings.social_instagram }}" target="_blank">
+                       <img src="{{ 'blog-instagram.png' | asset_url }}" />
+                    </a>
+                </li>
+          	</ul>
+        
+      	</div>
+  	</section>
+  
+  	<section class="full-width">
+		<div class="container">
+      		<hr class="full-width-rule">
+  		</div>
+	</section>
+  
+  	<section class="full-width">
+
+        <div class="container container-padding">
+              
+             	<div class="grid small-gutter"> 
+                  
+                    {% for article in blog.articles %}
+
+                        <style>
+                          a.blog-article {
+                            text-decoration: none;
+                          }
+                        </style>
+
+                          <a class="blog-article grid__item one-third medium--one-half small--one-whole text-center {% unless article.image %} no-image {% endunless %}" href="{{ article.url }}">
+
+                              <div class="featured-img-wrap">
+                                
+                                	<img class="featured-img" src="{{ article.image.src | img_url: '400x400', crop: 'center' }}">
+
+                              </div>
+                           
+
+                              <div class="blog-content">
+
+                                  <div class="blog-text-wrap">
+
+                                      <h4 class="time">{{ article.published_at | date: '%B %e, %Y' }}</h4>
+
+                                      <p style="font-size: 20px;">{{ article.title }}</p>
+
+                                      <h4 class="read-more">Read More</h4>
+
+                                  </div>
+
+                              </div>
+
+                          </a>
+
+                          
+
+                    {% endfor %}
+  
+                  
+              	</div>
+          
+                  {% if paginate.pages > 1 %}
+                  <div class="pagination-wrap">
+                      <div class="pagination">
+                      {{ paginate | default_pagination | replace: 'Previous', 'Newer' | replace: 'Next', 'Older' }}
+                      </div>
+                  </div>
+                  {% endif %}
+
+                  {% endpaginate %}
+          
+
+            </div>
+
+  	</section>

@@ -1,0 +1,128 @@
+<section class="hidden md:block overflow-hidden relative w-full h-full bg-[url('{{ 'poster2.png'|file_url }}')] bg-contain  bg-right bg-no-repeat  2xl:h-screen flex flex-col justify-center items-start lg:justify-end">
+  <div class="hidden w-full h-full absolute bg-black" id="rax-video-container">
+    <video id="rax-video" class="w-full h-full rounded-lg">
+      <source
+        src="{{ '無字卡_Omnia X MagSafe (1).mp4'|file_url }}"
+        over
+        type="video/mp4"
+      >
+    </video>
+  </div>
+  <div class="p-8 md:p-12 lg:px-16 lg:py-24 flex h-full items-center">
+    <div class="relative max-w-[14rem] 2xl:!max-w-full">
+      <h1 class="font-extrabold text-black text-sm tracking-wider md:text-5xl 2xl:text-7xl videoChangeColor">
+        Omnia X
+
+        <strong class="block font-extrabold text-black text-sm tracking-wider md:text-5xl 2xl:text-7xl videoChangeColor">
+          MagSafe
+        </strong>
+      </h1>
+
+      <p class="mt-2 lg:mt-4 text-black text-[11px] md:text-lg 2xl:text-2xl videoChangeColor">
+        不限車款、車齡，每台車具備最新穎便捷充電方式！
+      </p>
+
+      <div class="mt-2 lg:mt-8 flex flex-wrap gap-4 text-center 2xl:pt-8">
+        <button
+          id="rax-play-button"
+          class="play_button block !lg:w-full !rounded-full bg-[#4B9BE1] 2xl:text-2xl 2xl:!px-16 2xl:!py-4 md:!px-16 md:!py-4 md:px-8 md:py-4 text-[11px] md:text-xl p-1 font-medium text-white shadow hover:bg-[#4B9BEE] focus:outline-none focus:ring active:bg-[#4B9BEE] sm:w-auto"
+        >
+          觀看影片
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="z-40 min-h-96 md:hidden overflow-hidden  relative w-full h-full  bg-contain  bg-right bg-no-repeat  2xl:h-screen flex flex-col justify-center items-start lg:justify-end">
+  <div class="hidden w-full h-full absolute bg-black" id="rax-video-container2">
+    <video id="rax-video2" class="w-full h-full rounded-lg">
+      <source
+        src="{{ '（直式）Omnia X 短影片.mp4'|file_url }}"
+        over
+        type="video/mp4"
+      >
+    </video>
+  </div>
+  <div class="">
+    <div class="rlative container 2xl:!max-w-full flex justify-center items-center flex-col !bg-[#F1F1F1] pb-8">
+      <image src="{{ 'poster_mobile.png'|file_url  }}" class="py-16"></image>
+      <div class="relative" id="rax-title">
+        <h1 class="text-center font-extrabold text-black text-[30px] tracking-wider md:text-5xl 2xl:text-7xl videoChangeColor">
+          Omnia X MagSafe
+        </h1>
+
+        <p class="text-center mt-2 text-black !text-[14px]  videoChangeColor">
+          不限車款、車齡，每台車具備最新穎便捷充電方式！
+        </p>
+      </div>
+
+      <div class="absolute right-5 top-5 mt-2 lg:mt-8 flex flex-wrap gap-4 text-center 2xl:pt-8 z-40">
+        <button
+          id="rax-play-button2"
+          class="play_button block !lg:w-full !rounded-full bg-white !px-8 !py-2 !border-[1px] !border-black !border-solid 2xl:text-2xl 2xl:!px-16 2xl:!py-4 md:!px-16 md:!py-4 md:px-8 md:py-4 text-[12px] md:text-xl p-1 font-medium text-black shadow hover:bg-[#4B9BEE] focus:outline-none focus:ring active:bg-[#4B9BEE] sm:w-auto"
+        >
+          觀看影片
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const videoContainer = document.getElementById('rax-video-container');
+  const video = document.getElementById('rax-video');
+   const videoContainer2 = document.getElementById('rax-video-container2');
+  const video2 = document.getElementById('rax-video2');
+  const playButton = document.getElementById('rax-play-button');
+  const playButton2 = document.getElementById('rax-play-button2');
+  // Add an event listener to the button
+  playButton.addEventListener('click', () => {
+      videoContainer.classList.remove('hidden')
+      if (video.paused) {
+          video.play(); // Play the video if it is paused
+          playButton.textContent = '立即購買'; // Change button text to "Pause Video"
+
+          document.querySelectorAll('.videoChangeColor').forEach(p => p.classList.add('!text-white'))
+      } else {
+          video.pause(); // Pause the video if it is playing
+          playButton.textContent = '播放影片'; // Change button text to "Play Video"
+          document.getElementById('OmniaXMagSafe-SinglePage-3').scrollIntoView();
+      }
+  });
+  playButton2.addEventListener('click', () => {
+      videoContainer2.classList.remove('hidden')
+      videoContainer2.classList.add('z-30')
+    videoContainer2.classList.add('pt-10')
+      if (video2.paused) {
+          video2.play(); // Play the video if it is paused
+          playButton2.textContent = '觀看影片'; // Change button text to "Pause Video"
+          document.getElementById('rax-title').classList.add('hidden');
+
+          document.querySelectorAll('.videoChangeColor').forEach(p => p.classList.add('!text-white'))
+      } else {
+          video2.pause(); // Pause the video if it is playing
+          playButton2.textContent = '觀看影片'; // Change button text to "Play Video"
+          document.getElementById('OmniaXMagSafe-SinglePage-3').scrollIntoView();
+        document.getElementById('rax-title').classList.remove('hidden');
+      }
+  });
+</script>
+{% schema %}
+{
+  "name": "Video Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL",
+      "default": "https://www.youtube.com/embed/VIDEO_ID"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

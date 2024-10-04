@@ -1,0 +1,130 @@
+<meta property="og:site_name" content="{{ shop.name | escape }}" />
+
+{% if template == 'index' %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:description" content="{{ page_description }}">
+  <meta property="og:image" content="http:{{ "2019_AllProducts_Hero_Mobile.jpg" | asset_url }}">
+  <meta property="og:image:secure_url" content="https:{{ "2019_AllProducts_Hero_Mobile.jpg" | asset_url }}">
+  {% elsif template contains 'product' %}
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="{{ product.title | strip_html | escape }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:description" content="{{ product.description | strip_html | escape }}">
+      {% for image in product.images limit:3 %}
+      <meta property="og:image" content="http:{{ image.src | img_url: 'grande' }}">
+      <meta property="og:image:secure_url" content="https:{{ image.src | img_url: 'grande' }}">
+      {% endfor %}
+  <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html | escape }}">
+  <meta property="og:price:currency" content="{{ shop.currency }}">
+  {% elsif template contains 'article' %}
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ article.title | strip_html | escape }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:description" content="{{ article.excerpt_or_content | strip_html | escape }}">
+  <meta property="og:image" content="http:{{ article | img_url: '1024x1024' }}">
+  <meta property="og:image" content="http:{{ article | img_url: '1024x1024' }}">
+  <meta property="og:image:secure_url" content="https:{{ article | img_url: '1024x1024' }}">
+  {% elsif template == 'password' %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ shop.name | escape }}">
+  <meta property="og:url" content="{{ shop.url }}">
+  <meta property="og:description" content="{% unless shop.description == blank %}{{ shop.description | escape }}{% else %}{{ shop.name | escape }}{% endunless %}">
+  <meta property="og:image" content="https:{{ 'logo.png' | asset_url }}">
+  {% elsif template contains 'page.futura-overview' %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page_title | escape }}">
+  	<meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:image" content="http:{{ "Futura-X-product-page-mobile.jpg" | asset_url }}" />
+    <meta property="og:image:secure_url" content="https:{{ "Futura-X-product-page-mobile.jpg" | asset_url }}">
+  {% elsif template == 'page.omnia-overview' %}  
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page_title | escape }}">
+  	<meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:image" content="http:{{ "omnia-meta.jpg" | asset_url }}" />
+    <meta property="og:image:secure_url" content="https:{{ "omnia-meta.jpg" | asset_url }}">
+  {% elsif template == 'page.latitude-overview' %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page_title | escape }}">
+  	<meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:image" content="http:{{ "latitude-overview-hero-2-1-mobile.jpg" | asset_url }}" />
+    <meta property="og:image:secure_url" content="https:{{ "latitude-overview-hero-2-1-mobile.jpg" | asset_url }}">
+  {% elsif template == 'page.samsung-overview' %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page_title | escape }}">
+  	<meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:image" content="http:{{ "samsung-hero-mobile.jpg" | asset_url }}" />
+    <meta property="og:image:secure_url" content="https:{{ "samsung-hero-mobile.jpg" | asset_url }}">
+  {% elsif template == 'page.about' %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page_title | escape }}">
+  	<meta property="og:url" content="{{ canonical_url }}">  		
+    <meta property="og:image" content="http:{{ "about-hero-1-mobile.jpg" | asset_url }}" />
+    <meta property="og:image:secure_url" content="https:{{ "about-hero-1-mobile.jpg" | asset_url }}">
+	{% elsif template == 'page.prelude-overview' %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page_title | escape }}">
+  	<meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:image" content="http:{{ "prelude-new-hero-3.jpg" | asset_url }}" />
+    <meta property="og:image:secure_url" content="https:{{ "prelude-new-hero-3.jpg" | asset_url }}">
+	{% else %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page_title | escape }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+{% endif %}
+
+{% if page_description %}
+  <meta property="og:description" content="{{ page_description | escape }}">
+  <meta property="og:image" content="http:{{ 'logotype-gray.png' | asset_url }}">
+  <meta property="og:image:secure_url" content="https:{{ 'logotype-gray.png' | asset_url }}">
+{% endif %}
+
+{% if template contains 'article' and article.image %}
+	<meta name="twitter:card" content="summary_large_image">
+{% elsif template == 'index' and hero_enabled %}
+	<meta name="twitter:card" content="summary_large_image">
+{% else %}
+	<meta name="twitter:card" content="summary">
+{% endif %}
+
+{% unless settings.social_twitter == blank %}
+  <meta name="twitter:site" content="@{{ settings.social_twitter | split: 'twitter.com/' | last }}">
+{% endunless %}
+
+{% if template == 'index' %}
+    <meta name="twitter:title" content="{{ page_title }}">
+    <meta name="twitter:description" content="{{ page_description | escape }}">
+    <meta name="twitter:image" content="https:{{ '2019_AllProducts_Hero_Mobile.jpg' | asset_url }}">
+{% elsif template contains 'product' %} 
+    <meta name="twitter:title" content="{{ product.title | strip_html | escape }}">
+    <meta name="twitter:description" content="{{ product.description | strip_html | truncate: 200, '' | escape }}">
+    <meta name="twitter:image" content="https:{{ product | img_url: 'large' }}">
+    <meta name="twitter:image:width" content="480">
+    <meta name="twitter:image:height" content="480">
+{% elsif template contains 'page' %}
+  	<meta property="twitter:title" content="{{ page_title }}">
+  	{% if template == 'page.futura-overview' %}
+  		<meta property="twitter:image" content="https:{{ "Futura-X-product-page-mobile.jpg" | asset_url }}" />
+	{% elsif template == 'page.omnia-overview' %}  
+  		<meta property="twitter:image" content="https:{{ "omnia-meta.jpg" | asset_url }}" />
+	{% elsif template == 'page.latitude-overview' %}
+  		<meta property="twitter:image" content="https:{{ "latitude-overview-hero-2-1-mobile.jpg" | asset_url }}" />
+	{% elsif template == 'page.samsung-overview' %}
+  		<meta property="twitter:image" content="https:{{ "samsung-hero-mobile.jpg" | asset_url }}" />
+	{% elsif template == 'page.about' %}
+  		<meta property="twitter:twitter" content="https:{{ "about-hero-1-mobile.jpg" | asset_url }}" />
+	{% elsif template == 'page.prelude-overview' %}
+  		<meta property="twitter:image" content="https:{{ "prelude-new-hero-3.jpg " | asset_url }}" />
+	{% else %}
+		<meta property="twitter:image" content="https:{{ 'logotype-gray.png' | asset_url }}">
+	{% endif %}
+{% elsif template contains 'article' %}
+    <meta name="twitter:title" content="{{ article.title | strip_html | escape }}">
+    <meta name="twitter:description" content="{{ article.excerpt_or_content | strip_html | truncate: 200, '' | escape }}">
+  {% if article.image %}
+    <meta property="twitter:image" content="https:{{ article | img_url: '1024x1024' }}">
+  {% endif %}
+{% else %}
+{% endif %}
+

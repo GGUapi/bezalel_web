@@ -1,0 +1,375 @@
+{% include 'bold-product' with product, hide_action: 'break', output: 'none' %}
+
+<div class="futura-buy no-swatches buy-page">
+
+    <section class="full-width overview-nav black-bg">
+        <ul>
+           <!-- <li><a href="/pages/futura-overview">Futura Overview</a></li>-->
+            <li><a href="/products/wireless-charger-futura-x">Futura X</a></li>
+        </ul>
+    </section>
+  
+    <section class="full-width fade-in offblack-bg product-wrap">
+
+        <div class="container container-padding">
+
+          	<div class="product">
+
+            {% assign current_variant = bold_selected_or_first_available_variant %}
+            {% assign featured_image = current_variant.featured_image | default: product.featured_image %}  
+
+            <div class="product-image">
+              
+                <div class="product-above-image-content-mobile">
+                  
+                    <div class="product-title">Accessory Stand for Futura X</div>
+              		<h4>Alumimum Desktop Stand for Futura X Wireless Charging Pad (Charging Pad not included)</h4> 
+                  
+                    <div class="prices-wrap">
+                        {% if current_variant.price < current_variant.compare_at_price %}<span class="ComparePrice">{{ current_variant.compare_at_price | money }}</span>&nbsp;&nbsp;{% endif %}
+                        <h3 class="price ProductPrice">
+                            {{ current_variant.price | money }}   
+                        </h3>
+                    </div>
+              		<div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}'>{{ product.metafields.judgeme.badge }}</div>				
+
+              	</div>
+              
+              	<div id="slider" class="regular-slider flexslider">
+                	<ul class="slides">
+                  		{% if product.images.size > 0 %}
+                    	<li class="slide" data-index="0" data-variant-img="{{ featured_image.id }}" data-thumb="{{ featured_image | img_url: 'small' }}">
+                        	<img src="{{ featured_image | img_url: 'grande' }}" alt="{{ featured_image.alt | escape }}">
+                    	</li>
+                    	{% if product.images.size > 1 %}
+                      	{% assign index = 0 %}
+                      		{% for image in product.images %}
+                        		{% unless image contains featured_image %}
+                          		{% assign index = index | plus: 1 %}
+                          			<li class="slide" data-index="{{ index }}" data-variant-img="{{ image.id }}" data-thumb="{{ image | img_url: 'small' }}">
+                              			<img src="{{ image | img_url: 'grande' }}" alt="{{ image.alt | escape }}">
+                          			</li>
+                        		{% endunless %}
+                      		{% endfor %}
+                    	{% endif %}
+                  		{% else %}
+                    	<li class="slide">
+                      		<img src="{{ 'no-image.svg' | asset_url }}" alt="">
+                    	</li>
+                  		{% endif %}
+                	</ul>
+              	</div>
+            </div>
+              
+            <div class="product-content">
+              
+				<div class="product-above-image-content-desktop">
+
+                    <div class="product-title">Accessory Stand for Futura X</div>
+              		<h4>Alumimum Desktop Stand for Futura X Wireless Charging Pad (Charging Pad not included)</h4>                          
+
+                    <div class="prices-wrap">
+                        {% if current_variant.price < current_variant.compare_at_price %}<span class="ComparePrice">{{ current_variant.compare_at_price | money }}</span>&nbsp;&nbsp;{% endif %}
+                        <h3 class="price ProductPrice">
+                            {{ current_variant.price | money }}   
+                        </h3>
+                    </div>
+              	</div>
+                                
+              	<div class='jdgm-widget jdgm-preview-badge desktop' data-id='{{ product.id }}'>{{ product.metafields.judgeme.badge }}</div>				
+              
+                      
+				{% assign preorder = false %}
+				{% if product.available %}
+              		{% for tag in product.tags %}
+              			{% if tag == 'preorder' %}
+              				{% assign preorder = true %}
+              			{% endif %}
+              		{% endfor %}
+              	{% endif %}
+
+                <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+
+                  <div class="buy-row swatches">
+
+                      <select name="id" id="product-select-{{ product.id }}" class="product-single__variants">
+                        
+                        {% for variant in product.variants %}
+						
+                        {% include 'bold-hidden-variants' with variant, bold_loop: 'loop' %}
+
+                        {% if variant.available %}
+
+                            <option {% if variant == current_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+
+                          {% else %}
+                            <option disabled="disabled">
+                              {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                            </option>
+                          {% endif %}
+                        {% endfor %}
+                   
+                        
+                      </select>
+
+                   	</div>
+                                
+                  	<div class="buy-row quantity-row">
+                        <div class="form__column quantity-selector">
+                            <label for="Quantity" class="quantity-selector">{{ 'products.product.quantity' | t }}</label>
+                            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="qty-remove-defaults quantity-selector">
+                        </div>                    
+                  		<button type="submit" name="add" id="AddToCart" class="ajaxify-cart btn btn--fill btn--regular btn--color">
+                    		<span id="AddToCartText">Add to Cart</span>
+                  		</button>
+                  	</div>
+                  
+					<article class="faq-item warranty">
+                        <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        	<div class="faq-question faq-animation">
+                        		<p itemprop="name"><strong>WARRANTY</strong></p><span class="ease-animation-slow"></span>
+                          	</div>
+                        	<div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        		<div itemprop="text">
+                                  	<p>1 Year Warranty</p>
+									<p>All BEZALEL products are covered by a one-year manufacturer's warranty from the date of purchase by the original consumer.</p>
+                                  	<p><strong><a href="/pages/customer-support" target="_blank">More Warranty Information</a></strong></p>
+                        		</div>
+                        	</div>
+                        </div>
+                    </article>
+                  
+                </form>
+
+            	</div>
+              
+          	<div class="product-detail-anchor-nav">
+                <ul>
+                    <li><a href="#section1">Features</a></li>
+                    <li><a href="#section2">Specs</a></li>
+                    <li><a href="#section3">In the Box</a></li>
+                    <li><a href="#section4">Reviews</a></li>
+                </ul>
+            </div>
+          </div>
+		</div>     
+  	</section>
+  
+  	<span class="anchor" id="section1"></span>
+
+	<div id="features-section"> 
+      
+        <section class="full-width white-bg futura-and-phone">
+            <div class="container clearfix">
+                <table>
+                    <tr>
+                        <td class="middle sixty">
+                            <img src="{{ 'futura-black-stand-phone-white-bg.jpg' | asset_url }}" />                  	
+                        </td>
+                        <td class="black-txt middle">	
+                            <h2>Wireless Charge at All&nbsp;Angles</h2>
+                            <p class="last">The optional accessory stand lets your phone lie flat or be propped up while charging. Just place your phone down and watch it automatically power up. Simple and easy. Just the way you like it.</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section> 
+      
+  	</div>
+  
+	<section class="full-width futura-buy-1 hero">
+	</section>
+  
+  	<span class="anchor" id="section2"></span>
+
+	<section class="full-width white-bg" id="specs-section">
+      	<div class="container container-padding clearfix">
+            <h3 class="display-title">Specifications</h3>
+			<div class="grid">
+                <div class="grid__item one-quarter medium--one-third small--one-half">
+                    <img class="module-icon" src="{{ 'weight.png' | asset_url }}" />
+                    <h3>7.5</h3>
+                  	<p>Weight (Ounce)</p>                
+              	</div>
+                <div class="grid__item one-quarter medium--one-third small--one-half">
+                    <img class="module-icon" src="{{ 'dimensions.png' | asset_url }}" />
+                    <h3>3.7 x 3.7 x 3.9</h3>
+                  	<p>Dimensions (Inch)</p>               
+              	</div>
+          </div>
+      </div>
+  	</section>
+  
+  
+    <section class="full-width">
+        <div class="container">
+            <hr class="full-width-rule">
+        </div>
+    </section>
+  
+  	<span class="anchor" id="section3"></span>
+  
+  	<section class="full-width white-bg" id="box-section">
+      	<div class="container">
+            <h3 class="display-title">In the Box</h3>
+      	</div>
+  	</section>
+
+    <section class="full-width offwhite-bg" id="box-section-content">
+      	<div class="container clearfix">
+			<div class="grid">
+                <div class="grid__item one-quarter medium--one-half small--one-half">
+                    <div style="position:relative;float:left;width:100%;">
+                      	<img class="box-item" src="{{ 'futura-stand-in-the-box.png' | asset_url }}" />
+                  		<p>Accessory Stand for Futura X</p>
+                  	</div>
+                </div>
+          	</div>
+      	</div>
+  	</section>
+  
+    <section class="full-width">
+        <div class="container">
+            <hr class="full-width-rule">
+        </div>
+    </section>
+  
+  	<span class="anchor" id="section4"></span>
+  
+	<section class="full-width judgeme-review" id="reviews-section">
+      	<div class="container container-bottom-padding">
+          	<h3 class="display-title">What Customers Say</h3>
+          	<div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title }}' data-id='{{ product.id }}'>{{ product.metafields.judgeme.widget }}</div>
+      	</div>
+  	</section>    
+</div>
+
+{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+<script>
+  
+  	var selectCallback = function(variant, selector) {
+
+  	var $addToCart = $('#AddToCart'),
+      	$productPrice = $('.ProductPrice'),
+      	$comparePrice = $('.ComparePrice'),
+      	$quantityElements = $('.quantity-selector'),
+      	$addToCartText = $('#AddToCartText'),
+      	moneyFormat = "{{ shop.money_format }}";
+
+    	if (variant && variant.available == true) {
+            $addToCart.removeClass('btn--disabled').prop('disabled', false);
+            $quantityElements.removeClass('hidden');
+            $addToCartText.text({{ 'products.product.add_to_cart' | t | json }});
+
+            if (variant.featured_image) {
+                var newImg = $('#slider').find('.slide[data-variant-img="' + variant.featured_image.id + '"]');
+                if (newImg.length > 0) {
+                    if ($('#slider').hasClass('loaded')) {
+                        $('#slider').flexslider(newImg.data('index'));
+                    } else {
+                        $('#slider').data('loaded-index', newImg.data('index'));
+                    }
+                }
+            }
+
+            if ( variant.compare_at_price > variant.price ) {
+                $comparePrice.html(Shopify.formatMoney(variant.compare_at_price, moneyFormat)).show();
+                $productPrice.html(Shopify.formatMoney(variant.price,  moneyFormat)) + Shopify.formatMoney(variant.compare_at_price, moneyFormat);
+            } else {
+                $comparePrice.hide();
+                $productPrice.html(Shopify.formatMoney(variant.price, moneyFormat));
+            }
+          
+            var form = jQuery('#' + selector.domIdPrefix).closest('form');
+            for (var i=0,length=variant.options.length; i<length; i++) {
+                var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+                if (radioButton.size()) {
+                radioButton.get(0).checked = true;
+                }
+            }
+
+        } else {
+
+      	$addToCart.addClass('btn--disabled').prop('disabled', true);
+      	$addToCartText.text("{{ 'products.product.unavailable' | t }}");
+      	$quantityElements.addClass('hidden');
+    }
+    
+    $(".swatch-element input:radio").on('click', function(){
+        if ($(this).attr('checked', 'checked')){
+           	$(this).parent().addClass('active-swatch-single-variant');
+          	$(this).parent().siblings().removeClass('active-swatch-single-variant');
+        } else {
+           $(this).parent().removeClass('active-swatch-single-variant');
+       }
+    });      
+  };
+  
+    jQuery(function(){$(document).on("click",".faq-item .faq-question",function(){$(this).parent().find(".content").is(":visible")||($(".faq-item .content").slideUp(),$(".faq-item .faq-question").removeClass("active")),$(this).toggleClass("active").parent().find(".content").slideToggle()})});
+
+    jQuery(function($) {
+          new Shopify.OptionSelectors('product-select-{{ product.id }}', {
+          product: bold_product_json[{{ product.id }}],
+          onVariantSelected: selectCallback,
+          enableHistoryState: false
+      });
+
+      {% if product.options.size == 1 %}
+        {% if product.options.first != "Title" %}
+          $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">{{ product.options.first | escape }}</label>');
+        {% else %}
+          $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">&nbsp;</label>');
+        {% endif %}
+      {% endif %}
+
+      {% if bold_variants_size == 1 and product.variants.first.title contains 'Default' %}
+        $('.selector-wrapper').hide();
+      {% endif %}
+    });
+</script>
+
+{{ 'flexslider.js' | asset_url | script_tag }}
+
+<script>
+jQuery(document).ready(function() {
+  
+    if ($('.regular-slider').length > 0) {
+      
+      $('.regular-slider.flexslider').imagesLoaded(function() {
+        var sliderArgs = {
+            animation: 'slide',
+            animationSpeed: 300,    
+            slideshow: false,
+            slideshowSpeed: 5000,
+            directionNav: true,
+            keyboard: true,
+            prevText: '',
+            nextText: '',
+            smoothHeight: true,
+            controlNav: 'thumbnails',
+          	controlsContainer: $('.custom-controls-container'),
+    		customDirectionNav: $('.custom-navigation a'),
+          	start: function(slider) {
+                if ($(slider).find('.slide').not('.clone').length === 1) {
+                  $(slider).find('.flex-direction-nav').remove();
+                }
+                $(window).trigger('resize');
+                slider.addClass('loaded');
+                if ($('#slider').data('loaded-index') != undefined) {
+                  $('#slider').flexslider($('#slider').data('loaded-index'));
+                }
+
+                $('.flex-control-thumbs').addClass('show');
+          	}
+        };
+
+        if ($('.regular-slider.flexslider').find('li').length === 1) {
+          sliderArgs.touch = false;
+        }
+
+        $('.regular-slider.flexslider').flexslider(sliderArgs);
+      });
+    }
+ });
+</script>

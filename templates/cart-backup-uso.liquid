@@ -1,0 +1,345 @@
+<section class="full-width page-header">
+  	<div class="container container-top-padding">
+  		<h1 class="display-title">{{ 'cart.general.title' | t }}</h1>
+    </div>
+</section>
+
+{% assign discount_products_added = false %}
+
+{% for item in cart.items %}
+    {% if item.product.tags contains 'DISCOUNT_HIDDEN_PRODUCT' %}
+        {% assign discount_products_added = true %}
+    {% endif %}
+{% endfor %}
+
+{% assign total_compare = 0 %}
+
+{% for item in cart.items %}
+	{% if item.variant.compare_at_price > item.variant.price %}
+		{% assign total_compare = item.variant.compare_at_price | times: item.quantity %}
+	{% endif %}
+{% endfor %}
+<section class="full-width">
+  
+	<div class="container container-bottom-padding clearfix max-width-1100">
+  
+  	{% if cart.item_count > 0%}
+  	
+  		{% if discount_products_added %}
+    
+  			<form id="cart-form" action="/cart" method="post" novalidate class="cart table-wrap">
+            	
+              	{% for item in cart.items %}
+
+            	{% include 'bold-cart-item' with item %}
+
+            	<div class="cart-row cart-item" data-id="{{ item.id }}">
+
+                	<div class="cart-img-wrap">
+                      	<a href="{{ item.url | within: collections.all }}"><img src="{{ item | img_url: 'grande' }}" alt="{{ item.title | escape }}"></a>
+					</div>
+                
+                	<div class="content">
+
+                    	<h3 class="cart-item__title">
+                          	<a href="{{ item.url }}">{{ item.product.title }}
+                          		<span class="saso-cart-item-discount-notes" data-key="{{item.key}}"></span>
+                          		<span class="saso-cart-item-upsell-notes" data-key="{{item.key}}"></span>
+                           	</a>
+                      	</h3>
+
+                        {% unless item.variant.title contains 'Default' %}
+                          <small class="cart-item__variant-title">{{ item.variant.title }}</small>
+                        {% endunless %}
+			
+                      	{% assign seven = false %}
+
+						{% if item.variant.title contains "7" %}
+                      		{% assign seven = true %}
+                      	{% endif %}  	
+                      
+                      	{% if item.variant.title contains "Plus" and seven == true %}
+                              <p class="note-cart" style="color: red;">*Please note this is for the larger iPhone 7 Plus, not for the smaller iPhone 7.</p>
+                        {% endif %}  
+                      
+                        {% if item.variant.title contains "Plus" and seven == false %}
+                              <p class="note-cart" style="color: red;">*Please note this is for the larger iPhone 6 Plus/6S Plus, not for the smaller iPhone&nbsp;6 or&nbsp;6S.</p>
+                        {% endif %}
+                      
+                        {% assign property_size = item.properties | size %}
+                        {% if property_size > 0 %}
+                          {% for p in item.properties %}
+                            {% assign first_character_in_key = p.first | truncate: 1, '' %}
+                            {% unless p.last == blank or first_character_in_key == '_' %}
+                              <div class="cart-item__property">
+                                {{ p.first }}:
+                                {% if p.last contains '/uploads/' %}
+                                  <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                                {% else %}
+                                  {{ p.last }}
+                                {% endif %}
+                              </div>
+                            {% endunless %}
+                          {% endfor %}
+                        {% endif %}                                  	                  
+                      
+                        {% if item.variant.title contains "Plus" and seven == false %}
+								<p class="note-cart">*Note regarding for use in vehicles: While the Latitude works seamlessly with vehicles equipped with the Qi wireless charging transmitter, the charging pad in SOME vehicles may be too small to accommodate your iPhone 6 Plus/6s Plus (or any similarly iPhone Plus handset). This issue does not affect users with the smaller iPhone 6/6s devices.</p>
+                              <p class="note-cart"><a href="https://bezalel.co/blogs/bezalel-blog/cars-with-wireless-charging-that-work-with-the-latitude-case" target="_blank">Click here to see if your vehicle model works</a></p>              
+                        {% endif %}
+                	
+                        {% if item.variant.title contains "Plus" and seven == true %}
+                              <p class="note-cart">*Note regarding for use in vehicles: While the Latitude works seamlessly with vehicles equipped with the Qi wireless charging transmitter, the charging pad in SOME vehicles may be too small to accommodate your iPhone 7 Plus (or any similarly iPhone Plus handset). This issue does not affect users with the smaller iPhone 7 devices.</p>
+                              <p class="note-cart"><a href="https://bezalel.co/blogs/bezalel-blog/cars-with-wireless-charging-that-work-with-the-latitude-case" target="_blank">Click here to see if your vehicle model works</a></p>              
+                        {% endif %}                    
+
+                          <a class="remove" href="/cart/change?line={{ forloop.index }}&quantity=0" data-id="{{ item.id }}">
+                              <span aria-hidden="true">Remove <img src="{{ 'remove.png' | asset_url }}" /></span>
+                              <span class="fallback-text">{{ 'cart.general.remove_item' | t }}</span>
+                          </a>
+
+                      
+					</div>
+
+          			<div class="quantity-price-cart">
+                      
+                      
+                        {% if item.product.type == "DISCOUNT_HIDDEN_PRODUCT" or item.product.tags contains "upsell-product" %}
+                      	{% else %}
+                      	<div class="quantity-wrap">
+								<input class="count" type="number" min=1 name="updates[]" id="updates_{{ item.id }}" onchange="changeqty('{{item.id}}')" value="{{ item.quantity }}" min="0">                        
+                  			</div>    
+
+                      	{% endif %}
+
+                      	<div class="cart-price">
+                          <span class="cart-item__line-price_{{item.id}} price"><span>{{ item.line_price | money }}</span>{% if item.original_line_price != item.line_price %}&nbsp;<span class="strikethrough">{{ item.original_line_price | money }}</span>{% endif %}</span>
+                            {% for discount in item.discounts %}
+                          		<div class="cart-item__discount">{{ discount.title }}</div>
+                        	{% endfor %}
+                            {% for discount_application in cart.cart_level_discount_applications %}
+                          		<div class="cart-item__discount">{{ discount_application.title }}</div>
+                            {% endfor %}
+                      	</div>
+                      
+            	</div>
+                
+			</div>
+
+            {% endfor %}
+
+			<div class="cart_bottom">
+              
+                <h3 class="cart__subtotal-title">{{ 'cart.general.subtotal' | t }}</h3>
+
+                <span class="cart__subtotal-shipping">{{ 'cart.general.shipping_at_checkout' | t }}</span>
+
+                <h3 class="cart__subtotal">
+                	<span class="saso-cart-original-total">{{ cart.total_price | money }}</span>
+                	<span class="saso-cart-total"></span>
+                </h3>
+          	
+          	</div>
+            
+            <input type="submit" name="checkout" class="btn cart-checkout" value="Checkout">
+      		<a class="outline-btn general-cta continue-shopping" href="/collections/all">Continue Shopping</a>  
+                            
+          </form>
+  
+  		{% else %}
+      
+  		<form id="cart-form" action="/cart" method="post" novalidate class="cart table-wrap">
+            
+          	{% for item in cart.items %}
+
+            {% include 'bold-cart-item' with item %}
+
+            <div class="cart-row cart-item" data-id="{{ item.id }}">
+
+              	<div class="cart-img-wrap">
+                  	<a href="{{ item.url | within: collections.all }}">
+                      	<img src="{{ item | img_url: 'large' }}" alt="{{ item.title | escape }}">
+                  	</a>
+              	</div>
+
+              	<div class="content">
+
+                    <h3 class="cart-item__title"><a href="{{ item.url }}">{{ item.product.title }}</a></h3>
+
+                    {% unless item.variant.title contains 'Default' %}
+                      <small class="cart-item__variant-title">{{ item.variant.title }}</small>
+                    {% endunless %}
+
+                    {% assign seven = false %}
+
+                    {% if item.variant.title contains "7" %}
+                        {% assign seven = true %}
+                    {% endif %}
+
+                    {% if item.variant.title contains "Plus" and seven == true %}
+                          <p class="note-cart" style="color: red;">*Please note this is for the larger iPhone 7 Plus, not for the smaller iPhone&nbsp;7.</p>
+                    {% endif %} 
+                  
+                    {% if item.variant.title contains "Plus" and seven == false %}
+                          <p class="note-cart" style="color: red;">*Please note this is for the larger iPhone 6 Plus/6S Plus, not for the smaller iPhone&nbsp;6 or&nbsp;6S.</p>
+					{% endif %}
+                  
+                    {% assign property_size = item.properties | size %}
+                    {% if property_size > 0 %}
+                      {% for p in item.properties %}
+                        {% assign first_character_in_key = p.first | truncate: 1, '' %}
+                        {% unless p.last == blank or first_character_in_key == '_' %}
+                          <div class="cart-item__property">
+                            {{ p.first }}:
+                            {% if p.last contains '/uploads/' %}
+                              <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                            {% else %}
+                              {{ p.last }}
+                            {% endif %}
+                          </div>
+                        {% endunless %}
+                      {% endfor %}
+                    {% endif %}
+                  
+                    <a class="remove" href="/cart/change?line={{ forloop.index }}&quantity=0" data-id="{{ item.id }}">
+                    	<span aria-hidden="true">Remove <img src="{{ 'remove.png' | asset_url }}" /></span>
+                        <span class="fallback-text">{{ 'cart.general.remove_item' | t }}</span>
+                    </a>
+
+                </div>
+				       	
+          			<div class="quantity-price-cart">
+                      
+                        {% if item.product.type == "DISCOUNT_HIDDEN_PRODUCT" or item.product.tags contains "upsell-product" %}
+                      	{% else %}
+                      	<div class="quantity-wrap">
+								<input class="count" type="number" min=1 name="updates[]" id="updates_{{ item.id }}" onchange="changeqty('{{item.id}}')" value="{{ item.quantity }}" min="0">                        
+                  			</div>    
+
+                      	{% endif %}
+                                           	
+                      	<div class="cart-price">
+                          <span class="cart-item__line-price_{{item.id}} price"><span>{{ item.line_price | money }}</span>{% if item.original_line_price != item.line_price %}&nbsp;<span class="strikethrough">{{ item.original_line_price | money }}</span>{% endif %}</span>
+                          	{% for discount in item.discounts %}
+                          		<div class="cart-item__discount">{{ discount.title }}</div>
+                        	{% endfor %}
+                            {% for discount_application in cart.cart_level_discount_applications %}
+                          		<div class="cart-item__discount">{{ discount_application.title }}</div>
+                            {% endfor %}
+                      	</div>
+                      
+            		</div>
+         
+          	</div>
+
+          	{% endfor %}
+
+			<div class="cart_bottom">
+              
+                <h3 class="cart__subtotal-title">{{ 'cart.general.subtotal' | t }}</h3>
+
+                <span class="cart__subtotal-shipping">{{ 'cart.general.shipping_at_checkout' | t }}</span>
+
+                <h3 class="cart__subtotal">
+                	<span class="saso-cart-original-total">{{ cart.total_price | money }}</span>
+                	<span class="saso-cart-total"></span>
+                </h3>
+          	
+          	</div>
+          
+            <input type="submit" name="checkout" class="btn cart-checkout" value="Checkout">
+      		<a class="outline-btn general-cta continue-shopping" href="/collections/all">Continue Shopping</a>                
+             
+		</form>
+  
+	{% endif %}
+  
+  	{% else %}
+
+    <div class="text-center empty-cart">
+      	<p>{{ 'cart.general.empty' | t }}</p>
+      	<a href="/collections/all" class="btn outline-btn centered-button">
+        	{{ 'cart.general.continue_browsing' | t }}
+      	</a>
+    </div>
+
+  	{% endif %}
+
+	</div>
+</section>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+  
+    jQuery(document).ready(function() {
+      	
+        $('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter('.quantity-wrap input');
+        
+      	$('.quantity-wrap').each(function() {
+          	var spinner = jQuery(this),
+            input = spinner.find('input[type="number"]'),
+            btnUp = spinner.find('.quantity-up'),
+            btnDown = spinner.find('.quantity-down'),
+            min = input.attr('min'),
+            max = input.attr('max');
+
+          btnUp.click(function() {
+            var oldValue = parseFloat(input.val());
+            if (oldValue >= max) {
+              var newVal = oldValue;
+            } else {
+              var newVal = oldValue + 1;
+            }
+            spinner.find("input").val(newVal);
+            spinner.find("input").trigger("change");
+            
+          });
+
+          btnDown.click(function() {
+            var oldValue = parseFloat(input.val());
+            if (oldValue <= min) {
+              var newVal = oldValue;
+            } else {
+              var newVal = oldValue - 1;
+            }
+            spinner.find("input").val(newVal);
+            spinner.find("input").trigger("change");
+          });
+
+        });
+    });
+      
+	function changeqty(id) {
+        $.ajax({
+            type: "POST",
+            url: "/cart/change.js",
+            data: {
+                id: id,
+                quantity: parseInt($("#updates_" + id).val(), 10) || 0
+            },
+            dataType: "json",
+            success: function(data) {
+                console.log(data);
+                var items = data.items;
+                for (i = 0; i < items.length; i++) {
+                    var key = items[i].id;
+                	var originalLine = ('$' + (items[i].original_line_price /  100.0).toFixed(2));
+                    var discountedLine = ('$' + (items[i].line_price /  100.0).toFixed(2));                  
+                    	if (items[i].original_line_price != items[i].line_price ) {
+							$(".cart-item__line-price_" + key).html('<span>' + discountedLine + '</span>&nbsp;<span class="strikethrough">' + originalLine + '</span>');
+                		} else {
+							$(".cart-item__line-price_" + key).html('<span>' + discountedLine + '</span>');
+                		}
+                }
+
+                $(".cart-count").html(data.item_count);
+
+                var discountedTotal = ('$' + (data.total_price / 100.0).toFixed(2));
+             
+                $(".cart__subtotal").html( '<span class="saso-cart-discounted-total">' + discountedTotal + '</span>');
+            }
+		});
+    };
+
+</script>
+  

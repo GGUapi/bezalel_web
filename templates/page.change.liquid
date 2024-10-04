@@ -1,0 +1,118 @@
+<section class="full-width page-header clearfix">
+  	<div class="container container-padding">
+      	<h1 class="display-title">{{ page.title }}</h1>
+  	</div>
+</section>
+
+<section class="full-width rte clearfix"> 
+    <div class="container container-bottom-padding clearfix max-width-900">
+    	{{ page.content }}
+  	</div>
+</section>
+
+<style>
+  .main-content {
+    padding-top: 120px;
+    background-color: #EAEAEA;
+  }
+
+  h1.display-title {
+    font-size: 30px;
+    color: #707070;
+  }
+
+  .title{
+    margin-left:59px;
+  }
+
+  .M_conedit_part{
+    background-color:#CFD1D6;
+  }
+
+  .container{
+    max-width: 1920px;
+    padding-inline: 0px;
+  }
+
+  .M_content_edit .M_conedit_part, .faqs{
+    width: 100%;
+    padding-inline: 350px;
+    padding-top: 20px;
+  }
+
+  .button_connection {
+    display: inline-block;
+    width: 140px;
+    background-color: #727272;
+    color: white;
+    text-decoration: none;
+    border-radius:100px;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s;
+    padding: 10px;
+    text-align: center;
+    font-size:16px;
+  }
+
+  p,li{
+    font-size:16px;
+  }
+
+  .space-m-t-60 {
+    margin-top: 25px;
+  }
+
+  .space-m-b-30 {
+    margin-bottom: 0px;
+  }
+  @media(max-width:1024px){
+  .M_content_edit .M_conedit_part, .faqs{
+    width: 100%;
+    padding-inline: 60px;
+    padding-top: 20px;
+  }
+
+  .title{
+    margin-left:0px;
+  }
+
+  .space-m-t-60 {
+    margin-top: 10px;
+  }
+
+  }
+
+  @media(max-width:525px){
+  .button_connection {
+    display: inline-block;
+    width: 140px;
+    background-color: #727272;
+    color: white;
+    text-decoration: none;
+    border-radius:100px;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s;
+    padding: 10px;
+    text-align: center;
+    font-size:16px;
+    margin-bottom:20px;
+  }
+    
+  .M_content_edit .M_conedit_part, .faqs{
+    width: 100%;
+    padding-inline: 20px;
+    padding-top: 20px;
+  }
+
+  .title{
+    margin-left:0px;
+  }
+
+  .space-m-t-60 {
+    margin-top: 0px;
+  }
+  }
+
+</style>

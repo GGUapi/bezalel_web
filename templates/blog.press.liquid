@@ -1,0 +1,41 @@
+<div class="press">
+  
+	<section class="full-width">
+		<div class="container container-padding">          
+      		<h1 class="display-title">Press</h1>         
+      		<p class="media-contact"><span>MEDIA CONTACT</span><br>Erik&nbsp;Deutsch &nbsp;|&nbsp; (323)&nbsp;851&#8209;2455 &nbsp;|&nbsp; erikd@bezalel.co</p> 
+         </div>
+  	</section>
+  	
+
+	<section class="full-width">      
+		<div class="container container-bottom-padding">
+            <div class="grid--full max-width-900">
+
+                {% for article in blog.articles %}
+				{% if article.tags contains "news"  %}
+                <div class="grid">
+                  	
+                  	<div class="grid__item one-third small--one-whole">
+                      	{% if article.image.src  %}
+                      		<img src="{{ article.image.src | img_url: 'medium' }}">
+    					{% else %}
+                      		<img class="default-blog-img" src="{{ 'Mark_2x.png' | asset_url }}">
+    					{% endif %}
+                	</div>
+
+                    <div class="grid__item two-thirds small--one-whole">
+                        <p class="small">{{ article.created_at | date: "%B %-d, %Y" }}</p>
+                     	<h3>{{ article.excerpt }}</h3>
+                    </div>                   
+
+              	</div>
+                                	
+              	{% endif %}
+        		{% endfor %}
+              
+            </div>    
+        </div>
+          
+  	</section>
+</div>

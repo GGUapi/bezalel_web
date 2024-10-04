@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  	<script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1">  
+	{% if page_description %}
+  	<meta name="description" content="{{ page_description | escape }}">
+	{% endif %}
+	<meta name="theme-color" content="{{ settings.color_primary }}">  
+  	<title>
+  		{% if template == 'password' %}{{ shop.name }}{% else %}{{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}{% endif %}
+	</title>
+            
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ 'apple-icon-57x57.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ 'apple-icon-60x60.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ 'apple-icon-72x72.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ 'apple-icon-75x75.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ 'apple-icon-114x114.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ 'apple-icon-120x120.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ 'apple-icon-144x144.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ 'apple-icon-152x152.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ 'apple-icon-180x180.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ 'android-icon-192x192.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon-32x32.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ 'favicon-96x96.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ 'favicon-16x16.png' | asset_url }}">
+    <link rel="manifest" href="{{ 'manifest.json' | asset_url }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ 'ms-icon-144x144.png' | asset_url }}">
+    <meta name="theme-color" content="#ffffff"> 
+  	{{ content_for_header }}
+    {% include 'social-meta-tags' %}
+  
+    {{ 'styles.scss.css' | asset_url | stylesheet_tag }}
+    {{ '//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css' | stylesheet_tag }}
+  
+  	{% include 'bold-common' %}
+
+    {{ '//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js' | script_tag }}
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>-->
+  
+    {% unless template contains 'cart' %}
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous" async></script> 
+  	{% endunless %}
+  
+  	{% if template contains 'product' %}
+        <script>
+            jQuery(document).ready(function() {
+                $(".product-content").delay(1000).fadeIn(2000);       
+            });
+        </script>
+  	{% endif %}
+  
+    {% include 'ninjacoderz_sitemap_noindex' %}
+  
+    {% if template contains 'customers' %}
+      {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {% endif %} 
+
+    {% if template == 'page.contact' %}
+        {{ '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js' | script_tag }}
+        <script>
+            jQuery(document).ready(function() {
+              $("#datepicker").datepicker({
+                orientation: "bottom"
+              });
+            }); 
+        </script>
+    {% endif %} 
+  
+    {% if template contains 'overview' or template contains 'video' or template contains 'index' %}
+   		{{ 'jquery.magnific-popup.min.js' | asset_url | script_tag }}
+        {{ 'magnific-popup.css' | asset_url | stylesheet_tag }}
+        <script>
+          jQuery(document).ready(function(){
+              $('.video-popup').magnificPopup({type:'iframe'});
+          });
+        </script>
+
+    {% endif %} 
+  
+  	{% if template contains 'index' %}  
+   		{{ 'jquery.cycle2.min.js' | asset_url | script_tag }}
+  		{{ 'jquery.cycle2.carousel.min.js' | asset_url | script_tag }}
+  
+  	{% endif %}
+  
+    {% if product.metafields.inventory.ShappifyHidden == "true" %} <meta name="robots" content="noindex"> {% endif %}
+  
+	<!-- Hotjar Tracking Code for http://bezalel.co --> 
+  	<script>
+      (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:995042,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  	</script>
+  
+  	<!-- Start Visual Website Optimizer Asynchronous Code -->
+    <script type='text/javascript'>
+    var _vwo_code=(function(){
+    var account_id=272745,
+    settings_tolerance=2000,
+    library_tolerance=2500,
+    use_existing_jquery=false,
+    /* DO NOT EDIT BELOW THIS LINE */
+    f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+    </script>
+    <!--End Visual Website Optimizer Asynchronous Code -->
+	{% include 'judgeme_core' %}  
+  
+<!-- Chatra {literal} -->
+<script>
+    (function(d, w, c) {
+        w.ChatraID = 'Kj7DBxqt4mGxmghc3';
+        var s = d.createElement('script');
+        w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+        };
+        s.async = true;
+        s.src = 'https://call.chatra.io/chatra.js';
+        if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+</script>
+<!-- /Chatra {/literal} -->
+</head>
+  
+<body id="{{ page_title | handle }}" class="{% if template contains 'wall-charger' or template contains 'altair' or template contains 'kit' or template contains 'glossy' or template contains 'prelude' %}no-top-links {% endif %}{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+
+{% unless template == 'cart' %}   
+	<!--<div id="myModal" class="modal fade">
+      <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="close-icon" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <div class="modal-body">
+          	<a href="/collections/all"><img src="{{ "PrimeSale.jpg" | asset_url }}" /></a>
+          </div>
+      	</div> 
+    	</div>
+	</div>-->
+{% endunless %} 
+  
+  <div id="PageContainer">
+
+    <header class="site-header" role="banner">
+          
+            <div class="sub-menu-mobile animate">          
+               	<ul>
+                 	<li><h3><a href="/collections/all">Products</a></h3></li>
+                 	<li><h3><a href="/pages/customer-support">Help</a></h3></li>
+                 	<li><h3><a href="/pages/about">About</a></h3></li>
+                  	<li><h3 class="referral">Referral<span class="coming-soon">Coming Soon</span></h3></li>
+                 	<li>      
+                   		{% if shop.customer_accounts_enabled %}
+                        	{% if customer  %}
+                        	<h3><a href="/account"><span>Hello, {{ customer.first_name }}</span></a></h3>
+                        	{% else %}
+                        	<h3><a href="/account/login"><span>Sign In</span></a></h3>
+                        	{% endif %}
+                    	{% endif %} 
+                 	</li>
+               	</ul>
+            </div>
+
+            <nav class="mobile-nav" role="navigation">
+              	<div class="promotional-banner-mobile">FREE U.S. STANDARD SHIPPING</div>
+
+                <div class="logo-mobile">
+                    <a href="/"><span class="logo-nav-mobile"></span></a>
+                </div>
+
+                <div id="search-button-mobile">
+                	<img class="search-icon" src="{{ 'search-icon.png' | asset_url }}" />
+                </div>
+                <div id="search-mobile">
+                 
+                  	<form action="/search" method="get" id="search-bar-mobile" role="search">
+  						<input type="hidden" name="type" value="product">
+                    	<input type="search" name="q" onfocus="this.value=''" value="{{ search.terms | escape }}" class="search-input" placeholder="Search">
+                    	<input type="submit" class="search-submit" value="&#xf054;">
+                  	</form> 
+                </div>
+
+                <a class="cart-nav cart-nav-mobile" href="/cart">
+                	<img class="cart-icon" src="{{ 'cart-icon.png' | asset_url }}" />
+                    <span class="cart-count">{% unless cart.item_count > 99 or cart.item_count == 0 %}{{ cart.item_count }}{% endunless %}</span>
+                </a>
+
+                <button id="mobile-toggle"><img src="{{ 'Burger_menu_2x.png' | asset_url }}" /></button>          
+            </nav>
+
+          	<div class="promotional-banner">FREE U.S. STANDARD SHIPPING</div>
+
+			<nav class="closed-nav">
+
+                    <div id="logo-header">
+                        <a class="logo-nav" href="/">
+                            <img class="logotype" src="{{ 'logotype-gray.png' | asset_url }}" />
+                        </a>
+                    </div>
+                  
+					<div class="nav-items">
+                      
+                        <div class="nav-item" id="search">
+                            <form action="/search" method="get" id="search-bar" role="search">
+                                <input type="hidden" name="type" value="product">
+                              	<input type="search" name="q" onfocus="this.value=''" value="{{ search.terms | escape }}" class="search-input" placeholder="Search">
+                                <input type="submit" class="search-submit" value="&#xf054;">
+                            </form>                  
+                        </div>
+                        <div class="nav-item" id="search-button">
+                            <img class="search-icon" src="{{ 'search-icon.png' | asset_url }}" />
+                        </div>
+
+                        <div class="nav-item" id="products-open">
+                            <h3><a href="/collections/all">Products</a></h3>
+
+                        </div>
+
+                        <div class="nav-item" class="help">
+                            <h3><a href="/pages/customer-support">Help</a></h3>
+                        </div>
+
+                        <div class="nav-item" class="about">
+                            <h3><a href="/pages/about">About</a></h3>
+                        </div>
+
+                        <div class="nav-item" class="rewards">
+                            <h3><h3 class="referral">Referral<span class="coming-soon">Coming Soon</span></h3></h3>
+                        </div>
+
+                        <div class="nav-item" id="sign-in">
+                            {% if shop.customer_accounts_enabled %}
+                                {% if customer  %}
+                                <h3><a href="/account"><span>Hello, {{ customer.first_name }}</span></a></h3>
+                                {% else %}
+                                <h3><a href="/account/login"><span>Sign In</span></a></h3>
+                                {% endif %}
+                            {% endif %}                      
+                        </div> 
+
+                        <div class="nav-item" id="cart">
+                            <h3 aria-hidden="true">
+                              <a class="cart-nav" href="/cart">
+                            		<img class="cart-icon" src="{{ 'cart-icon.png' | asset_url }}" />
+                                	<span class="cart-count">{% unless cart.item_count > 99 or cart.item_count == 0 %}{{ cart.item_count }}{% endunless %}</span>
+                              </a>
+                            </h3>
+                        </div>
+                      
+                  	</div>
+                  
+            </nav>
+        		
+    </header>
+
+    <main class="main-content {% if template == 'index' %}home{% endif %}" role="main">
+
+      {{ content_for_layout }}
+
+    </main>   
+
+    <footer class="site-footer clearfix" role="contentinfo">
+        
+        	<div class="grid--full">
+              	<img class="bezalel-mark" src="{{ 'Mark-2x.png' | asset_url }}" />
+        	</div>
+        
+            <aside class="footer-section">         
+                <h3>Products</h3>
+                <ul>
+                  <li>
+                    <a href="/collections/bundles">Bundles</a>
+                  </li>
+                  <li>
+                    <a href="/collections/cases">Cases</a>
+                  </li>                          
+                  <li>
+                    <a href="/collections/chargers">Chargers</a>
+                  </li>
+                  <li>
+                    <a href="/collections/accessories">Accessories</a>
+                  </li>
+              </ul>
+            </aside>
+
+         <aside class="footer-section">         
+            <h3>About Us</h3>
+            <ul>
+              <li>
+                <a href="/pages/about">Our Story</a>
+              </li>
+              <li>
+                <a href="/blogs/bezalel-blog">Blog</a>
+              </li>
+              <li>
+                <a href="/blogs/press">Press</a>
+              </li>
+              <li>
+                <a href="/pages/careers">Careers</a>
+              </li>
+            </ul>
+        </aside>
+        
+        
+        <aside class="footer-section">
+            <h3>Support</h3>
+            <ul>
+              <li>
+                <a href="/pages/customer-support">FAQs</a>
+              </li>
+              <li>
+                <a href="/pages/customer-support">Warranty &amp; Returns</a>
+              </li>
+              <li>
+                <a href="/pages/customer-support">Shipping &amp; Delivery</a>
+              </li>
+              <li>
+                <a href="/pages/product-guide">Product Guide</a>
+              </li>
+              <li>
+                <a href="/pages/business-inquiry">Business Inquiry</a>
+              </li>
+          </ul>
+        </aside>
+        
+        
+        <aside class="social-footer footer-section">
+          
+          	<h3>Say Hello</h3>
+          
+		  	<ul>
+              	<li>
+                	<p>We’re available by phone and by chat Monday&#x2013;Friday, 10 a.m.&#x2013;6 p.m. PT.</p>
+              	</li>
+              	<li>
+					<button onclick="Chatra('openChat', true)">Live Chat</button>              
+				</li>             	
+            	<li>
+            		<a href="mailto:info@bezalel.co">info@bezalel.co</a>              
+              	</li>
+              	<li>
+					<a href="tel:4246254011">424.625.4011</a>              
+              	</li>  
+          </ul>
+
+        </aside>
+        
+        
+      
+		<section class="full-width clearfix copyright">
+                
+                <ul class="inline-list social-icons">
+                  	{% include 'footer_social-icons' %}
+                </ul>
+
+          		<div class="copy">
+            		<p class="text">&copy; 2019&nbsp;BEZALEL&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/pages/terms-of-service">Terms of Service</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/pages/privacy-policy">Privacy Policy</a>
+          		</div>  
+        </section>
+      
+    	</footer>    
+    
+  	</div>
+       
+ 	<script type="text/javascript">
+      if ( window.devicePixelRatio > 1 ) {
+        var retinaImages = document.getElementsByClassName('retina-img');
+        for (var i = 0; i <= retinaImages.length; i++ ) {
+          if ( retinaImages[i] != undefined ) {
+            retinaImages[i].setAttribute('src', retinaImages[i].getAttribute('data-retina-src'));
+          }
+        }
+      }
+    </script>
+
+    <script type="text/javascript">
+
+      {% capture jQuery_plus_icon %} {% include "asset_svg" with "plus" %} {% endcapture %}
+      {% capture jQuery_minus_icon %} {% include "asset_svg" with "minus" %} {% endcapture %}
+      {% capture jQuery_close_icon %} {% include "asset_svg" with "close" %} {% endcapture %}
+      {% capture jQuery_arrow_down_icon %} {% include "asset_svg" with "arrow_down" %} {% endcapture %}
+      {% capture jQuery_arrow_left_icon %} {% include "asset_svg" with "arrow_left" %} {% endcapture %}
+      {% capture jQuery_arrow_right_icon %} {% include "asset_svg" with "arrow_right" %} {% endcapture %}
+
+      jQuery.themeAssets = {
+        plus: '{{ jQuery_plus_icon | lstrip | rstrip }}',
+        minus: '{{ jQuery_minus_icon | lstrip | rstrip }}',
+        close: '{{ jQuery_close_icon | lstrip | rstrip }}',
+        arrow_down: '{{ jQuery_arrow_down_icon | lstrip | rstrip }}',
+        arrow_left: '{{ jQuery_arrow_left_icon | lstrip | rstrip }}',
+        arrow_right: '{{ jQuery_arrow_right_icon | lstrip | rstrip }}'
+      }	
+
+    </script>
+   		
+    {{ 'theme.js' | asset_url | script_tag }}
+    
+    {% if template contains 'product' or template contains "prelude-overview" or template contains "futura-overview" or template contains "latitude-overview" or template contains "collection" %}
+
+    <script>
+    jQuery(function() {
+      jQuery('.swatch :radio').change(function() {
+        var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
+        var optionValue = jQuery(this).val();
+        jQuery(this)
+          .closest('form')
+          .find('.single-option-selector')
+          .eq(optionIndex)
+          .val(optionValue)
+          .trigger('change');
+      });
+    });
+    </script>
+	{% endif %} 
+  
+    {% unless template == 'cart' %}     
+   <!--	<script type="text/javascript">
+
+        jQuery(document).ready(function() {
+            if ($.cookie('prime') == null) {
+                $('#myModal').modal('show');
+                $.cookie('prime', '7');
+            }
+        });
+        </script>-->
+    {% endunless %}
+  
+    {% include 'social-login' %}    
+
+    <!-- google dynamic remarketing tag for theme.liquid -->
+
+    {% if template contains 'product' %}
+        <script type="text/javascript">
+            var json_product = {{ product | json }};
+        </script>
+        <script>
+            var ecomm_prodid=[];
+            for(var i=0;i<json_product.variants.length;i++)
+                ecomm_prodid.push(json_product.variants[i].sku);
+        </script>
+        <script type="text/javascript">
+            var google_tag_params = {
+                ecomm_prodid: ecomm_prodid,
+                ecomm_pagetype: 'product',
+                ecomm_totalvalue: parseFloat('{{ product.price | money_without_currency | remove: ","}}')
+            };
+        </script>
+    {% elsif template contains 'collection' %}
+        <script type="text/javascript">
+            var google_tag_params = {
+                ecomm_prodid: '',
+                ecomm_pagetype: 'category',
+                ecomm_totalvalue: 0
+            };
+        </script>
+    {% elsif template contains 'cart' %}
+        <script type="text/javascript">
+        var id = new Array();
+        {% for item in cart.items %}
+        id.push('{{item.variant.sku}}');
+        {% endfor %}
+
+            var google_tag_params = {
+                ecomm_prodid: id,
+                ecomm_pagetype: 'cart',
+                ecomm_totalvalue: parseFloat('{{ cart.total_price | money_without_currency | remove: ","}}')
+            };
+        </script>
+    {% elsif template contains 'search' %}
+        <script type="text/javascript">
+            var google_tag_params = {
+                ecomm_prodid: '',
+                ecomm_pagetype: 'searchresults',
+                ecomm_totalvalue: 0
+        };
+        </script>
+    {% elsif template contains 'index' %}
+        <script type="text/javascript">
+            var google_tag_params = {
+                ecomm_prodid: '',
+                ecomm_pagetype: 'home',
+                ecomm_totalvalue: 0
+            };
+        </script>
+    {% else %}
+        <script type="text/javascript">
+            var google_tag_params = {
+                ecomm_prodid: '',
+                ecomm_pagetype: 'other',
+                ecomm_totalvalue: 0
+            };
+        </script>
+    {% endif %}
+
+    <!-- Google Code for Remarketing Tag -->
+    <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 969349839;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    <noscript>
+    <div style="display:inline;">
+    <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/969349839/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript> 
+    
+    {% if template contains 'blog' %}
+        <script>
+          jQuery(document).ready(function() {
+            $(function() {
+                $('.grid').each(function() {
+                    $(this).children('.blog-article').matchHeight();
+                });
+            });
+          });
+        </script> 
+    {% endif %}  
+
+    {% if template contains 'product' %}   
+        {% unless template contains 'kit' or template contains 'wall-charger' or template contains 'omnia' or template contains 'X' or template contains '6' or template contains 'samsung' or template contains 'glossy' %}
+
+        <script>
+        jQuery(document).ready(function() {
+
+              var addon = $(".add-ons");
+              var appLoaded = document.getElementById('w3-product-accessories');
+              var observer = new MutationObserver(function(mutations){
+                  mutations.forEach(function(mutation){
+                      console.log(mutation);
+                       $(".accessories-item").each(function(index) {
+                        var self = $(this),
+                          fullhandle = self.find(".accessories-title").attr("href"),
+                          fullhandleminus = fullhandle.slice(0, -2);
+                        if (!self.hasClass("accessoriesdone")) {
+                            self.find(".accessory-price").wrapAll('<div class="accessory-price-wrap"></div>');
+                            self.find("select").wrap('<div class="accessory-select-wrap"></div>');
+                            self.find(".accessories-title-wrap, .accessory-select-wrap, .accessory-price-wrap").wrapAll('<table class="accessory-right-table"></table>');
+                            self.find(".accessories-title").prop("href", fullhandleminus);
+                            self.find(".accessories-img-wrapper img").wrap('<a href="' + fullhandleminus + '"></a>');
+                            self.addClass("accessoriesdone");
+                            console.log(fullhandleminus);
+                        }
+                      });                	
+                  });
+
+              });
+              observer.observe(appLoaded, {attributes: true, attributeFilter: ['style'] });     
+
+            $(function() {
+                $('#specs-section .grid').each(function() {
+                    $(this).children('.grid__item').matchHeight();
+                });
+                $('#compatibility-section .grid').each(function() {
+                    $(this).children('.grid__item').matchHeight();
+                });
+            });
+        });
+        </script> 
+        {% endunless %} 
+    {% endif %}
+
+    {% if template contains 'overview' %}      
+        <script>
+            jQuery(document).ready(function() {
+                $(function() {
+                    $('.variant').each(function() {
+                        $(this).children('.product').matchHeight();
+                        $(this).find('.product-header').matchHeight();
+                    });
+                });
+            });
+        </script>    
+    {% endif %}
+
+	{% include 'sumo' %}
+	
+  	{% include 'jsonld-for-seo' %}
+  
+    <!-- Start Bing UET tag trackign code -->
+  	<script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"15002790"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>  
+    <script>
+     function GetRevenueValue()
+       {
+          return 6;
+        }
+    </script>
+    <script>
+    window.uetq = window.uetq || [];
+    window.uetq.push({ 'gv': GetRevenueValue(), 'gc': 'USD'}); 
+    </script>
+  
+ 	{% include 'smile-initializer' %}
+
+<!-- This line added automatically by JSON-LD for SEO. -->{% include 'jsonld-for-seo' %}
+</body>
+</html>

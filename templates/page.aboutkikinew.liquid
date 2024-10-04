@@ -1,0 +1,181 @@
+{% comment %} 匯入 'bold-product' 模板，並傳入 product 參數，hide_action 設置為 'break'，output 設置為 'none' {% endcomment %}
+{% include 'bold-product' with product, hide_action: 'break', output: 'none' %}
+{% comment %} 匯入 CSS 樣式表 {% endcomment %}
+<!-- <link rel="stylesheet" href="{{ 'about_onile.css.css' | asset_url }}" type="text/css"> -->
+<link rel="stylesheet" href="{{ 'aboutKikiNewCss2.css' | asset_url }}" type="text/css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> <!--達人分享AOS動畫 -->
+
+
+
+
+  <!---第一列--
+  <div class="container" id="sec1">
+        <div class="row fixBB">
+            <div>
+                <img src="{{ 'about02_top.jpg' | asset_url }}" alt="BEZALEL 倍加能 | 無線充電" style=" width: 100%;height: 100%;object-fit: cover;object-position: center;">
+                  <div class="BannerContent">
+                    <p class="Anytimetext">Anytime,Anywhere.</p>
+                  </div>
+            </div>
+        </div>
+  </div>  -->
+
+
+
+
+<!-- 第二列 -->
+ <section class="full-width overview-product-intro textBox">  
+	<div class="container container-padding max-width-600 clearfix">      
+        <h1 class = "big-title"> About us </h1>
+        
+        <!--<h4>Wireless Power.Anytime.Anywhere.</h4> -->
+        
+      	<p class="space-m-b-0">我們是BEZALEL倍加能，致力於打造最高品質的無線充電體驗生態系統。</p>
+        <br>
+        <p class="space-m-b-0">倍加能創立於美國洛杉磯，透過領先業界的創新技術應用，將無線充電產品的自由與便利融入日常生活。</p>
+        
+        <a href="https://bezalel.tw/blogs/newblog" target="_blank" title="BEZALEL瀏覽生活文章" rel="nofollow noopener noreferrer" class="button_connection">我們的部落格</a>
+    </div>  
+</section>
+
+
+
+<!-- 第三列 -->
+<div class="container" id="sec1">
+  <div class="row fixBB">
+    <div class="col-12  col-lg-12" style="position: relative;">
+      <img src="{{ 'newabout_1.jpg' | asset_url }}" alt="BEZALEL 倍加能 | 無線充電" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+      <!--<div class="image-wrapper col-12 col-md-3 col-lg-3 col-sm-0 " style="z-index: 1;">
+        <img src="{{ 'XR-01.png' | asset_url }}" alt="XR" style="width: auto; height: auto; max-width: 100%; max-height: 100%;">
+      </div> 
+      <div class="col-lg-6 col-md-6 col-xs-12 col-12 BlogContent" >
+        <p class="blogtext">倍加能創立於美國洛杉磯，透過領先業界的創新技術應用，將無線充電產品的自由與便利融入日常生活。</p>
+        <a href="https://bezalel.tw/blogs/bezalel-blog" target="_blank" title="BEZALEL瀏覽生活文章" rel="nofollow noopener noreferrer" class="button_connection">瀏覽生活文章</a>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<!-- 第四列 -->
+ <section class="full-width overview-product-intro textBox">  
+	<div class="container container-padding max-width-600 clearfix">      
+      	<p class="space-m-b-0">我們注重設計與美感：<br>優雅的線條、幾乎無感的輕盈重量、精緻的作工，使產品具備獨特的 BEZALEL 風格。</p>
+        <a href="https://bezalel.tw/collections/all" target="_blank" title="BEZALEL瀏覽生活文章" rel="nofollow noopener noreferrer" class="button_connection">我們的產品</a>
+    </div>  
+</section>
+
+<!-- 第五列 -->
+<div class="container" id="sec1">
+  <div class="row fixBB">
+    <div class="col-12  col-lg-12" style="position: relative;">
+      <img src="{{ 'newabout_2.jpg' | asset_url }}" alt="BEZALEL 倍加能 | 無線充電" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+      <!--<div class="image-wrapper col-12 col-md-3 col-lg-3 col-sm-0 " style="z-index: 1;">
+        <img src="{{ 'XR-01.png' | asset_url }}" alt="XR" style="width: auto; height: auto; max-width: 100%; max-height: 100%;">
+      </div> 
+      <div class="col-lg-6 col-md-6 col-xs-12 col-12 BlogContent" >
+        <p class="blogtext">倍加能創立於美國洛杉磯，透過領先業界的創新技術應用，將無線充電產品的自由與便利融入日常生活。</p>
+        <a href="https://bezalel.tw/blogs/bezalel-blog" target="_blank" title="BEZALEL瀏覽生活文章" rel="nofollow noopener noreferrer" class="button_connection">瀏覽生活文章</a>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<!-- 第六列 -->
+ <section class="full-width overview-product-intro textBox">  
+	<div class="container container-padding max-width-600 clearfix">      
+      	<p class="space-m-b-0">倍加能擁有來自不同地區的專業的產品開發與服務團隊，為每一位使用者營造最佳體驗。<br>我們希望藉由無線充電，讓使用者體驗生活的⾃由。<br>我們重視每個人的使用體驗、將流暢行動視為寶物，並關注每個更大突破的機會。</p>
+    </div>  
+</section>
+
+ <!--第四列-圖片+文字 -->
+
+<style>
+
+  .container.clearfix.mailRight{
+    transform:translateY(-30px) !important;
+  }
+  /* Futura S的位置 */
+  .textBoxfour {
+    position: relative;
+    padding:280px;/* 設置內容框的內邊距 */
+    background-color:#EAEAEA;
+  }
+  
+  .textBoxfour img {
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  /* 文字 */
+  .rectangle_Background {
+    background-color: #9EA1A8;
+    padding: 150px 100px; /* 调整右侧 padding 为 0，左侧 padding 为 100px */
+    right: 0;
+    top: 25%;
+    position: absolute;
+    width: 60%;
+    height: 300px;
+    display: flex; /* 使用 flexbox 布局 */
+    justify-content: center; /* 水平居中对齐 */
+    align-items: center; /* 垂直居中对齐 */
+  }
+  
+    
+    /* 居中文字 */
+    .centered-text {
+      text-align: center;
+      font-size:35px;
+    }
+
+      /* 媒體查詢：最大寬度800px時的樣式 */
+      @media (max-width: 800px) {
+        .textBoxfour {
+          padding: 50px; /* 调整段落文字的 padding */
+        }
+        
+        .textBoxfour img {
+          display: none; /* 隐藏图片 */
+        }
+        
+        .rectangle_Background {
+          display: none; /* 隐藏背景长方形 */
+        }
+
+    }
+
+  /* 設置BannerContent的字體粗細 */
+  #BannerContent{
+    font-weight:bolder;
+  }
+
+  .overview-product-intro h4{
+    text-align:center;
+  }
+  
+</style>
+<!--
+ <section class="full-width overview-product-intro textBoxfour"> 
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 image-front">
+        <img src="{{ 'Front.png' | asset_url }}" alt="Futura S" style="width: auto; height: auto; max-width: 100%; max-height: 90%;">
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+        <div class="rectangle_Background">
+          <p class="centered-text">我們注重設計與美感。優雅的線條、幾乎無感的輕盈重量、精緻的作工，使產品具備獨特的 BEZALEL 風格。</p>
+        </div>
+      </div>
+    </div>
+ </section>
+-->
+
+
+
+
+
+
+

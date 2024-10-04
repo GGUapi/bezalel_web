@@ -1,0 +1,299 @@
+<section class="full-width page-header">
+  	<div class="container container-padding">
+  		<h2 class="display-title">{{ 'customer.account.details' | t }}</h2>
+  	</div>
+</section>
+
+<div class="full-width info-page accounts">
+  	<div class="container container-bottom-padding max-width-1100 clearfix">
+      
+		<div class="account-wrap half">
+            <h3>個人資訊</h3>
+            <p>姓名&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ customer.name }}</p>
+            {% if customer.default_address != nil %}
+            <p>
+            <p>地址&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ customer.default_address.address1 }}<br></p>
+
+            <!--{% if customer.default_address.address2 != "" %}
+              {{ customer.default_address.address2 }}<br>
+            {% endif %}
+
+            {% if customer.default_address.city != "" %}
+              {{ customer.default_address.city }},&nbsp;
+            {% endif %} 
+
+            {% if customer.default_address.province_code != "" %}
+              {{ customer.default_address.province_code | upcase }}&nbsp;
+            {% endif %}
+
+            {% if customer.default_address.zip != "" %}
+              {{ customer.default_address.zip | upcase }}<br>
+            {% endif %}
+
+            {% if customer.default_address.country != "" %}
+              {{ customer.default_address.country }}<br>
+            {% endif %}-->
+
+            {% if customer.default_address.phone != "" %}
+              <p>聯絡電話&emsp;&emsp;&emsp;&emsp;&emsp;{{ customer.default_address.phone }}</p>
+            {% endif %}
+            </p>
+
+          	{% endif %}
+            <div class="buttonblock">
+    			<button class="btn" onclick="location.href='/account/addresses'">{{ 'customer.account.view_addresses' | t }}</button>
+                <button class="btn" onclick="location.href='/account/logout'">{{ 'customer.account.logout' | t }}</button>
+            </div>
+		</div>
+      
+		<div class="account-wrap half">
+      
+      		<h3>{{ 'customer.orders.title' | t }}</h3>
+
+
+        	{% if customer.orders.size != 0 %}
+
+          		<div class="orders-wrap">
+            <table>
+              <thead>
+                <tr class = "topic" style="background-color:#CFD1D6;">
+                  <th>{{ 'customer.orders.order_number' | t }}</th>
+                  <th>{{ 'customer.orders.date' | t }}</th>
+                  <th class = "status">{{ 'customer.orders.payment_status' | t }}</th>
+                  <th class = "status">{{ 'customer.orders.fulfillment_status' | t }}</th>
+                  <th class = "status">{{ 'customer.orders.total' | t }}</th>
+                  <th>詳細資訊</th>
+                </tr>
+              </thead>
+              <tbody style="background-color:#DDDEE1;">
+                {% for order in customer.orders %}
+                  <tr>
+                    <td data-label="{{ 'customer.orders.order_number' | t }}">{{ order.name}}</td>
+                    <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: format: 'month_day_year' }}</td>
+                    <td data-label="{{ 'customer.orders.payment_status' | t }}" class = "status">{{ order.financial_status_label }}</td>
+                    <td data-label="{{ 'customer.orders.fulfillment_status' | t }}" class = "status">{{ order.fulfillment_status_label }}</td>
+                    <td data-label="{{ 'customer.orders.total' | t }}" class = "status">{{ order.total_price | money }}</td>
+                    <td data-label="詳細資訊">
+                      <a href="{{ order.customer_url }}">
+                       <img src="{{'search.png'|asset_url}}" />
+                      </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+        	{% else %}
+
+          		<p>{{ 'customer.orders.none' | t }}</p>
+
+        	{% endif %}
+
+			
+		</div>
+      
+	</div>
+</div>
+
+<style>
+.orders-wrap table tr th, .orders-wrap table tr td {
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #EAEAEA;
+    color: #333C3D;
+    min-width:142px;
+    padding:10px;
+    height:44px;
+}
+
+
+.orders-wrap table tr th:last-child, .orders-wrap table tr td:last-child {
+    text-align: center;
+}
+
+.orders-wrap{
+  width:120%;
+}
+
+.main-content {
+    padding-top: 120px;
+    background-color: #EAEAEA;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #727272;
+    color: #FFF;
+    border-radius: 100px !important;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    min-width: 140px;
+    margin-right: 45px;
+    font-size:16px;
+}
+  
+.btn:hover {
+    font-weight: bold;
+}
+  
+.btn:hover, .btn:focus {
+    color: #EAEAEA;
+}
+
+.buttonblock{
+  margin-top: 150px;
+}
+
+p,h2,h3{
+  color:#333C3D;
+}
+
+.full-width img {
+    width: 20%;
+    height: auto;
+}
+
+p,h3{
+  font-size:16px;
+}
+
+h2.display-title{
+  font-size:30px;
+}
+
+.container{
+  max-width:1680px;
+  margin:100px 120px;
+}
+
+@media(max-width:1600px){
+  .container{
+    max-width:1350px;
+    margin:100px 120px;
+  }
+}
+
+@media(max-width:1440px){
+  .accounts .half{
+    width:30%;
+  }
+
+  .container{
+    margin:100px 80px;
+  }
+}
+
+@media(max-width:1360px){
+  .container{
+    max-width:1315px;
+    margin:0 15px;
+  }
+
+  .accounts .half {
+    float: left;
+    width: 35.3%;
+  }
+}
+
+@media(max-width:1024px){
+  .container{
+    max-width:1315px;
+    margin:50px 20px;
+  }
+
+  .accounts .half {
+    float: left;
+    width: 100%;
+    margin-left:0%;
+  }
+
+  .account-wrap h3 {
+    margin-top: 10px;
+    width: 100%;
+    padding-top: 50px;
+  }
+
+  .buttonblock{
+    margin-top: 80px;
+  }
+
+  .orders-wrap table tr th, .orders-wrap table tr td {
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #EAEAEA;
+    color: #333C3D;
+    min-width:116px;
+    padding:10px;
+    height:44px;
+  }
+}
+
+@media(max-width:550px){
+  .account-wrap h3 {
+    margin-top: 0px;
+    width: 100%;
+    padding-top: 0px;
+  }
+
+  .status{
+    display:none;
+  }
+
+  .container{
+    max-width:1315px;
+    margin:30px 0px;
+    padding-inline:20px;
+  }
+
+  .orders-wrap table tr th, .orders-wrap table tr td {
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #EAEAEA;
+    color: #333C3D;
+    max-width:105px;
+    padding:10px;
+    height:44px;
+  }
+
+  .orders-wrap {
+    width: 330px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #727272;
+    color: #FFF;
+    border-radius: 100px !important;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    max-width: 140px !important;
+    margin-right: 45px;
+    font-size:16px;
+  }
+
+  .accounts .btn {
+    width: 100%!important;
+    max-width: none;
+    margin: 0 15px 60px 0;
+  }
+
+  .buttonblock {
+    margin-top: 60px;
+  }
+}
+
+@media(max-width:375px){
+  .container-bottom-padding{
+    padding:0 13px 70px !important;
+  }
+}
+
+@media(max-width:360px){
+  .container-bottom-padding{
+    padding:0 5px 70px !important;
+  }
+}
+</style>

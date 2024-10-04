@@ -1,0 +1,45 @@
+  <li><a href="https://page.line.me/667jjfhr" target="_blank" data-analytics-title="line" title="line" rel="noreferrer noopener">
+    <img src="https://cdn.shopify.com/s/files/1/1403/9023/files/Line-W.png?v=1691046329"  style="height:24px!important;width:24px!important;" >
+  </a></li>
+  {% if settings.social_instagram != '' %}
+  <li><a href="{{ settings.social_instagram }}" target="_blank" data-analytics-title="instagram" title="instagram" rel="noreferrer noopener nofollow">
+    <img src="https://www.instagram.com/bezalel.tw/"  style="height:24px!important;width:24px!important;" >
+  </a></li>
+{% endif %}
+{% if settings.social_facebook != '' %}
+  <li><a href="{{ settings.social_facebook }}" target="_blank" data-analytics-title="Facebook" title="Facebook" rel="noreferrer noopener nofollow">
+      	<img src="https://cdn.shopify.com/s/files/1/1403/9023/files/FB-W.png?v=1691046329"  style="height:24px!important;width:24px!important;" >
+        
+  </a></li>
+{% endif %}
+
+
+
+
+  <!-- 下面為原始程式2023/8/5
+{% if settings.social_facebook != '' %}
+  <li><a href="{{ settings.social_facebook }}" target="_blank" data-analytics-title="Facebook" title="Facebook" rel="noreferrer noopener nofollow">
+      	{% include 'asset_svg' with 'facebook' %}
+  </a></li>
+{% endif %}
+{% if settings.social_pinterest != '' %}
+  <li><a href="{{ settings.social_pinterest }}" target="_blank" data-analytics-title="pinterest" title="pinterest" rel="noreferrer noopener nofollow">
+    	{% include 'asset_svg' with 'pinterest' %}
+  </a></li>
+{% endif %}
+{% if settings.social_instagram != '' %}
+  <li><a href="{{ settings.social_instagram }}" target="_blank" data-analytics-title="instagram" title="instagram" rel="noreferrer noopener nofollow">
+    {% include 'asset_svg' with 'instagram' %}
+  </a></li>
+{% endif %}
+{% if settings.social_youtube != '' %}
+  <li><a href="{{ settings.social_youtube }}" target="_blank" data-analytics-title="youtube" title="youtube" rel="noreferrer noopener nofollow">
+    {% include 'asset_svg' with 'youtube' %}
+  </a></li>
+{% endif %}
+{% if settings.social_email != '' %}
+  <li><a href="mailto:{{ settings.social_email }}" target="_blank" data-analytics-title="客服信箱" title="客服信箱" rel="noreferrer noopener">
+    {% include 'asset_svg' with 'email' %}
+  </a></li>
+{% endif %}
+  -->

@@ -1,0 +1,629 @@
+{% include 'bold-product' with product, hide_action: 'break', output: 'none' %}
+
+<div class="futura-buy futura-buy-white buy-page">
+
+    <section class="full-width white-bg product-wrap">
+
+        <div class="container container-padding">
+
+          	<div class="product">
+
+            {% assign current_variant = bold_selected_or_first_available_variant %}
+            {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+
+            <div class="product-image">
+				
+              	<div class="product-above-image-content-mobile">
+                  
+                    <div class="product-title">{{ product.title }}</div>                  
+                    <h4>{{ product.description }}</h4>                           
+                  	<h5>*支援 iPhone 12 mini、 iPhone 12、 iPhone 12 Pro、 iPhone 12 ProMax、 iPhone 13 mini、 iPhone 13、 iPhone 13 Pro、 iPhone 13 ProMax  MagSafe 系列手機及其他支援 Qi 充電標準的裝置，同時享有立架式及多種充電模式，為達最佳充電體驗建議選購BEZALEL相關配件。</h5>
+
+					 <div class="prices-wrap">
+                        {% if current_variant.price < current_variant.compare_at_price %}<span class="ComparePrice">{{ current_variant.compare_at_price | money }}</span>&nbsp;&nbsp;{% endif %}
+                        <h3 class="price ProductPrice">
+                            {{ current_variant.price | money }}   
+                        </h3>
+                        <h4 class="color_discount"></h4>
+                    </div>
+                	<div class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}">{{ product.metafields.judgeme.badge }}</div>				
+
+              	</div>
+              
+              	<div id="slider" class="regular-slider flexslider">
+                	<ul class="slides">
+                  		{% if product.images.size > 0 %}
+                            <li class="slide featured" data-index="0" data-variant-img="{{ featured_image.id }}" data-thumb="{{ featured_image | img_url: 'small' }}">
+                                <img src="{{ featured_image | img_url: 'grande' }}" width="440" height="440" alt="{{ featured_image.alt | escape }}">
+                            </li>
+                    	{% if product.images.size > 1 %}
+                      	{% assign index = 0 %}
+                      		{% for image in product.images %}
+                        		{% unless image contains featured_image %}
+                          		{% assign index = index | plus: 1 %}
+                      				{% if image.alt contains 'youtube' %}
+                          			<li class="slide{% if image.alt contains 'youtube' %} video{% endif %}" data-index="{{ index }}" data-variant-img="{{ image.id }}" data-thumb="{{ image | img_url: 'small' }}">
+                                        <iframe src="{{ image.alt }}" frameborder="0" allowfullscreen></iframe>
+                                    </li>
+                      				{% else %}
+                          			<li class="slide" data-index="{{ index }}" data-variant-img="{{ image.id }}" data-thumb="{{ image | img_url: 'small' }}">
+                              			<img src="{{ image | img_url: 'grande' }}" width="440" height="440" alt="{{ image.alt | escape }}">
+                          			</li>
+                      				{% endif %}
+                        		{% endunless %}
+                      		{% endfor %}
+                    	{% endif %}
+                  		{% else %}
+                    	<li class="slide">
+                      		<img src="{{ 'no-image.svg' | asset_url }}" alt="*">
+                    	</li>
+                  		{% endif %}
+
+                	</ul>
+              	</div>
+            </div>
+              
+            <div class="product-content">
+              
+				<div class="product-above-image-content-desktop">
+                  
+                    <div class="product-title">{{ product.title }}</div>
+                	<h4>{{ product.description }}</h4>                           
+                  	<h5>*支援 iPhone 12 mini、 iPhone 12、 iPhone 12 Pro、 iPhone 12 ProMax、 iPhone 13 mini、 iPhone 13、 iPhone 13 Pro、 iPhone 13 ProMax  MagSafe 系列手機及其他支援 Qi 充電標準的裝置，同時享有立架式及多種充電模式，為達最佳充電體驗建議選購BEZALEL相關配件。</h5>
+
+                    <div class="prices-wrap">
+                        {% if current_variant.price < current_variant.compare_at_price %}<span class="ComparePrice">{{ current_variant.compare_at_price | money }}</span>&nbsp;&nbsp;{% endif %}
+                        <h3 class="price ProductPrice">
+                            {{ current_variant.price | money }}   
+                        </h3>
+                        <h4 class="color_discount">限時優惠</h4>
+                    </div>
+                  
+              	</div>
+				              
+                <div class="jdgm-widget jdgm-preview-badge desktop" data-id="{{ product.id }}">{{ product.metafields.judgeme.badge }}</div>				
+
+				{% assign preorder = false %}
+				{% if product.available %}
+              		{% for tag in product.tags %}
+              			{% if tag == 'preorder' %}
+              				{% assign preorder = true %}
+              			{% endif %}
+              		{% endfor %}
+              	{% endif %}
+
+                <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+
+                  <div class="buy-row swatches">
+
+                      <select name="id" id="product-select-{{ product.id }}" class="product-single__variants">
+                        
+                        {% for variant in product.variants %}
+						
+                        {% include 'bold-hidden-variants' with variant, bold_loop: 'loop' %}
+
+                        {% if variant.available %}
+
+                            <option {% if variant == current_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+
+                          {% else %}
+                            <option disabled="disabled">
+                              {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                            </option>
+                          {% endif %}
+                        {% endfor %}
+                   
+                      </select>
+                          {% for option in product.options %}
+                            {% include 'swatch' with option %}
+                          {% endfor %}
+                   	</div>
+                                
+                  	<div class="buy-row quantity-row">
+                        <div class="form__column quantity-selector">
+                            <label for="Quantity" class="quantity-selector">{{ 'products.product.quantity' | t }}</label>
+                            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="qty-remove-defaults quantity-selector">
+                        </div>   
+                        <button type="submit" name="add" id="AddToCart" class="btn">
+                            <span id="AddToCartText">現貨搶購中</span><!--下方js $addToCartText-->
+                        </button>
+                  	</div> 
+                  
+                    <div class="buy-row add-ons">  
+                      
+                        <h3>加購配件</h3>
+                    
+                      	<div id="w3-product-accessories">
+                        	<div id="w3-money-format" style="display:none;">{{ shop.money_format }}</div>
+                      	</div>                    
+                    
+					</div>
+                  
+					<article class="faq-item warranty">
+                        <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        	<div class="faq-question faq-animation">
+                        		<p itemprop="name"><strong>保證</strong></p>
+                              <span class="ease-animation-slow"></span>
+                          	</div>
+                        	<div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        		<div itemprop="text">
+                                  	<p>1年保固</p>
+									<p>自購買日起，所有倍加能產品享有一年保固。</p>
+                                  	<p><strong><a href="/pages/warranty" target="_blank" title="更多保固訊息">更多保固訊息</a></strong></p>
+                        		</div>
+                        	</div>
+                        </div>
+                    </article>
+                  
+                </form>
+
+            	</div>
+              
+          	<div class="product-detail-anchor-nav">
+                <ul>
+                    <li><a href="#section1" data-analytics-title="特色">特色</a></li>
+                    <li><a href="#section2" data-analytics-title="規格">規格</a></li>
+                    <li><a href="#section3" data-analytics-title="內容物">內容物</a></li>
+                    <li><a href="#section4" data-analytics-title="評論">評論</a></li>
+                    <li><a href="/pages/service" target="_blank" data-analytics-title="FAQ">FAQ</a></li>
+
+                </ul>
+            </div>
+          </div>
+		</div>
+    </section>
+  
+	<span class="anchor" id="section1"></span>
+  
+	<div id="features-section"> 
+      
+        <section class="full-width white-bg futura-and-phone">
+            <div class="container clearfix">
+                <table>
+                    <tr>
+                        <td class="middle sixty">
+                            <source type="image/webp" srcset="{{ 'Pro_Prelude_SE_MagSafe_c01.webp' | asset_url }}" />
+                            <img src="{{ 'Pro_Prelude_SE_MagSafe_c01.jpg' | asset_url }}" width="600" height="600" alt="只要一個Prelude SE就足夠">                 	
+                        </td>
+                        <td class="black-txt middle">	
+                            <h2>只要一個Prelude SE就足夠</h2>
+                            <p class="last">一顆三用支援 MagSafe、Qi 無線充電，也可作為接線式行動電源，想怎麼使用都行。角度可自由調整，橫放豎放都能同時充電、追劇、工作或玩遊戲，使用體驗大升級。</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+ 
+      	<section class="full-width white-bg">
+                             	
+            <div class="container clearfix">
+                <source type="image/webp" srcset="{{ 'Pro_Prelude_SE_MagSafe_c02.webp' | asset_url }}" class="features-mobile" />
+                <img src="{{ 'Pro_Prelude_SE_MagSafe_c02.jpg' | asset_url }}" alt="高效快充且不易發熱" class="features-mobile">
+                <table>
+                    <tr>
+                        <td class="middle black-txt left-text">
+                            <h2>高效快充且不易發熱</h2>
+                            <p class="last">高達20W的有線輸出與15W的無線輸出，為你的3C 配件快速注入電量。採用主流的TYPE-C 接孔，速度功率再提升，實現快充功能的高性能接頭。</p>                        
+                      	</td>
+                        <td class="middle sixty-five" id="qi-certified">	
+                          	<source type="image/webp" srcset="{{ 'Pro_Prelude_SE_MagSafe_c02.webp' | asset_url }}" class="features-desktop" />
+                            <img src="{{ 'Pro_Prelude_SE_MagSafe_c02.jpg' | asset_url }}" width="765" height="765" alt="高效快充且不易發熱" class="features-desktop">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section class="full-width white-bg">
+            <div class="container container-bottom-padding clearfix">
+                <table>
+                    <tr>
+                        <td class="top sixty-five">
+                            <source type="image/webp" srcset="{{ 'Pro_Prelude_SE_MagSafe_c03.webp' | asset_url }}" id="futura-white-angled" />
+                            <img src="{{ 'Pro_Prelude_SE_MagSafe_c03.jpg' | asset_url }}" width="650" height="650" alt="一放即充完美吸附" id="futura-white-angled">                 	
+                        </td>
+                        <td class="middle black-txt">	
+                            <h2>一放即充完美吸附</h2>
+							<p class="last">完美對應iPhone12/13MagSafe 系列，精準吸附，不易掉落，隨時隨地無線充電，大小可一手掌握。</p>                        
+                      	</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+  	    <section class="full-width white-bg prelude-feature-4">
+            <source type="image/webp" srcset="{{ 'Pro_Prelude_SE_MagSafe_c04.webp' | asset_url }}" class="features-mobile features-image-mobile" />
+            <img src="{{ 'Pro_Prelude_SE_MagSafe_c04.jpg' | asset_url }}" alt="時尚及功能性一應俱全" class="features-mobile features-image-mobile">                 	
+            <div class="container container-bottom-padding clearfix feature-right-image">
+                <table>
+                    <tr>
+                        <td class="middle black-txt left-text">
+                            <h2>時尚及功能性一應俱全</h2>
+                            <p>以「時尚、外型輕薄、不受限制」的概念來設計，輕薄小巧，方便攜帶好收納，隨身帶著走。</p>                        
+                            <p class="last">三種充電模式，漂浮、直立、橫放模式自由配。Prelude SE顏色背後也具有深遠意義。黑灰色象徵誠懇、穩重帶有哲學家的沉靜。粉紅色象徵著展現自信、高貴與典雅，永不會褪色的美。</p>
+                      	</td>
+                        <td class="middle sixty">	
+                          	<source type="image/webp" srcset="{{ 'Pro_Prelude_SE_MagSafe_c04.webp' | asset_url }}" class="features-desktop" />
+                            <img src="{{ 'Pro_Prelude_SE_MagSafe_c04.jpg' | asset_url }}" width="650" height="650" alt="時尚及功能性一應俱全" class="features-desktop">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+	</div>
+
+	<section class="full-width preludeSEmagsafe-banner hero">
+	</section>
+
+    <span class="anchor" id="section2"></span>
+
+    <section class="full-width white-bg" id="specs-section">
+      	<div class="container max-width-1100 container-bottom-padding clearfix">
+            <h3 class="display-title space-p-t-30">規格</h3>
+			<div class="grid">
+                <div class="grid__item one-third medium--one-third small--one-half">
+                    <span class="module-icon technology"></span>
+                    <h3>Qi</h3>
+                  	<p>無線充電標準</p>
+              	</div>
+                <div class="grid__item one-third medium--one-third small--one-half">
+                    <span class="module-icon weight"></span>
+                    <h3>175</h3>
+                  	<p>重量（公克）</p>                
+              	</div>
+                <div class="grid__item one-third medium--one-third small--one-half">
+                    <span class="module-icon input"></span>
+                  	<h3> 5V/3A, 9V/2.2A</h3>
+                  	<p>USB-C 輸入 (電壓/電流)</p>   
+              	</div>
+                <div class="grid__item one-third medium--one-third small--one-half">
+                    <span class="module-icon output"></span>
+                    <h3> 5W/7.5W/10W/15W</h3>
+                  	<p>無線輸出 (電壓/電流)</p>               
+        <h3> 5V/3A, 9V/2.2A</h3>
+                  	<p>USB-C 輸出 (電壓/電流)</p>  
+              	</div>
+                <div class="grid__item one-third medium--one-third small--one-half">
+                    <span class="module-icon electricity"></span>
+                    <h3>5000</h3>
+                  	<p>電池容量 (mAh)</p>               
+              	</div>
+                <div class="grid__item one-third medium--one-third small--one-half">
+                    <span class="module-icon dimensions"></span>
+                    <h3> 110 x 67 x 11</h3>
+                  	<p>尺寸（公釐）</p>               
+              	</div>
+          </div>
+      </div>
+  	</section>
+  
+    <section class="full-width">
+        <div class="container">
+            <hr class="full-width-rule">
+        </div>
+    </section>
+
+    <span class="anchor" id="section3"></span>
+
+    <section class="full-width white-bg" id="box-section">
+      	<div class="container clearfix">
+            <h3 class="display-title">內容物</h3>
+      	</div>
+  	</section>
+
+    <section class="full-width offwhite-bg" id="box-section-content">
+      	<div class="container max-width-1100 clearfix">
+			<div class="grid">
+                <div class="grid__item one-third medium--one-half small--one-half">
+                    <div class="M_pro_contentbox">
+                      	<source type="image/webp" srcset="{{ 'Pro_Prelude_SE_MagSafe_box.webp' | asset_url }}" class="box-item" />
+                        <img src="{{ 'Pro_Prelude_SE_MagSafe_box.png' | asset_url }}" width="285" height="285" alt="Prelude SE MagSafe 立架式磁吸無線充電行動電源" class="box-item">
+                  		<p>Prelude SE MagSafe 立架式磁吸無線充電行動電源</p>
+                  	</div>
+                </div>
+              	{% if product.title contains "Stand" %}
+                <div class="grid__item one-third medium--one-half small--one-half">
+                    <div class="M_pro_contentbox">
+                      	<source type="image/webp" srcset="{{ 'Pro_Prelude_SE_MagSafe_box.webp' | asset_url }}" class="box-item" />
+                        <img src="{{ 'Pro_Prelude_SE_MagSafe_box.png' | asset_url }}" width="285" height="285" alt="Accessory Stand for Futura X" class="box-item">
+                  		<p>Accessory Stand for Futura X</p>
+                  	</div>
+                </div>
+              	{% endif %}
+              	<div class="grid__item one-third medium--one-half small--one-half">
+                    <div class="M_pro_contentbox">
+                      	<source type="image/webp" srcset="{{ 'Pro_Prelude_SE_MagSafe_box2.webp' | asset_url }}" class="box-item" />
+                        <img src="{{ 'Pro_Prelude_SE_MagSafe_box2.png' | asset_url }}" width="285" height="285" alt="USB Type-C 充電線" class="box-item">
+                  		<p>USB Type-C 充電線</p>
+                  	</div>
+                </div>
+
+          </div>
+      	</div>
+  	</section>
+
+   	<span class="anchor" id="section4"></span>
+
+    <section class="full-width">
+        <div class="container">
+            <hr class="full-width-rule">
+        </div>
+    </section>
+  
+	<section class="full-width judgeme-review space-p-b-80" id="reviews-section">
+      	<div class="max-width-1100 container">
+          	<h3 class="display-title space-p-t-20">顧客評論</h3>
+          	<div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title }}' data-id='{{ product.id }}'>{{ product.metafields.judgeme.widget }}</div>
+      	</div>
+  	</section>
+</div>
+
+{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+{{ 'flexslider.js' | asset_url | script_tag }}
+<script>   
+  	var selectCallback = function(variant, selector) {
+
+  	var $addToCart = $('#AddToCart'),
+      	$productPrice = $('.ProductPrice'),
+      	$comparePrice = $('.ComparePrice'),
+      	$quantityElements = $('.quantity-selector'),
+      	$addToCartText = $('#AddToCartText'),
+        
+      	moneyFormat = "{{ shop.money_format }}";
+
+    	if (variant && variant.available == true) {
+            $addToCart.removeClass('btn--disabled').prop('disabled', false);
+            $quantityElements.removeClass('hidden');
+            $addToCartText.text({{ 'products.product.add_to_cart' | t | json }});
+
+      	if (variant.featured_image) {
+        	var newImg = $('#slider').find('.slide[data-variant-img="' + variant.featured_image.id + '"]');
+        	if (newImg.length > 0) {
+          		if ($('#slider').hasClass('loaded')) {
+            		$('#slider').flexslider(newImg.data('index'));
+          		} else {
+            		$('#slider').data('loaded-index', newImg.data('index'));
+          		}
+        	}
+      	}
+
+        if ( variant.compare_at_price > variant.price ) {
+            $comparePrice.html(Shopify.formatMoney(variant.compare_at_price, moneyFormat)).show();
+            $productPrice.html(Shopify.formatMoney(variant.price,  moneyFormat)) + Shopify.formatMoney(variant.compare_at_price, moneyFormat);
+        } else {
+            $comparePrice.hide();
+            $productPrice.html(Shopify.formatMoney(variant.price, moneyFormat));
+        }
+          
+        var form = jQuery('#' + selector.domIdPrefix).closest('form');
+      	for (var i=0,length=variant.options.length; i<length; i++) {
+        	var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+        	if (radioButton.size()) {
+          	radioButton.get(0).checked = true;
+        	}
+      	}
+
+    } else {
+
+      	$addToCart.addClass('btn--disabled').prop('disabled', true);
+      	$addToCartText.text("{{ 'products.product.unavailable' | t }}");
+      	$quantityElements.addClass('hidden');
+    }
+      //edit 2022/04/06 addToCartText
+      $addToCartText.text('加入購物車');
+    
+    $(".swatch-element input:radio").on('click', function(){
+        if ($(this).attr('checked', 'checked')){
+           	$(this).parent().addClass('active-swatch-single-variant');
+          	$(this).parent().siblings().removeClass('active-swatch-single-variant');
+        } else {
+           $(this).parent().removeClass('active-swatch-single-variant');
+       }
+    });      
+  };
+
+  jQuery(function($) {
+      	new Shopify.OptionSelectors('product-select-{{ product.id }}', {
+      	product: bold_product_json[{{ product.id }}],
+      	onVariantSelected: selectCallback,
+      	enableHistoryState: false
+    });
+
+    {% if product.options.size == 1 %}
+      {% if product.options.first != "Title" %}
+        $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">{{ product.options.first | escape }}</label>');
+      {% else %}
+        $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">&nbsp;</label>');
+      {% endif %}
+    {% endif %}
+
+    {% if bold_variants_size == 1 and product.variants.first.title contains 'Default' %}
+      $('.selector-wrapper').hide();
+    {% endif %}
+  });
+    
+  jQuery(function(){$(document).on("click",".faq-item .faq-question",function(){$(this).parent().find(".content").is(":visible")||($(".faq-item .content").slideUp(),$(".faq-item .faq-question").removeClass("active")),$(this).toggleClass("active").parent().find(".content").slideToggle()})});
+
+  jQuery(document).ready(function() {
+      $('.swatch-element.black').addClass('active-swatch-single-variant');
+
+      if ($('.regular-slider').length > 0) {
+
+        $('.regular-slider.flexslider').imagesLoaded(function() {
+          var sliderArgs = {
+              animation: 'slide',
+              animationSpeed: 300,    
+              slideshow: false,
+              slideshowSpeed: 5000,
+              directionNav: true,
+              keyboard: true,
+              prevText: '',
+              nextText: '',
+              smoothHeight: true,
+              controlNav: 'thumbnails',
+              controlsContainer: $('.custom-controls-container'),
+              customDirectionNav: $('.custom-navigation a'),
+              start: function(slider) {
+                  if ($(slider).find('.slide').not('.clone').length === 1) {
+                    $(slider).find('.flex-direction-nav').remove();
+                  }
+                  $(window).trigger('resize');
+                  slider.addClass('loaded');
+                  if ($('#slider').data('loaded-index') != undefined) {
+                    $('#slider').flexslider($('#slider').data('loaded-index'));
+                  }
+                  $('.flex-control-thumbs img').each(function() {
+                      if ($(this).prop('alt') != 'Black') {
+//                           $(this).parent('li').addClass('hide');
+                      }                	
+                  })
+                  $('.flex-control-thumbs').addClass('show');
+              }
+          };
+
+          if ($('.regular-slider.flexslider').find('li').length === 1) {
+            sliderArgs.touch = false;
+          }
+
+          $('.regular-slider.flexslider').flexslider(sliderArgs);
+        });
+      }
+   });
+</script>
+
+<style>
+
+{% assign width = '40px' %}
+{% assign height = '40px' %}
+.swatch { 
+  margin:1em 0 0; 
+}
+.swatch .header {
+  margin: 0.5em 0;
+}
+.swatch input { 
+  display:none;
+}
+.swatch label {
+  float:left;
+  min-width:{{ width }} !important; 
+  height:{{ height }} !important;
+  margin:0;
+  font-size:14px;
+  text-align:center;
+  line-height:{{ height }};
+  white-space:nowrap;
+  text-transform:uppercase;
+  color: #343339;
+}
+.swatch-element label { padding:0 10px; }
+.color.swatch-element label { padding:0;  border-radius: 0; }
+.swatch .swatch-element {
+  float:left;
+  -webkit-transform:translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing:antialiased; /* webkit text rendering fix */
+  margin:0px 10px 10px 0;
+  position:relative;
+}
+/* Image with the cross in it */
+.crossed-out { position:absolute; width:100%; height:100%; left:0; top:0; }
+.swatch .swatch-element .crossed-out { display:none; }
+.swatch .swatch-element.soldout .crossed-out { display:block; }
+.swatch .swatch-element.soldout label {
+  filter: alpha(opacity=60); /* internet explorer */
+  -khtml-opacity: 0.6;      /* khtml, old safari */
+  -moz-opacity: 0.6;       /* mozilla, netscape */
+  opacity: 0.6;           /* fx, safari, opera */
+}
+/* Tooltips */
+.swatch .tooltip {
+  text-align:center;
+  background:#343339;
+  color:#fff;
+  bottom:100%;
+  padding: 10px;
+  display:block;
+  position:absolute;
+  width:100px;
+  left:{{ width | remove: 'px' | to_number | divided_by: 2 | minus: 50 | plus: 2 }}px;
+  margin-bottom:15px;
+  /* Make it invisible by default */
+  filter:alpha(opacity=0);
+  -khtml-opacity: 0;
+  -moz-opacity: 0;
+  opacity:0;
+  visibility:hidden;
+  /* Animations */
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  z-index: 10000;
+  -moz-box-sizing:border-box; 
+  -webkit-box-sizing:border-box; 
+  box-sizing:border-box;
+}
+.swatch .tooltip:before {
+  bottom:-20px;
+  content:" ";
+  display:block;
+  height:20px;
+  left:0;
+  position:absolute;
+  width:100%;
+}
+/* CSS triangle */
+.swatch .tooltip:after {
+  border-left:solid transparent 10px;
+  border-right:solid transparent 10px;
+  border-top:solid #343339 10px;
+  bottom:-10px;
+  content:" ";
+  height:0;
+  left:50%;
+  margin-left:-13px;
+  position:absolute;
+  width:0;
+}
+.swatch .swatch-element:hover .tooltip {
+  filter:alpha(opacity=100);
+  -khtml-opacity:1;
+  -moz-opacity:1;
+  opacity:1;
+  visibility:visible;
+  -webkit-transform:translateY(0px);
+     -moz-transform:translateY(0px);
+      -ms-transform:translateY(0px);
+       -o-transform:translateY(0px);
+          transform:translateY(0px);
+}
+.swatch.error {
+  background-color:#E8D2D2!important;
+  color:#333!important;
+  padding:1em;
+  border-radius:5px;
+}
+.swatch.error p {
+  margin:0.7em 0;
+}
+.swatch.error p:first-child {
+  margin-top:0;
+}
+.swatch.error p:last-child {
+  margin-bottom:0;
+}
+.swatch.error code {
+  font-family:monospace;
+}
+</style>

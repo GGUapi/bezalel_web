@@ -1,0 +1,87 @@
+<section class="full-width page-header">
+  	<div class="container container-padding">
+  		<h1 class="display-title">Search Results</h1>
+  	</div>
+</section>
+
+<div class="product-add-to-cart container container-bottom-padding max-width-1100">
+
+    {% if search.performed %}
+  
+      <div class="collection-list grid-uniform small-gutter">
+        
+          {% if search.results_count == 0 %}
+              <p style="text-align: center;">Sorry, your search produced no results.</p>
+          {% endif %} 
+
+          {% for item in search.results %}        
+        
+			{% if item.object_type == 'product' and item.available == true %}
+        
+				{% include 'bold-product' with item, hide_action: 'skip' %}       
+        
+            	{% assign product = item %}
+
+                {% unless product.title contains "Test" or product.type == "DISCOUNT_HIDDEN_PRODUCT" or product.type == "Hidden" %}
+
+            		{% include 'product-grid-item' %} 
+ 
+        		{% endunless %}
+        
+        		{% elsif item.object_type == 'article' %}
+        
+        				{% assign article = item %}
+        
+        				<a class="blog-article grid__item one-third medium--one-half small--one-whole text-center {% unless article.image %} no-image {% endunless %}" href="{{ article.url }}">
+							
+                          {% if article.image %}
+                              <div class="featured-img-wrap">
+                                
+                                	 <img class="featured-img" src="{{ article.image.src | img_url: '400x400', crop: 'center' }}" />
+
+                              </div>
+                          	{% else %}
+                          	<div class="featured-img-wrap">
+                            	<img class="featured-img" src="{{ 'placeholder.jpg' | asset_url }}" />
+
+                          	</div>
+                          	{% endif %}
+
+                              <div class="blog-content">
+
+                                  <div class="blog-text-wrap">
+                                      <h4 class="time">{{ article.published_at | date: '%B %e, %Y' }}</h4>
+
+                                      <h3>{{ article.title }}</h3>
+
+                                      <h4 class="read-more">Read More</h4>
+
+                                  </div>
+
+                              </div>
+
+                          </a>
+        
+              
+          	{% endif %}
+  
+        {% endfor %}
+
+      </div>       
+  
+	</div>
+
+{% endif %}
+
+{{ "matchHeight.js"  | asset_url | script_tag }}
+
+<script type="text/javascript">
+    $(function() {
+        $('.collection-list').each(function() {
+            $(this).children('.product').matchHeight();
+            $(this).find('.collection-title-wrap').matchHeight();
+            $(this).children('.blog-article').matchHeight();
+
+        });
+    });
+</script>

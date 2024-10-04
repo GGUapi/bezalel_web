@@ -1,0 +1,207 @@
+{% if collection.handle == "accessories" %}
+<section class="full-width category-banner">
+    <picture class="desktop">
+        <source type="image/webp" srcset="{{ 'banner_Pro_Accessories_Desktop.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_Accessories_Desktop.jpg' | asset_url }}" alt="BEZALEL 倍加能 配件" width="2560" height="750">
+    </picture>					
+    <picture class="tablet">
+        <source type="image/webp" srcset="{{ 'banner_Pro_Accessories_Table.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_Accessories_Table.jpg' | asset_url }}" alt="BEZALEL 倍加能 配件" width="1024" height="400">
+    </picture>					
+    <picture class="mobile">
+        <source type="image/webp" srcset="{{ 'banner_Pro_Accessories_Mobile.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_Accessories_Mobile.jpg' | asset_url }}" alt="BEZALEL 倍加能 配件" width="800" height="300">
+    </picture>
+    <div class="overlay">
+        <h2>周邊配件</h2>
+    </div> 
+</section>
+{% elsif collection.handle == "for-android" %}
+<section class="full-width category-banner">
+    <picture class="desktop">
+        <source type="image/webp" srcset="{{ 'banner_Pro_Android_Desktop.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_Android_Desktop.jpg' | asset_url }}" alt="BEZALEL 倍加能 For Android產品" width="2560" height="750">
+    </picture>					
+    <picture class="tablet">
+        <source type="image/webp" srcset="{{ 'banner_Pro_Android_Table.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_Android_Table.jpg' | asset_url }}" alt="BEZALEL 倍加能 For Android產品" width="1024" height="400">
+    </picture>					
+    <picture class="mobile">
+        <source type="image/webp" srcset="{{ 'banner_Pro_Android_Mobile.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_Android_Mobile.jpg' | asset_url }}" alt="BEZALEL 倍加能 For Android產品" width="800" height="300">
+    </picture>
+    <div class="overlay">
+        <h2>For Android</h2>
+    </div>
+</section>
+{% elsif collection.handle == "for-iphone" %}
+<section class="full-width category-banner">
+    <picture class="desktop">
+        <source type="image/webp" srcset="{{ 'banner_Pro_iPhone_Desktop.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_iPhone_Desktop.jpg' | asset_url }}" alt="BEZALEL 倍加能 For iphone產品" width="2560" height="750">
+    </picture>					
+    <picture class="tablet">
+        <source type="image/webp" srcset="{{ 'banner_Pro_iPhone_Table.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_iPhone_Table.jpg' | asset_url }}" alt="BEZALEL 倍加能 For iphone產品" width="1024" height="400">
+    </picture>					
+    <picture class="mobile">
+        <source type="image/webp" srcset="{{ 'banner_Pro_iPhone_Mobile.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_iPhone_Mobile.jpg' | asset_url }}" alt="BEZALEL 倍加能 For iphone產品" width="800" height="300">
+    </picture>
+    <div class="overlay">
+        <h2>For iPhone</h2>
+    </div>
+</section>
+{% elsif collection.handle == "all" %}
+<!--<section class="full-width category-banner">
+    <picture class="desktop">
+        <source type="image/webp" srcset="{{ 'banner_Pro_all_Desktop.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_all_Desktop.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線充電全系列產品" width="2560" height="750">
+    </picture>					
+    <picture class="tablet">
+        <source type="image/webp" srcset="{{ 'banner_Pro_all_Table.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_all_Table.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線充電全系列產品" width="1024" height="400">
+    </picture>					
+    <picture class="mobile">
+        <source type="image/webp" srcset="{{ 'banner_Pro_all_Mobile.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_all_Mobile.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線充電全系列產品" width="800" height="300">
+    </picture>
+    <div class="overlay">
+        <h2>全系列產品</h2>
+    </div>
+</section> -->
+{% elsif collection.handle == "in-the-go" %}
+<section class="full-width category-banner">
+    <picture class="desktop">
+        <source type="image/webp" srcset="{{ 'banner_Pro_iPhone_Desktop.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_iPhone_Desktop.jpg' | asset_url }}" alt="BEZALEL 倍加能 For iphone產品" width="2560" height="750">
+    </picture>					
+    <picture class="tablet">
+        <source type="image/webp" srcset="{{ 'banner_Pro_iPhone_Table.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_iPhone_Table.jpg' | asset_url }}" alt="BEZALEL 倍加能 For iphone產品" width="1024" height="400">
+    </picture>					
+    <picture class="mobile">
+        <source type="image/webp" srcset="{{ 'banner_Pro_iPhone_Mobile.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_iPhone_Mobile.jpg' | asset_url }}" alt="BEZALEL 倍加能 For iphone產品" width="800" height="300">
+    </picture>
+    <div class="overlay">
+        <h2>戶外用品</h2>
+    </div>
+</section>
+{% elsif collection.handle == "in-door" %}
+<!--<section class="full-width category-banner">
+    <picture class="desktop">
+        <source type="image/webp" srcset="{{ 'banner_Pro_Chargers_Desktop.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_Chargers_Desktop.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線充電器" width="2560" height="750">
+    </picture>					
+    <picture class="tablet">
+        <source type="image/webp" srcset="{{ 'banner_Pro_Chargers_Table.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_Chargers_Table.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線充電器" width="1024" height="400">
+    </picture>					
+    <picture class="mobile">
+        <source type="image/webp" srcset="{{ 'banner_Pro_Chargers_Mobile.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_Chargers_Mobile.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線充電器" width="800" height="300">
+    </picture>
+    <div class="overlay">
+        <h2>室內充電</h2>
+    </div>
+</section> -->
+{% elsif collection.handle == "vechcle" %}
+<!--<section class="full-width category-banner">
+    <picture class="desktop">
+        <source type="image/webp" srcset="{{ 'banner_Pro_CarChargers_Desktop.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_CarChargers_Desktop.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線車用充電器" width="2560" height="750">
+    </picture>					
+    <picture class="tablet">
+        <source type="image/webp" srcset="{{ 'banner_Pro_CarChargers_Table.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_CarChargers_Table.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線車用充電器" width="1024" height="400">
+    </picture>					
+    <picture class="mobile">
+        <source type="image/webp" srcset="{{ 'banner_Pro_CarChargers_Mobile.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_CarChargers_Mobile.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線車用充電器" width="800" height="300">
+    </picture>
+    <div class="overlay">
+        <h2>車用充電</h2>
+    </div>
+</section> -->
+{% elsif collection.handle == "new product" %}
+<section class="full-width category-banner">
+    <picture class="desktop">
+        <source type="image/webp" srcset="{{ 'banner_Pro_CarChargers_Desktop.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_CarChargers_Desktop.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線車用充電器" width="2560" height="750">
+    </picture>					
+    <picture class="tablet">
+        <source type="image/webp" srcset="{{ 'banner_Pro_CarChargers_Table.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_CarChargers_Table.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線車用充電器" width="1024" height="400">
+    </picture>					
+    <picture class="mobile">
+        <source type="image/webp" srcset="{{ 'banner_Pro_CarChargers_Mobile.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_CarChargers_Mobile.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線車用充電器" width="800" height="300">
+    </picture>
+    <div class="overlay">
+        <h2>最新產品</h2>
+    </div>
+</section>
+{% elsif collection.handle == "套組" %}
+<section class="full-width category-banner">
+    <picture class="desktop">
+        <source type="image/webp" srcset="{{ 'banner_Pro_CarChargers_Desktop.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_CarChargers_Desktop.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線車用充電器" width="2560" height="750">
+    </picture>					
+    <picture class="tablet">
+        <source type="image/webp" srcset="{{ 'banner_Pro_CarChargers_Table.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_CarChargers_Table.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線車用充電器" width="1024" height="400">
+    </picture>					
+    <picture class="mobile">
+        <source type="image/webp" srcset="{{ 'banner_Pro_CarChargers_Mobile.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_CarChargers_Mobile.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線車用充電器" width="800" height="300">
+    </picture>
+    <div class="overlay">
+        <h2>套組</h2>
+    </div>
+</section>
+{% elsif collection.handle == "events-2205" %}
+<section class="full-width category-banner">
+    <picture class="desktop">
+        <source type="image/webp" srcset="{{ 'banner_Pro_combi0_Desktop.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_combi0__Deskto.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線充電 | Prelude X系列 MagSafe 磁吸無線充電器 獨家組合商品優惠" width="2560" height="750">
+    </picture>					
+    <picture class="tablet">
+        <source type="image/webp" srcset="{{ 'banner_Pro_combi0_Table.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_combi0_Table.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線充電 | Prelude X系列 MagSafe 磁吸無線充電器 獨家組合商品優惠" width="1024" height="400">
+    </picture>					
+    <picture class="mobile">
+        <source type="image/webp" srcset="{{ 'banner_Pro_combi0_Mobile.webp' | asset_url }}" />
+        <img src="{{ 'banner_Pro_combi0_Mobile.jpg' | asset_url }}" alt="BEZALEL 倍加能 無線充電 | Prelude X系列 MagSafe 磁吸無線充電器 獨家組合商品優惠" width="800" height="300">
+    </picture>
+</section>
+{% endif %}
+<div class="product-add-to-cart">
+    <div class="container container-padding max-width-1100">
+
+        <div class="collection-list grid-uniform {% unless shop.products_count == 0 %} small-gutter {% endunless %}">
+
+          {% for product in collection.products %}
+            {% unless product.title contains "Test" or product.type == "DISCOUNT_HIDDEN_PRODUCT" or product.type == "Test" %}
+            {% include 'bold-product' with product, hide_action: 'skip' %}		
+            {% include 'product-grid-item' %}
+            {% endunless %}
+          {% else %}
+
+          <div class="grid__item">
+            <p><em>{{ 'collections.general.no_matches' | t }}</em></p>
+          </div>
+
+          {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+        $('.collection-list').each(function() {
+            $(this).find('.collection-title-wrap').matchHeight();
+            $(this).children('.product').matchHeight();
+        });
+    });
+</script>

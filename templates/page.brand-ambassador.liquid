@@ -1,0 +1,113 @@
+<div class="brand-ambassador">
+  
+  	<section class="full-width brand-hero">
+      	<div class="wrapper">
+        	<h2 class="title">BEZALEL <strong>Brand Ambassadors</strong></h3>
+        	<h4 class="subhead">You want to be a part of something special. You have a voice that needs to be a heard. You need an opportunity.</h3>      
+        	<h2 class="join">Join #teambezalel and power&nbsp;up&nbsp;your&nbsp;life.</h3>      
+      	</div>
+	</section>
+  
+	<section class="full-width ambassador-contact-form">
+      
+       	<div class="wrapper wrapper-padding">
+          
+          	<h3>Please fill out the following form for brand ambassador consideration. We’ll review, and if you are a good match we’ll be in touch!</h3>         
+			{% form 'contact' %}
+
+            <div id="contactFormWrapper">
+
+                <input type="text" id="contactFormName" class="full-input" name="contact[name]" placeholder="Name" />
+
+                <input type="email" id="contactFormEmail" class="full-input" name="contact[email]" placeholder="Email Address" />
+
+                <input type="telephone" id="contactFormTelephone" class="full-input" name="contact[phone]" placeholder="Phone Number">
+
+                <input type="text" id="contactFormStreet" name="contact[Street]" placeholder="Street">
+
+                <input type="text" id="contactFormState" name="contact[State]" placeholder="State">
+
+                <input type="text" id="contactFormZip" name="contact[Zip]" placeholder="Zip">
+              
+              	<p>Which University/ College do you attend ? (If applicable)</p>
+                
+              	<input type="text" id="contactFormUniversity" class="full-input" name="contact[University]">
+              
+              	<p>In which state is your school located? (If applicable)</p>
+                
+              	<input type="text" id="contactFormSchoolState" class="full-input" name="contact[School State]">
+
+				<p>What's your major? (If applicable)</p>
+                
+              	<input type="text" id="contactFormMajor" class="full-input" name="contact[Major]">
+              
+				<p>What's your GPA (If applicable)?</p>
+                
+              	<input type="text" id="contactFormGPA" class="full-input" name="contact[GPA]">
+              
+				<p>Are you involved in any extracurricular activities? (club, sports, association...etc )</p>
+                
+              	<textarea id="contactFormActivities" class="full-input" name="contact[Activities]">Enter text here...</textarea>
+              	                            
+				<p>Do you have any work or internship experience?</p>
+                
+              	<textarea id="contactFormWork" class="full-input" name="contact[Work]">Enter text here...</textarea>
+                  
+				<p>Are you familiar with wireless charging technology?</p>
+                
+              	<input type="text" id="contactFormWirelessTech" class="full-input" name="contact[Familiar with Wireless Tech]">
+ 				
+              	<p>How did you hear about us?</p>
+                
+              	<textarea id="contactFormHear" class="full-input" name="contact[How did they hear about us]">Enter text here...</textarea>             
+                              
+              	<input type="text" id="contactFormInstagram" name="contact[Instagram Handle]" placeholder="Instagram Handle">
+                              
+              	<input type="text" id="contactFormTwitter" name="contact[Twitter Handle]" placeholder="Twitter Handle" >	              
+              
+                <input type="text" id="contactFormFacebook" class="full-input" name="contact[Facebook Link]" placeholder="Facebook Link" />
+              
+                <input type="text" id="contactFormYouTube" class="full-input" name="contact[YouTube]" placeholder="YouTube Channel (if any)" />
+
+                <input type="text" id="contactFormBlog" class="full-input" name="contact[Blog]" placeholder="Blog Page Link (if any)" />
+
+              	<p>What‘s your current Smartphone model? (ex: iPhone 6s)</p>
+              	
+              	<input type="text" id="contactFormPhoneModel" class="full-input" name="contact[Phone Model]">
+              	
+              	<p>What makes you the best candidate for the BEZALEL ambassador program?</p>
+              
+              	<textarea id="contactFormCandidate" class="full-input" name="contact[Why Them]">Enter text here...</textarea>     
+              
+              	<p>What will you do to make sure more people know about BEZALEL? </p>
+              
+              	<textarea id="contactFormKnow" class="full-input" name="contact[What They Will Do]">Enter text here...</textarea>             
+
+              	<input type="submit" id="contactFormSubmit" value="Submit" class="btn button" />
+              
+            </div>
+
+        	{% if form.posted_successfully? %}
+        	<div class="successForm feedback">
+          		<p>Thank you for applying!</p>
+        	</div>
+        	{% endif %}
+
+        	{% if form.errors %}
+            <div class="errorForm feedback">
+                <!-- {{ form.errors.size }} or {{ form.errors | size }} -->
+                <p>Oops, sorry. We were unable to submit your application because it contained {{ form.errors | size | pluralize: 'an error', 'a few errors' }}. Please correct the following and submit again:</p>
+                <p>
+                    {% for field in form.errors %}
+                        <span class="alert label">The {{ field | capitalize | replace: 'Body', 'Message' }} field {{ form.errors.messages[field] }}</span><br />
+                    {% endfor %}
+                </p>
+            </div>
+            {% endif %}
+
+        {% endform %}            
+          
+      	</div>
+      
+  	</section>
+</div>

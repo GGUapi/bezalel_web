@@ -1,0 +1,696 @@
+{% include 'bold-product' with product, hide_action: 'break', output: 'none' %}
+
+<div class="prelude-buy no-top-menu-buy no-swatches buy-page">
+  
+    <section class="full-width fade-in product-wrap">
+
+        <div class="container container-padding">
+
+          	<div class="product">
+
+            {% assign current_variant = bold_selected_or_first_available_variant %}
+            {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+
+            <div class="product-image">
+              
+               <div class="product-above-image-content-mobile">
+                  
+              		<div class="product-title">Prelude Portable Wireless Charger</div>
+                    <h4>10W Fast Portable Wireless Charger<br>made for iPhone&nbsp;11, XS, XS Max, XR, Samsung and other Qi&#8209;enabled devices</a></h4>
+                  	<h5>*For best product performance, use BEZALEL 18W USB Power&nbsp;Adapter.</h5>
+
+                    <div class="prices-wrap">
+                        {% if current_variant.price < current_variant.compare_at_price %}<span class="ComparePrice">{{ current_variant.compare_at_price | money }}</span>&nbsp;&nbsp;{% endif %}
+                        <h3 class="price ProductPrice">
+                            {{ current_variant.price | money }}   
+                        </h3>
+                    </div>
+              	
+                 	<div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}'>{{ product.metafields.judgeme.badge }}</div>				
+
+              	</div>
+              
+              	<div id="slider" class="regular-slider flexslider">
+                	<ul class="slides">
+                  		{% if product.images.size > 0 %}
+                            <li class="slide featured" data-index="0" data-variant-img="{{ featured_image.id }}" data-thumb="{{ featured_image | img_url: 'small' }}">
+                                <img src="{{ featured_image | img_url: 'grande' }}" alt="{{ featured_image.alt | escape }}">
+                              	<span></span>
+                            </li>
+                    	{% if product.images.size > 1 %}
+                      	{% assign index = 0 %}
+                      		{% for image in product.images %}
+                        		{% unless image contains featured_image %}
+                          		{% assign index = index | plus: 1 %}
+                      				{% if image.alt contains 'youtube' %}
+                          			<li class="slide{% if image.alt contains 'youtube' %} video{% endif %}" data-index="{{ index }}" data-variant-img="{{ image.id }}" data-thumb="{{ image | img_url: 'small' }}">
+                                        <iframe src="{{ image.alt }}" frameborder="0" allowfullscreen></iframe>
+                                    </li>
+                      				{% else %}
+                          			<li class="slide" data-index="{{ index }}" data-variant-img="{{ image.id }}" data-thumb="{{ image | img_url: 'small' }}">
+                              			<img src="{{ image | img_url: 'grande' }}" alt="{{ image.alt | escape }}">
+                          			</li>
+                      				{% endif %}
+                        		{% endunless %}
+                      		{% endfor %}
+                    	{% endif %}
+                  		{% else %}
+                    	<li class="slide">
+                      		<img src="{{ 'no-image.svg' | asset_url }}" alt="">
+                    	</li>
+                  		{% endif %}
+
+                	</ul>
+              	</div>
+            </div>
+              
+            <div class="product-content">
+              
+				<div class="product-above-image-content-desktop">
+
+                    <div class="product-title">Prelude Portable Wireless Charger</div>
+                    <h4>10W Fast Portable Wireless Charger<br>made for iPhone 11, XS, XS&nbsp;Max, XR, Samsung and other Qi&#8209;enabled&nbsp;devices</a></h4>
+                  	<h5>*For best product performance, use BEZALEL 18W USB Power&nbsp;Adapter.</h5>
+
+                    {% if current_variant.price < current_variant.compare_at_price %}<span class="ComparePrice">{{ current_variant.compare_at_price | money }}</span>&nbsp;&nbsp;{% endif %}
+
+                    <h3 class="price ProductPrice">
+                        {{ current_variant.price | money }}              
+                    </h3>
+              	</div>
+                                          
+              	<div class='jdgm-widget jdgm-preview-badge desktop' data-id='{{ product.id }}'>{{ product.metafields.judgeme.badge }}</div>				
+                      
+				{% assign preorder = false %}
+				{% if product.available %}
+              		{% for tag in product.tags %}
+              			{% if tag == 'preorder' %}
+              				{% assign preorder = true %}
+              			{% endif %}
+              		{% endfor %}
+              	{% endif %}
+
+                <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+
+                  <div class="buy-row swatches">
+
+                      <select name="id" id="productSelect" class="product-single__variants">
+                        
+                        {% for variant in product.variants %}
+						
+                        {% include 'bold-hidden-variants' with variant, bold_loop: 'loop' %}
+
+                        {% if variant.available %}
+
+                            <option {% if variant == current_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+
+                          {% else %}
+                            <option disabled="disabled">
+                              {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                            </option>
+                          {% endif %}
+                        {% endfor %}                   
+                        
+                      </select>
+
+                   	</div>
+                                
+                  	<div class="buy-row quantity-row">
+                        <div class="form__column quantity-selector">
+                            <label for="Quantity" class="quantity-selector">{{ 'products.product.quantity' | t }}</label>
+                            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="qty-remove-defaults quantity-selector">
+                        </div>   
+                        <button type="submit" name="add" id="AddToCart" class="btn">
+                            <span id="AddToCartText">Add to Cart</span>
+                        </button>
+                  	</div>  
+           
+                  	<div class="buy-row add-ons">
+                        <h3>Add Accessories</h3>                  
+                        <div id="w3-product-accessories" data-product-handle="{{ product.handle }}">
+                            <div id="w3-money-format" style="display:none;">{{ shop.money_format }}</div>
+                        </div>
+                  	</div>
+                  
+					<article class="faq-item warranty">
+                        <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        	<div class="faq-question faq-animation">
+                        		<p itemprop="name"><strong>WARRANTY</strong></p><span class="ease-animation-slow"></span>
+                          	</div>
+                        	<div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        		<div itemprop="text">
+                                  	<p>1 Year Warranty</p>
+									<p>All BEZALEL products are covered by a one-year manufacturer's warranty from the date of purchase by the original consumer.</p>
+                                  	<p><strong><a href="/pages/customer-support" target="_blank">More Warranty Information</a></strong></p>
+                        		</div>
+                        	</div>
+                        </div>
+                    </article>
+          	</form>
+
+            </div>
+              
+          	<div class="product-detail-anchor-nav">
+                <ul>
+                    <li><a href="#section1">Features</a></li>
+                    <li><a href="#section2">Specs</a></li>
+                    <li><a href="#section3">In the Box</a></li>
+                    <li><a href="#section4">FAQ</a></li>
+                    <li><a href="#section5">Reviews</a></li>
+                </ul>
+            </div>
+			</div>
+		</div>      
+    </section>
+
+    <span class="anchor" id="section1"></span>
+
+	<div id="features-section">
+      
+        <section class="full-width white-bg prelude-award-feature">
+            <div class="container container-top-padding clearfix feature-left-image">
+                <table>
+                    <tr>
+                        <td class="top fourty">
+                            <img src="{{ 'reddot-award-winner-2019.jpg' | asset_url }}" />                  	
+                        </td>
+                        <td class="black-txt middle">	
+                          	<p class="last">Go on with your life without the extra battery weight. Prelude adheres to the glossy-surface back of your phone and charges wirelessly when you need it. Freely remove the Prelude when you're done. Simple.</p>                        
+                      	</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+      
+        <section class="full-width white-bg prelude-feature-1">
+            <div class="container container-padding clearfix feature-left-image">
+                <table>
+                    <tr>
+                        <td class="middle sixty">
+                            <img src="{{ 'prelude-black-buy-feature-2-v2.jpg' | asset_url }}" />                  	
+                        </td>
+                        <td class="black-txt middle">	
+                            <h2>True Wireless<br>Charging</h2>
+                          <p>Prelude adheres to the glossy-surface back of your phone, so you can use your phone and charge at the same time. Play games, take pictures and watch your favorite movies while you&nbsp;charge.</p>
+                          <p class="last">Magnetic alignment case for latest iPhones available. Perfect match designed for iPhone&nbsp;8 and above!</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+ 
+      	<section class="full-width white-bg">
+            <img class="features-mobile features-image-mobile" src="{{ 'prelude-black-buy-feature-1-v3.jpg' | asset_url }}" />                  	
+            <div class="container container-bottom-padding clearfix feature-right-image">
+                <table>
+                    <tr>
+                        <td class="middle black-txt left-text">
+                            <h2>Fast&#8209;Charging<br>&amp; Easy to Use</h2>
+                            <p class="last">Fast&#8209;charges your smartphone up to 10W. Powers on with motion sensor. Easily adheres to phone when you need it, easily detaches when you&nbsp;don’t.</p>                        
+                      	</td>
+                        <td class="middle sixty">	
+                          	<img class="features-desktop" src="{{ 'prelude-black-buy-feature-1-v3.jpg' | asset_url }}" /> 
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section class="full-width white-bg">
+            <div class="container container-bottom-padding clearfix feature-left-image">
+                <table>
+                    <tr>
+                        <td class="top sixty-five">
+                            <img src="{{ 'prelude-black-buy-feature-cables.jpg' | asset_url }}" />                  	
+                        </td>
+                        <td class="black-txt middle">	
+                            <h2>Wireless Charging<br>Multiple Ways </h2>
+                          	<p>Multi&#8209;functioning Prelude moves freely with you as a wireless portable charger.</p>
+							<p class="last">Works also as a wired portable charger when convenient for you. Now, charge even faster, up to 18W with BEZALEL’s Type-C cable. With or without a cable, fully-mobile Prelude is designed with your ever-changing needs in mind.</p>                        
+                      	</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+      
+      	<section class="full-width white-bg prelude-feature-4">
+            <img class="features-mobile features-image-mobile" src="{{ 'prelude-black-buy-feature-3.jpg' | asset_url }}" />                  	
+            <div class="container container-bottom-padding clearfix feature-right-image">
+                <table>
+                    <tr>
+                        <td class="middle black-txt left-text">
+                            <h2>From the Designer</h2>
+                            <p>"We wanted to design a charger that was wire&#8209;free, gravity&#8209;free and hassle&#8209;free.</p>                        
+                      		<p class="last">Prelude was brought to life by combining nano-suction and wireless charging technology in an ultra&#8209;slim, small frame, made of a seamlessly smooth body, with no lines or screw&nbsp;holes."
+                      	</td>
+                        <td class="middle sixty">	
+                          	<img class="features-desktop" src="{{ 'prelude-black-buy-feature-3.jpg' | asset_url }}" /> 
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+	</div>
+
+	<section class="full-width glossy-case hero">
+	</section>
+
+    <span class="anchor" id="section2"></span>
+
+    <section class="full-width white-bg" id="specs-section">
+      	<div class="container max-width-1100 container-bottom-padding clearfix">
+            <h3 class="display-title">Specifications</h3>
+			<div class="grid">
+                <div class="grid__item one-third medium--one-third small--one-half">
+                    <img class="module-icon" src="{{ 'Qi.png' | asset_url }}" />
+                    <h3>Qi</h3>
+                  	<p>Wireless Technology</p>
+              	</div>
+                <div class="grid__item one-third medium--one-third small--one-half">
+                    <img class="module-icon" src="{{ 'weight.png' | asset_url }}" />
+                    <h3>5.6</h3>
+                  	<p>Weight (Ounce)</p>                
+              	</div>
+                <div class="grid__item one-third medium--one-third small--one-half">
+                    <img class="module-icon" src="{{ 'input.png' | asset_url }}" />
+                    <h3>12V / 1A</h3>
+                  	<p>Wireless Input (Voltage/Amps)</p>                
+                    <h3>DC 5V / 9V, 12V ; 18W</h3>
+                  	<p>USB-C Input (Voltage/Amps)</p>   
+              	</div>
+                <div class="grid__item one-third medium--one-third small--one-half">
+                    <img class="module-icon" src="{{ 'output.png' | asset_url }}" />
+                    <h3>DC 5V / 1A, 9V / 1.2A, 12V / 0.9A</h3>
+                  	<p>Wireless Output (Voltage/Amps)</p>               
+                    <h3>5V / 2A, 9V / 1.67A, 12V / 1.5A</h3>
+                  	<p>USB-C Output (Voltage/Amps)</p>  
+              	</div>
+                <div class="grid__item one-third medium--one-third small--one-half">
+                    <img class="module-icon" src="{{ 'quick-charge.png' | asset_url }}" />
+                    <h3>5000</h3>
+                  	<p>Battery Capacity (mAh)</p>               
+              	</div>
+                <div class="grid__item one-third medium--one-third small--one-half">
+                    <img class="module-icon" src="{{ 'dimensions.png' | asset_url }}" />
+                    <h3>4.4 x 2.6 x 0.63</h3>
+                  	<p>Dimensions (Inch)</p>               
+              	</div>
+          </div>
+      </div>
+  	</section>
+  
+    <section class="full-width">
+        <div class="container">
+            <hr class="full-width-rule">
+        </div>
+    </section>
+
+    <span class="anchor" id="section3"></span>
+
+    <section class="full-width white-bg" id="box-section">
+      	<div class="container clearfix max-width-1100">
+            <h3 class="display-title">In the Box</h3>
+      	</div>
+  	</section>
+
+    <section class="full-width" id="box-section-content">
+      	<div class="container max-width-1100 clearfix">
+			<div class="grid">
+                <div class="grid__item one-third medium--one-half small--one-half">
+                    <div style="position:relative;float:left;width:100%;">
+                      	<img class="box-item" src="{{ 'prelude-new-in-the-box.png' | asset_url }}" />
+                  		<p>Prelude Portable Wireless Charger</p>
+                  	</div>
+                </div>
+              	<div class="grid__item one-third medium--one-half small--one-half">
+                    <div style="position:relative;float:left;width:100%;">
+                      	<img class="box-item cable-image" src="{{ 'omnia-cable-in-the-box.png' | asset_url }}" />
+                  		<p>USB Type-C Cable</p>
+                  	</div>
+                </div>
+              	<div class="grid__item one-third medium--one-half small--one-half">
+                    <div style="position:relative;float:left;width:100%;">
+                      	<a href="{{ "Prelude_User_Guide_20191231.pdf" | asset_url }}" target="_blank">
+                      	<img class="box-item cable-image" src="{{ 'bezalel-download-file-icon.png' | asset_url }}" />
+                      	<p>Prelude Product Guide</p></a>
+                  	</div>
+                </div>
+          	</div>
+      	</div>
+  	</section>
+  
+    <section class="full-width">
+        <div class="container">
+            <hr class="full-width-rule">
+        </div>
+    </section>
+
+    <span class="anchor" id="section4"></span>
+
+ 	<section class="full-width white-bg" id="faq-section">
+      	<div class="container clearfix max-width-1100">
+            <h3 class="display-title">FAQ</h3>
+      	</div>
+  	</section>
+
+    <section class="full-width" id="faq-section-content">
+      	<div class="container max-width-1100 container-bottom-padding clearfix">
+			<div class="grid">
+                <div class="grid__item one-half medium--one-half small--one-whole">
+                    <article class="faq-item">
+                        <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        	<div class="faq-question faq-animation">
+                        		<p itemprop="name"><strong>How do I charge my device using Prelude?</strong></p><span class="ease-animation-slow"></span>
+                          	</div>
+                        	<div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        		<div itemprop="text">
+                                  	<p><strong>There are 2 ways to charge using Prelude:</strong></p>
+                                  	<p><strong>Wirelessly:</strong> Simply remove the magnetic cover, peel the protective film, shake to turn on and align it to the center of your phone.</p>
+									<p><strong>Wired:</strong> Charge your phone with Prelude using a USB-C cable via Prelude’s USB-C port.</p>
+                        		</div>
+                        	</div>
+                        </div>
+                    </article>        
+                    <article class="faq-item">
+                        <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        	<div class="faq-question faq-animation">
+                              	<p itemprop="name"><strong>How to charge Prelude?</strong></p><span class="ease-animation-slow"></span>
+                          	</div>
+                        	<div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        		<div itemprop="text">
+                                  	<p><strong>There are two ways to charge Prelude:</strong></p>
+                                  	<p><strong>Charging Prelude by Cable:</strong> Plug USB-C end of cable to Prelude and the other end into the power adapter.</p>
+									<p><strong>Charging Prelude wirelessly:</strong> Place Prelude (the side with the logo) onto a Qi-charging pad. A wireless charging LED indicator will light up to show prelude is being charged wirelessly.</p>
+                        		</div>
+                        	</div>
+                        </div>
+                    </article> 
+ 					<article class="faq-item">
+                        <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        	<div class="faq-question faq-animation">
+                        		<p itemprop="name"><strong>How do I know when my Prelude is fully charged?</strong></p><span class="ease-animation-slow"></span>
+                          	</div>
+                        	<div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        		<div itemprop="text">
+                                  	<p>Once fully charged, all 4 LED indicator lights will be on.</p>
+                                </div>
+                        	</div>
+                        </div>
+                    </article> 
+                    <article class="faq-item">
+                        <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        	<div class="faq-question faq-animation">
+                        		<p itemprop="name"><strong>How fast does Prelude charge?</strong></p><span class="ease-animation-slow"></span>
+                          	</div>
+                        	<div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        		<div itemprop="text">
+                                  	<p>The wireless charging speed for the Prelude is 10W. However, please note that some wireless charging receivers may charge at a slightly slower rate.</p>
+                                  	<p>The Prelude can also charge your phone up 18W via its USB&#8209;C output port with BEZALEL USB&#8209;C to Lightning cable or USB&#8209;C to USB&#8209;C cable.</p>
+                        		</div>
+                        	</div>
+                        </div>
+                    </article>
+                    <article class="faq-item">
+                        <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        	<div class="faq-question faq-animation">
+                        		<p itemprop="name"><strong>How long does it take to charge Prelude?</strong></p><span class="ease-animation-slow"></span>
+                          	</div>
+                        	<div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        		<div itemprop="text">
+                                  	<p>When using BEZALEL 18W Power Adapter, it will take only about 1.5 hours to fully charge your Prelude.</p>
+                                  	<p>When using a Fast Charge, a 5v/2a (or 10W) or a QC 2.0 or 3.0 adapter it will take about 2-3 hours to fully charge your Prelude. If you are using anything smaller than mentioned, such as standard iPhone charging cube (5W), it will take approx. 4.5 hrs to fully charge.</p>
+                        		</div>
+                        	</div>
+                        </div>
+                    </article>
+					<article class="faq-item">
+                        <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        	<div class="faq-question faq-animation">
+                              	<p itemprop="name"><strong>How long does the battery last?</strong></p><span class="ease-animation-slow"></span>
+                          	</div>
+                        	<div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        		<div itemprop="text">
+                                  	<p>Prelude is designed to give your phone the extra boost it needs throughout the day. It will give your smartphone approx. 75-95% additional battery life. Depending on the device you are charging, the battery will last accordingly.</p>
+                        		</div>
+                        	</div>
+                        </div>
+                    </article>
+              	</div>
+              	<div class="grid__item one-half medium--one-half small--one-whole">
+
+					<article class="faq-item">
+                        <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        	<div class="faq-question faq-animation">
+                        		<p itemprop="name"><strong>What is the Prelude’s battery capacity?</strong></p><span class="ease-animation-slow"></span>
+                          	</div>
+                        	<div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        		<div itemprop="text">
+                                  	<p>The Prelude’s battery is 5000mAh, its rated capacity is 3100mAh.</p>
+                        		</div>
+                        	</div>
+                        </div>
+                    </article>
+					<article class="faq-item">
+                        <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        	<div class="faq-question faq-animation">
+                        		<p itemprop="name"><strong>What do I do if my phone is not charging?</strong></p><span class="ease-animation-slow"></span>
+                          	</div>
+                        	<div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        		<div itemprop="text">
+                                  	<p>If your Prelude is not charging your mobile device, double check to see if it is Qi compatible. If so, the center of the nano-suction area must be correctly aligned to the center back of your phone.</p>
+                        		</div>
+                        	</div>
+                        </div>
+                    </article>
+					<article class="faq-item">
+                        <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        	<div class="faq-question faq-animation">
+                        		<p itemprop="name"><strong>The nano-suction area is dirty and does not attach well anymore.</strong></p><span class="ease-animation-slow"></span>
+                          	</div>
+                        	<div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        		<div itemprop="text">
+                                  	<p>If the nano-suction area becomes dirty or dusty, it will lose some of its stickiness. Simply, rub the nano-suction area with your finger using lukewarm water and let air dry. This will make it regain stickiness and can be used over and over again.</p>
+                                  	<p><strong>NOTE: Do not put Prelude under running water.</strong></p>
+                        		</div>
+                        	</div>
+                        </div>
+                    </article>
+					<article class="faq-item">
+                        <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        	<div class="faq-question faq-animation">
+                        		<p itemprop="name"><strong>Can I bring Prelude on a plane?</strong></p><span class="ease-animation-slow"></span>
+                          	</div>
+                        	<div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        		<div itemprop="text">
+                                  <p>Yes! According to TSA, portable chargers or power banks containing a lithium ion battery must be packed in carry&#8209;on bags only! <strong>NOT ON CHECKED BAGS.</strong></p>
+                        		</div>
+                        	</div>
+                        </div>
+                    </article>
+					<article class="faq-item">
+                        <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        	<div class="faq-question faq-animation">
+                        		<p itemprop="name"><strong>Is my device compatible?</strong></p><span class="ease-animation-slow"></span>
+                          	</div>
+                        	<div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        		<div itemprop="text">
+                                  <p>Prelude can wirelessly charge most Qi&#8209;enabled devices. <a href="/pages/futura-x-and-prelude-compatible-devices" target="_blank">Click here</a> to see if your device is compatible.</p>
+                        		</div>
+                        	</div>
+                        </div>
+                    </article>
+              </div>
+          	</div>
+      	</div>
+  	</section>
+  
+    <section class="full-width">
+        <div class="container">
+            <hr class="full-width-rule">
+        </div>
+    </section>
+
+    <span class="anchor" id="section5"></span>
+
+	<section class="full-width judgeme-review" id="reviews-section">
+      	<div class="container max-width-1100">
+          	<h3 class="display-title">What Customers Say</h3>
+          	<div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title }}' data-id='{{ product.id }}'>{{ product.metafields.judgeme.widget }}</div>
+      	</div>
+  	</section> 
+
+    <section class="full-width">
+        <div class="container">
+            <hr class="full-width-rule">
+        </div>
+    </section>
+
+  	<span class="anchor" id="section5"></span>
+
+	<section class="full-width" id="got-questions">
+      	<div class="max-width-1100 container clearfix container-bottom-padding">
+          	<h3 class="display-title">Got a Question?</h3>
+          	<p>Visit our <a href="/pages/customer-support" target="_blank">Support</a> page or <a style="text-decoration:underline;" href="mailto:support@bezalel.co">Message</a> our Support Team</p>
+      	</div>
+  	</section>  
+</div>
+
+{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+{{ 'flexslider.js' | asset_url | script_tag }}
+
+<script>
+  
+  	var selectCallback = function(variant, selector) {
+
+  	var $addToCart = $('#AddToCart'),
+      	$productPrice = $('.ProductPrice'),
+      	$comparePrice = $('.ComparePrice'),
+      	$quantityElements = $('.quantity-selector'),
+      	$addToCartText = $('#AddToCartText'),
+      	moneyFormat = "{{ shop.money_format }}";
+
+    	if (variant && variant.available == true) {
+            $addToCart.removeClass('btn--disabled').prop('disabled', false);
+            $quantityElements.removeClass('hidden');
+            $addToCartText.text('Add to Cart');
+
+      	if (variant.featured_image) {
+        	var newImg = $('#slider').find('.slide[data-variant-img="' + variant.featured_image.id + '"]');
+        	if (newImg.length > 0) {
+          		if ($('#slider').hasClass('loaded')) {
+            		$('#slider').flexslider(newImg.data('index'));
+          		} else {
+            		$('#slider').data('loaded-index', newImg.data('index'));
+          		}
+        	}
+      	}
+
+        if ( variant.compare_at_price > variant.price ) {
+            $comparePrice.html(Shopify.formatMoney(variant.compare_at_price, moneyFormat)).show();
+            $productPrice.html(Shopify.formatMoney(variant.price,  moneyFormat)) + Shopify.formatMoney(variant.compare_at_price, moneyFormat);
+        } else {
+            $comparePrice.hide();
+            $productPrice.html(Shopify.formatMoney(variant.price, moneyFormat));
+        }
+        var form = jQuery('#' + selector.domIdPrefix).closest('form');
+      	for (var i=0,length=variant.options.length; i<length; i++) {
+        	var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+        	if (radioButton.size()) {
+          	radioButton.get(0).checked = true;
+        	}
+      	}
+
+    } else {
+		$addToCart.addClass('btn--disabled').prop('disabled', true);
+      	$addToCartText.text("Pre-Order");
+        $quantityElements.addClass('hidden');
+    }    
+
+    $(".swatch-element input:radio").on('click', function(){
+        if ($(this).attr('checked', 'checked')){
+           	$(this).parent().addClass('active-swatch-single-variant');
+          	$(this).parent().siblings().removeClass('active-swatch-single-variant');
+        } else {
+           $(this).parent().removeClass('active-swatch-single-variant');
+       }
+    });      
+  };
+
+  	jQuery(function($) {
+        new Shopify.OptionSelectors('productSelect', {
+          product: bold_product_json[{{ product.id }}],
+          onVariantSelected: selectCallback,
+          enableHistoryState: false
+        });
+
+        {% if product.options.size == 1 %}
+          {% if product.options.first != "Title" %}
+            $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">{{ product.options.first | escape }}</label>');
+          {% else %}
+            $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">&nbsp;</label>');
+          {% endif %}
+        {% endif %}
+
+        {% if bold_variants_size == 1 and product.variants.first.title contains 'Default' %}
+          $('.selector-wrapper').hide();
+        {% endif %}
+  	});
+	jQuery(document).ready(function() {
+  
+        if ($('.regular-slider').length > 0) {
+
+          $('.regular-slider.flexslider').imagesLoaded(function() {
+            var sliderArgs = {
+                animation: 'slide',
+                animationSpeed: 300,    
+                slideshow: false,
+                slideshowSpeed: 5000,
+                directionNav: true,
+                keyboard: true,
+                prevText: '',
+                nextText: '',
+                smoothHeight: true,
+                video: true,
+                controlNav: 'thumbnails',
+                controlsContainer: $('.custom-controls-container'),
+                customDirectionNav: $('.custom-navigation a'),
+                start: function(slider) {
+                    if ($(slider).find('.slide').not('.clone').length === 1) {
+                      $(slider).find('.flex-direction-nav').remove();
+                    }
+                    $(window).trigger('resize');
+                    slider.addClass('loaded');
+                    if ($('#slider').data('loaded-index') != undefined) {
+                      $('#slider').flexslider($('#slider').data('loaded-index'));
+                    }
+
+                    $('.flex-control-thumbs').addClass('show');
+                }
+            };
+
+            if ($('.regular-slider.flexslider').find('li').length === 1) {
+              sliderArgs.touch = false;
+            }
+
+            $('.regular-slider.flexslider').flexslider(sliderArgs);
+          });
+        }
+ 	});
+  
+    jQuery(function(){$(document).on("click",".faq-item .faq-question",function(){$(this).parent().find(".content").is(":visible")||($(".faq-item .content").slideUp(),$(".faq-item .faq-question").removeClass("active")),$(this).toggleClass("active").parent().find(".content").slideToggle()})});
+
+  	var tag = document.createElement('script');
+
+  	tag.src = "https://www.youtube.com/iframe_api";
+  	var firstScriptTag = document.getElementsByTagName('script')[0];
+  	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	var player;
+  	function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        playerVars: {
+              color: 'white',
+              playlist: VideoIdArr
+          },
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      });
+  	}
+
+  	function onPlayerReady(event) {
+    	event.target.playVideo();
+  	}
+
+  	var done = false;
+  	function onPlayerStateChange(event) {
+    	if (event.data == YT.PlayerState.PLAYING && !done) {
+      	setTimeout(stopVideo, 6000);
+      	done = true;
+    	}
+  	}
+  	function stopVideo() {
+    	player.stopVideo();
+  	}
+
+</script>

@@ -1,0 +1,38 @@
+{% assign on_sale = false %}
+{% if bold_compare_at_price > bold_price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+  {% assign sold_out = false %}
+{% endif %}
+
+<div class="product grid__item one-third medium--one-half small--one-whole text-center">
+
+  <a href="{{ product.url | within: collection }}" class="grid__image sale-{{ on_sale }} sold-{{ sold_out }}">
+    	<div class="collection-image-wrap">
+            {% if product.featured_image %}
+            <img class="retina-img" src="{{ product.featured_image.src | img_url: 'large' }}" data-retina-src="{{ product.featured_image.src | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}">
+            {% else %}
+            <img src="{{ 'no-image.svg' | asset_url }}" alt="" />
+            {% endif %}
+            {% if on_sale %}
+            <span class="badge badge--on-sale">{{ 'products.product.on_sale' | t }}</span>
+            {% endif %}
+    	</div>
+  </a>
+
+  <h3><a href="{{ product.url | within: collection }}">{{ product.title }}</a></h3>
+
+  <a href="{{ product.url | within: collection }}"><button class="price">
+    
+    {{ bold_price | money }}
+    
+    {% if on_sale %}
+      <span>{{ bold_compare_at_price | money }}</span>
+    {% endif %}
+    
+  </button></a>
+
+</div>

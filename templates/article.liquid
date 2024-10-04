@@ -1,0 +1,70 @@
+<section class="full-width">
+    <div class="container max-width-1100 clearfix">
+      
+      	<div class="article__sharing" style="margin-top: 0;">
+          	{% if settings.blog_sharing_enabled %}
+            	{% include 'page_share' %}
+          	{% endif %}
+      	</div>
+    </div>
+</section>
+
+<section class="full-width">
+    <div class="container max-width-1100 clearfix">
+        <hr class="full-width-rule">
+    </div>
+</section>
+
+<section class="full-width rte info-page"> 
+  
+    <div class="container max-width-1100 clearfix">
+        
+      	<article itemscope itemtype="http://schema.org/Article">
+          
+            <h2 class="display-title article__title clearfix">{{ article.title }}</h2>
+      
+            <div class="article__content rte clearfix" itemprop="articleBody">{{ article.content }}</div>
+
+            {% if settings.blog_sharing_enabled or settings.blog_rss_enabled %}
+              <div class="article__sharing bottom_share">
+
+                {% if settings.blog_sharing_enabled %}
+                  {% include 'page_share' %}
+                {% endif %}
+
+              </div>
+
+            {% endif %}
+
+             </article>  	
+  
+        {% if paginate.pages > 1 %}
+        <div id="pagination">
+            {{ paginate | default_pagination }}
+        </div>
+        {% endif %}
+
+  	</div>
+</section>
+
+<section class="full-width rte info-page comments"> 
+  
+    <div class="container container-bottom-padding max-width-1100 clearfix">
+      <h3 class="display-title">Comments</h3>
+      <div id="disqus_thread"></div>
+          <script>
+
+          var disqus_config = function () {
+          this.page.url = '{{ canonical_url }}';
+          this.page.identifier = '{{ article.id }}';
+          };
+          (function() { // DON'T EDIT BELOW THIS LINE
+          var d = document, s = d.createElement('script');
+          s.src = 'https://bezalelinc.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+          })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>

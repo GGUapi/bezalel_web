@@ -1,0 +1,548 @@
+/*
+        LOYALTY PROGRAM EXPLAINER PAGE - STYLESHEET : Flow Theme v1.0.1
+        ===========================================   =====================
+        Provided by Smile.io.              www.smile.io
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
+
+/****************************************
+    [ Temporary Global Styles]
+****************************************/
+body {
+    margin: 0px;
+}
+
+/*********************
+    [ General Styles ]
+**********************/
+
+
+/* _______________
+   Common Headings
+*/
+.smileio-refer-a-friend-explainer h1,
+.smileio-refer-a-friend-explainer h2,
+.smileio-refer-a-friend-explainer h3 {
+    display: inline-block;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.smileio-refer-a-friend-explainer h2 {
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 34px;
+    margin: 25px auto 50px auto;
+    padding-bottom: 35px;
+    border-bottom: 2px solid;
+    color: black;
+    border-bottom-color: #ac9456;
+    
+}
+.smileio-refer-a-friend-explainer h3 {
+    width: 100%;
+    font-size: 30px;
+    font-weight: 300;
+    margin: 35px 0 40px 0;
+    text-align: left;
+}
+
+
+/* ____________________________________
+   Backgrounds, Sections & Descriptions
+*/
+.smileio-refer-a-friend-explainer section {
+    margin: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    /*max-width: 975px;*/
+    max-width:100%;
+}
+
+.smileio-refer-a-friend-explainer .section-description {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 22px;
+    max-width: 623px;
+    margin: auto;
+    color: #909090;
+}
+
+.smileio-refer-a-friend-explainer .background,
+.smileio-refer-a-friend-explainer .no-background{
+    
+    overflow: auto;
+    
+}
+.smileio-refer-a-friend-explainer .background {
+    background-repeat: no-repeat;           
+    -webkit-background-size: cover;  
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    background: url({{ 'smile_banner.png' | asset_url }}) no-repeat center center;      
+}
+
+/* __________
+   CTA Button
+*/
+.smileio-refer-a-friend-explainer .refer-a-friend-btn {
+    text-align:center;
+}
+.smileio-refer-a-friend-explainer .cta-button {
+    display: inline-block;
+    width: 400px;
+    padding: 20px 0px;
+    padding-left: 30px;
+    margin-top: 90px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    text-decoration: none;
+    box-sizing: content-box;
+    background-position:7% center;
+    background-repeat:no-repeat;
+    color: white;
+    background-color: {{ settings.smile_referral_brand_color }};
+    background-image:url({{ 'refer-a-friend-btn-icon.png' | asset_img_url }});
+    border-bottom: 3px solid {{ settings.smile_referral_accent_color }};
+}
+    .smileio-refer-a-friend-explainer .cta-button:hover {
+        background-color: {{ settings.smile_referral_accent_color }};
+    }
+
+@media screen and (max-width: 950px)
+    {
+        .smileio-refer-a-friend-explainer .cta-button {
+            font-size: 24px;
+            height: 26px;
+            width: 280px;
+        }
+    }
+    @media screen and (max-width: 700px)
+    {
+        .smileio-refer-a-friend-explainer .cta-button {
+            font-size: 19px;
+            height: 20px;
+            width: 226px;
+            padding-top: 10px;
+            margin-right: 0px;
+        }
+    }
+
+/* __________
+   Arrow
+*/
+.smileio-refer-a-friend-explainer .arrow {
+    display: inline-block;
+    width:32px;
+    height:18px;
+    margin-top:110px;
+    background-repeat:no-repeat;
+    margin-left: 48%;
+    background-image:url('{{ 'arrow.png' | asset_img_url }}');
+}
+
+@media screen and (max-width: 960px)
+    {
+        .smileio-refer-a-friend-explainer .arrow {
+            margin-left: 0%;
+        }
+    }   
+@media screen and (max-width: 700px)
+    {
+        .smileio-refer-a-friend-explainer .arrow {
+            margin-left: 0%;
+        }
+    
+   }
+
+/* ___________
+   Earning Box
+*/
+.smileio-refer-a-friend-explainer .earning-box {
+    display: inline-block;
+    vertical-align: top;
+    width: 270px;
+    margin: 0px 25px;
+    padding: 20px 10px 15px 10px;
+}
+
+   @media screen and (max-width: 700px)
+   {
+      .smileio-refer-a-friend-explainer .earning-box {
+          padding: 0px;
+          width: 320px;
+          margin: 0px 00px;
+      }
+   }
+
+.smileio-refer-a-friend-explainer .earning-box .earning-icon {
+    width: 100%;
+    background: transparent no-repeat bottom left;
+}
+.smileio-refer-a-friend-explainer .earning-box .earning-icon:before {
+    margin: 0;
+    font-size: 135px;
+    text-align: left;
+    color: {{ settings.smile_referral_brand_color }};
+}
+.smileio-refer-a-friend-explainer .earning-box .st-icon-refer-a-friend{
+    height:175px;
+    background-position:center;
+    background-image:url({{ 'refer-a-friend-icon.png' | asset_image_url: '175x' }});
+}
+
+.smileio-refer-a-friend-explainer .earning-box .st-icon-friend-joins{
+    height:175px;
+    background-position:center;
+    background-image:url({{ 'friend-joins-icon.png' | asset_image_url: '175x' }});
+}
+
+.smileio-refer-a-friend-explainer .earning-box .st-rewards-for-all{
+    height:175px;
+    background-position:center;
+    background-image:url({{ 'rewards-fo-all-icon.png' | asset_image_url: '175x' }});
+}
+
+.smileio-refer-a-friend-explainer .earning-box .earning-title {
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 50px;
+    color: {{ settings.smile_referral_content_color }};
+}
+.smileio-refer-a-friend-explainer .earning-box .earning-amount .points-value {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 50px;
+    border-bottom: 2px solid;
+    color: #ac9456;
+    border-bottom-color: #ac9456;
+}
+
+.smileio-refer-a-friend-explainer .earning-box .earning-amount .points-label {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #666;
+}
+
+.smileio-refer-a-friend-explainer .earning-box .earning-description {
+    margin-top: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: center;
+    color: {{ settings.smile_referral_content_color }};
+}
+
+/* ______________
+   Explainer Body
+*/
+.smileio-refer-a-friend-explainer {
+    margin: auto;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 26px;
+    text-align: center;
+    color: {{ settings.smile_referral_banner_color }};
+}
+
+/**********************
+    [ Program Summary ]
+**********************/
+.smileio-refer-a-friend-explainer .program-summary {
+    max-width: 1026px;
+    text-align: left;
+    margin-right: auto;
+    margin-left: auto;
+    min-height:920px;
+}
+
+.smileio-refer-a-friend-explainer .program-summary h1 {
+    font-size: 30.85pt;
+    font-weight: 300;
+    line-height: 35px;
+    margin-top: 427px;
+    text-transform: uppercase;
+    color: {{ settings.smile_referral_banner_color }};
+    text-align: center;
+
+}
+
+    @media screen and (max-width: 1024px)
+    {
+        .smileio-refer-a-friend-explainer .program-summary {
+            text-align: center;
+         }
+        .smileio-refer-a-friend-explainer .program-summary h1 {
+            font-size: 26pt;
+            line-height: 36px;
+            /*margin-top: 320px;*/
+        }
+    }
+    @media screen and (max-width: 960px)
+    {
+        .smileio-refer-a-friend-explainer .program-summary {
+            text-align: center;
+         }
+        .smileio-refer-a-friend-explainer .program-summary h1 {
+            font-size: 26pt;
+            line-height: 36px;
+            /*margin-top: 320px;*/
+        }
+    }
+    @media screen and (max-width: 700px)
+    {
+        .smileio-refer-a-friend-explainer .program-summary h1 {
+            font-size: 26px;
+            line-height: 30px;
+            /*margin-top: 50px;*/
+        }
+    }
+    
+
+.smileio-refer-a-friend-explainer .program-summary .program-description {
+    margin-top: 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-size:24px;
+    font-weight:400;
+    text-align:center;
+    line-height: 30px;
+    padding: 0px 80px;
+}
+    @media screen and (max-width: 700px)
+    {
+        .smileio-refer-a-friend-explainer .program-summary .program-description {
+            padding: 0px 0px;
+            font-size:16px;
+            line-height: 20px;
+        }
+    }
+
+/* _________________
+   Points Worth Box
+*/
+        .smileio-refer-a-friend-explainer .points-worth-box-bg {
+            background: #fafafa; /* Old browsers */
+            background: -moz-linear-gradient(top,  #fafafa 0%, #fafafa 49%, #fafafa 50%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top,  #fafafa 0%,#fafafa 49%,#fafafa 50%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom,  #fafafa 0%,#fafafa 49%,#fafafa 50%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+        }
+
+.smileio-refer-a-friend-explainer .points-worth-box {
+    margin: 35px auto;
+    padding: 50px 10px;
+    background-color: white;
+    border: 2px solid #ac9456;
+}
+
+.smileio-refer-a-friend-explainer .points-worth-box .label {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    padding: 0 20px;
+    vertical-align: middle;
+    white-space: nowrap;
+    color: #4a4a4a;
+}
+
+.smileio-refer-a-friend-explainer .points-worth-box .worth {
+    font-size: 20px;
+    font-weight: 400;
+    padding: 0 20px;
+    white-space: nowrap;
+    vertical-align: middle;
+    color: #4a4a4a;
+}
+
+.smileio-refer-a-friend-explainer .points-worth-box .points-icon {
+    margin: auto;
+    width: 50px;
+    height: 50px;
+    padding: 0 10px;
+    vertical-align: middle;
+    display: inline-block;
+    background: transparent no-repeat center;
+}
+
+    @media screen and (max-width: 950px)
+    {
+        .smileio-refer-a-friend-explainer .points-worth-box {
+            padding-top: 45px;
+            padding-bottom: 45px;
+        }
+        .smileio-refer-a-friend-explainer .points-worth-box .label {
+            font-size: 28px;
+        }
+        .smileio-refer-a-friend-explainer .points-worth-box .worth {
+            font-size: 19px;
+        }
+    }
+    @media screen and (max-width: 900px)
+    {
+        .smileio-refer-a-friend-explainer .points-worth-box {
+            padding: 30px 10px;
+        }
+        .smileio-refer-a-friend-explainer .points-worth-box .points-icon {
+            display: block;
+            padding: 25px 10px;
+        }
+    }
+    @media screen and (max-width: 500px)
+    {
+        .smileio-refer-a-friend-explainer .points-worth-box .label {
+            font-size: 26px;
+        }
+        .smileio-refer-a-friend-explainer .points-worth-box .worth {
+            font-size: 18px;
+        }
+    }
+
+
+
+/*********************
+    [ Earning Legend ]
+*********************/
+.smileio-refer-a-friend-explainer .earning-legend .refer-a-friend-earning-options {
+    margin: 20px auto;
+    text-align: center;
+}
+    /* 3 items per row:  */
+    @media screen and (max-width: 990px)
+    {
+        .smileio-refer-a-friend-explainer .earning-legend .refer-a-friend-earning-options {
+            max-width: 730px;
+        }
+    }
+    /* 2 items per row: */
+    @media screen and (max-width: 750px)
+    {
+        .smileio-refer-a-friend-explainer .earning-legend .refer-a-friend-earning-options {
+            max-width: 485px;
+        }
+    }
+    /* 1 items per row: */
+    @media screen and (max-width: 510px)
+    {
+        .smileio-refer-a-friend-explainer .earning-legend .refer-a-friend-earning-options {
+            max-width: 485px;
+        }
+        .smileio-refer-a-friend-explainer .earning-legend .earning-box {
+            margin-top: 20px;
+        }
+    }
+
+
+/**********************
+    [ Invite a Friend ]
+**********************/
+.smileio-refer-a-friend-explainer .referral-box {
+    display: inline-block;
+    margin: 54px auto auto auto;
+    padding: 35px 25px;
+    width: 216px;
+    background-color: white;
+    border: 2px solid #ac9456;
+    border-bottom: 7px solid #ac9456;
+}
+
+.smileio-refer-a-friend-explainer .referral-box .earning-box {
+    margin: auto;
+    width: 126px;
+}
+.smileio-refer-a-friend-explainer .referral-box .earning-icon {
+    background-position: center;
+}
+
+/**********
+    [ FAQ ]
+***********/
+.smileio-refer-a-friend-explainer .faq {
+    max-width: 650px;
+}
+.smileio-refer-a-friend-explainer .faq-bg {
+    /*margin-top: 30px;*/
+    border-top: solid 4px;
+}
+
+.smileio-refer-a-friend-explainer .faq h3 {
+   color: {{ settings.smile_referral_content_color }};
+   text-align:center;
+   font-size: 26px;
+}
+.smileio-refer-a-friend-explainer .faq .question-list {
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+.smileio-refer-a-friend-explainer .faq .question {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: {{ settings.smile_referral_brand_color }};
+    border-bottom-color: {{ settings.smile_referral_brand_color }};
+}
+
+.smileio-refer-a-friend-explainer .faq .answer {
+    margin: 30px 0px 30px 10px;
+    padding-left:40px;
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align:left;
+    background-repeat: no-repeat;
+    background-position:0% 20%;
+    color: {{ settings.smile_referral_content_color }};
+    background-image: url({{ 'faq-ans.png' | asset_img_url }});    
+}
+        
+        
+/* Footer */ 
+.smileio-refer-a-friend-explainer .footer-bg {
+    margin-top: 100px;
+    border-top: solid 4px;
+    background:#333333;
+}
+
+.smileio-refer-a-friend-explainer .footer {
+    padding:100px 0px;
+}
+.smileio-refer-a-friend-explainer .footer h2 {
+    color:#E7E3E3;
+    margin:auto;
+    line-height:normal;
+    font-weight:300;
+    font-size:26px;
+    border-bottom:0px;
+}
+
+.smileio-refer-a-friend-explainer .footer .cta-button {
+    margin-top: 20px;
+    width:222px;
+    font-size:19px;
+    line-height:38px;
+    padding: 12px 0px;
+    padding-left:34px;
+    background-position: 6% center;
+}
+
+.smileio-refer-a-friend-explainer.golden .footer .cta-button {
+    background-color: {{ settings.smile_referral_brand_color }}
+}
+
+    @media screen and (max-width: 950px) {
+        .smileio-refer-a-friend-explainer .footer .cta-button {
+            height: 36px;
+    }
+}
+

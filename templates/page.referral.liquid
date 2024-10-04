@@ -1,0 +1,144 @@
+<!--
+        LOYALTY PROGRAM Refer a Friend EXPLAINER PAGE - HTML TEMPLATE : Flow Theme v1.0
+        ==============================================   ==================
+        Provided by Smile.io.              www.smile.io
+ -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    {{ 'smile-referral.css' | asset_url | stylesheet_tag }}
+
+    <title>{{ page.title }}</title>
+</head>
+
+<body>
+    <div class="smileio-refer-a-friend-explainer">
+        <div class="background program-summary-bg">
+                <section class="program-summary">
+                    <h1>{{ settings.smile_referral_header }}</h1>
+                    <div class="program-description">
+                        {{ settings.smile_referral_desc}}
+                    </div>
+                    {% if customer %}
+                    <div class="refer-a-friend-btn">
+                       <a class="cta-button" href="#" data-st-intent="st:referrals:offers">{{ settings.smile_referral_cta }}</a>
+                    </div>
+                    {% else %}
+                    <div class="refer-a-friend-btn">
+                       <a class="cta-button" href="/account/login">Log in to Refer a Friend Now</a>
+                    </div>
+                    {% endif %}
+                    <div class="arrow"></div>
+                </section>
+        </div>
+
+        <div class="background points-worth-box-bg">
+            <section class="earning-legend">
+                
+                <div class="refer-a-friend-earning-options">
+                    <!-- Example 1 -->
+                    <div class="earning-box">
+                        <div class="earning-icon st-icon-refer-a-friend"></div>
+                        <div class="earning-title">
+                            {{ settings.smile_referral_refer_title }}
+                        </div>
+                        <div class="earning-description">
+                            {{ settings.smile_referral_refer_desc }}
+                        </div>
+                    </div>
+
+                    <!-- Example 2 -->
+                    <div class="earning-box">
+                        <div class="earning-icon st-icon-friend-joins"></div>
+                        <div class="earning-title">
+                            {{ settings.smile_referral_friend_title }}
+                        </div>
+                        <div class="earning-description">
+                            {{ settings.smile_referral_friend_desc }}
+                        </div>
+                    </div>
+
+                    <!-- Example 3 -->
+                    <div class="earning-box">
+                        <div class="earning-icon st-rewards-for-all"></div>
+                        <div class="earning-title">
+                            {{ settings.smile_referral_rewards_header }}
+                        </div>
+                        <div class="earning-description">
+                            {{ settings.smile_referral_rewards_desc }}
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+            </section>
+
+        </div>
+
+        
+
+        
+
+        <div class="no-background faq-bg">
+            <section class="faq">
+                <h3>{{ settings.smile_referral_faq_header }}</h3>
+                <ul class="question-list">
+                    <!-- ===========================================================
+                         FAQ Questions and Answers.
+                        * Copy,Paste and modify as needed.
+                        ============================================================ -->
+
+                    <!-- Example 1 -->
+                    <li class="question">
+                        <span>Q. {{ settings.smile_referral_faq_q1 }}</span>
+                        <span class="answer">
+                        {{ settings.smile_referral_faq_a1 }}
+                        </span>
+                    </li>
+
+                    <!-- Example 2 -->
+                    <li class="question">
+                        <span>Q. {{ settings.smile_referral_faq_q2 }}</span>
+                        <span class="answer">
+                          {{ settings.smile_referral_faq_a2 }}
+                        </span>
+                    </li>
+
+                    <!-- Example 3 -->
+                    <li class="question">
+                        <span>Q. {{ settings.smile_referral_faq_q3 }}
+                        </span>
+                        <span class="answer">
+                           {{ settings.smile_referral_faq_a3 }}
+                        </span>
+                    </li>
+
+                    <!-- Example 4 -->
+                    <li class="question">
+                        <span>Q. {{ settings.smile_referral_faq_q4 }}</span>
+                        <span class="answer">
+                           {{ settings.smile_referral_faq_a4 }}
+                        </span>
+                    </li>
+
+                    <!-- Example 5 -->
+                    <li class="question">
+                        <span>Q. {{ settings.smile_referral_faq_q5 }}</span>
+                        <span class="answer">
+                            {{ settings.smile_referral_faq_a5 }}
+                        </span>
+                    </li>
+                </ul>
+            </section>
+        </div>        
+    </div>
+    
+    <!-- ===========================================================================
+         Loyalty Page Explainer content ends here.
+         =========================================================================== -->
+</body>
+</html>

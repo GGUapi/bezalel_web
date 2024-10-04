@@ -1,0 +1,2588 @@
+{% include 'bold-product' with product, hide_action: 'break', output: 'none' %}
+<link rel="stylesheet" href="{{ 'popup_style.css' | asset_url }}" type="text/css">
+
+
+<div class="futura-buy futura-buy-white buy-page" id="OmniaXMagSafe-SinglePage-3">
+
+
+    <!---->
+
+
+
+    <!---->
+    <section class="full-width white-bg product-wrap">
+
+        <div class="container container-padding">
+
+          	<div class="product">
+
+                <!--img area--->
+
+                <div class="redline">
+                  <!--img area--->
+
+
+                                    <div class="product-image redline3">
+                                    <!--<p style = "color:#4B9BE1;">預購預計 5 月下旬到貨</p>-->
+                                    <div class="product-title">{{ product.title }}</div>
+                                    <h6>{{ product.description }}</h6><br>
+                                    <div class="product-above-image-content-mobile">
+                      
+                                        {% assign current_variant = bold_selected_or_first_available_variant %}
+                                        {% assign featured_image = current_variant.featured_image | default: product.featured_image %}                          
+                                    <div class="prices-wrap">
+                                            {% if current_variant.price < current_variant.compare_at_price %}<span class="ComparePrice">{{ current_variant.compare_at_price | money }}</span>&nbsp;&nbsp;{% endif %}
+                                            <h3 class="price ProductPrice color_discount">
+                                                {{ current_variant.price | money }}   
+                                            </h3>
+                                        </div>
+                                     
+
+
+                    
+                                    </div>
+                                  
+                                    <div id="slider" class="regular-slider flexslider">
+                                      <ul class="slides">
+                                          {% if product.images.size > 0 %}
+                                                <li class="slide featured" data-index="0" data-variant-img="{{ featured_image.id }}" data-thumb="{{ featured_image | img_url: 'small' }}">
+                                                    <img src="{{ featured_image | img_url: 'grande' }}" width="440" height="440" alt="{{ featured_image.alt | escape }}">
+                                                </li>
+                                          {% if product.images.size > 1 %}
+                                            {% assign index = 0 %}
+                                              {% for image in product.images %}
+                                                {% unless image contains featured_image %}
+                                                  {% assign index = index | plus: 1 %}
+                                                  {% if image.alt contains 'youtube' %}
+                                                    <li class="slide{% if image.alt contains 'youtube' %} video{% endif %}" data-index="{{ index }}" data-variant-img="{{ image.id }}" data-thumb="{{ image | img_url: 'small' }}">
+                                                            <iframe src="{{ image.alt }}" frameborder="0" allowfullscreen></iframe>
+                                                        </li>
+                                                  {% else %}
+                                                    <li class="slide" data-index="{{ index }}" data-variant-img="{{ image.id }}" data-thumb="{{ image | img_url: 'small' }}">
+                                                        <img src="{{ image | img_url: 'grande' }}" width="440" height="440" alt="{{ image.alt | escape }}">
+                                                    </li>
+                                                  {% endif %}
+                                                {% endunless %}
+                                              {% endfor %}
+                                          {% endif %}
+                                          {% else %}
+                                          <li class="slide">
+                                              <img src="{{ 'no-image.svg' | asset_url }}" alt="*">
+                                          </li>
+                                          {% endif %}
+                    
+                                      </ul>
+                                    </div>
+                                </div>
+                  <!--img area--->
+                </div>
+                <div class="redline2">
+                  <!---p R--->
+                  <div class="product-content redline2"> 
+              <!--桌面大小的商品內容顯示-->
+				<div class="product-above-image-content-desktop fix1">
+   
+                    {% assign current_variant = bold_selected_or_first_available_variant %}
+                    {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+                    
+                  
+                  <div class="prices-wrap">
+                       
+                        <h3 class="price ProductPrice color_discount">
+                            {{ current_variant.price | money }}   
+                        </h3>
+                        {% if current_variant.price < current_variant.compare_at_price %}<span class="ComparePrice">&nbsp;&nbsp;&nbsp;&nbsp;{{ current_variant.compare_at_price | money }}</span>&nbsp;&nbsp;{% endif %}
+                    </div>
+
+
+ 
+
+              
+                  
+              	</div>
+				              
+                	
+
+				{% assign preorder = false %}
+				{% if product.available %}
+              		{% for tag in product.tags %}
+              			{% if tag == 'preorder' %}
+              				{% assign preorder = true %}
+              			{% endif %}
+              		{% endfor %}
+              	{% endif %}
+
+                <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+
+                  <div class="buy-row swatches">
+
+                      <select name="id" id="product-select-{{ product.id }}" class="product-single__variants">
+                        
+                        {% for variant in product.variants %}
+						
+                        {% include 'bold-hidden-variants' with variant, bold_loop: 'loop' %}
+
+                        {% if variant.available %}
+
+                            <option {% if variant == current_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+
+                          {% else %}
+                            <option disabled="disabled">
+                              {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                            </option>
+                          {% endif %}
+                        {% endfor %}
+                   
+                      </select>
+                          {% for option in product.options %}
+                            {% include 'swatch' with option %}
+                          {% endfor %}
+                   	</div>
+                               <!-----> 
+                  	<div class="buy-row quantity-row">
+                        <div class="form__column quantity-selector">
+                            <p for="Quantity" class="quantity-selector" style="color:#000!important;">{{ 'products.product.quantity' | t }}</p> <!--數量字-->
+                            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="qty-remove-defaults quantity-selector" style="color:#000!important;" >
+                        </div>   
+                        <!--<button type="submit" name="add" id="AddToCart" class="btn" style = "position:fixed;right:100px;top:100px;">
+                            <span id="AddToCartText">現貨搶購</span><!--下方js $addToCartText
+                        </button> -->
+                        <button type="submit" name="add" id="AddToCart" class="btn" style = "background-color:#FFF;color:#000;">
+                            <span id="AddToCartText">加到購物車</span><!--下方js $addToCartText-->
+                        </button>
+                  	</div> 
+                  
+                    <div class="buy-row add-ons">  
+                      
+                    <label itemprop="name">加購</label>
+                        <!--
+                      	<div id="w3-product-accessories">
+                        	<div id="w3-money-format" style="display:none;">{{ shop.money_format }}</div>
+                      	</div> -->  
+                        <div id="w3-product-accessories" data-product-handle="{{ product.handle }}">
+                          <div id="w3-money-format" style="display:none;">{{ shop.money_format }}</div>
+                        </div>
+                        <div id="w3-product-accessories" data-product-handle="{{ product.handle }}">
+                          <div id="w3-money-format" style="display:none;">{{ shop.money_format }}</div>
+                        </div>
+
+                        <article class="faq-item warranty">
+                          <div itemprop="mainEntity" itemtype="https://schema.org/Question">
+                            <div class="faq-question faq-animation">
+                              <p itemprop="name">保證</p>
+                                  <span class="ease-animation-slow"></span>
+                              </div>
+                            <div class="content antialiasing hidden" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                              <div itemprop="text">
+                                      <p>1年保固</p>
+                    <p>自購買日起，所有倍加能產品享有一年保固。</p>
+                                      <p><strong><a href="/pages/warranty" target="_blank" title="更多保固訊息">更多保固訊息</a></strong></p>
+                              </div>
+                            </div>
+                          </div>
+                      </article>
+                    
+					</div>
+                </form>
+
+            	</div>
+                  <!-----P R---->
+                <div>
+          </div>
+		</div>
+            </div>
+        </div>
+    </section>
+         
+
+         
+	<span class="anchor" id="section1"></span>
+ 
+                                      
+</div>
+
+  
+{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+{{ 'flexslider.js' | asset_url | script_tag }}
+<script>   
+  	var selectCallback = function(variant, selector) {
+
+  	var $addToCart = $('#AddToCart'),
+      	$productPrice = $('.ProductPrice'),
+      	$comparePrice = $('.ComparePrice'),
+      	$quantityElements = $('.quantity-selector'),
+      	$addToCartText = $('#AddToCartText'),
+        
+      	moneyFormat = "{{ shop.money_format }}";
+
+    	if (variant && variant.available == true) {
+            $addToCart.removeClass('btn--disabled').prop('disabled', false);
+            $quantityElements.removeClass('hidden');
+            $addToCartText.text({{ 'products.product.add_to_cart' | t | json }});
+
+      	if (variant.featured_image) {
+        	var newImg = $('#slider').find('.slide[data-variant-img="' + variant.featured_image.id + '"]');
+        	if (newImg.length > 0) {
+          		if ($('#slider').hasClass('loaded')) {
+            		$('#slider').flexslider(newImg.data('index'));
+          		} else {
+            		$('#slider').data('loaded-index', newImg.data('index'));
+          		}
+        	}
+      	}
+
+        if ( variant.compare_at_price > variant.price ) {
+            $comparePrice.html(Shopify.formatMoney(variant.compare_at_price, moneyFormat)).show();
+            $productPrice.html(Shopify.formatMoney(variant.price,  moneyFormat)) + Shopify.formatMoney(variant.compare_at_price, moneyFormat);
+        } else {
+            $comparePrice.hide();
+            $productPrice.html(Shopify.formatMoney(variant.price, moneyFormat));
+        }
+          
+        var form = jQuery('#' + selector.domIdPrefix).closest('form');
+      	for (var i=0,length=variant.options.length; i<length; i++) {
+        	var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+        	if (radioButton.size()) {
+          	radioButton.get(0).checked = true;
+        	}
+      	}
+
+    } else {
+
+      	$addToCart.addClass('btn--disabled').prop('disabled', true);
+      	$addToCartText.text("{{ 'products.product.unavailable' | t }}");
+      	$quantityElements.addClass('hidden');
+    } 
+      //edit 2022/04/06 addToCartText
+      
+
+
+        $(".swatch-element input:radio").on('mouseover', function(){
+          $(this).parent().addClass('active-swatch-single-variant');
+        });
+
+        $(".swatch-element input:radio").on('mouseout', function(){
+          $(this).parent().removeClass('active-swatch-single-variant');
+        });
+      $(".swatch-element input:radio").on('click', function(){
+        if ($(this).attr('checked', 'checked')){
+           	$(this).parent().addClass('active-swatch-single-variant');
+          	$(this).parent().siblings().removeClass('active-swatch-single-variant');
+        } else {
+           $(this).parent().removeClass('active-swatch-single-variant');
+       }
+    });     
+
+  };
+
+  jQuery(function($) {
+      	new Shopify.OptionSelectors('product-select-{{ product.id }}', {
+      	product: bold_product_json[{{ product.id }}],
+      	onVariantSelected: selectCallback,
+      	enableHistoryState: false
+    });
+
+    {% if product.options.size == 1 %}
+      {% if product.options.first != "Title" %}
+        $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">{{ product.options.first | escape }}</label>');
+      {% else %}
+        $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">&nbsp;</label>');
+      {% endif %}
+    {% endif %}
+
+    {% if bold_variants_size == 1 and product.variants.first.title contains 'Default' %}
+      $('.selector-wrapper').hide();
+    {% endif %}
+  });
+    
+  jQuery(function(){$(document).on("click",".faq-item .faq-question",function(){$(this).parent().find(".content").is(":visible")||($(".faq-item .content").slideUp(),$(".faq-item .faq-question").removeClass("active")),$(this).toggleClass("active").parent().find(".content").slideToggle()})});
+
+  jQuery(document).ready(function() {
+      $('.swatch-element.black').addClass('active-swatch-single-variant');
+
+      if ($('.regular-slider').length > 0) {
+
+        $('.regular-slider.flexslider').imagesLoaded(function() {
+          var sliderArgs = {
+              animation: 'slide',
+              animationSpeed: 300,    
+              slideshow: false,
+              slideshowSpeed: 5000,
+              directionNav: true,
+              keyboard: true,
+              prevText: '',
+              nextText: '',
+              smoothHeight: true,
+              controlNav: 'thumbnails',
+              controlsContainer: $('.custom-controls-container'),
+              customDirectionNav: $('.custom-navigation a'),
+              start: function(slider) {
+                  if ($(slider).find('.slide').not('.clone').length === 1) {
+                    $(slider).find('.flex-direction-nav').remove();
+                  }
+                  $(window).trigger('resize');
+                  slider.addClass('loaded');
+                  if ($('#slider').data('loaded-index') != undefined) {
+                    $('#slider').flexslider($('#slider').data('loaded-index'));
+                  }
+                  $('.flex-control-thumbs img').each(function() {
+                      if ($(this).prop('alt') != 'Black') {
+//                           $(this).parent('li').addClass('hide');
+                      }                	
+                  })
+                  $('.flex-control-thumbs').addClass('show');
+              }
+          };
+
+          if ($('.regular-slider.flexslider').find('li').length === 1) {
+            sliderArgs.touch = false;
+          }
+
+          $('.regular-slider.flexslider').flexslider(sliderArgs);
+        });
+      }
+   });
+
+//Tab function
+$(document).ready(function() {
+  $('.tab-item').click(function() {
+    $('.tab-item').removeClass('active');
+    $(this).addClass('active');
+    var tabId = $(this).data('tab');
+    $('.tab-pane').removeClass('active');
+    $('#' + tabId).addClass('active');
+  });
+});
+
+    // 開啟彈跳視窗
+    function openModal() {
+        document.getElementById('modalOverlay').style.display = 'block';
+    }
+
+    function openModal2() {
+        document.getElementById('modalOverlay2').style.display = 'block';
+    }
+
+    function openModal3() {
+        document.getElementById('modalOverlay3').style.display = 'block';
+    }
+
+    // 關閉彈跳視窗
+    function closeModal() {
+        document.getElementById('modalOverlay').style.display = 'none';
+    }
+
+    function closeModal2() {
+        document.getElementById('modalOverlay2').style.display = 'none';
+    }
+
+    function closeModal3() {
+        document.getElementById('modalOverlay3').style.display = 'none';
+    }
+
+    function scrollToTop() {
+            window.scrollTo(0, 400);
+    }
+
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("carousel-images")[0].getElementsByClassName("carouselItems");
+        let dots = document.getElementsByClassName("carousel-button");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        slides[slideIndex-1].style.display = "flex";
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        dots[slideIndex-1].className += " active";
+        setTimeout(showSlides, 500000); 
+        
+    }
+
+    function setCurrentSlide(n) {
+        slideIndex = n - 1;  
+        showSlides();
+        clearTimeout(autoSlide);  
+        autoSlide = setTimeout(showSlides, 500000);  
+    }
+
+
+
+</script>
+
+<style>
+
+{% assign width = '40px' %}
+{% assign height = '40px' %}
+.swatch { 
+  margin:1em 0 0; 
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch .header {
+  margin: 0.5em 0;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch input { 
+  display:none;
+}
+.swatch label {
+  float:left;
+  width:400px;
+  height:{{ height }} !important;
+  margin:0;
+  font-size:16px !important;
+  text-align:center;
+  line-height:{{ height }};
+  white-space:nowrap;
+  text-transform:uppercase;
+  border: 1px solid black !important;
+  background-color:#EAEAEA !important;
+  color: #5C5D62!important;
+    /*GGG*/
+    border-radius: 100px;
+    /*GGG*/
+}
+
+.swatch label:hover{
+  background-color:#4b9be1!important;
+  color:#FFF !important;
+  border:none !important;
+}
+.swatch-element label { padding:0 10px; }
+.color.swatch-element label { padding:0;  border-radius: 0; }
+.swatch .swatch-element {
+  float:left;
+  -webkit-transform:translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing:antialiased; /* webkit text rendering fix */
+  margin:0px 10px 10px 0;
+  position:relative;
+    /*GGG*/
+    border-radius: 0px;
+    /*GGG*/
+}
+/* Image with the cross in it */
+.crossed-out { 
+  position:absolute; width:100%; height:100%; left:0; top:0; 
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch .swatch-element .crossed-out { display:none; }
+.swatch .swatch-element.soldout .crossed-out { display:block; }
+.swatch .swatch-element.soldout label {
+  filter: alpha(opacity=60); /* internet explorer */
+  -khtml-opacity: 0.6;      /* khtml, old safari */
+  -moz-opacity: 0.6;       /* mozilla, netscape */
+  opacity: 0.6;           /* fx, safari, opera */
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+/* Tooltips */
+.swatch .tooltip {
+  text-align:center;
+  background:#343339;
+  color:#fff;
+  bottom:100%;
+  padding: 10px;
+  display:block;
+  position:absolute;
+  width:100px;
+  left:{{ width | remove: 'px' | to_number | divided_by: 2 | minus: 50 | plus: 2 }}px;
+  margin-bottom:15px;
+  /* Make it invisible by default */
+  filter:alpha(opacity=0);
+  -khtml-opacity: 0;
+  -moz-opacity: 0;
+  opacity:0;
+  visibility:hidden;
+  /* Animations */
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  z-index: 10000;
+  -moz-box-sizing:border-box; 
+  -webkit-box-sizing:border-box; 
+  box-sizing:border-box;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch .tooltip:before {
+  bottom:-20px;
+  content:" ";
+  display:block;
+  height:20px;
+  left:0;
+  position:absolute;
+  width:100%;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+/* CSS triangle */
+.swatch .tooltip:after {
+  border-left:solid transparent 10px;
+  border-right:solid transparent 10px;
+  border-top:solid #343339 10px;
+  bottom:-10px;
+  content:" ";
+  height:0;
+  left:50%;
+  margin-left:-13px;
+  position:absolute;
+  width:0;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch .swatch-element:hover .tooltip {
+  filter:alpha(opacity=100);
+  -khtml-opacity:1;
+  -moz-opacity:1;
+  opacity:1;
+  visibility:visible;
+  -webkit-transform:translateY(0px);
+     -moz-transform:translateY(0px);
+      -ms-transform:translateY(0px);
+       -o-transform:translateY(0px);
+          transform:translateY(0px);
+            /*GGG*/
+  border-radius: 0px;
+  /*GGG*/
+}
+.swatch.error {
+  background-color:#E8D2D2!important;
+  color:#333!important;
+  padding:1em;
+  border-radius:5px;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch.error p {
+  margin:0.7em 0;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch.error p:first-child {
+  margin-top:0;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch.error p:last-child {
+  margin-bottom:0;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch.error code {
+  font-family:monospace;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+
+.layoutTest{
+  
+}
+
+.fullh2{
+  text-align:center !important;
+}
+
+.fullp{
+  text-align:center !important;
+}
+
+.product-wrap .ComparePrice{
+  
+  float: left;
+  display: inline-block;
+  padding: 5px 5px 5px 10px;
+  margin: 3px 10px 0 0;
+  font-family: "Mark", Arial, sans-serif !important;
+  font-size: 16px !important;
+  width: auto;
+  line-height: 1.4;
+  text-decoration: line-through;
+  color: #929292;
+}
+
+
+.flex-container {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .layoutTestLeft{
+  background-color:green!important
+}
+    .layoutTestRight{
+  
+}
+
+a.jdgm-write-rev-link{
+  display:block !important;
+}
+
+.futura-buy-white .product-wrap .input-holder svg path, .omnia-buy-white .product-wrap .input-holder svg path, .cable-buy-white .product-wrap .input-holder svg path {
+  
+  fill: #000 !important;
+}
+  .layoutTestFull{
+    text-align:center;
+  }
+
+.fixBorder{
+  background-color:#EAEAEA!important;
+}
+
+.fixbackground{
+  padding-top:80px;
+}
+
+.fixbackground2{
+
+}
+.fixbackground3{
+    background-image: url({{'NewPreludeXMagSafeGIF-R.gif'|asset_url}});
+
+    background-size: cover;
+    background-position: left top;
+    background-repeat: no-repeat;
+      height: 100%;
+  flex-grow: 1;
+}
+
+.fixbackground4{
+    /**/background-image: url({{'NewPreludeXMagSafe_4_3_6.jpg'|asset_url}});
+    background-size: cover;
+    background-position: left top;
+    background-repeat: no-repeat;
+      height: 100%;
+  flex-grow: 1;
+}
+
+.fixbackground5{
+    background-color:#FFFFFF;
+    color:#454549;
+    padding-top:1em;
+    padding-bottom:1em;
+}
+
+.contextWord{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+.fontReset1{
+    color:#343439;
+}
+
+.kol{
+  display:none;
+  width:420px;
+  background-color:#d9d9d9;
+  padding:30px;
+  align-items:center;
+  border-radius:10px;
+  height:205px;
+}
+
+.pc{
+  display:flex;
+}
+
+.kolname{
+  margin-bottom:0px;
+  font-weight:700;
+  font-size:22px;
+}
+
+.fontReset2{
+    color:#FFFFFF;
+}
+
+.fixDivPadding{
+    padding-top:3em;
+    padding-bottom:3em;
+}
+  
+.bannerPic{
+    background-image: url({{'NewPreludeXMagSafe16_10.jpg'|asset_url}});
+    background-repeat: no-repeat;
+    background-size: contain;
+    width:auto;
+    height:auto;
+}
+
+.backIMG{
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index:-1;
+}
+
+.iconIMG img{
+    width:78px; 
+    
+}
+
+/*先把所有div的padding消掉*/
+div {
+    --bs-gutter-x: 0!important;
+    margin: 0;
+    padding: 0;
+  }
+
+/*有需要padding的再自己修*/
+
+
+.fix1{
+    display: flex;
+    align-items: flex-start;
+}
+
+.fix2{
+    align:center;
+}
+
+/*改內文寬度，要注意是否會影響到其他的*/
+#features-section h2, #features-section p {
+  text-align: left;
+  /* max-width: 350px; */
+  max-width: 400px;
+}
+
+.fix3{
+    border-bottom:2px;
+    border-style:solid;
+    border-color:#f0f0f0;
+    text-align: center;
+    line-height: 1.6;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+  .tab-menu {
+  display: flex;
+  justify-content: space-between;
+  background-color: #eee;
+  height: auto;
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  
+}
+
+.tab-itemAre{
+  padding:0px!important;
+}
+
+.tab-item.active {
+  background-color: #f0f0f0;
+  
+}
+
+.tab-content {
+  min-height: 150px;
+  background-color: #454549!important;
+  padding-top: 3em!important;
+  padding-left: 10%!important;
+  padding-right: 3%!important;
+  color: #000000;
+}
+
+.tab-content-2{
+  width:100%;
+  font-size: 24px;
+}
+
+.tab-pane {
+  display: none;
+  
+}
+
+.tab-pane.active {
+  display: block;
+  
+}
+
+.prices-wrap h3.color_discount {
+  color: black !important;
+  font-size:30px;
+}
+
+.right-btn {
+    float: right;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #333;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .right-btn:hover {
+    font-weight: bold;
+  }
+  
+  .right-btn:hover, .right-btn:focus {
+    color: #555;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FFF;
+    color: #333;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn:hover {
+    font-weight: bold;
+  }
+  
+  .btn:hover, .btn:focus {
+    color: white !important;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /*改動說明書下載按鈕樣式*/
+  .button {
+    display: flex;
+    background-color: #FFF;
+    color: #4B9BE1;
+    border: none;
+    border-radius:10px;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: normal;
+    text-decoration: none;
+    cursor: pointer;
+    transition: font-weight 0.2s ease-in-out;
+    width:300px;
+    height:85px;
+    justify-content:center;
+    align-items:center;
+  }
+  
+  .button:hover {
+    background-color: #4B9BE1;
+    color: #FFF;
+  }
+
+  .img-container {
+    position: relative;
+  }
+
+  .img-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .img-container:hover::before {
+    opacity: 1;
+  }
+  
+  .img-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: brightness(0.5);
+  }
+
+  .iconContextFix{
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 可以讓內容垂直置中 */
+}
+
+#features-section img{
+  margin:50px 0px;
+  border-radius:5px;
+}
+
+p{
+  font-size:16px;
+}
+
+.Mbanner{
+  display:none;
+}
+  
+.prelude{
+  display:flex;
+  gap:30px;
+  position:relative;
+  top:150px;
+}
+
+.preludeButton{
+  width:235px;
+  height:45px;
+  padding:10px 20px;
+  border-radius:100px !important;
+  background-color:white;
+  color:#4B9BE1;
+  font-size:16px;
+}
+
+.preludeButton:hover{
+  background-color:#4B9BE1;
+  color:white;
+  opacity:1;
+}  
+
+.single{
+  position:relative;
+  top:145px;
+}
+  
+.pop{
+  text-decoration:underline;
+  font-size:16px;
+  color:#808080;
+  background-color: #EAEAEA;
+  padding-inline: 0px;
+}
+
+    /* 覆蓋整個頁面的背景 */
+    .overlay {
+        display: none; /* 預設不顯示 */
+        position: fixed; /* 固定位置，不隨滾動條滾動 */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+        z-index: 1000; /* 確保覆蓋其他元素 */
+    }
+
+  .overlay p{
+    font-size:15px;
+    color:#000000 !important;
+    text-align:left;
+  }
+
+  .overlay h2{
+    font-size:24px;
+    color:#000000 !important;
+    text-align:left;
+  }
+
+  .popimg1{
+    width:550px;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'NewMount1.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius:5px;
+  }
+
+  .popimg2{
+    width:550px !important;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'NewMount2.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius:5px;
+  }
+
+  .popimg3{
+    width:550px !important;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'NewMount3.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius:5px;
+  }
+
+  .multi{
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 80px;
+  }
+
+    /* 彈跳視窗的樣式 */
+    .modal {
+        position: fixed;
+        display:flex;
+        background-color: white;
+        width: 650px;
+        height: 450px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 50px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1001; /* 比背景高一級的 zIndex */
+        align-items:center;
+        gap:30px;
+        border-radius:20px;
+        justify-content:center;
+    }
+
+    .modal2 {
+        position: fixed;
+        display:flex;
+        background-color: white;
+        width: auto;
+        height: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 50px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1001; /* 比背景高一級的 zIndex */
+        align-items:center;
+        gap:30px;
+        border-radius:20px;
+    }
+
+    .modal3 {
+        position: fixed;
+        display:flex;
+        background-color: white;
+        width: 650px;
+        height: 450px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 50px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1001; /* 比背景高一級的 zIndex */
+        align-items:center;
+        gap:30px;
+        border-radius:20px;
+    }
+
+    /* 關閉按鈕的樣式 */
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 600px;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-color: #D9d9d9;
+        font-size: 22px;
+        text-align: center;
+        border-radius: 100px;
+    }
+
+    .close-btn2 {
+        position: absolute;
+        top: 15px;
+        right: 60px;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-color: #D9d9d9;
+        font-size: 22px;
+        text-align: center;
+        border-radius: 100px;
+    }
+
+        .carousel-container {
+            max-width: 1920px;
+            position: relative;
+            margin-inline: 0%;
+            overflow-x:scroll;
+            display:flex;
+            gap:20px;
+            justify-content:center;
+            height:250px;
+        }
+
+        .carousel-container::-webkit-scrollbar{
+          display:none;
+        }
+
+        .carousel-images img {
+            width: 100%;
+            height: auto;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .carousel-button {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-button:hover {
+            background-color: #717171;
+        }
+
+        .carousel-button.active {
+            background-color: #333;
+        }
+
+  .carouselItems{
+    display:flex;
+    gap:20px;
+  }
+
+  .Limg{
+    padding-left:31% !important;
+    padding-right:30px !important;
+    background-image:none;
+  }
+
+  .Rimg{
+    padding-left:30px !important;
+    padding-right:31% !important;
+    background-image:none;
+  }
+
+  
+  .mobile{
+    display:none;
+  }
+
+  .product{
+    padding-inline:14%;
+  }
+
+  .titledemo{
+    font-size:22px;
+    text-align:left;
+    margin-bottom:30px;
+  }
+
+  .contentdemo{
+    padding-left:31%;
+  }
+
+  .contentdemo2{
+    padding-right:0%;
+    position:relative;
+    top:83px;
+  }
+
+  .demoh2{
+    font-size:12px;
+    text-align:left;
+  }
+
+  .demop{
+    font-size:12px;
+    text-align:left;
+    margin-bottom:30px;
+  }
+
+  .intro{
+    margin-bottom:100px;
+  }
+
+.Bigbanner{
+  height:auto !important;
+  padding-right:0px !important;
+}
+
+.main-content{
+  background-color:#EAEAEA;
+}
+
+.space-p-b-80{
+  padding-bottom:0px;
+}
+
+.grayword{
+  margin-top:0px;
+  position:relative;
+  top:145px;
+  
+}
+
+.gray1{
+  top:160px;
+}
+
+.gray2{
+  top:155px;
+}
+  
+/*購物區標題*/
+quantity-selector label, .swatch .header, .quantity-row label {
+  margin: 0.5em 0 !important;
+  text-transform: none !important;
+  font-size: 22px !important;
+}
+
+.product-wrap .warranty .faq-question p {
+  /* padding-left: 25%; */
+  font-size: 16px;
+}
+
+/*加購區修改*/
+.accessories-item {
+  margin-bottom: 15px;
+  text-align: left;
+  /* overflow: hidden; */
+  background-color: #EAEAEA!important;
+}
+
+.futura-buy-white #w3-product-accessories .accessories-item, .omnia-buy-white #w3-product-accessories .accessories-item, .cable-buy-white #w3-product-accessories .accessories-item {
+  
+  /*border-bottom: 5px solid #ffffff !important;*/
+}
+
+.graylink{
+  text-decoration:underline;
+  font-size:24px;
+  color:#838383;
+}
+
+
+.add-ons #w3-product-accessories .accessories-item input[type=checkbox] {
+  position: absolute;
+  top: 80%;
+  left: 10px;
+  width: 25px !important;
+  height: 25px !important;
+  margin-top: -10px !important;
+  border: 1px solid #404040 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  z-index: 99;
+}
+
+
+.accessories-item .accessories-img-wrapper {
+  margin-top: 17px;
+  float: left;
+  cursor: pointer;
+  position: relative;
+}
+
+.accessories-left {
+  position: relative;
+  float: left;
+  margin-right: 5px;
+  text-align: center;
+  width: 134px!important;
+}
+
+.add-ons #w3-product-accessories .accessories-item .accessories-img-wrapper {
+  display: block;
+  float: right;
+  width: 60%;
+  cursor: default;
+  z-index: 0 !important;
+}
+
+
+.redline{
+  background-color:#EAEAEA!important
+}
+
+.redline2{
+
+}
+
+.redline3{
+
+}
+
+.swipe{
+  display:none;
+}  
+.last{
+  font-size:16px;
+  max-width:none !important;
+}
+
+h2{
+  font-size:22px;
+}
+
+.myRadius option{
+  /*GGG*/
+  border-radius: 10px;
+  /*GGG*/
+  background-color:green;
+
+}
+
+.product-wrap #AddToCart, .product-wrap #addToCartCopy {
+  display: block;
+  top: auto;
+  float: left;
+  width: 100%;
+  max-width: 233px!important;
+  padding: 10px 20px;
+  margin-top: 50px;
+  border: none !important;
+  background: #2f98ff !important;
+  color: #fff !important;
+  line-height: 1.6;
+  cursor: pointer;
+}
+  
+.swatch-element{
+  border:0px;
+}  
+
+.futura-buy-white label{
+  font-size:22px;
+}
+
+.quantity-selector{
+  font-size:22px !important;
+  text-align:left;
+}
+  
+/*加入購物車了啦*/
+.product-wrap #addToCartCopy{
+  border-radius: 100px!important;
+  border-style: solid!important;
+  background: #fff!important;
+  border: 0px solid #454549 !important;
+  color: #454549 !important;
+  font-size:16px;
+  height:40px;
+  width:200px;
+  height:40px;
+}
+
+.product-wrap #addToCartCopy:hover{
+  background-color:#4B9BE1 !important;
+  color:white !important;
+  font-weight:100 !important;
+}
+
+  /*數量--*/
+  .input-holder.minus input {
+    border-radius: 2px 0 0 2px;
+    /* border: 2px !important; */
+    border-color: #000!important;
+    color: #000!important;
+    border-style: solid!important;
+  }
+
+/*數量++*/
+.quantity-row .input-holder input {
+  padding: 0 !important;
+  height: 42px !important;
+  width: 42px !important;
+  border-radius: 0px !important;
+  border: 0px !important; 
+  border-color: #454549!important;
+  border-style: solid!important;
+}
+
+/*中間數字*/
+.futura-buy-white .quantity-row .input-holder.minus, .futura-buy-white .quantity-row .input-holder.plus, .futura-buy-white .quantity-row #Quantity, .futura-buy-white #w3-product-accessories .accessories-item input[type=checkbox], .omnia-buy-white .quantity-row .input-holder.minus, .omnia-buy-white .quantity-row .input-holder.plus, .omnia-buy-white .quantity-row #Quantity, .omnia-buy-white #w3-product-accessories .accessories-item input[type=checkbox], .cable-buy-white .quantity-row .input-holder.minus, .cable-buy-white .quantity-row .input-holder.plus, .cable-buy-white .quantity-row #Quantity, .cable-buy-white #w3-product-accessories .accessories-item input[type=checkbox] {
+  border: none!important;
+  
+}
+
+.quantity-row #Quantity{
+  font-size:30px;
+}
+  
+svg plus {
+  fill:#000!important;
+} 
+
+path {
+  fill: #000!important;
+}
+
+.faq-item{
+  display:none;
+}
+
+/*購物車黑色那一塊的調整*/
+.quantity-row {
+  max-width: 450px!important;
+  background-color: #EAEAEA;
+  padding: 25px 0px;
+  text-align: center;
+}
+
+#Quantity {
+  color:#fff!important;
+}
+
+
+
+        /*New 逹人分享*/
+		/* 照片區域樣式 */
+		#photo-area {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 20px;
+			background-color: #f5f5f5;
+		}
+
+		.photo {
+			position: relative;
+			width: 20%;
+			height: auto;
+			transition: opacity 0.3s ease-in-out;
+		}
+
+		.photo:hover {
+			opacity: 1;
+			cursor: pointer;
+		}
+
+		.photo.active {
+			opacity: 0.8;
+		}
+
+		.photo-mask {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			color: #fff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			opacity: 1;
+			transition: opacity 0.3s ease-in-out;
+		}
+
+		.photo.active .photo-mask {
+			opacity: 0;
+		}
+
+		/* 內容區域樣式 */
+		#Tcontent-area {
+			padding: 20px;
+			background-color: #EAEAEA;
+            
+		}
+
+		.Tcontent {
+			display: none;
+		}
+
+		.Tcontent.active {
+			display: block;
+		}
+
+    .fixDaZenPadding{
+      /**/
+      padding:0px;
+      background-color:#454549!important;
+      color:#FFF;
+    }
+
+    /**/
+    label{
+      color:#CCC!important;
+    }
+
+
+
+    /*評論區的顏色*/
+    .jdgm-star {
+      color: #4E92CF!important;
+  }
+
+  .jdgm-rev-widg{
+    padding:24px 300px !important;
+  }
+
+  .jdgm-histogram__bar {
+    background: white !important;
+    border: 1px solid #212529 !important;
+    box-shadow: none !important;
+    
+}
+
+  .number2{
+    background-color:#D9D9D9;
+    opacity:0.8;
+    margin:300px 0 0 0%;
+  }
+  
+  .full-width img{
+    padding-right:0px;
+  }
+
+.jdgm-histogram__bar-content {
+  background: #929292 !important;
+}
+
+.jdgm-write-rev-link {
+  background-color: white !important;
+  padding: 10px 45px !important;
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 100px !important;
+  color: #929292 !important;
+  font-family: "Mark", Arial, sans-serif !important;
+  border: 1px solid #929292 !important;
+  line-height: 1.6 !important;
+  text-align: center !important;
+  font-size: 20px !important;
+  text-transform: none !important;
+  font-family: "Mark", Arial, sans-serif !important;
+}
+
+.jdgm-write-rev-link > a a:hover, a:visited, a:link, a:active{
+  text-decoration: none!important;
+  font-size:16px !important;
+  
+}
+
+.accessory-price{
+  font-size:16px !important;
+}
+
+.small{
+  font-size:12px !important;
+}
+
+/*適用於*/
+.fixData1{
+  text-align: center;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+
+/*寄信mail的botton被弄不見了，修復*/
+.mailchimp-wrap #mc-embedded-subscribe {
+  width: 100%;
+  /* height: auto; */
+  height: 40px;
+  padding: 0;
+  border: none;
+  line-height: 50px;
+  z-index: 999;
+
+}
+
+/*.flex-direction-nav a.flex-prev{
+  background: url('new_left-arrow.png') no-repeat center center;
+}
+
+.flex-direction-nav a.flex-next{
+  background: url('new_right-arrow.png') no-repeat center center;
+}*/
+
+.flex-control-nav{
+  display:none !important;
+}
+
+@media (max-width: 1600px) {
+  .popimg1{
+    width:450px;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'NewMount1.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg2{
+    width:450px !important;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'NewMount2.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg3{
+    width:450px !important;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'NewMount3.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .grayword{
+    top:110px;
+  }
+
+  .gray1,.gray2{
+    top:110px;
+  }
+
+  .prelude{
+    top:113px;
+  }
+
+  .single{
+    top:108px;
+  }
+
+  .carousel-images img{
+    width:360px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .grayword{
+    margin-top:60px;
+    top:63px;
+  }
+
+  .gray1,.gray2{
+    top:60px;
+  }
+
+  .prelude{
+    display:flex;
+    gap:15px;
+    top:95px;
+  }
+
+  .preludeButton{
+    width:200px;
+  }
+
+  .single{
+    top:90px;
+  }
+
+  .popimg1{
+    width:400px;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'NewMount1.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg2{
+    width:400px !important;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'NewMount2.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg3{
+    width:400px !important;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'NewMount3.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .carousel-images img{
+    width:320px;
+  }
+}
+
+
+  
+@media (min-width: 1401px) {
+  .product-wrap .product-title {
+    text-align: left;
+    margin: 0;
+    line-height: 1.3;
+    color: #fff;
+    font-family: "Mark Bold", Arial, sans-serif;
+    font-size: 40px;
+}
+  .container{ 
+    max-width: 2048px;
+    background-color: #EAEAEA;
+    
+  }
+  .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 2048px;
+  }
+  /*內文*/
+  #features-section h2, #features-section p {
+    text-align: left;
+    max-width: 600px;
+  }
+}
+
+  .container{ 
+    max-width: 2048px;
+    background-color: #EAEAEA;
+    
+  }
+
+@media (max-width: 1024px) {
+  .product {
+    padding-inline: 20px;
+  }
+
+  .preludeButton{
+    width:225px;
+  }
+
+  .carousel-images, .carousel-buttons{
+    display:none;
+  }
+
+  .swipe{
+    display:block;
+  }
+
+  .kol{
+    display:flex;
+  }
+
+  .Limg {
+    padding-left: 50px !important;
+    padding-right: 0px !important;
+  }
+
+  .Rimg {
+    padding-left: 30px !important;
+    padding-right: 50px !important;
+  }
+
+  .prelude {
+        display: flex;
+        gap: 15px;
+        flex-direction: row;
+        margin-top: 20px !important;
+        top:67px;
+        align-items:flex-start;
+  }
+
+  p{
+    font-size:16px;
+  }
+
+  .grayword{
+    position:relative;
+    top:65px;
+    margin-top:50px;
+  }
+
+  .popimg1{
+    width:300px;
+    height:300px;
+    padding:0px !important;
+    background-image: url("{{'NewMount1.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg2{
+    width:300px !important;
+    height:300px;
+    padding:0px !important;
+    background-image: url("{{'NewMount2.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg3{
+    width:300px !important;
+    height:300px;
+    padding:0px !important;
+    background-image: url("{{'NewMount3.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .carousel-container{
+    justify-content: space-between;
+    margin-inline:50px;
+    flex-wrap:wrap;
+    flex-direction:column;
+  }
+
+  .kol{
+    width:450px;
+    height:175px;
+  }
+
+  .contentdemo{
+    padding-left:50px;
+  }
+
+  .contentdemo2{
+    padding-right:50px;
+  }
+
+  .number2{
+    margin: 80% 0 0 0%;
+  }
+
+  .Bigbanner{
+    height:auto !important;
+  }
+
+  .bannerPic{
+    height:auto;
+  }
+
+  .gray1{
+    top:55px;
+  }
+
+
+  .single{
+    top:75px;
+    width:250px;
+  }
+}
+
+@media (max-width: 820px) {
+  .grayword{
+    margin-top:50px;
+    top:23px;
+  }
+
+  quantity-selector label, .swatch .header, .quantity-row label {
+    padding-top:8px;
+  }
+
+  .product-wrap #AddToCart, .product-wrap #addToCartCopy{
+    margin-top:0px;
+    max-width:170px !important;
+    position:relative;
+    left:160px;
+    top:-42px;
+  }
+
+  .kolname{
+    font-size:22px !important;
+  }
+
+  .swatch label{
+    white-space:normal;
+    width:330px;
+    height:70px !important;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:10px 20px !important;
+    line-height:1.5 !important;
+  }
+
+  .gray1{
+    top:5px;
+  }
+
+  .gray2{
+    top:10px;
+  }
+
+  .prelude{
+    display:flex;
+    gap:15px;
+    top:15px;
+    flex-direction:column;
+  }
+
+  .preludeButton{
+    height:40px;
+    padding:10px 20px;
+    width:250px;
+    
+  }
+
+  button{
+    padding:7px 45px;
+  }
+
+  .single{
+    top:32px;
+  }
+  
+  h2{
+    font-size:22px;
+  }
+
+  p{
+    font-size:16px !important;
+  }
+
+  .demop{
+    font-size:12px !important;
+  }
+
+  .pop{
+    font-size:16px;
+  }
+
+  .jdgm-rev-widg{
+    padding-inline:50px !important;
+  }
+
+  .number2{
+    margin: 200px 0 20px 0;
+    width:200px;
+  }
+
+  .popimg1{
+    width:220px !important;
+    height:auto;
+    padding:0px !important;
+    background-image: url("{{'NewMount1.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg2{
+    width:220px !important;
+    height:auto;
+    padding:0px !important;
+    background-image: url("{{'NewMount2.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg3{
+    width:220px !important;
+    height:auto;
+    padding:0px !important;
+    background-image: url("{{'NewMount3.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+@media (max-width: 767px) {
+  /*規格修正*/
+
+  .container{ 
+    /*max-width: 2048px;*/
+    background-color: #EAEAEA;
+    
+  }
+  .fix3 {
+    border-bottom: 3px;
+    border-style: solid;
+    border-color: #f0f0f0;
+    text-align: center;
+    line-height: 3em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    font-size: 9px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+  .fixbackground3 {
+    background-image: none;
+    background-size: cover;
+    background-position: left top;
+    background-repeat: no-repeat;
+    height: 100%;
+    flex-grow: 1;
+    color: #343439;
+  }
+
+  .fixbackground4 {
+    background-image: none;
+    background-size: cover;
+    background-position: left top;
+    background-repeat: no-repeat;
+    height: 100%;
+    flex-grow: 1;
+    color: #343439;
+  }
+
+    /*改動說明書下載按鈕樣式 simon 2023/3/18*/
+    .button {
+      display: inline-block;
+      background-color: #4B9BE1;
+      color: #444;
+      border: none;
+      border-radius: 10px;
+      padding: 5px 10px;
+      font-size: 13px;
+      width: 25%;
+      font-weight: normal;
+      text-decoration: none;
+      cursor: pointer;
+      transition: font-weight 0.2s ease-in-out;
+  }
+
+
+
+
+    /*RWD後 採購button會破版的修改 simon 2023/3/18*/
+    .quantity-row {
+      max-width: 450px!important;
+      background-color: #EAEAEA;
+      padding: 25px;
+      text-align: center!important;
+      height: 150px;
+  }
+    .product-wrap #AddToCart, .product-wrap #addToCartCopy {
+      display: block;
+      top: auto;
+      float: left;
+      width: 100%;
+      max-width: 100%!important;
+      padding: 10px 20px;
+      margin-top: 27px;
+      border: none !important;
+      background: #fff !important;
+      color: #212529 !important;
+      line-height: 1.6;
+      cursor: pointer;
+  }
+
+
+    .product-wrap #addToCartCopy{
+      border-radius: 100px!important;
+      border-style: solid!important;
+      background: #FFFFFF!important;
+      border: 1px solid #454549 !important;
+      color: #000 !important;
+      }
+    
+      /*數量--*/
+      .input-holder.minus input {
+        border-radius: 2px 0 0 2px;
+        /* border: 2px !important; */
+        border-color: #454549!important;
+        color: #454549!important;
+        border-style: solid!important;
+      }
+
+    /*逹人分享RWD後的button變更*/
+    .right-btn {
+      float: none!important;
+      display: flex!important;
+      padding-left: 47px!important;
+      background-color: #fff!important;
+      color: #333!important;
+      border-radius: 20px!important;
+      transition: all 0.3s ease-in-out!important;
+      width: 193px!important;
+      font-size: 15px;
+  }
+
+  .tab-content {
+    min-height: 210px;
+    background-color: #454549!important;
+    padding-top: 3em!important;
+    padding-left: 10%!important;
+    padding-right: 3%!important;
+    color: #FFFFFF;
+    /* max-height: 300px; */
+}
+
+    /*逹人分享的寫縮小*/
+    .tab-content-2 {
+      width: 100%;
+      background-color:#454549!important;
+      font-size: 16px!important;
+  }
+
+  .fixDaZenPadding{
+    /**/
+    padding:10px;
+  }
+
+  /*內文*/
+  #features-section h2, #features-section p {
+    text-align: left;
+    /* max-width: 350px; */
+    max-width: 430px;
+  }
+
+}
+
+  @media (min-width: 1200px)
+{
+  .h4, h4 {
+      font-size: 15px;
+  }
+}
+
+@media( max-width:768px ){
+  .quantity-row {
+    max-width: 450px!important;
+    background-color: #EAEAEA;
+    padding: 0px;
+    display: flex;
+    margin: 0.75em 17% 20px !important;
+    flex-direction:column;
+  }
+    .product-wrap #AddToCart, .product-wrap #addToCartCopy {
+      display: block;
+      top: auto;
+      float: left;
+      width: 100%;
+      max-width: 233px!important;
+      padding: 10px 20px;
+      margin-top: 20px !important;
+      border: 0px solid #000 !important;
+      background-color: #FFF !important;
+      color: #000 !important;
+      line-height: 1.6;
+      cursor: pointer;
+      position:inherit;
+    }
+
+  .product-wrap .quantity-selector{
+    float:inherit;
+    margin-right:2px;
+  }
+
+  .jdgm-write-rev-link{
+    padding-inline:40px;
+  }
+
+  .grayword{
+    margin-top:40px;
+    top:22px;
+  }
+
+  .gray1{
+    top:0px;
+  }
+
+  .gray2{
+    top:7px;
+  }
+
+  .single{
+    top:25px;
+  }
+
+  .prelude{
+    display:flex;
+    gap:15px;
+    top:5px;
+  }
+
+  .contentdemo2{
+    top:75px;
+  }
+
+}
+
+@media (max-width: 500px){
+  .product-wrap #AddToCart, .product-wrap #addToCartCopy {
+    display: block;
+    top: 100px !important;
+    right:30px !important;
+    float: inherit;
+    width: 100%;
+    min-width: none !important;
+    height:40px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: 0px solid #000 !important;
+    background-color: #FFF !important;
+    color: #000 !important;
+    line-height: 1.6;
+    cursor: pointer;
+    border-radius:100px !important;
+  }
+
+  .quantity-row .input-holder input{
+    height:40px !important;
+  }
+
+  .product-wrap .quantity-selector{
+    margin-right:0px;
+  }
+
+  .quantity-row {
+    max-width: 450px!important;
+    background-color: #EAEAEA;
+    padding: 0px;
+    display: block;
+    margin: 0.75em 0px 20px !important;
+  }
+
+  .swatch label{
+    width:300px;
+  }
+
+  .product-wrap .container-padding {
+    padding: 40px 0px;
+  }
+
+  .product-wrap .warranty .faq-question{
+    padding:23px 45px 23px 0px;
+  }
+
+  .add-ons #w3-product-accessories .accessories-item{
+    padding:5px 10px !important;
+  }
+
+  .product-wrap .product-title,.product-wrap h6{
+    text-align:left;
+  }
+
+  .product-wrap .prices-wrap{
+    display:flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  .product-wrap .ProductPrice{
+    padding:8px 0 0;
+  }
+
+  .flexslider .slides img{
+    width:75%;
+  }
+
+  .flex-direction-nav a{
+    padding-inline:35px;
+  }
+
+  .product-wrap .buy-row, .product-wrap .warranty{
+    padding-inline:10px;
+  }
+
+  .bannerPic,.Bigbanner{
+    height:auto !important;
+  }
+
+  .Bigbanner{
+    display:none;
+  }
+
+  .Mbanner{
+    display:block;
+  }
+
+  .Rimg,.Limg{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    text-align:center !important;
+  }
+
+  #features-section h2{
+    text-align:left;
+    margin: 0px 30px 10px;
+  }
+
+  .grayword{
+    margin-top:0px;
+  }
+
+  .ContextPaddingFix{
+    padding:0px !important;
+  }
+
+  .gray1{
+    margin:30px 0px;
+  }
+
+  .gray2{
+    margin:30px 0px;
+    top:0px;
+  }
+
+  .protect{
+    margin:0px 0px 30px;
+  }
+
+  .prelude{
+    margin-top:30px !important;
+  }
+
+  #features-section p {
+    padding-inline:30px;
+    margin:0px;
+  }
+
+  #features-section img{
+    margin:20px 0px;
+  }
+
+  button{
+    padding:30px 45px;
+  }
+
+  .pop{
+    padding-left:30px;
+  }
+
+  .carousel-container{
+    margin-inline:30px;
+    height:auto;
+  }
+
+  .jdgm-rev-widg{
+    padding-inline:30px !important;
+  }
+
+  .preludeButton{
+    padding:10px 20px;
+  }
+
+  .contentdemo, .contentdemo2{
+    padding-left:30px !important;
+  }
+
+  .contentdemo2{
+    top:0px;
+    padding-right:30px;
+  }
+
+  .button{
+    width:180px;
+    background-color:#FFF;
+    color:#4B9BE1;
+    height:65px;
+    padding:10px;
+  }
+
+  .demoh2{
+    margin-bottom:10px;
+  }
+  
+  .demop{
+    margin-bottom:40px;
+  }
+
+  .popimg1{
+    width:220px !important;
+    height:auto;
+    padding:0px !important;
+    background-image: url("{{'NewMount1.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg2{
+    width:220px !important;
+    height:auto;
+    padding:0px !important;
+    background-image: url("{{'NewMount2.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg3{
+    width:220px !important;
+    height:auto;
+    padding:0px !important;
+    background-image: url("{{'NewMount3.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .fixbackground{
+    overflow-x:scroll;
+    justify-content: left !important;
+    max-width:370px;
+    margin-inline:30px;
+    padding-top:50px;
+    height:310px;
+  }
+
+  .number2{
+    background-color:#D9D9D9;
+    opacity:0.8;
+    margin:210px 15px 0px;
+    width:190px;
+    height:35px;
+    padding:6px;
+    font-size:16px;
+  }
+
+  .popimg{
+    display:none;
+  }
+
+  .kol{
+    width:inherit;
+    height:220px;
+  }
+
+  .multi{
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 0px;
+  }
+
+  .modal {
+        position: fixed;
+        display:flex;
+        background-color: white;
+        width: 350px;
+        height: 450px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 50px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1001; /* 比背景高一級的 zIndex */
+        align-items:center;
+        gap:30px;
+        border-radius:20px;
+  }
+
+  .product {
+        padding-inline: 30px;
+  }
+
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 300px;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-color: #D9d9d9;
+        font-size: 22px;
+        text-align: center;
+        border-radius: 100px;
+    }
+
+  .contextWord{
+    justify-content: left;
+  }
+
+  .fixDivPadding{
+    padding-top:3em;
+    padding-bottom:3em;
+    justify-content: center;
+  }
+
+  .mobile{
+    display:block;
+  }
+
+  .pc{
+    display:none;
+  }
+
+  .prelude{
+    top:0px;
+    margin-left:30px;
+  }
+
+  .single{
+    top:0px;
+    margin:30px;
+  }
+
+.fullh2{
+  text-align:left !important;
+  margin-inline:0px !important;
+}
+
+.fullp{
+  text-align:left !important;
+  padding-inline:0px !important;
+}
+
+}
+
+@media (max-width:390px){
+  .kol{
+    width:inherit;
+    height:280px;
+  }
+}
+
+@media (max-width:375px){
+  .product-wrap .swatch .swatch-element {
+    text-align: center;
+    float: none!important;
+    display: inline-block;
+    margin: 5px -22px 0!important;
+  }
+
+  .kol{
+    width:inherit;
+    height:330px;
+  }
+}
+
+
+  .template-product .main-content{
+    padding-top:0px !important;
+  }
+
+</style>
+<script>
+  // 逹人分享，將滑鼠事件監聽器添加到每個照片
+const photos = document.querySelectorAll('.photo');
+photos.forEach(photo => {
+photo.addEventListener('mouseover', e => {
+  // 取消先前的TActive照片
+  const prevActivePhoto = document.querySelector('.photo.TActive');
+  const prevActiveTcontent = document.querySelector('.Tcontent.TActive');
+  prevActivePhoto.classList.remove('TActive');
+  prevActiveTcontent.classList.remove('TActive');
+
+  // 設置當前照片為TActive照片
+  const currentPhoto = e.target;
+  const currentTcontent = document.querySelector(`#Tcontent-${currentPhoto.dataset.index}`);
+  currentPhoto.classList.add('TActive');
+  currentTcontent.classList.add('TActive');
+});
+});
+
+
+</script>

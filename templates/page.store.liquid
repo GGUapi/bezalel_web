@@ -1,0 +1,904 @@
+{% comment %} 匯入 'bold-product' 模板，並傳入 product 參數，hide_action 設置為 'break'，output 設置為 'none' {% endcomment %}
+{% include 'bold-product' with product, hide_action: 'break', output: 'none' %}
+{% comment %} 匯入 CSS 樣式表 {% endcomment %}
+<!-- <link rel="stylesheet" href="{{ 'about_onile.css.css' | asset_url }}" type="text/css"> -->
+<link rel="stylesheet" href="{{ 'aboutKikiNewCss.css' | asset_url }}" type="text/css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> <!--達人分享AOS動畫 -->
+
+
+
+
+  <div class="container" id="sec1">
+        <div class="row fixBB">
+            <div class = "banner1">
+                <img src="{{ 'Maskgroup.png' | asset_url }}" alt="BEZALEL 倍加能 | 無線充電" style=" width: 100%;height: 100%;object-fit: cover;object-position: center;">
+            </div>
+        </div>
+  </div>
+
+
+
+
+<!-- 第二列 -->
+ <section class="full-width overview-product-intro textBox ">  
+	<div class="container container-padding max-width-600 clearfix" style = "border-bottom:1px solid black;display:flex;">
+      <div class = "text">
+        <h1 class = "big-title">服務據點</h1>
+        <h4 class = "small-title">前往門市親身體驗 BEZALEL 無線充電的魅力與便捷</h4>
+      </div>
+      <select id="mySelect" class = "cpuoption">
+        <option value="option1">全台門市&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;⌵</option>
+        <option value="option2">北部</option>
+        <option value="option3">中部</option>
+        <option value="option4">南部</option>
+      </select>
+    </div>  
+    <div class = "mobileoption" > 
+      <select id="mySelect2" >
+        <option value="option1">全台門市&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;⌵</option>
+        <option value="option2">北部</option>
+        <option value="option3">中部</option>
+        <option value="option4">南部</option>
+      </select>
+    </div>
+</section>
+
+
+
+<!-- 北中南據點 -->
+ <section class="full-width overview-product-intro textBox">  
+	<div class="container container-padding max-width-600 clearfix">      
+      	<h1 class = "big-title" id = "northtext">北部</h1>
+        <div class = "location" id = "north">
+          <a href = "https://maps.app.goo.gl/SruF2292jDtxEDQv7">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 台北天母</h3>
+              <p class = "storeinfo">新光三越天母店一館 1樓<br>台北市士林區天母東路68號一館1樓<br>02-2873-3308</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/MUN9v5WVL9Nt8qfP9">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 台北南西</h3>
+              <p class = "storeinfo">新光三越台北南西店三館 2樓<br>台北市中山區南京西路15號2樓<br>02-2521-2711</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/Cp6dWrG9vBntgu33A">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 台北站前</h3>
+              <p class = "storeinfo">新光三越台北站前店 2樓<br>台北市中正區忠孝西路一段66號2樓<br>02-2361-5689</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/KnfrgAScahuhNRgSA">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 台北信義A11</h3>
+              <p class = "storeinfo">新光三越信義新天地A11館 1樓<br>台北市信義區松壽路11號1樓<br>02-8786-1011</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/XmmVPetLrNAsCgnZ7">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 台北信義A4</h3>
+              <p class = "storeinfo">新光三越信義新天地A4館 B1<br>台北市信義區松高路19號B1<br>02-2725-2018</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/x1vpKjVMvLTpvtzEA">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 桃園站前</h3>
+              <p class = "storeinfo">新光三越桃園站前店 1樓<br>桃園市中正路19號1樓<br>03-331-2528</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/CJRdqL5irHEQEc2v5">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 桃園青埔</h3>
+              <p class = "storeinfo">桃園新光影城百貨 1樓<br>桃園市中壢區春德路107號1樓<br>03-287-5208</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/gZdWyKvELrg5pV269">
+            <div class = "store">
+              <h3 class = "storeName">蔦屋書店 | 松山店</h3>
+              <p class = "storeinfo">CITYLINK 松山壹號店<br>台北市信義區松山路11號3樓<br>02-2528-0616</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/rEui2zfWmmw59ahB6">
+            <div class = "store">
+              <h3 class = "storeName">蔦屋書店 | 內湖店</h3>
+              <p class = "storeinfo">CITYLINK 內湖店<br>台北市內湖區成功路四段188號1樓<br>02-7747-2968</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/vppapEMzV9AfiTYN9">
+            <div class = "store">
+              <h3 class = "storeName">蔦屋書店 | 南港店</h3>
+              <p class = "storeinfo">CITYLINK 南港店 A棟2F<br>台北市南港區忠孝東路七段369號2樓<br>02-2786-2869</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/biZox5ARe1Sc5LvA9">
+            <div class = "store">
+              <h3 class = "storeName">膜法少年 | 鶯歌建國店</h3>
+              <p class = "storeinfo"><br>新北市鶯歌區建國路239號1樓<br>0976-361-291</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/S8PdwoCS6SF5jawAA">
+            <div class = "store">
+              <h3 class = "storeName">秉毅科技 | 台北總店</h3>
+              <p class = "storeinfo"><br>台北市中正區八德路一段92號<br>02-2396-2111</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/f1RmTqURjcsu9XX6A">
+            <div class = "store">
+              <h3 class = "storeName">a#Shop | 土城門市</h3>
+              <p class = "storeinfo"><br>新北市土城區裕民路188號<br>02-8261-7111</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/GBHaY566DT6juPms8">
+            <div class = "store">
+              <h3 class = "storeName">a#Shop | 鶯歌門市</h3>
+              <p class = "storeinfo"><br>新北市鶯歌區建國路204號<br>02-2677-6800</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/w6G8QipynTz482wX7">
+            <div class = "store">
+              <h3 class = "storeName">秉毅科技 | 竹北門市</h3>
+              <p class = "storeinfo"><br>新竹縣竹北市中正東路211號<br>03-553-8588</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/WE5PkaaFZ36uoFFg9">
+            <div class = "store">
+              <h3 class = "storeName">Maclove 麥克愛愛</h3>
+              <p class = "storeinfo">台北大安總店<br>台北市大安區大安路一段51巷49-6號<br>02-2751-5051</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/TnZdDH6emECaFz2M9">
+            <div class = "store">
+              <h3 class = "storeName">Maclove 麥克愛愛</h3>
+              <p class = "storeinfo">台北南港維修中心<br>台北市南港區南港路二段20巷5號B2<br>0963-586-414</p>
+            </div>
+          </a>
+
+          <a href = "https://maps.app.goo.gl/1NHQ1hQBqNSgotYd6">
+            <div class = "store">
+              <h3 class = "storeName">創Q space ｜ ATT4FUN 信義店</h3>
+              <p class = "storeinfo"><br>台北市信義區松壽路12號2樓<br>02-7745-3366</p>
+            </div>
+          </a>
+
+          <a href = "https://maps.app.goo.gl/nLYPAcXidRHrDjMy5">
+            <div class = "store">
+              <h3 class = "storeName">創Q space ｜ 台北三創生活館</h3>
+              <p class = "storeinfo"><br>台北市中正區市民大道三段2號2樓<br>02-7701-0216</p>
+            </div>
+          </a>
+
+
+        </div> 
+        <h1 class = "big-title" id = "centertext">中部</h1>
+        <div class = "location" id = "center">
+          <a href = "https://maps.app.goo.gl/h96iD5XjYiyygCXh7">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 台中中友</h3>
+              <p class = "storeinfo">中友百貨 B棟 2樓<br>台中市北區三民路三段161號B棟<br>04-2229-5598</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/z3gq7dYBsjMgbYgu7">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 台中中港</h3>
+              <p class = "storeinfo">新光三越 台中中港店 2樓<br>台中市士林區天母東路68號一館1樓<br>02-2873-3308</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/NPLPY3NcoEjLAaGT6">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 台中三井Outlet</h3>
+              <p class = "storeinfo">MITSUI OUTLET PARK 南四口 1樓<br>台中市梧棲區台灣大道十段166號<br>04-2656-3309</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/2hCBeDCjXk1NJSE19">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 台中西區店</h3>
+              <p class = "storeinfo"><br>台中市西區五權五街105號<br>04-2376-1631</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/taoqeRiM8xkPpFxQ6">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 台中大里店</h3>
+              <p class = "storeinfo"><br>台中市大里區東榮路29號<br>04-2483-6539</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/zEVRpdCaFuHBDePX9">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 台中漢口店</h3>
+              <p class = "storeinfo"><br>台中市西屯區漢口路二段39號<br>04-2314-4076</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/aWzkxBPxNs2hYZgb8">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 台中太平店</h3>
+              <p class = "storeinfo"><br>台中市太平區太平路592號<br>04-2275-0449</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/yfnenqze2JKboEHC6">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 台中東山店</h3>
+              <p class = "storeinfo"><br>台中市北屯區東山路一段221號<br>04-2435-1397</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/cV49JkTtGVnCbU6NA">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 台中松竹店</h3>
+              <p class = "storeinfo"><br>台中市北屯區松竹路二段193號<br>04-2247-6096</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/cDtc445yu939fAu29">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 台中美村南店</h3>
+              <p class = "storeinfo"><br>台中市南區美村南路90號<br>04-2250-0852</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/xKbebp6C4hkLQPd2A">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 台中烏日店</h3>
+              <p class = "storeinfo"><br>台中市烏日區中山路一段413號<br>04-2337-6693</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/7vMnbzppfCqshvR29">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 台中北平店</h3>
+              <p class = "storeinfo"><br>台中市北區北平路二段98-1號<br>04-2299-3916</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/jzWhE9qHf4vKwY4X6">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 台中黎明店</h3>
+              <p class = "storeinfo"><br>台中市南屯區黎明路二段209號<br>04-2380-4456</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/b9K3k1CQwFckzF2J9">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 台中精武東店</h3>
+              <p class = "storeinfo"><br>台中市東區精武東路210號<br>04-2215-5570</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/E4NiejWjenoS1YJo8">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 台中精誠店</h3>
+              <p class = "storeinfo"><br>台中市西區精誠路265號<br>04-2473-4531</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/3YdbvVxaTfeiQAZYA">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 台中大雅民生店</h3>
+              <p class = "storeinfo"><br>台中市大雅區民生路一段237號<br>04-2560-1518</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/MsktjEcV8Qbcf4ZP9">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 彰化大埔店</h3>
+              <p class = "storeinfo"><br>彰化縣彰化市大埔路581號<br>04-711-4590</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/dg5FgEwCaDKiCmYd7">
+            <div class = "store">
+              <h3 class = "storeName">a#Shop ｜ 彰化門市</h3>
+              <p class = "storeinfo"><br>彰化縣彰化市中華路105號<br>04-723-9588</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/GrGoxjeRNwHfKW616">
+            <div class = "store">
+              <h3 class = "storeName">a#Shop ｜ 鹿港門市</h3>
+              <p class = "storeinfo"><br>彰化縣鹿港鎮中山路157號<br>04-777-1511</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/qZdtn2b1bYUjMjsQA">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 彰化員林店</h3>
+              <p class = "storeinfo"><br>彰化縣員林市中山路一段653號<br>04-836-6997</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/J4uCBqb9nNkZCtLR9">
+            <div class = "store">
+              <h3 class = "storeName">殼老爹 | 雲林斗六中山店</h3>
+              <p class = "storeinfo"><br>雲林縣斗六市中山路196號<br>05-536-2408</p>
+            </div>
+          </a>
+        </div>
+        <h1 class = "big-title" id = "southtext">南部</h1>
+        <div class = "location" id = "south">
+          <a href = "https://maps.app.goo.gl/pPduaow4SkD3sQ787">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 嘉義耐斯</h3>
+              <p class = "storeinfo">嘉義耐斯廣場購物中心 1樓<br>嘉義市東區忠孝路600號<br>05-276-5718</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/yX32aves65CaXji26">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 嘉義垂楊</h3>
+              <p class = "storeinfo">新光三越 嘉義垂楊店 1樓<br>嘉義市西區垂楊路726號<br>05-222-3685</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/jjwu8JtzAXdjprFE9">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 台南西門</h3>
+              <p class = "storeinfo">新光三越 台南新天地 1樓 B區<br>台南市中西區西門路一段658號<br>06-303-0689</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/1AyDWE2ziRyLSbiY7">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 台南中山</h3>
+              <p class = "storeinfo">新光三越 台南中山店 2樓<br>台南市中西區中山路162號<br>06-222-2158</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/b6j5nY2FXjET4MRK7">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 台南三井</h3>
+              <p class = "storeinfo">MITSUI OUTLET PARK 1樓 A區<br>台中市北區三民路三段161號B棟<br>04-2229-5598</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/9NzXivmPMdYnWJUb6">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 高雄左營</h3>
+              <p class = "storeinfo">新光三越 高雄左營店 1樓<br>高雄市左營區高鐵路123號<br>07-346-9850</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/dMxh4yGVjzB77Bxw6">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 高雄三多</h3>
+              <p class = "storeinfo">新光三越 高雄三多店 B1<br>高雄市前鎮區三多三路213號<br>07-331-9218</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/RVTFPX95UQZ2BKHy8">
+            <div class = "store">
+              <h3 class = "storeName">[i]Store | 高雄草衙</h3>
+              <p class = "storeinfo">SKM Park Outlets 大道東 1樓<br>高雄市前鎮區中安路1之1號<br>07-791-8900</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/Fac94EMFqy2RMXt96">
+            <div class = "store">
+              <h3 class = "storeName">蔦屋書店 | 高雄大立店</h3>
+              <p class = "storeinfo">大立百貨 A館<br>高雄市前金區五福三路57號1-2樓<br>07-215-9016</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/z4KFzqzFUXFia7bf7">
+            <div class = "store">
+              <h3 class = "storeName">GS 3C 手機平板配件</h3>
+              <p class = "storeinfo">金華門市<br>台南市南區金華路二段201號<br>0908-928-806</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/q84N91wPn4MopPKb8">
+            <div class = "store">
+              <h3 class = "storeName">GS 3C 手機平板配件</h3>
+              <p class = "storeinfo">東安門市<br>台南市東區東安路173號<br>0906-933-735</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/bqv2Z5wqhSQhy15E7">
+            <div class = "store">
+              <h3 class = "storeName">GS 3C 手機平板配件</h3>
+              <p class = "storeinfo">永華門市<br>台南市安平區華平路208號<br>0908-015-119</p>
+            </div>
+          </a>
+          <a href = "https://maps.app.goo.gl/3hjQtVkAUsZ2AS5U9">
+            <div class = "store">
+              <h3 class = "storeName">WHOLE CASE 好殼手機店</h3>
+              <p class = "storeinfo"><br>高雄市左營區保靖街30號<br>07-557-0258</p>
+            </div>
+          </a>
+        </div>
+    </div>  
+</section>
+
+<!-- 第五列
+<div class="container" id="sec1">
+  <div class="row fixBB">
+    <div class="col-12  col-lg-12" style="position: relative;">
+      <img src="{{ 'newabout_2.jpg' | asset_url }}" alt="BEZALEL 倍加能 | 無線充電" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+      <!--<div class="image-wrapper col-12 col-md-3 col-lg-3 col-sm-0 " style="z-index: 1;">
+        <img src="{{ 'XR-01.png' | asset_url }}" alt="XR" style="width: auto; height: auto; max-width: 100%; max-height: 100%;">
+      </div> 
+      <div class="col-lg-6 col-md-6 col-xs-12 col-12 BlogContent" >
+        <p class="blogtext">倍加能創立於美國洛杉磯，透過領先業界的創新技術應用，將無線充電產品的自由與便利融入日常生活。</p>
+        <a href="https://bezalel.tw/blogs/bezalel-blog" target="_blank" title="BEZALEL瀏覽生活文章" rel="nofollow noopener noreferrer" class="button_connection">瀏覽生活文章</a>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- 第六列 
+ <section class="full-width overview-product-intro textBox">  
+	<div class="container container-padding max-width-600 clearfix">      
+      	<p class="space-m-b-0">倍加能擁有來自不同地區的專業的產品開發與服務團隊，為每一位使用者營造最佳體驗。<br>我們希望藉由無線充電，讓使用者體驗生活的⾃由。<br>我們重視每個人的使用體驗、將流暢行動視為寶物，並關注每個更大突破的機會。</p>
+    </div>  
+</section> -->
+
+ <!--第四列-圖片+文字 -->
+
+<style>
+
+  .store{
+    width:310px;
+    background-color:white;
+    border-radius:10px;
+    padding:15px;
+  }
+
+  .storeName{
+    font-size:16px;
+    color:black;
+    text-align:left;
+  }
+
+  .storeinfo{
+    font-size:12px;
+    color:black;
+    text-align:left;
+    margin-bottom:0px;
+  }
+  /* Futura S的位置 */
+  .textBoxfour {
+    position: relative;
+    padding:280px;/* 設置內容框的內邊距 */
+    background-color:#EAEAEA;
+  }
+  
+  .textBoxfour img {
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  /* 文字 */
+  .rectangle_Background {
+    background-color: #9EA1A8;
+    padding: 150px 100px; /* 调整右侧 padding 为 0，左侧 padding 为 100px */
+    right: 0;
+    top: 25%;
+    position: absolute;
+    width: 60%;
+    height: 300px;
+    display: flex; /* 使用 flexbox 布局 */
+    justify-content: center; /* 水平居中对齐 */
+    align-items: center; /* 垂直居中对齐 */
+  }
+
+  .container.clearfix.mailRight{
+      transform: translateY(0px) !important;
+      height:180px !important;
+  }
+  
+    
+    /* 居中文字 */
+    .centered-text {
+      text-align: center;
+      font-size:35px;
+    }
+
+      /* 媒體查詢：最大寬度800px時的樣式 */
+      @media (max-width: 800px) {
+        .textBoxfour {
+          padding: 50px; /* 调整段落文字的 padding */
+        }
+        
+        .textBoxfour img {
+          display: none; /* 隐藏图片 */
+        }
+        
+        .rectangle_Background {
+          display: none; /* 隐藏背景长方形 */
+        }
+
+    }
+
+  /* 設置BannerContent的字體粗細 */
+  #BannerContent{
+    font-weight:bolder;
+  }
+
+  .banner1{
+    padding:35px 300px 15px;
+    background-color:#EAEAEA;
+  }
+
+  .big-title{
+    font-size:22px;
+    text-align:left !important;
+  }
+
+  
+
+  .full-width img{
+    width:310px;
+  }
+
+  .location{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    padding-bottom:30px;
+    justify-content:flex-start;
+  }
+
+select {
+  width: 340px; /* 設置下拉選單的寬度 */
+  padding: 5px; /* 將下拉選單添加一些間距 */
+  border: 1px solid #ccc; /* 將下拉選單添加一個框線 */
+  border-radius: 5px; /* 將下拉選單的角角圓化 */
+  background-color: #f9f9f9; /* 設置下拉選單的背景顏色 */
+  margin-left:563px;
+}
+
+option {
+  padding: 5px; /* 將選項添加一些間距 */
+  border-bottom: 1px solid #ccc; /* 將選項添加一個框線 */
+}
+
+  .mobileoption{
+    display:none;
+  }
+
+.jumpstart-selector select{
+  border:0px !important;
+  border-radius:10px !important;
+  color:black;
+  font-size:16px !important;
+}
+
+@media screen and (max-width: 1600px){
+select {
+  width: 340px; /* 設置下拉選單的寬度 */
+  padding: 5px; /* 將下拉選單添加一些間距 */
+  border: 1px solid #ccc; /* 將下拉選單添加一個框線 */
+  border-radius: 5px; /* 將下拉選單的角角圓化 */
+  background-color: #f9f9f9; /* 設置下拉選單的背景顏色 */
+  margin-left:260px;
+}
+
+  .full-width img{
+    width:235px;
+  }
+
+  .store{
+    width:230px;
+  }
+}
+
+@media screen and (max-width: 1440px){
+select {
+  width: 340px; /* 設置下拉選單的寬度 */
+  padding: 5px; /* 將下拉選單添加一些間距 */
+  border: 1px solid #ccc; /* 將下拉選單添加一個框線 */
+  border-radius: 5px; /* 將下拉選單的角角圓化 */
+  background-color: #f9f9f9; /* 設置下拉選單的背景顏色 */
+  margin-left:100px;
+}
+
+  .full-width img{
+    width:195px;
+  }
+
+  .store{
+    width:263px;
+  }
+}
+
+/*平板留邊50px、行動裝置排版*/
+
+@media screen and (max-width: 1024px){
+
+  .full-width img{
+    width:210px;
+  }
+
+  .banner1{
+    padding:35px 50px 15px;
+    background-color:#EAEAEA;
+  }
+
+  .textBox{
+    background-color:#EAEAEA;
+    padding:15px 50px;
+  } 
+
+  .cpuoption{
+    display:none;
+  }
+
+  .mobileoption{
+    display:flex;
+    margin-top:12px;
+  }
+
+  .follow{
+    margin-top:0px !important;
+  }
+
+select {
+  width: 340px; /* 設置下拉選單的寬度 */
+  padding: 5px; /* 將下拉選單添加一些間距 */
+  border: 1px solid #ccc; /* 將下拉選單添加一個框線 */
+  border-radius: 5px; /* 將下拉選單的角角圓化 */
+  background-color: #f9f9f9; /* 設置下拉選單的背景顏色 */
+  margin-left:0px;
+}
+
+  .jumpstart-selector .arrow{
+    display:none;
+  }
+
+  .store{
+    width:285px;
+  }
+}
+
+@media screen and (max-width: 820px){
+  .full-width img{
+    width:160px;
+  }
+
+  .store{
+    width:220px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .full-width img{
+    width:152px;
+  }
+
+  .mailchimp p{
+    margin-top:0px;
+  }
+
+  .container.clearfix.mailRight{
+    height: 130px !important;
+  }
+
+  .store{
+    width:205px;
+  }
+}
+
+/*手機留邊30px、行動裝置排版*/
+
+@media screen and (max-width: 450px){
+
+    .store {
+        height: 160px;
+        width: 175px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+  .overview-product-intro h4{
+    width:280px;
+  }
+
+  .container.clearfix.mailRight{
+    height: 80px !important;
+  }
+  
+  .full-width img{
+    width:180px;
+  }
+
+  .banner1{
+    padding:0px 0px 15px;
+    background-color:#EAEAEA;
+  }
+
+  .textBox{
+    background-color:#EAEAEA;
+    padding:15px 30px;
+  } 
+
+select {
+  width: 370px; /* 設置下拉選單的寬度 */
+  padding: 0 25px !important; /* 將下拉選單添加一些間距 */
+  border: 1px solid #ccc; /* 將下拉選單添加一個框線 */
+  border-radius: 5px; /* 將下拉選單的角角圓化 */
+  background-color: #f9f9f9; /* 設置下拉選單的背景顏色 */
+  margin-left:0px;
+}
+
+  .location{
+    gap:10px;
+  }
+  
+}
+
+@media screen and (max-width: 414px){
+select {
+  width: 350px; /* 設置下拉選單的寬度 */
+  padding: 0 15px !important; /* 將下拉選單添加一些間距 */
+  border: 1px solid #ccc; /* 將下拉選單添加一個框線 */
+  border-radius: 5px; /* 將下拉選單的角角圓化 */
+  background-color: #f9f9f9; /* 設置下拉選單的背景顏色 */
+  margin-left:0px;
+}
+
+  .full-width img{
+    width:170px;
+  }
+
+  .store{
+    width:165px;
+  }
+  
+}
+
+@media screen and (max-width: 390px){
+select {
+  width: 330px; /* 設置下拉選單的寬度 */
+  padding: 0 5px !important; /* 將下拉選單添加一些間距 */
+  border: 1px solid #ccc; /* 將下拉選單添加一個框線 */
+  border-radius: 5px; /* 將下拉選單的角角圓化 */
+  background-color: #f9f9f9; /* 設置下拉選單的背景顏色 */
+  margin-left:0px;
+}
+
+  .full-width img{
+    width:160px;
+  }
+
+  .store{
+    width:160px;
+  }
+
+  
+}
+
+@media screen and (max-width: 375px){
+select {
+  width: 315px; /* 設置下拉選單的寬度 */
+  padding: 0 15px !important; /* 將下拉選單添加一些間距 */
+  border: 1px solid #ccc; /* 將下拉選單添加一個框線 */
+  border-radius: 5px; /* 將下拉選單的角角圓化 */
+  background-color: #f9f9f9; /* 設置下拉選單的背景顏色 */
+  margin-left:0px;
+}
+
+  .full-width img{
+    width:150px;
+  }
+
+  .store{
+    width:150px;
+  }
+  
+}
+
+@media screen and (max-width: 360px){
+select {
+  width: 300px; /* 設置下拉選單的寬度 */
+  padding: 0 15px !important; /* 將下拉選單添加一些間距 */
+  border: 1px solid #ccc; /* 將下拉選單添加一個框線 */
+  border-radius: 5px; /* 將下拉選單的角角圓化 */
+  background-color: #f9f9f9; /* 設置下拉選單的背景顏色 */
+  margin-left:0px;
+}
+
+  .full-width img{
+    width:145px;
+  }
+
+  .overview-product-intro h4{
+    width:280px;
+    text-align:left !important;
+  }
+
+  .store{
+    width:145px;
+  }
+  
+}
+</style>
+<!--
+ <section class="full-width overview-product-intro textBoxfour"> 
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 image-front">
+        <img src="{{ 'Front.png' | asset_url }}" alt="Futura S" style="width: auto; height: auto; max-width: 100%; max-height: 90%;">
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+        <div class="rectangle_Background">
+          <p class="centered-text">我們注重設計與美感。優雅的線條、幾乎無感的輕盈重量、精緻的作工，使產品具備獨特的 BEZALEL 風格。</p>
+        </div>
+      </div>
+    </div>
+ </section>
+-->
+
+<script>
+  const select = document.getElementById('mySelect');
+  const mselect = document.getElementById('mySelect2');
+  const north = document.getElementById('north');
+  const center = document.getElementById('center');
+  const south = document.getElementById('south');
+  const northtext = document.getElementById('northtext');
+  const centertext = document.getElementById('centertext');
+  const southtext = document.getElementById('southtext');
+  select.addEventListener('change', function() {
+    const selectedOption = select.options[select.selectedIndex].text;
+    console.log(`Selected option: ${selectedOption}`);
+    if( selectedOption == "北部" ){
+      north.style.display = "flex";
+      northtext.style.display = "block";      
+      center.style.display = "none";
+      centertext.style.display = "none";
+      south.style.display = "none";
+      southtext.style.display = "none";
+    }
+
+    else if( selectedOption == "中部" ){
+      north.style.display = "none";
+      northtext.style.display = "none";      
+      center.style.display = "flex";
+      centertext.style.display = "block";
+      south.style.display = "none";
+      southtext.style.display = "none";
+    }
+
+    else if( selectedOption == "南部" ){
+      north.style.display = "none";
+      northtext.style.display = "none";      
+      center.style.display = "none";
+      centertext.style.display = "none";
+      south.style.display = "flex";
+      southtext.style.display = "block";
+    }
+
+    else {
+      north.style.display = "flex";
+      northtext.style.display = "block";      
+      center.style.display = "flex";
+      centertext.style.display = "block";
+      south.style.display = "flex";
+      southtext.style.display = "block";
+    }
+  });
+
+  mselect.addEventListener('change', function() {
+    const selectedOption = mselect.options[mselect.selectedIndex].text;
+    console.log(`Selected option: ${selectedOption}`);
+    if( selectedOption == "北部" ){
+      north.style.display = "flex";
+      northtext.style.display = "block";      
+      center.style.display = "none";
+      centertext.style.display = "none";
+      south.style.display = "none";
+      southtext.style.display = "none";
+    }
+
+    else if( selectedOption == "中部" ){
+      north.style.display = "none";
+      northtext.style.display = "none";      
+      center.style.display = "flex";
+      centertext.style.display = "block";
+      south.style.display = "none";
+      southtext.style.display = "none";
+    }
+
+    else if( selectedOption == "南部" ){
+      north.style.display = "none";
+      northtext.style.display = "none";      
+      center.style.display = "none";
+      centertext.style.display = "none";
+      south.style.display = "flex";
+      southtext.style.display = "block";
+    }
+
+    else {
+      north.style.display = "flex";
+      northtext.style.display = "block";      
+      center.style.display = "flex";
+      centertext.style.display = "block";
+      south.style.display = "flex";
+      southtext.style.display = "block";
+    }
+  });
+</script>
+
+
+
+
+
+
+

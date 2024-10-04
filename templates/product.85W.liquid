@@ -1,0 +1,2891 @@
+{% include 'bold-product' with product, hide_action: 'break', output: 'none' %}
+<link rel="stylesheet" href="{{ 'popup_style.css' | asset_url }}" type="text/css">
+        <section class="full-width white-bg futura-and-phone">
+            <div class="container clearfix ">
+                <div class="layoutTest bannerPic"><img src="{{'top_banner.jpg'|asset_url}}" class = "Bigbanner"/></div>
+            </div>
+        </section>
+
+
+<div class="futura-buy futura-buy-white buy-page">
+
+
+    <!---->
+
+
+
+    <!---->
+    <section class="full-width white-bg product-wrap">
+
+        <div class="container container-padding">
+
+          	<div class="product">
+
+                <!--img area--->
+
+                <div class="redline">
+                  <!--img area--->
+
+
+                                    <div class="product-image redline3">
+                                    <!--<p style = "color:#4B9BE1;">預購預計 5 月下旬到貨</p>-->
+                                    <div class="product-title">{{ product.title }}</div>
+                                    <h6>{{ product.description }}</h6><br>
+                                    <div class="product-above-image-content-mobile">
+                      
+                                        {% assign current_variant = bold_selected_or_first_available_variant %}
+                                        {% assign featured_image = current_variant.featured_image | default: product.featured_image %}                          
+                                    <div class="prices-wrap">
+                                            {% if current_variant.price < current_variant.compare_at_price %}<span class="ComparePrice">{{ current_variant.compare_at_price | money }}</span>&nbsp;&nbsp;{% endif %}
+                                            <h3 class="price ProductPrice color_discount">
+                                                {{ current_variant.price | money }}   
+                                            </h3>
+                                        </div>
+                                     
+
+
+                    
+                                    </div>
+                                  
+                                    <div id="slider" class="regular-slider flexslider">
+                                      <ul class="slides">
+                                          {% if product.images.size > 0 %}
+                                                <li class="slide featured" data-index="0" data-variant-img="{{ featured_image.id }}" data-thumb="{{ featured_image | img_url: 'small' }}">
+                                                    <img src="{{ featured_image | img_url: 'grande' }}" width="440" height="440" alt="{{ featured_image.alt | escape }}">
+                                                </li>
+                                          {% if product.images.size > 1 %}
+                                            {% assign index = 0 %}
+                                              {% for image in product.images %}
+                                                {% unless image contains featured_image %}
+                                                  {% assign index = index | plus: 1 %}
+                                                  {% if image.alt contains 'youtube' %}
+                                                    <li class="slide{% if image.alt contains 'youtube' %} video{% endif %}" data-index="{{ index }}" data-variant-img="{{ image.id }}" data-thumb="{{ image | img_url: 'small' }}">
+                                                            <iframe src="{{ image.alt }}" frameborder="0" allowfullscreen></iframe>
+                                                        </li>
+                                                  {% else %}
+                                                    <li class="slide" data-index="{{ index }}" data-variant-img="{{ image.id }}" data-thumb="{{ image | img_url: 'small' }}">
+                                                        <img src="{{ image | img_url: 'grande' }}" width="440" height="440" alt="{{ image.alt | escape }}">
+                                                    </li>
+                                                  {% endif %}
+                                                {% endunless %}
+                                              {% endfor %}
+                                          {% endif %}
+                                          {% else %}
+                                          <li class="slide">
+                                              <img src="{{ 'no-image.svg' | asset_url }}" alt="*">
+                                          </li>
+                                          {% endif %}
+                    
+                                      </ul>
+                                    </div>
+                                </div>
+                  <!--img area--->
+                </div>
+                <div class="redline2">
+                  <!---p R--->
+                  <div class="product-content redline2"> 
+              <!--桌面大小的商品內容顯示-->
+				<div class="product-above-image-content-desktop fix1">
+   
+                    {% assign current_variant = bold_selected_or_first_available_variant %}
+                    {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+                    
+                  
+                  <div class="prices-wrap">
+                       
+                        <h3 class="price ProductPrice color_discount">
+                            {{ current_variant.price | money }}   
+                        </h3>
+                        {% if current_variant.price < current_variant.compare_at_price %}<span class="ComparePrice">&nbsp;&nbsp;&nbsp;&nbsp;{{ current_variant.compare_at_price | money }}</span>&nbsp;&nbsp;{% endif %}
+                    </div>
+
+
+ 
+
+              
+                  
+              	</div>
+				              
+                	
+
+				{% assign preorder = false %}
+				{% if product.available %}
+              		{% for tag in product.tags %}
+              			{% if tag == 'preorder' %}
+              				{% assign preorder = true %}
+              			{% endif %}
+              		{% endfor %}
+              	{% endif %}
+
+                <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+
+                  <div class="buy-row swatches">
+
+                      <select name="id" id="product-select-{{ product.id }}" class="product-single__variants">
+                        
+                        {% for variant in product.variants %}
+						
+                        {% include 'bold-hidden-variants' with variant, bold_loop: 'loop' %}
+
+                        {% if variant.available %}
+
+                            <option {% if variant == current_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+
+                          {% else %}
+                            <option disabled="disabled">
+                              {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                            </option>
+                          {% endif %}
+                        {% endfor %}
+                   
+                      </select>
+                          {% for option in product.options %}
+                            {% include 'swatch' with option %}
+                          {% endfor %}
+                   	</div>
+                               <!-----> 
+                  	<div class="buy-row quantity-row">
+                        <div class="form__column quantity-selector">
+                            <p for="Quantity" class="quantity-selector" style="color:#000!important;">{{ 'products.product.quantity' | t }}</p> <!--數量字-->
+                            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="qty-remove-defaults quantity-selector" style="color:#000!important;" >
+                        </div>   
+                        <!--<button type="submit" name="add" id="AddToCart" class="btn" style = "position:fixed;right:100px;top:100px;">
+                            <span id="AddToCartText">現貨搶購</span><!--下方js $addToCartText
+                        </button> -->
+                        <button type="submit" name="add" id="AddToCart" class="btn" style = "height:45px;">
+                            <span id="AddToCartText">加到購物車</span><!--下方js $addToCartText-->
+                        </button>
+                  	</div> 
+                  
+
+                </form>
+
+            	</div>
+                  <!-----P R---->
+                <div>
+                
+              
+            
+     <!--         
+          	<div class="product-detail-anchor-nav">
+                <ul>
+                    <li><a href="#section1" data-analytics-title="特色">特色</a></li>
+                    <li><a href="#section2" data-analytics-title="規格">規格</a></li>
+                    <li><a href="#section3" data-analytics-title="內容物">內容物</a></li>
+                    <li><a href="#section4" data-analytics-title="評論">評論</a></li>
+                    <li><a href="/pages/service" target="_blank" data-analytics-title="FAQ">FAQ</a></li>
+
+                </ul>
+            </div>-->
+          </div>
+		</div>
+            </div>
+        </div>
+    </section>
+            <div class="overlay" id="modalOverlay">
+            <div class="modal">
+              <span class="close-btn" onclick="closeModal()">&times;</span>
+              <img src="{{'Airpod.png'|asset_url}}" class = "popimg" /> 
+              <div>
+                <h2>AirPods</h2>
+                <p>AirPods Pro 版<br>2021 年前<br>·僅提供無線充電<br>2021 年後<br>·支援 MagSafe 磁吸充電<br>
+                <br>AirPods 第二代，分兩款：<br>·有無線充電<br>·沒有無線充電<br>在購買時要確認是購買哪款機型<br>
+                <br>AirPods 第三代<br>推出後皆有支援MagSafe充電</p>                
+              </div>
+
+            </div>
+          </div>
+
+          <div class="overlay" id="modalOverlay3">
+            <div class="modal">
+              <span class="close-btn" onclick="closeModal3()">&times;</span>
+              <img src="{{'01Tesla.png'|asset_url}}" class = "popimg" style = "width:250px;height:250px;" /> 
+              <div>
+                <h2>電動車專用支架<br>$390</h2>
+                <br><br><br>
+                <p>．隱形設計，簡約美觀
+                <br>．可摺疊收納於螢幕後方
+                <br>．3M 點黏式固定，不傷表面
+                <br>凡購買Omnia X 內已包含-通用型旋轉勾夾</p>
+                <br>
+                <button class = "preludeButton" style = "background-color:#4B9BE1;" onclick = "closeModal3()">加入購物車</button>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="overlay" id="modalOverlay2">
+            <div class="modal2">
+              <span class="close-btn2" onclick="closeModal2()">&times;</span>
+              <img src="{{'08-40.jpg'|asset_url}}" /> 
+            </div>
+          </div>
+	<span class="anchor" id="section1"></span>
+  <section class="full-width white-bg">	
+            <div id="features-section"> 
+            <!--- layout type 1--->
+              <!--Layout type2-->
+
+              <!--Layout text1-->
+
+          
+              
+          <section class="full-width white-bg">	
+          <div class="container">
+              <div class="row fixBorder">
+                <div class="col-md-6 fixBorder">
+                      <img class = "Limg pc" src="{{'photo_01.png'|asset_url}}" /> 
+                      <img class = "Limg mobile" src="{{'photo_11.png'|asset_url}}" /> 
+                  </div>
+                <div class="col-md-6 fixBorder contextWord fontReset1" style = "justify-content:left;">
+                  <div class="layoutTestFull fixBorder">
+                    <div class = "Rimg">  
+                      <h2>快充支援 高效輸出</h2>
+                      <p class="last">85W 車用快充頭，支援 PD 3.0 & QC 3.0 快充技術，充電更高效。</p>     
+                    <!--<div  class = "grayword" style = "text-align:left;"><button class = "pop" onclick = "openModal()" >支援規格</button></div> -->
+                    </div>
+                  </div>
+
+                  
+              </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="full-width white-bg">	
+          <div class="container">
+          <div class="row fixBorder">
+            <div class="col-md-6 order-md-2 fixBorder">
+                      <img class = "Rimg pc" src="{{'photo_02.png'|asset_url}}" /> 
+                      <img class = "Rimg mobile" src="{{'photo_12.png'|asset_url}}" /> 
+          </div>
+            <div class="col-md-6 order-md-1 fixBorder contextWord fontReset1">
+              <div class="layoutTestFull fixBorder ContextPaddingFix">
+                  <div class = "Limg">
+                  <h2>效率升級 2+1</h2>
+                  <p class="last">兩個 USB-C 充電孔與 一 個 USB-A 充電孔，兼容大多數數位裝置，平板和筆電都能充。</p>  
+                  <div class = "grayword"><p style = "color:#808080;" >*建議搭配快充專用充電線</p></div>
+                  </div>
+              </div>
+
+              </div>
+
+          </div>
+          </div>
+          </section>
+
+          <section class="full-width white-bg">	
+          <div class="container">
+              <div class="row fixBorder">
+                <div class="col-md-6 fixBorder">
+                      <img class = "Limg pc" src="{{'photo_03.png'|asset_url}}" /> 
+                      <img class = "Limg mobile" src="{{'photo_13.png'|asset_url}}" /> 
+                  </div>
+                <div class="col-md-6 fixBorder contextWord fontReset1" style = "justify-content:left;">
+                  <div class="layoutTestFull fixBorder">
+                    <div class = "Rimg"> 
+                      <h2>智慧分流 更安心</h2>
+                      <p class="last">充電智慧自動分流，根據連接裝置自動調節充電功率，充電功率合計最高達 85W。</p>
+                      <!--<div class = "grayword" ><p style = "color:#808080;" >MagSafe 支援設備：iPhone , Apple Watch , AirPods</p></div> -->             
+                  </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+          </section>
+
+
+          <section class="full-width white-bg">	
+          <div class="container">
+          <div class="row fixBorder">
+            <div class="col-md-6 order-md-2 fixBorder">
+                      <img class = "Rimg pc" src="{{'photo_04.png'|asset_url}}" /> 
+                      <img class = "Rimg mobile" src="{{'photo_14.png'|asset_url}}" /> 
+          </div>
+            <div class="col-md-6 order-md-1 fixBorder contextWord fontReset1">
+              <div class="layoutTestFull fixBorder">
+                <div class = "Limg">
+                  <h2>防滑彈片設計</h2>
+                  <p class="last">採用高品質防滑彈片，不只傳導率佳，電流更是穩定，確保充電穩定性。</p>  
+                  <div class = "prelude" style = "margin-top:80px;display:none;" > 
+                    <a href = "https://bezalel.tw/products/prelude-x-magsafe-2"><button class = "preludeButton" style = "color:#4B9BE1;background-color:white;" id = "preludeButton">Prelude X 5000 mAh</button></a>
+                    <a href = "https://bezalel.tw/products/prelude-x-magsafe-2"><button class = "preludeButton" style = "background-color:#4B9BE1;" id = "preludeButton">Prelude XR 10000 mAh</button></a>
+                  </div>
+                </div>
+              </div>
+
+              </div>
+          </div>
+          </div>
+          </section>
+
+          <!--<section class="full-width white-bg">	
+          <div class="container">
+          <div class="row fixBorder">
+              <div class="col-12 fixBorder contextWord fontReset1 fixDivPadding">
+                  <div class="layoutTestFull fixBorder" style="padding-left:20px;padding-right:20px;margin-top:80px;">
+                      <h2 style = "text-align:center;">多款支架 不挑車款</h2><br>
+                      <p style = "text-align:center;" >除了 Omnia X 內附的 - 智慧型轉軸式支架，BEZALEL 還推出三款分別為圓形出風口、吸盤式支架以及 Tesla 電動車專用支架，無論哪一種車型，都能輕鬆為您的愛車挑選最適合的安裝方式。</p>                  
+                  </div>
+              </div>
+
+          </div>
+          </div>
+          </section>
+
+          <section class="full-width white-bg">	
+          <div class="container">
+          <div class="row row-cols-2 fixBorder">
+              <div class="col-12 fixBorder">               
+                <div class="layoutTestFull fixBorder fixbackground" style = "display:flex;justify-content: center;gap:20px;">
+                  <div class = "popimg1"><button class = "preludeButton number2" onclick = "scrollToTop()" >電動車專用支架</button></div>
+                  <div class = "popimg2"><button class = "preludeButton number2" onclick = "scrollToTop()" >吸盤式專用支架</button></div>
+                  <div class = "popimg3"><button class = "preludeButton number2" onclick = "scrollToTop()" >窗型出風口專用支架</button></div>
+                </div>
+              </div>
+
+          </div>
+          </div>
+          </section> -->
+
+          <section class="full-width white-bg">	
+          <div class="container">
+              <div class="row fixBorder">
+                <div class="col-md-6 fixBorder">
+                      <img class = "Limg pc" src="{{'photo_05.png'|asset_url}}" /> 
+                      <img class = "Limg mobile" src="{{'photo_15.png'|asset_url}}" /> 
+                  </div>
+                <div class="col-md-6 fixBorder contextWord fontReset1" style = "justify-content:left;">
+                  <div class="layoutTestFull fixBorder">
+                    <div class = "Rimg" style = "text-align: left;">
+                      <h2>全方位的安心保障</h2>
+                      <p class="last">配備過流、過溫、過載以及短路保護機制，為您的車內充電提供了全方位的安全保障。</p>   
+                      <!--<a href = "https://bezalel.tw/products/bezalel-85w-carcharger" ><button class = "preludeButton" style = "background-color:#4B9BE1;">加購 85W 三孔快速充電器</button></a> -->
+                  </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+          </section>
+
+          <!--<section class="full-width white-bg">	
+          <div class="container">
+          <div class="row fixBorder">
+            <div class="col-md-6 order-md-2 fixBorder">
+              <img class = "Rimg pc" src="{{'Omnia7.png'|asset_url}}" /> 
+              <img class = "Rimg mobile" src="{{'photo5.png'|asset_url}}" />
+          </div>
+            <div class="col-md-6 order-md-1 fixBorder contextWord fontReset1" style = "justify-content:right;" >
+              <div class="layoutTestFull fixBorder" style="padding-top:2em;">
+                <div class = "Limg">
+                  <h2>多重保護 安全認證</h2><br>
+                  <p class="last">車用充電更需要安全保障，Omnia X 配備多重保護機制，包括過壓、過溫、過載、過充保護，並通過多國國際安全認證。</p>       
+                  <!--<div style = "margin-top:80px;text-align: left;"><button class = "pop" onclick = "openModal()" >認證資訊</button></div> 
+              </div>
+              </div>
+
+              </div>
+          </div>
+          </div>
+          </section> 
+
+          <section class="full-width white-bg">	
+          <div class="container">
+              <div class="row fixBorder">
+                <div class="col-md-6 fixBorder">
+                      <img class = "Limg pc" src="{{'08-3.jpg'|asset_url}}" onclick = "openModal2()" /> 
+                      <img class = "Limg mobile" src="{{'photo6.png'|asset_url}}" />
+                  </div>
+                <div class="col-md-6 fixBorder contextWord fontReset1" style = "justify-content:left;">
+                  <div class="layoutTestFull fixBorder">
+                    <div class = "Rimg" style = "text-align: left;">
+                    <br>
+                    <br>  
+                      <h2>科技氛圍 滿分外型</h2><br>
+                      <p class="last">科技感十足的外型設計，以加州曙光金機身搭配透明黑化面蓋，低調奢華，完美融入愛車內裝。</p>   
+                      <br>
+                      <br>
+                      <!--<button class = "preludeButton" style = "background-color:#4B9BE1;">觀看影片了解更多</button> 
+                  </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+          </section>
+
+
+            </div>
+</section> -->
+	
+      <!--new tab function-->
+
+   <section class="full-width white-bg">
+          
+      <!--new tab function-->
+      <div class="container fixBorder fixbackground5">
+        <!--<div class="carousel-container">
+          <!--<div class="carousel-images">
+            <img src="{{'Group1.png'|asset_url}}" alt="Image 1" >
+            <img src="{{'Group2.png'|asset_url}}" alt="Image 2" >
+            <img src="{{'Group3.png'|asset_url}}" alt="Image 3" >
+            <img src="{{'Group4.png'|asset_url}}" alt="Image 4" >
+            <img src="{{'Group5.png'|asset_url}}" alt="Image 5" >
+          </div>
+          <div class="carousel-buttons">
+            <span class="carousel-button" onclick="setCurrentSlide(1)"></span>
+            <span class="carousel-button" onclick="setCurrentSlide(2)"></span>
+            <span class="carousel-button" onclick="setCurrentSlide(3)"></span>
+            <span class="carousel-button" onclick="setCurrentSlide(4)"></span>
+            <span class="carousel-button" onclick="setCurrentSlide(5)"></span>
+          </div> 
+
+            <img src="{{'Group1.png'|asset_url}}" alt="Image 1" >
+            <img src="{{'Group2.png'|asset_url}}" alt="Image 2" >
+            <img src="{{'Group3.png'|asset_url}}" alt="Image 3" >
+            <img src="{{'Group4.png'|asset_url}}" alt="Image 4" >
+            <img src="{{'Group5.png'|asset_url}}" alt="Image 5" >
+        </div> -->
+              <!--
+              <div class="tab-content">
+                <div class="Tcontent tab-pane active" id="tab1">嚼舌根的分享內容....!!<a href="#" class="right-btn">READ MORE</a></div>
+                <div class="Tcontent tab-pane" id="tab2">蘋果爹的分享內容....!!<a href="#" class="right-btn">READ MORE</a></div>
+                <div class="Tcontent tab-pane" id="tab3">jomen的分享內容....!!<a href="#" class="right-btn">READ MORE</a></div>
+                <div class="Tcontent tab-pane" id="tab4">凱特內容的分享內容....!!<a href="#" class="right-btn">READ MORE</a></div>
+                <div class="Tcontent tab-pane" id="tab5">賴瑞的分享內容....!!<a href="#" class="right-btn">READ MORE</a></div>
+              </div>
+              <div class="tab-menu">
+                <div class="tab-item active" data-tab="tab1"><img src="{{'human_AKON.jpg'|asset_url}}" />  </div>
+                <div class="tab-item" data-tab="tab2"><img src="{{'human_APPLEDAD.jpg'|asset_url}}" />  </div>
+                <div class="tab-item" data-tab="tab3"><img src="{{'human_jomen.jpg'|asset_url}}" /></div>
+                <div class="tab-item" data-tab="tab4"><img src="{{'human_KIT.jpg'|asset_url}}" />  </div>
+                <div class="tab-item" data-tab="tab5"><img src="{{'human_larry.jpg'|asset_url}}" />  </div>
+              </div>-->
+
+
+              <!--<div id="Tcontent-area" class="tab-content">
+                <div class="Tcontent active" id="Tcontent-1">                   
+                  <div class="tab-content-2">                                   
+                          <section class="full-width">	
+                            <div class="container">
+                            <div class="row">
+                              <div class="col-md-8 fixDaZenPadding">
+                                <strong>【Joeman】</strong>我找很久超級好用的 MagSafe 車用無線充電器，首創黑科技三合一車用充電技術，跟我的特斯拉非常的搭！
+                            </div>
+                              <div class="col-md-4 fixDaZenPadding">
+                                  <a href="https://youtu.be/Qs9yPlfeMYk" class="right-btn" target="_blank">READ MORE</a>
+                              </div>
+                            </div>
+                            </div>
+                          </section>                 
+                  </div>
+                </div>
+                <div class="Tcontent" id="Tcontent-2">
+                 
+                  <div class="tab-content-2">                                   
+                          <section class="full-width">	
+                            <div class="container">
+                            <div class="row">
+                              <div class="col-md-8 fixDaZenPadding">
+                                <strong>【我是賴瑞】</strong>無線充電效率可以說是非常的高，支援 Qi2 充電技術，手錶跟手機同時充電輸出，也不會影響到各自的充電效率
+                            </div>
+                              <div class="col-md-4 fixDaZenPadding">
+                                  <a href="https://youtu.be/Y58FzIrStrY" class="right-btn" target="_blank">READ MORE</a>
+                              </div>
+                            </div>
+                            </div>
+                          </section>                 
+                  </div>
+
+              </div>
+              <div class="Tcontent" id="Tcontent-3">
+                
+
+                <div class="tab-content-2">                                   
+                <section class="full-width">	
+                  <div class="container">
+                  <div class="row">
+                    <div class="col-md-8 fixDaZenPadding">
+                      <strong>【阿康嚼舌根】</strong>開車外出兩天以上時就不需要再另外帶充電線，因為開車時候就可以幫我們Apple Watch 補電了，真的超級方便哦！
+                  </div>
+                    <div class="col-md-4 fixDaZenPadding">
+                        <a href="https://youtu.be/Qs9yPlfeMYk" class="right-btn" target="_blank">READ MORE</a>
+                    </div>
+                  </div>
+                  </div>
+                </section>                 
+                </div>
+
+              </div>
+              <div class="Tcontent" id="Tcontent-4">
+                
+                <div class="tab-content-2">                                   
+                <section class="full-width">	
+                  <div class="container">
+                  <div class="row">
+                    <div class="col-md-8 fixDaZenPadding">
+                      <strong>【Iris 艾莉絲】</strong>磁吸的能力有點超越想像，我拿到第一天就直接開上山路測試，山路曲折而且不時會用重煞車，穩定度部分幫大家直接激烈時側了，真的很妥！
+                  </div>
+                    <div class="col-md-4 fixDaZenPadding">
+                        <a href="https://www.instagram.com/p/CkyHJ1_hkfd/" class="right-btn" target="_blank">READ MORE</a>
+                    </div>
+                  </div>
+                  </div>
+                </section>                 
+                </div>
+
+              </div>
+              <div class="Tcontent" id="Tcontent-5">
+                
+                    <div class="tab-content-2">                                   
+                    <section class="full-width">	
+                      <div class="container">
+                      <div class="row">
+                        <div class="col-md-8 fixDaZenPadding">
+                          <strong>【蘋果迷】</strong>除了幫 iPhone 充電以外，還有可以幫Apple Watch 或 AirPods 充電的設計，讓我們這些隨身都有兩三台蘋果裝置的「蘋果迷」隨時在車上補電。
+                      </div>
+                        <div class="col-md-4 fixDaZenPadding">
+                            <a href="https://youtu.be/RqcYQjny25Q" class="right-btn" target="_blank">READ MORE</a>
+                        </div>
+                      </div>
+                      </div>
+                    </section>                 
+                    </div>
+    
+              </div>
+            </div>
+
+
+              <div id="photo-area" class="tab-itemAre">
+                <div class="photo active" id="photo-1">
+                  <img src="{{'human001.jpg'|asset_url}}" alt="Photo 1">
+                  <div class="photo-mask">Joeman</div>
+                </div>
+                <div class="photo" id="photo-2">
+                  <img src="{{'human002.jpg'|asset_url}}" alt="Photo 2">
+                  <div class="photo-mask">我是賴瑞</div>
+                </div>
+                <div class="photo" id="photo-3">
+                  <img src="{{'human003.jpg'|asset_url}}" alt="Photo 3">
+                  <div class="photo-mask">阿康嚼舌根</div>
+                </div>
+                <div class="photo" id="photo-4">
+                  <img src="{{'Human4_new.jpg'|asset_url}}" alt="Photo 4">
+                  <div class="photo-mask">Iris 艾莉絲</div>
+                </div>
+                <div class="photo" id="photo-5">
+                  <img src="{{'Human5_new.jpg'|asset_url}}" alt="Photo 5">
+                  <div class="photo-mask">蘋果迷</div>
+                </div>
+              </div> -->
+
+            
+        
+            <script>
+              // 獲取照片和內容元素
+              var photos = document.querySelectorAll(".photo");
+              var Tcontents = document.querySelectorAll(".Tcontent");
+            
+              // 初始化 TActive 照片和對應的內容
+              var activePhoto = document.querySelector(".photo.active");
+              var activeTcontent = document.querySelector(".Tcontent.active");
+            
+              // 為每個照片添加事件監聽器
+              photos.forEach(function(photo) {
+                photo.addEventListener("mouseover", function() {
+                  // 移除當前 TActive 照片和對應的內容的 active 樣式
+                  activePhoto.classList.remove("active");
+                  activeTcontent.classList.remove("active");
+            
+                  // 將當前照片和對應的內容設置為 TActive
+                  activePhoto = photo;
+                  activeTcontent = document.querySelector("#Tcontent-" + photo.id.split("-")[1]);
+                  activePhoto.classList.add("active");
+                  activeTcontent.classList.add("active");
+                });
+              });
+            </script>
+
+        </div>
+    </section>
+
+  
+	<section class="full-width judgeme-review space-p-b-80" id="reviews-section">
+      	<div class="max-width-1100 container">
+          	<h3 class="display-title space-p-t-20">顧客評論</h3>
+          	<div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title }}' data-id='{{ product.id }}'>{{ product.metafields.judgeme.widget }}</div>
+      	</div>
+  	</section>
+
+    <section class="full-width white-bg">	
+          <div class="container">
+              <div class="row fixBorder intro" >
+                <div class="col-md-6 fixBorder contextWord fontReset1" style = "background-color:#D9D9D9 !important;">
+                  <div class="layoutTestFull fixBorder">
+                    <div class = "contentdemo" style = "padding-left:25%;">
+                      <br>
+                      <br>
+                      <br>
+                      <h2 class = "titledemo">產品規格</h2>
+                      <h2 class = "demoh2">品名</h2>
+                      <p class = "demop">85W 三孔快充車用充電器</p>
+                      <h2 class = "demoh2">內容物</h2>
+                      <div style = "display:none;">
+                        <img src="{{'Omnia_part1.png'|asset_url}}" style = "width:30%;"/>
+                        <img src="{{'Omnia_part2.png'|asset_url}}" style = "width:30%;"/>
+                        <img src="{{'Omnia_part3.png'|asset_url}}" style = "width:30%;"/>
+                      </div>
+                      <p class = "demop">．85W 三孔快充車用充電器   × 1 <br>．User 使用說明書 × 1</p>
+                      <!--<h2 class = "demoh2">支援</h2>
+                      <p class = "demop">MagSafe 磁吸充電、Qi 無線充電</p> -->
+                      <h2 class = "demoh2">尺寸</h2>
+                      <p class = "demop">31*45*77 mm</p>
+                      <h2 class = "demoh2">重量</h2>
+                      <p class = "demop">43g</p>
+                      <br>
+                      <br> 
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                    </div>
+            
+                  </div>
+                </div>
+                <div class="col-md-6 fixBorder contextWord fontReset1" style = "justify-content:left;background-color:#D9D9D9 !important;">
+                  <div class="layoutTestFull fixBorder">
+                    <div class = "contentdemo2">
+                      <h2 class = "demoh2">規格說明</h2>
+                      <p class = "demop">．型號：BZ2CC85<br>．輸入：DC 12-24V⎓7.5A<br>．總輸出：85W
+                        <br>USB-C 1 輸出：5V⎓3A , 9V⎓3A , 12V⎓3A , <br>15V⎓3A , 20V⎓3.25A PPS：3.3-11V⎓5A<br>USB-C 2 輸出：5V⎓3A , 9V⎓2.22A , 12V⎓1.67A <br>USB-A 輸出：5V⎓3A , 9V⎓2A , 12V⎓1.5A<br>USB - A + USB - C2：5V⎓3A </p>
+                      <p class = "infoimg"><img src="{{'intro85W.png'|asset_url}}"/></p>
+                      <a class="button" href="https://drive.google.com/file/d/1HABPl9xhH30Q-yUqkEeRYc9k1c8yjaTA/view?usp=drive_link" target="_blank" >85W 三孔快充車用充電器<br>說明書下載</a>
+                      <br>
+                      <br>  
+                    </div>
+             
+                  </div>
+              </div>
+              </div>
+            </div>
+    </section>
+
+                                      
+</div>
+
+
+                  
+<!--<section class="full-width white-bg" id="specs-section">
+  <h3 class="display-title space-p-t-20 fixbackground5 " style="">規格</h3>
+
+<div class="container fixBorder iconIMG ">
+  <div class="row row-cols-3 fix3">
+    <div class="col"><p>Omnia X MagSafe 車用磁吸無線充電器</p></div>
+    <div class="col"><p>85W 三孔快充車用充電器  </p></div>
+  </div>
+  <div class="row row-cols-3 fix3">
+    <div class="col">
+        <img src="{{'Omnia_part1.png'|asset_url}}" />
+        <img src="{{'Omnia_part2.png'|asset_url}}" />
+        <img src="{{'Omnia_part3.png'|asset_url}}" /><br>
+        內容物
+        <br>
+        Omnia X MagSafe 車用磁吸無線充電器 × 1<br>
+        冷氣出風口夾 × 1<br>
+        USB-C 充電線 × 1<br>
+        User 使用說明書 × 1
+    </div>
+    <div class="col">
+        <img src="{{'Omnia_part4.png'|asset_url}}"  /><br>
+        內容物
+        <br>
+        85W 三孔快充車用充電器   × 1<br>
+        User 使用說明書 × 1
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+  <div class="row row-cols-3 fix3">
+    <div class="col">
+      規格說明<br>
+      型號：BZ10X15<br>
+      USB-C 輸入：5V⎓3A, 9V⎓3A<br>
+      無線充電區域 1：7.5W / 15W<br>
+      無線充電區域 2：5W<br>
+      無線充電區域 3：5W<br>
+    </div>
+    <div class="col">
+      規格說明<br>
+      型號：BZ2CC85<br>
+      輸入：DC 12-24V⎓7.5A<br>
+      總輸出：85W<br>
+      USB-C 1 輸出：5V⎓3A , 9V⎓3A , 12V⎓3A , <br>
+      15V⎓3A , 20V⎓3.25A PPS：3.3-11V⎓5A<br>
+      USB-C 2 輸出：5V⎓3A , 9V⎓2.22A , 12V⎓1.67A <br>
+      USB-A 輸出：5V⎓3A , 9V⎓2A , 12V⎓1.5A<br>
+      USB - A + USB - C2：5V⎓3A <br>
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+  <div class="row row-cols-3 fix3">
+    <div class="col">
+      支援<br>
+      MagSafe 磁吸充電、Qi 無線充電<br>
+    </div>
+    <div class="col">
+
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+  <div class="row row-cols-3 fix3">
+    <div class="col">
+      <img src="{{'NewPreludeXMagSafe_banner_icon-08.png'|asset_url}}" />
+      <br>尺寸<br>
+      含內附支架：68*68*139 mm<br>
+      不含內附支架：68*68*57.5 mm<br>
+
+    </div>
+    <div class="col">
+      <img src="{{'NewPreludeXMagSafe_banner_icon-08.png'|asset_url}}" /><br>
+      尺寸<br>
+      31*45*77 mm<br>
+    </div>
+    <div class="col">
+ 
+    </div>
+  </div>
+  <div class="row row-cols-3 fix3">
+    <div class="col">
+        <img src="{{'NewPreludeXMagSafe_banner_icon-04.png'|asset_url}}" />
+        <br>
+        重量(g)
+        <br>
+        136
+        <br>
+    </div>
+    <div class="col">
+        <img src="{{'NewPreludeXMagSafe_banner_icon-04.png'|asset_url}}" />
+        <br>
+        重量<br>
+        43 g<br> 
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+  <div class="row row-cols-3 fix3">
+    <div class="col">
+
+       
+    </div>
+    <div class="col">
+
+    </div>
+    <div class="col">
+ 
+    </div>
+  </div>
+  <div class="row row-cols-3 fix3">
+    <div class="col">
+     
+    </div>
+    <div class="col">
+      
+    </div>
+    <div class="col">
+       
+    </div>
+  </div>
+</div>
+
+</section> -->
+
+
+<!--<section class="full-width white-bg">	
+<div class="container">
+    <div class="row row-cols-2 fixBorder">
+        <div class="col-12 fixBorder">
+            <div class="layoutTestFull fixData1 fixBorder">
+                <br><br>
+                <h2>適用於</h2>
+                  <p>iPhone 12 mini、 iPhone 12、iPhone 12 Pro、 iPhone 12 Pro Max、 iPhone 13 mini、iPhone 13、 iPhone 13 Pro、 
+                  iPhone 13 Pro Max、 
+                  </p>
+                  <p>
+                  iPhone 14、iPhone 14 Plus、iPhone 14 Pro、iPhone 14 Pro Max、 iPhone 15、iPhone 15 Plus、iPhone 15 Pro、iPhone 15 Pro Max
+                  </p>  
+                <br>                
+            </div>
+        </div>
+        <div class="col-12 fixBorder">
+            <div class="layoutTestFull fixData1 fixBorder">
+                <br><br>
+                <h2>其他資訊</h2>
+                <p>Logo面僅提供 3W 無線輸出，僅支援小裝置（藍牙耳機）充電。</p> 
+                <p>
+                提供MagSafe系列手機及其他支援 Qi 充電標準的裝置，獨創雙面充電及多種充電模式，為達最佳充電體驗建議選購BEZALEL相關配件。
+                </p> 
+                <br>                 
+            </div>
+        </div>
+        <div class="col-12 fixBorder fixData1">
+            <div class="container">
+                <div class="button-group">
+                    <a class="button" href="https://drive.google.com/file/d/1JRJ47ORPaI9On1hIhNsafUP30N3iNQEJ/view?usp=share_link" target="_blank" >Prelude X MagSafe <br>說明書下載</a>
+                    <a class="button" href="https://drive.google.com/file/d/1mjYHiNFKEmZ8eUrhNuFJxW-tIhun-rYm/view?usp=sharing" target="_blank" >Prelude XR MagSafe <br>說明書下載</a>
+                    <a class="button" href="https://drive.google.com/file/d/1KdxMsFDNbxZXznFVum6ooKkHb9cHDO0t/view?usp=sharing" target="_blank" >Prelude XS MagSafe <br>說明書下載</a>
+                  </div>
+
+                  <br><br><br><br>
+        </div>
+
+    </div>
+  </div>
+</div>
+</section> -->
+
+
+
+  
+{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+{{ 'flexslider.js' | asset_url | script_tag }}
+<script>   
+  	var selectCallback = function(variant, selector) {
+
+  	var $addToCart = $('#AddToCart'),
+      	$productPrice = $('.ProductPrice'),
+      	$comparePrice = $('.ComparePrice'),
+      	$quantityElements = $('.quantity-selector'),
+      	$addToCartText = $('#AddToCartText'),
+        
+      	moneyFormat = "{{ shop.money_format }}";
+
+    	if (variant && variant.available == true) {
+            $addToCart.removeClass('btn--disabled').prop('disabled', false);
+            $quantityElements.removeClass('hidden');
+            $addToCartText.text({{ 'products.product.add_to_cart' | t | json }});
+
+      	if (variant.featured_image) {
+        	var newImg = $('#slider').find('.slide[data-variant-img="' + variant.featured_image.id + '"]');
+        	if (newImg.length > 0) {
+          		if ($('#slider').hasClass('loaded')) {
+            		$('#slider').flexslider(newImg.data('index'));
+          		} else {
+            		$('#slider').data('loaded-index', newImg.data('index'));
+          		}
+        	}
+      	}
+
+        if ( variant.compare_at_price > variant.price ) {
+            $comparePrice.html(Shopify.formatMoney(variant.compare_at_price, moneyFormat)).show();
+            $productPrice.html(Shopify.formatMoney(variant.price,  moneyFormat)) + Shopify.formatMoney(variant.compare_at_price, moneyFormat);
+        } else {
+            $comparePrice.hide();
+            $productPrice.html(Shopify.formatMoney(variant.price, moneyFormat));
+        }
+          
+        var form = jQuery('#' + selector.domIdPrefix).closest('form');
+      	for (var i=0,length=variant.options.length; i<length; i++) {
+        	var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+        	if (radioButton.size()) {
+          	radioButton.get(0).checked = true;
+        	}
+      	}
+
+    } else {
+
+      	$addToCart.addClass('btn--disabled').prop('disabled', true);
+      	$addToCartText.text("{{ 'products.product.unavailable' | t }}");
+      	$quantityElements.addClass('hidden');
+    } 
+      //edit 2022/04/06 addToCartText
+      
+
+
+        $(".swatch-element input:radio").on('mouseover', function(){
+          $(this).parent().addClass('active-swatch-single-variant');
+        });
+
+        $(".swatch-element input:radio").on('mouseout', function(){
+          $(this).parent().removeClass('active-swatch-single-variant');
+        });
+      $(".swatch-element input:radio").on('click', function(){
+        if ($(this).attr('checked', 'checked')){
+           	$(this).parent().addClass('active-swatch-single-variant');
+          	$(this).parent().siblings().removeClass('active-swatch-single-variant');
+        } else {
+           $(this).parent().removeClass('active-swatch-single-variant');
+       }
+    });     
+
+  };
+
+  jQuery(function($) {
+      	new Shopify.OptionSelectors('product-select-{{ product.id }}', {
+      	product: bold_product_json[{{ product.id }}],
+      	onVariantSelected: selectCallback,
+      	enableHistoryState: false
+    });
+
+    {% if product.options.size == 1 %}
+      {% if product.options.first != "Title" %}
+        $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">{{ product.options.first | escape }}</label>');
+      {% else %}
+        $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">&nbsp;</label>');
+      {% endif %}
+    {% endif %}
+
+    {% if bold_variants_size == 1 and product.variants.first.title contains 'Default' %}
+      $('.selector-wrapper').hide();
+    {% endif %}
+  });
+    
+  jQuery(function(){$(document).on("click",".faq-item .faq-question",function(){$(this).parent().find(".content").is(":visible")||($(".faq-item .content").slideUp(),$(".faq-item .faq-question").removeClass("active")),$(this).toggleClass("active").parent().find(".content").slideToggle()})});
+
+  jQuery(document).ready(function() {
+      $('.swatch-element.black').addClass('active-swatch-single-variant');
+
+      if ($('.regular-slider').length > 0) {
+
+        $('.regular-slider.flexslider').imagesLoaded(function() {
+          var sliderArgs = {
+              animation: 'slide',
+              animationSpeed: 300,    
+              slideshow: false,
+              slideshowSpeed: 5000,
+              directionNav: true,
+              keyboard: true,
+              prevText: '',
+              nextText: '',
+              smoothHeight: true,
+              controlNav: 'thumbnails',
+              controlsContainer: $('.custom-controls-container'),
+              customDirectionNav: $('.custom-navigation a'),
+              start: function(slider) {
+                  if ($(slider).find('.slide').not('.clone').length === 1) {
+                    $(slider).find('.flex-direction-nav').remove();
+                  }
+                  $(window).trigger('resize');
+                  slider.addClass('loaded');
+                  if ($('#slider').data('loaded-index') != undefined) {
+                    $('#slider').flexslider($('#slider').data('loaded-index'));
+                  }
+                  $('.flex-control-thumbs img').each(function() {
+                      if ($(this).prop('alt') != 'Black') {
+//                           $(this).parent('li').addClass('hide');
+                      }                	
+                  })
+                  $('.flex-control-thumbs').addClass('show');
+              }
+          };
+
+          if ($('.regular-slider.flexslider').find('li').length === 1) {
+            sliderArgs.touch = false;
+          }
+
+          $('.regular-slider.flexslider').flexslider(sliderArgs);
+        });
+      }
+   });
+
+//Tab function
+$(document).ready(function() {
+  $('.tab-item').click(function() {
+    $('.tab-item').removeClass('active');
+    $(this).addClass('active');
+    var tabId = $(this).data('tab');
+    $('.tab-pane').removeClass('active');
+    $('#' + tabId).addClass('active');
+  });
+});
+
+    // 開啟彈跳視窗
+    function openModal() {
+        document.getElementById('modalOverlay').style.display = 'block';
+    }
+
+    function openModal2() {
+        document.getElementById('modalOverlay2').style.display = 'block';
+    }
+
+    function openModal3() {
+        document.getElementById('modalOverlay3').style.display = 'block';
+    }
+
+    // 關閉彈跳視窗
+    function closeModal() {
+        document.getElementById('modalOverlay').style.display = 'none';
+    }
+
+    function closeModal2() {
+        document.getElementById('modalOverlay2').style.display = 'none';
+    }
+
+    function closeModal3() {
+        document.getElementById('modalOverlay3').style.display = 'none';
+    }
+
+    function scrollToTop() {
+            window.scrollTo(0, 400);
+    }
+
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("carousel-images")[0].getElementsByTagName("img");
+        let dots = document.getElementsByClassName("carousel-button");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        slides[slideIndex-1].style.display = "block";
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        dots[slideIndex-1].className += " active";
+        setTimeout(showSlides, 5000); 
+        
+    }
+
+    function setCurrentSlide(n) {
+        slideIndex = n - 1;  
+        showSlides();
+        clearTimeout(autoSlide);  
+        autoSlide = setTimeout(showSlides, 5000);  
+    }
+
+
+
+</script>
+
+<style>
+
+{% assign width = '40px' %}
+{% assign height = '40px' %}
+.swatch { 
+  margin:1em 0 0; 
+    /*GGG*/
+    border-radius: 10px;
+  display:none;
+    /*GGG*/
+}
+.swatch .header {
+  margin: 0.5em 0;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch input { 
+  display:none;
+}
+.swatch label {
+  float:left;
+  width:310px;
+  height:{{ height }} !important;
+  margin:0;
+  font-size:11px !important;
+  text-align:center;
+  line-height:{{ height }};
+  white-space:nowrap;
+  text-transform:uppercase;
+  color: #5C5D62!important;
+    /*GGG*/
+    border-radius: 0px;
+    /*GGG*/
+}
+.swatch-element label { padding:0 10px; }
+.color.swatch-element label { padding:0;  border-radius: 0; }
+.swatch .swatch-element {
+  float:left;
+  -webkit-transform:translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing:antialiased; /* webkit text rendering fix */
+  margin:0px 10px 10px 0;
+  position:relative;
+    /*GGG*/
+    border-radius: 0px;
+    /*GGG*/
+}
+/* Image with the cross in it */
+.crossed-out { 
+  position:absolute; width:100%; height:100%; left:0; top:0; 
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch .swatch-element .crossed-out { display:none; }
+.swatch .swatch-element.soldout .crossed-out { display:block; }
+.swatch .swatch-element.soldout label {
+  filter: alpha(opacity=60); /* internet explorer */
+  -khtml-opacity: 0.6;      /* khtml, old safari */
+  -moz-opacity: 0.6;       /* mozilla, netscape */
+  opacity: 0.6;           /* fx, safari, opera */
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+/* Tooltips */
+.swatch .tooltip {
+  text-align:center;
+  background:#343339;
+  color:#fff;
+  bottom:100%;
+  padding: 10px;
+  display:block;
+  position:absolute;
+  width:100px;
+  left:{{ width | remove: 'px' | to_number | divided_by: 2 | minus: 50 | plus: 2 }}px;
+  margin-bottom:15px;
+  /* Make it invisible by default */
+  filter:alpha(opacity=0);
+  -khtml-opacity: 0;
+  -moz-opacity: 0;
+  opacity:0;
+  visibility:hidden;
+  /* Animations */
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  z-index: 10000;
+  -moz-box-sizing:border-box; 
+  -webkit-box-sizing:border-box; 
+  box-sizing:border-box;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch .tooltip:before {
+  bottom:-20px;
+  content:" ";
+  display:block;
+  height:20px;
+  left:0;
+  position:absolute;
+  width:100%;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+/* CSS triangle */
+.swatch .tooltip:after {
+  border-left:solid transparent 10px;
+  border-right:solid transparent 10px;
+  border-top:solid #343339 10px;
+  bottom:-10px;
+  content:" ";
+  height:0;
+  left:50%;
+  margin-left:-13px;
+  position:absolute;
+  width:0;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch .swatch-element:hover .tooltip {
+  filter:alpha(opacity=100);
+  -khtml-opacity:1;
+  -moz-opacity:1;
+  opacity:1;
+  visibility:visible;
+  -webkit-transform:translateY(0px);
+     -moz-transform:translateY(0px);
+      -ms-transform:translateY(0px);
+       -o-transform:translateY(0px);
+          transform:translateY(0px);
+            /*GGG*/
+  border-radius: 0px;
+  /*GGG*/
+}
+.swatch.error {
+  background-color:#E8D2D2!important;
+  color:#333!important;
+  padding:1em;
+  border-radius:5px;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch.error p {
+  margin:0.7em 0;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch.error p:first-child {
+  margin-top:0;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch.error p:last-child {
+  margin-bottom:0;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+.swatch.error code {
+  font-family:monospace;
+    /*GGG*/
+    border-radius: 10px;
+    /*GGG*/
+}
+
+.layoutTest{
+  
+}
+
+.product-wrap .ComparePrice{
+  
+  float: left;
+  display: inline-block;
+  padding: 5px 5px 5px 10px;
+  margin: 3px 10px 0 0;
+  font-family: "Mark", Arial, sans-serif !important;
+  font-size: 16px !important;
+  width: auto;
+  line-height: 1.4;
+  text-decoration: line-through;
+  color: #929292;
+}
+
+
+.flex-container {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .layoutTestLeft{
+  background-color:green!important
+}
+    .layoutTestRight{
+  
+}
+
+.futura-buy-white .product-wrap .input-holder svg path, .omnia-buy-white .product-wrap .input-holder svg path, .cable-buy-white .product-wrap .input-holder svg path {
+  
+  fill: #000 !important;
+}
+  .layoutTestFull{
+    text-align:center;
+  }
+
+.fixBorder{
+  background-color:#EAEAEA!important;
+}
+
+.fixbackground{
+
+}
+
+.fixbackground2{
+
+}
+.fixbackground3{
+    background-image: url({{'NewPreludeXMagSafeGIF-R.gif'|asset_url}});
+
+    background-size: cover;
+    background-position: left top;
+    background-repeat: no-repeat;
+      height: 100%;
+  flex-grow: 1;
+}
+
+.fixbackground4{
+    /**/background-image: url({{'NewPreludeXMagSafe_4_3_6.jpg'|asset_url}});
+    background-size: cover;
+    background-position: left top;
+    background-repeat: no-repeat;
+      height: 100%;
+  flex-grow: 1;
+}
+
+.fixbackground5{
+    background-color:#FFFFFF;
+    color:#454549;
+    padding-top:1em;
+    padding-bottom:1em;
+}
+
+.contextWord{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+.fontReset1{
+    color:#343439;
+}
+
+.fontReset2{
+    color:#FFFFFF;
+}
+
+.fixDivPadding{
+    padding-top:3em;
+    padding-bottom:3em;
+}
+
+.bannerPic{
+    background-image: url({{'NewPreludeXMagSafe16_10.jpg'|asset_url}});
+    background-repeat: no-repeat;
+    background-size: contain;
+    width:auto;
+    height:auto;
+}
+
+.infoimg{
+  width:360px;
+}
+      
+.backIMG{
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index:-1;
+}
+
+.iconIMG img{
+    width:78px; 
+    
+}
+
+
+/*先把所有div的padding消掉*/
+div {
+    --bs-gutter-x: 0!important;
+    margin: 0;
+    padding: 0;
+  }
+
+/*有需要padding的再自己修*/
+
+
+.fix1{
+    display: flex;
+    align-items: flex-start;
+}
+
+.fix2{
+    align:center;
+}
+
+/*改內文寬度，要注意是否會影響到其他的*/
+#features-section h2, #features-section p {
+  text-align: left;
+  /* max-width: 350px; */
+  max-width: 400px;
+}
+
+.fix3{
+    border-bottom:2px;
+    border-style:solid;
+    border-color:#f0f0f0;
+    text-align: center;
+    line-height: 1.6;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+  .tab-menu {
+  display: flex;
+  justify-content: space-between;
+  background-color: #eee;
+  height: auto;
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  
+}
+
+.tab-itemAre{
+  padding:0px!important;
+}
+
+.tab-item.active {
+  background-color: #f0f0f0;
+  
+}
+
+.tab-content {
+  min-height: 150px;
+  background-color: #454549!important;
+  padding-top: 3em!important;
+  padding-left: 10%!important;
+  padding-right: 3%!important;
+  color: #000000;
+}
+
+.tab-content-2{
+  width:100%;
+  font-size: 24px;
+}
+
+.tab-pane {
+  display: none;
+  
+}
+
+.tab-pane.active {
+  display: block;
+  
+}
+
+.prices-wrap h3.color_discount {
+  color: black !important;
+}
+
+.right-btn {
+    float: right;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #333;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .right-btn:hover {
+    font-weight: bold;
+  }
+  
+  .right-btn:hover, .right-btn:focus {
+    color: #555;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FFF;
+    color: #333;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn:hover {
+    font-weight: bold;
+  }
+  
+  .btn:hover, .btn:focus {
+    color: #555;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /*改動說明書下載按鈕樣式*/
+  .button {
+    display: inline-block;
+    background-color: #fff;
+    color: #4B9BE1;
+    border: none;
+    border-radius: 17px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: normal;
+    text-decoration: none;
+    cursor: pointer;
+    transition: font-weight 0.2s ease-in-out;
+  }
+  
+  .button:hover {
+    background-color:#4B9BE1;
+    color:#FFF;
+  }
+
+  .img-container {
+    position: relative;
+  }
+
+  .img-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .img-container:hover::before {
+    opacity: 1;
+  }
+  
+  .img-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: brightness(0.5);
+  }
+
+  .iconContextFix{
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 可以讓內容垂直置中 */
+}
+
+#features-section img{
+  padding:50px 0px;
+}
+
+p{
+  font-size:15px;
+}
+
+.prelude{
+  display:flex;
+  gap:30px;
+}
+
+.preludeButton{
+  width:235px;
+  height:45px;
+  padding-inline:0px;
+  border-radius:50px !important;
+  font-size:15px;
+}
+
+.pop{
+  text-decoration:underline;
+  font-size:20px;
+  color:#808080;
+  background-color: #EAEAEA;
+  padding-inline: 0px;
+}
+
+    /* 覆蓋整個頁面的背景 */
+    .overlay {
+        display: none; /* 預設不顯示 */
+        position: fixed; /* 固定位置，不隨滾動條滾動 */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+        z-index: 1000; /* 確保覆蓋其他元素 */
+    }
+
+  .overlay p{
+    font-size:15px;
+    color:#000000 !important;
+    text-align:left;
+  }
+
+  .overlay h2{
+    font-size:24px;
+    color:#000000 !important;
+    text-align:left;
+  }
+
+  .popimg1{
+    width:550px;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'05-2.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg2{
+    width:550px !important;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'05-1.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg3{
+    width:550px !important;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'05-3.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+
+    /* 彈跳視窗的樣式 */
+    .modal {
+        position: fixed;
+        display:flex;
+        background-color: white;
+        width: 650px;
+        height: 450px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 50px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1001; /* 比背景高一級的 zIndex */
+        align-items:center;
+        gap:30px;
+        border-radius:20px;
+    }
+
+    .modal2 {
+        position: fixed;
+        display:flex;
+        background-color: white;
+        width: auto;
+        height: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 50px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1001; /* 比背景高一級的 zIndex */
+        align-items:center;
+        gap:30px;
+        border-radius:20px;
+    }
+
+    .modal3 {
+        position: fixed;
+        display:flex;
+        background-color: white;
+        width: 650px;
+        height: 450px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 50px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1001; /* 比背景高一級的 zIndex */
+        align-items:center;
+        gap:30px;
+        border-radius:20px;
+    }
+
+    /* 關閉按鈕的樣式 */
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 600px;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-color: #D9d9d9;
+        font-size: 22px;
+        text-align: center;
+        border-radius: 100px;
+    }
+
+    .close-btn2 {
+        position: absolute;
+        top: 15px;
+        right: 60px;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-color: #D9d9d9;
+        font-size: 22px;
+        text-align: center;
+        border-radius: 100px;
+    }
+
+        .carousel-container {
+            max-width: 1920px;
+            position: relative;
+            margin-inline: 0%;
+            overflow-x:scroll;
+            display:flex;
+        }
+
+        .carousel-images img {
+            width: 100%;
+            height: auto;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .carousel-button {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-button:hover {
+            background-color: #717171;
+        }
+
+        .carousel-button.active {
+            background-color: #333;
+        }
+
+  .Limg{
+    padding-left:31% !important;
+    padding-right:30px !important;
+    background-image:none;
+  }
+
+  .Rimg{
+    padding-left:30px !important;
+    padding-right:31% !important;
+    background-image:none;
+  }
+
+  .pc{
+    display:block;
+  }
+  
+  .mobile{
+    display:none;
+  }
+
+  .product{
+    padding-inline:14%;
+  }
+
+  .titledemo{
+    font-size:27px;
+    text-align:left;
+    margin-bottom:30px;
+  }
+
+  .contentdemo{
+    padding-left:31%;
+    background-color:#D9D9D9;
+  }
+
+  .contentdemo2{
+    padding-right:31%;
+    background-color:#D9D9D9;
+  }
+
+  .demoh2{
+    font-size:15px;
+    text-align:left;
+  }
+
+  .demop{
+    font-size:15px;
+    text-align:left;
+  }
+
+  .intro{
+    margin-bottom:70px;
+  }
+
+  #PageContainer{
+    background-color:#d9d9d9;
+  }
+
+.Bigbanner{
+  height:auto !important;
+  padding-right:0px !important;
+}
+
+.main-content{
+  background-color:#EAEAEA;
+}
+
+.space-p-b-80{
+  padding-bottom:0px;
+}
+
+.grayword{
+  margin-top:80px;
+  position:relative;
+  top:100px;
+}
+  
+/*購物區標題*/
+quantity-selector label, .swatch .header, .quantity-row label {
+  margin: 0.5em 0 !important;
+  text-transform: none !important;
+  font-size: 16px !important;
+}
+
+.product-wrap .warranty .faq-question p {
+  /* padding-left: 25%; */
+  font-size: 16px;
+}
+
+/*加購區修改*/
+.accessories-item {
+  margin-bottom: 15px;
+  text-align: left;
+  /* overflow: hidden; */
+  background-color: #EAEAEA!important;
+}
+
+.futura-buy-white #w3-product-accessories .accessories-item, .omnia-buy-white #w3-product-accessories .accessories-item, .cable-buy-white #w3-product-accessories .accessories-item {
+  
+  /*border-bottom: 5px solid #ffffff !important;*/
+}
+
+.graylink{
+  text-decoration:underline;
+  font-size:24px;
+  color:#838383;
+}
+
+
+.add-ons #w3-product-accessories .accessories-item input[type=checkbox] {
+  position: absolute;
+  top: 80%;
+  left: 10px;
+  width: 25px !important;
+  height: 25px !important;
+  margin-top: -10px !important;
+  border: 1px solid #404040 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  z-index: 99;
+}
+
+
+.accessories-item .accessories-img-wrapper {
+  margin-top: 17px;
+  float: left;
+  cursor: pointer;
+  position: relative;
+}
+
+.accessories-left {
+  position: relative;
+  float: left;
+  margin-right: 5px;
+  text-align: center;
+  width: 134px!important;
+}
+
+.add-ons #w3-product-accessories .accessories-item .accessories-img-wrapper {
+  display: block;
+  float: right;
+  width: 60%;
+  cursor: default;
+  z-index: 0 !important;
+}
+
+
+.redline{
+  background-color:#EAEAEA!important
+}
+
+.redline2{
+
+}
+
+.redline3{
+
+}
+
+.last{
+  font-size:15px;
+  max-width:none !important;
+}
+
+h2{
+  font-size:40px;
+}
+
+.myRadius option{
+  /*GGG*/
+  border-radius: 10px;
+  /*GGG*/
+  background-color:green;
+
+}
+
+.product-wrap #AddToCart, .product-wrap #addToCartCopy {
+  display: block;
+  top: auto;
+  float: left;
+  width: 100%;
+  max-width: 233px!important;
+  padding: 6px 0;
+  margin-top: 43px;
+  border: none !important;
+  background: #FFF !important;
+  color: #000 !important;
+  line-height: 1.6;
+  cursor: pointer;
+  border-radius:5px !important;
+}
+
+.product-wrap #AddToCart:hover{
+  background-color:#4B9BE1 !important;
+  color:white !important;
+  font-weight:100 !important;
+}
+  
+.swatch-element{
+  border:0px;
+}
+
+
+/*加入購物車了啦*/
+.product-wrap #addToCartCopy{
+  border-radius: 50px!important;
+  border-style: solid!important;
+  background: #d9d9d9!important;
+  border: 0px solid #454549 !important;
+  color: #454549 !important;
+  font-size:18px;
+  height:42px;
+  width:200px;
+  height:56px;
+}
+
+.product-wrap #addToCartCopy:hover{
+  background-color:#4B9BE1 !important;
+  color:white !important;
+  font-weight:100 !important;
+}
+
+  /*數量--*/
+  .input-holder.minus input {
+    border-radius: 2px 0 0 2px;
+    /* border: 2px !important; */
+    border-color: #000!important;
+    color: #000!important;
+    border-style: solid!important;
+  }
+
+/*數量++*/
+.quantity-row .input-holder input {
+  padding: 0 !important;
+  height: 42px !important;
+  width: 42px !important;
+  border-radius: 0px !important;
+  border: 0px !important; 
+  border-color: #454549!important;
+  border-style: solid!important;
+}
+
+/*中間數字*/
+.futura-buy-white .quantity-row .input-holder.minus, .futura-buy-white .quantity-row .input-holder.plus, .futura-buy-white .quantity-row #Quantity, .futura-buy-white #w3-product-accessories .accessories-item input[type=checkbox], .omnia-buy-white .quantity-row .input-holder.minus, .omnia-buy-white .quantity-row .input-holder.plus, .omnia-buy-white .quantity-row #Quantity, .omnia-buy-white #w3-product-accessories .accessories-item input[type=checkbox], .cable-buy-white .quantity-row .input-holder.minus, .cable-buy-white .quantity-row .input-holder.plus, .cable-buy-white .quantity-row #Quantity, .cable-buy-white #w3-product-accessories .accessories-item input[type=checkbox] {
+  border: none!important;
+}
+  
+svg plus {
+  fill:#000!important;
+} 
+
+path {
+  fill: #000!important;
+}
+
+.faq-item{
+  display:none;
+}
+
+/*購物車黑色那一塊的調整*/
+.quantity-row {
+  max-width: 450px!important;
+  background-color: #EAEAEA;
+  padding: 25px 0px;
+  text-align: center;
+}
+
+#Quantity {
+  color:#fff!important;
+}
+
+
+
+        /*New 逹人分享*/
+		/* 照片區域樣式 */
+		#photo-area {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 20px;
+			background-color: #f5f5f5;
+		}
+
+		.photo {
+			position: relative;
+			width: 20%;
+			height: auto;
+			transition: opacity 0.3s ease-in-out;
+		}
+
+		.photo:hover {
+			opacity: 1;
+			cursor: pointer;
+		}
+
+		.photo.active {
+			opacity: 0.8;
+		}
+
+		.photo-mask {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			color: #fff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			opacity: 1;
+			transition: opacity 0.3s ease-in-out;
+		}
+
+		.photo.active .photo-mask {
+			opacity: 0;
+		}
+
+		/* 內容區域樣式 */
+		#Tcontent-area {
+			padding: 20px;
+			background-color: #EAEAEA;
+            
+		}
+
+		.Tcontent {
+			display: none;
+		}
+
+		.Tcontent.active {
+			display: block;
+		}
+
+    .fixDaZenPadding{
+      /**/
+      padding:0px;
+      background-color:#454549!important;
+      color:#FFF;
+    }
+
+    /**/
+    label{
+      color:#CCC!important;
+    }
+
+
+
+    /*評論區的顏色*/
+    .jdgm-star {
+      color: #4E92CF!important;
+  }
+
+  .jdgm-rev-widg{
+    padding:24px 300px !important;
+  }
+
+  .jdgm-histogram__bar {
+    background: white !important;
+    border: 1px solid #212529 !important;
+    box-shadow: none !important;
+    
+}
+
+  .number2{
+    background-color:#D9D9D9;
+    opacity:0.8;
+    margin:67% 0 0 0%;
+  }
+  
+  .full-width img{
+    padding-right:20px;
+  }
+
+.jdgm-histogram__bar-content {
+  background: #929292 !important;
+}
+
+.jdgm-write-rev-link {
+  background-color: white !important;
+  padding: 10px 45px !important;
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+  color: #929292 !important;
+  font-family: "Mark", Arial, sans-serif !important;
+  border: 1px solid #929292 !important;
+  line-height: 1.6 !important;
+  text-align: center !important;
+  font-size: 20px !important;
+  text-transform: none !important;
+  font-family: "Mark", Arial, sans-serif !important;
+}
+
+.jdgm-write-rev-link > a a:hover, a:visited, a:link, a:active{
+  text-decoration: none!important;
+}
+
+/*適用於*/
+.fixData1{
+  text-align: center;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+
+/*寄信mail的botton被弄不見了，修復*/
+.mailchimp-wrap #mc-embedded-subscribe {
+  width: 100%;
+  /* height: auto; */
+  height: 40px;
+  padding: 0;
+  border: none;
+  line-height: 50px;
+  z-index: 999;
+  
+}
+
+/*.flex-direction-nav a.flex-prev{
+  background: url('new_left-arrow.png') no-repeat center center;
+}
+
+.flex-direction-nav a.flex-next{
+  background: url('new_right-arrow.png') no-repeat center center;
+}*/
+
+.flex-control-nav{
+  display:none !important;
+}
+
+h2{
+  font-size:27px;
+}
+
+@media (min-width: 1600px) {
+  .popimg1{
+    width:450px;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'05-2.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg2{
+    width:450px !important;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'05-1.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg3{
+    width:450px !important;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'05-3.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+}
+
+@media (max-width: 1440px) {
+  .grayword{
+    margin-top:60px;
+  }
+
+  .prelude{
+    display:flex;
+    gap:15px;
+  }
+
+  .popimg1{
+    width:400px;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'05-2.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg2{
+    width:400px !important;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'05-1.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg3{
+    width:400px !important;
+    height:366px;
+    padding:0px !important;
+    background-image: url("{{'05-3.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+
+
+  
+@media (min-width: 1401px) {
+  .product-wrap .product-title {
+    text-align: left;
+    margin: 0;
+    line-height: 1.3;
+    color: #fff;
+    font-family: "Mark Bold", Arial, sans-serif;
+    font-size: 27px;
+}
+  .container{ 
+    max-width: 2048px;
+    background-color: #EAEAEA;
+    
+  }
+  .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 2048px;
+  }
+  /*內文*/
+  #features-section h2, #features-section p {
+    text-align: left;
+    max-width: 600px;
+  }
+}
+
+  .container{ 
+    max-width: 2048px;
+    background-color: #EAEAEA;
+    
+  }
+
+@media (max-width: 1024px) {
+  .product {
+    padding-inline: 20px;
+  }
+
+  .Limg {
+    padding-left: 50px !important;
+    padding-right: 0px !important;
+  }
+
+  .Rimg {
+    padding-left: 30px !important;
+    padding-right: 50px !important;
+  }
+
+  .prelude {
+        display: flex;
+        gap: 15px;
+        flex-direction: column;
+        margin-top: 20px !important;
+  }
+
+  .grayword{
+    margin-top:50px;
+    top:55px;
+  }
+
+  .popimg1{
+    width:300px;
+    height:300px;
+    padding:0px !important;
+    background-image: url("{{'05-2.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg2{
+    width:300px !important;
+    height:300px;
+    padding:0px !important;
+    background-image: url("{{'05-1.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg3{
+    width:300px !important;
+    height:300px;
+    padding:0px !important;
+    background-image: url("{{'05-3.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .carousel-container{
+    margin-inline:0px;
+  }
+
+  .contentdemo{
+    padding-left:50px;
+  }
+
+  .contentdemo2{
+    padding-right:50px;
+  }
+
+  .number2{
+    margin: 80% 0 0 0%;
+  }
+
+  .Bigbanner{
+    height:auto !important;
+  }
+
+  .bannerPic{
+    height:auto;
+  }
+}
+
+@media (max-width: 820px) {
+  h2{
+    font-size:30px;
+  }
+
+  p{
+    font-size:15px !important;
+  }
+
+  .pop{
+    font-size:15px;
+  }
+
+  .jdgm-rev-widg{
+    padding-inline:50px !important;
+  }
+
+  .number2{
+    margin: 95% 0 0 0%;
+  }
+}
+@media (max-width: 767px) {
+  /*規格修正*/
+
+  .container{ 
+    /*max-width: 2048px;*/
+    background-color: #EAEAEA;
+    
+  }
+  .fix3 {
+    border-bottom: 3px;
+    border-style: solid;
+    border-color: #f0f0f0;
+    text-align: center;
+    line-height: 3em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    font-size: 9px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+  .fixbackground3 {
+    background-image: none;
+    background-size: cover;
+    background-position: left top;
+    background-repeat: no-repeat;
+    height: 100%;
+    flex-grow: 1;
+    color: #343439;
+  }
+
+  .fixbackground4 {
+    background-image: none;
+    background-size: cover;
+    background-position: left top;
+    background-repeat: no-repeat;
+    height: 100%;
+    flex-grow: 1;
+    color: #343439;
+  }
+
+    /*改動說明書下載按鈕樣式 simon 2023/3/18*/
+    .button {
+      display: inline-block;
+      background-color: #FFF;
+      color: #4B9BE1;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      font-size: 13px;
+      width: 25%;
+      font-weight: normal;
+      text-decoration: none;
+      cursor: pointer;
+      transition: font-weight 0.2s ease-in-out;
+  }
+
+
+
+
+    /*RWD後 採購button會破版的修改 simon 2023/3/18*/
+    .quantity-row {
+      max-width: 450px!important;
+      background-color: #EAEAEA;
+      padding: 25px;
+      text-align: center!important;
+      height: 150px;
+  }
+    .product-wrap #AddToCart, .product-wrap #addToCartCopy {
+      display: block;
+      top: auto;
+      float: left;
+      width: 100%;
+      max-width: 100%!important;
+      padding: 5px 0;
+      margin-top: 27px;
+      border: none !important;
+      background: #fff !important;
+      color: #212529 !important;
+      line-height: 1.6;
+      cursor: pointer;
+      border-radius:5px;
+  }
+
+
+    .product-wrap #addToCartCopy{
+      border-radius: 0px!important;
+      border-style: solid!important;
+      background: #FFFFFF!important;
+      border: 1px solid #454549 !important;
+      color: #000 !important;
+      }
+    
+      /*數量--*/
+      .input-holder.minus input {
+        border-radius: 2px 0 0 2px;
+        /* border: 2px !important; */
+        border-color: #454549!important;
+        color: #454549!important;
+        border-style: solid!important;
+      }
+
+    /*逹人分享RWD後的button變更*/
+    .right-btn {
+      float: none!important;
+      display: flex!important;
+      padding-left: 47px!important;
+      background-color: #fff!important;
+      color: #333!important;
+      border-radius: 20px!important;
+      transition: all 0.3s ease-in-out!important;
+      width: 193px!important;
+      font-size: 15px;
+  }
+
+  .tab-content {
+    min-height: 210px;
+    background-color: #454549!important;
+    padding-top: 3em!important;
+    padding-left: 10%!important;
+    padding-right: 3%!important;
+    color: #FFFFFF;
+    /* max-height: 300px; */
+}
+
+    /*逹人分享的寫縮小*/
+    .tab-content-2 {
+      width: 100%;
+      background-color:#454549!important;
+      font-size: 16px!important;
+  }
+
+  .fixDaZenPadding{
+    /**/
+    padding:10px;
+  }
+
+  /*內文*/
+  #features-section h2, #features-section p {
+    text-align: left;
+    /* max-width: 350px; */
+    max-width: 300px;
+  }
+
+}
+
+  @media (min-width: 1200px)
+{
+  .h4, h4 {
+      font-size: 15px;
+  }
+}
+
+@media( max-width:768px ){
+  .quantity-row {
+    max-width: 450px!important;
+    background-color: #EAEAEA;
+    padding: 0px;
+    display: flex;
+    margin: 0.75em 19% 20px !important;
+    flex-direction:column;
+  }
+    .product-wrap #AddToCart, .product-wrap #addToCartCopy {
+      display: block;
+      top: auto;
+      float: left;
+      width: 100%;
+      max-width: 233px!important;
+      padding: 6px 0;
+      margin-top: 20px !important;
+      border: 0px solid #000 !important;
+      background-color: #FFF !important;
+      color: #000 !important;
+      line-height: 1.6;
+      cursor: pointer;
+    }
+
+  .product-wrap .quantity-selector{
+    float:inherit;
+    margin-right:0px;
+  }
+
+  .jdgm-write-rev-link{
+    padding-inline:40px;
+  }
+
+}
+
+@media (max-width: 500px){
+  .swatch{
+    display:none !important;
+  }
+
+  .grayword{
+    margin-top:0px;
+    top:0px;
+    font-size:15px;
+  }
+
+  #features-section p{
+    text-align:left;
+    padding-bottom:30px;
+  }
+
+  #features-section img{
+    padding:20px 0px;
+  }
+
+  .full-width img{
+    padding-right:0px;
+  }
+  
+  .product-wrap #AddToCart, .product-wrap #addToCartCopy {
+    display: block;
+    top: 100px !important;
+    right:30px !important;
+    float: inherit;
+    width: 100%;
+    min-width: none !important;
+    height:40px;
+    padding: 9px 0;
+    margin-top: 20px;
+    border: 0px solid #000 !important;
+    background-color: #FFF !important;
+    color: #000 !important;
+    line-height: 1.6;
+    cursor: pointer;
+    border-radius:5px;
+  }
+
+  .quantity-row .input-holder input{
+    height:40px !important;
+  }
+
+  .quantity-row {
+    max-width: 450px!important;
+    background-color: #EAEAEA;
+    padding: 0px;
+    display: block;
+    margin: 0.75em 0px 20px !important;
+  }
+
+  .product-wrap .container-padding {
+    padding: 40px 0px;
+  }
+
+  .product-wrap .warranty .faq-question{
+    padding:23px 45px 23px 0px;
+  }
+
+  .add-ons #w3-product-accessories .accessories-item{
+    padding:5px 10px !important;
+  }
+
+  .product-wrap .product-title,.product-wrap h6{
+    text-align:left;
+  }
+
+  .product-wrap .prices-wrap{
+    display:flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  .product-wrap .ProductPrice{
+    padding:8px 0 0;
+  }
+
+  .flexslider .slides img{
+    width:75%;
+  }
+
+  .flex-direction-nav a{
+    padding-inline:35px;
+  }
+
+  .product-wrap .buy-row, .product-wrap .warranty{
+    padding-inline:10px;
+  }
+
+  .bannerPic,.Bigbanner{
+    height:auto !important;
+  }
+
+  .Rimg,.Limg{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    text-align:center !important;
+  }
+
+  #features-section h2{
+    margin-bottom:10px;
+    text-align:left;
+  }
+
+  #features-section p {
+    padding-inline:30px;
+  }
+
+  .pop{
+    padding-left:30px;
+  }
+
+  .carousel-container{
+    margin-inline:30px;
+  }
+
+  .jdgm-rev-widg{
+    padding-inline:30px !important;
+  }
+
+  .contentdemo, .contentdemo2{
+    padding-inline:30px !important;
+  }
+
+  .button{
+    width:60%;
+  }
+
+  .layoutTestFull{
+    width:inherit;
+  }
+
+  .popimg1{
+    width:220px !important;
+    height:auto;
+    padding:0px !important;
+    background-image: url("{{'05-2.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg2{
+    width:220px !important;
+    height:auto;
+    padding:0px !important;
+    background-image: url("{{'05-1.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .popimg3{
+    width:220px !important;
+    height:auto;
+    padding:0px !important;
+    background-image: url("{{'05-3.jpg'|asset_url}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .fixbackground{
+    overflow-x:scroll;
+    justify-content: left !important;
+    max-width:300px;
+    margin-inline:30px;
+  }
+
+  .number2{
+    background-color:#D9D9D9;
+    opacity:0.8;
+    margin:67% 0 0 0%;
+    width:120px;
+    height:25px;
+    padding:0px;
+    font-size:10px;
+  }
+
+  .popimg{
+    display:none;
+  }
+
+  .modal {
+        position: fixed;
+        display:flex;
+        background-color: white;
+        width: 350px;
+        height: 450px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 50px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1001; /* 比背景高一級的 zIndex */
+        align-items:center;
+        gap:30px;
+        border-radius:20px;
+  }
+
+  .product {
+        padding-inline: 30px;
+  }
+
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 300px;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-color: #D9d9d9;
+        font-size: 22px;
+        text-align: center;
+        border-radius: 100px;
+    }
+
+  .contextWord{
+    justify-content: left;
+  }
+
+  .fixDivPadding{
+    padding-top:3em;
+    padding-bottom:3em;
+    justify-content: center;
+  }
+
+  .mobile{
+    display:block;
+  }
+
+  .pc{
+    display:none;
+  }
+
+  .contentdemo2{
+    margin-top:-375px;
+  }
+
+  .demop{
+    padding-inline:0px !important;
+    margin-inline:0px !important;
+  }
+
+  .demoh2, .titledemo{
+    margin-inline:0px !important;    
+  }
+
+  .infoimg{
+    padding-inline:0px !important;
+    margin-inline:0px !important;
+    width:180px;
+  }
+}
+
+@media (max-width:375px){
+  .product-wrap .swatch .swatch-element {
+    text-align: center;
+    float: none!important;
+    display: inline-block;
+    margin: 5px -22px 0!important;
+  }
+}
+
+@media (max-width:820px){
+  quantity-selector label, .swatch .header, .quantity-row label {
+    padding-top:8px;
+  }
+
+  .product-wrap #AddToCart, .product-wrap #addToCartCopy{
+    margin-top:40px;
+    max-width:170px !important;
+  }
+
+  
+}
+
+@media (max-width:1024px){
+  .template-product .main-content{
+    padding-top:100px !important;
+  }
+}  
+
+</style>
+<script>
+  // 逹人分享，將滑鼠事件監聽器添加到每個照片
+const photos = document.querySelectorAll('.photo');
+photos.forEach(photo => {
+photo.addEventListener('mouseover', e => {
+  // 取消先前的TActive照片
+  const prevActivePhoto = document.querySelector('.photo.TActive');
+  const prevActiveTcontent = document.querySelector('.Tcontent.TActive');
+  prevActivePhoto.classList.remove('TActive');
+  prevActiveTcontent.classList.remove('TActive');
+
+  // 設置當前照片為TActive照片
+  const currentPhoto = e.target;
+  const currentTcontent = document.querySelector(`#Tcontent-${currentPhoto.dataset.index}`);
+  currentPhoto.classList.add('TActive');
+  currentTcontent.classList.add('TActive');
+});
+});
+
+
+</script>
